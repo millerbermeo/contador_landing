@@ -1,0 +1,97 @@
+---
+import Header from "../components/Header.astro";
+import Home from "../components/Home.astro";
+import Navbar from "../components/Navbar.astro";
+import AuthorCard from "../components/AuthorCard.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+
+
+const services = [
+	{
+		icon: "#icon-path1",
+		title: "Asesoría Tributaria y Fiscal",
+		items: [
+			"Optimización de obligaciones fiscales a través de estrategias legales.",
+			"Declaración de renta para personas naturales y jurídicas.",
+			"Manejo de impuestos nacionales y territoriales.",
+			"Representación ante la DIAN y entidades gubernamentales.",
+		],
+	},
+	{
+		icon: "#icon-path2",
+		title: "Contabilidad General y Financiera",
+		items: [
+			"Diseño e implementación de sistemas contables adaptados a cada negocio.",
+			"Registro y control de operaciones contables en tiempo real.",
+			"Elaboración de estados financieros.",
+			"Análisis financiero para toma de decisiones.",
+		],
+	},
+	{
+		icon: "#icon-path3",
+		title: "Revisoría Fiscal y Auditoría",
+		items: [
+			"Auditoría exhaustiva de procesos internos.",
+			"Revisoría fiscal para transparencia en informes financieros.",
+			"Auditorías de control interno para optimizar procesos.",
+		],
+	},
+	{
+		icon: "#icon-path4",
+		title: "Asesoría y Gestión Laboral",
+		items: [
+			"Liquidación de nómina y aportes a seguridad social.",
+			"Gestión de contratos laborales y obligaciones parafiscales.",
+			"Acompañamiento en procesos de desvinculación y liquidación laboral.",
+			"Asesoría en normativa laboral actualizada.",
+		],
+	},
+	{
+		icon: "#icon-path5",
+		title: "Planeación Financiera y Presupuestaria",
+		items: [
+			"Creación de presupuestos y pronósticos financieros.",
+			"Análisis de rentabilidad y costos.",
+			"Estrategias de ahorro y reinversión para maximizar el valor del negocio.",
+		],
+	},
+	{
+		icon: "#icon-path6",
+		title: "Asesoría en Constitución y Transformación Empresarial",
+		items: [
+			"Orientación en la creación de empresas en Colombia.",
+			"Consultoría para transformaciones empresariales.",
+			"Estructuración de proyectos de emprendimiento.",
+		],
+	},
+];
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<main class="w-full">
+			<Header />
+			<Navbar />
+			<Home />
+		</main>
+		<section class="w-full">
+			<AuthorCard />
+		</section>
+
+		<section class="container mx-auto py-16 px-8 bg-gray-100 text-gray-800">
+			<h2 class="text-4xl font-bold text-center mb-10">Servicios Ofrecidos</h2>
+			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+			  {services.map(service => (
+				<ServiceCard icon={service.icon} title={service.title} items={service.items} />
+			  ))}
+			</div>
+		  </section>
+	</body>
+</html>

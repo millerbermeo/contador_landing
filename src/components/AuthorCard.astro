@@ -1,0 +1,25 @@
+---
+const author = {
+  name: "Brayan Pedraza",
+  title: "Contador Público en Colombia",
+  description: `Contador Público con sólida experiencia en asesoría financiera y contable para empresas y personas naturales en Colombia. Mi misión es brindar a cada cliente un respaldo integral en el manejo de sus finanzas y obligaciones fiscales, permitiendo que se concentren en el crecimiento y éxito de sus negocios. Comprometido con la precisión, la ética y el cumplimiento de las normativas vigentes, ofrezco un servicio personalizado y confiable.`,
+  imageSrc: "brayan.jpeg", // Cambia esto a la ruta de la imagen de tu autor.
+};
+---
+
+<div class="flex justify-center items-center container mx-auto my-16">
+  <div class="flex items-center space-x-6 max-w-4xl"> 
+    <img
+      src={author.imageSrc}
+      alt={author.name}
+      class="w-24 h-24 rounded-full object-cover"
+    />
+    <div class="w-full"> <!-- Ajuste de ancho máximo para mantener el largo -->
+      <h4 class="text-sm font-light text-gray-500">Sobre mí</h4>
+      <h3 class="text-2xl font-semibold">
+        {author.name} — <span class="font-normal">{author.title}</span>
+      </h3>
+      <p class="text-gray-700 mt-2">{author.description}</p>
+    </div>
+  </div>
+</div>
