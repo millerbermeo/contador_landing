@@ -1,0 +1,60 @@
+---
+// Loader.astro
+const { percentage, serviceName } = Astro.props;
+
+let currentPercentage = 0; // Valor inicial
+let circleColor = "border-blue-500"; // Color del borde
+
+// Función para iniciar la carga
+function startLoading() {
+    const interval = setInterval(() => {
+        if (currentPercentage < percentage) {
+            currentPercentage++;
+        } else {
+            clearInterval(interval); // Detener el intervalo cuando se alcanza el porcentaje
+        }
+    }, 3000); // Ajusta la velocidad de incremento
+}
+
+// Esta función es para calcular el estilo del círculo basado en el porcentaje
+function getCircleStyle() {
+    return `h-16 w-16 border-8 rounded-full -translate-x-2 -translate-y-2 ${circleColor} absolute`;
+}
+
+// Iniciar la carga al montar el componente
+startLoading();
+---
+
+<div class="flex flex-col items-center justify-center mt-10">
+    <div class="h-16 w-16 border-8 rounded-full">
+        <div
+            class={getCircleStyle()}
+            style={`clip-path: inset(${100 - percentage}% 0 0 0)`}
+        >
+            <div
+                class="absolute flex items-center justify-center w-full h-full"
+            >
+                <span class="text-xl font-bold text-blue-500"
+                    >{percentage}+ </span
+                >
+            </div>
+        </div>
+    </div>
+
+    <div class="flex items-end gap-3 mt-2">
+        <h2 class="text-2xl font-light">{serviceName}</h2>
+        <!-- <p class="font-bold text-blue-500">{percentage}+</p> -->
+    </div>
+</div>
+
+<style>
+    /* Estilo para animar el borde del círculo */
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>

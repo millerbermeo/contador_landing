@@ -1,30 +1,79 @@
-<!-- src/components/Home.astro -->
-<section class="bg-gradient-to-b from-gray-100 to-white py-16">
-    <div class="container mx-auto px-6 md:px-12 lg:px-20 flex flex-col lg:flex-row items-center gap-12">
-      
-      <!-- Contenido Principal -->
-      <div class="lg:w-1/2 text-left flex flex-col items-start">
-        <h1 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Contador Público</h1>
-        <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
-          Líderes en contabilidad, ofreciendo servicios financieros exclusivos para empresas.
-        </h2>
-        <p class="text-lg lg:text-xl text-gray-600 mb-6">
-          Aseguramos cumplimiento y optimización para llevar su empresa al siguiente nivel.
-        </p>
-        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-          Conócenos
-        </button>
-      </div>
-  
-      <!-- Imagen -->
-      <div class="lg:w-1/2 flex justify-center items-center">
-        <img 
-          class="w-full h-auto max-w-lg rounded-xl shadow-xl transition-transform transform hover:scale-105 z-0" 
-          src="model.jpg" 
-          alt="Modelo" 
-        />
-      </div>
-  
+---
+import Loader from "../components/Loader.astro";
+
+const loadings = [
+    { serviceName: "Clientes", percentage: 60 },
+    { serviceName: "Empresas", percentage: 80 },
+    { serviceName: "Visitas", percentage: 75 },
+];
+---
+
+<section
+    class="bg-red-400 bg-gradient-to-b from-gray-100 to-white w-full flex justify-center py-28"
+>
+    <div
+        class="container mx-auto px-6 md:px-12 lg:px-20 flex flex-col lg:flex-row items-center gap-12"
+    >
+        <!-- Contenido Principal -->
+        <div class="lg:w-1/2 text-left flex flex-col items-start gap-y-3">
+            <h1 class="text-2xl font-light text-gray-800 mb-4">
+                Contador Público
+            </h1>
+            <h2
+                class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6"
+            >
+                Líderes en contabilidad, ofreciendo <span
+                class="text-[#4dbb4b]"> servicios financieros exclusivos para empresas.</span
+                >
+            </h2>
+            <p class="text-lg lg:text-xl text-gray-600 mb-6">
+                Aseguramos cumplimiento y optimización para llevar su empresa al
+                siguiente nivel.
+            </p>
+            <button
+                class="bg-[#4dbb4b] hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            >
+                Conócenos
+            </button>
+
+            <div class="flex gap-10">
+                {
+                    loadings.map(({ serviceName, percentage }) => (
+                        <Loader
+                            percentage={percentage}
+                            serviceName={serviceName}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Imagen -->
+        <div class="lg:w-1/2 mx-auto flex justify-center items-center relative">
+            <div
+                class="w-64 h-64 rounded-full absolute -top-10 -right-16 z-10 bg-[#4dbb4b] flex flex-col items-center justify-center text-center p-4 shadow-lg"
+            >
+                <img
+                    src="logo2.png"
+                    alt=""
+                    class="w-24 h-24 rounded-full border-4 border-white shadow-md"
+                />
+                <h2 class="text-xl font-bold text-white">
+                    Brian Pedraza Osorio
+                </h2>
+                <h3 class="text-lg font-semibold text-white text-opacity-90">
+                    Universidad de la Amazonia
+                </h3>
+                <p class="text-sm text-gray-200">
+                    Contador público con tarjeta profesional vigente.
+                </p>
+            </div>
+
+            <img
+                class="w-full h-auto max-w-xl rounded-full bg-[#85bb4b] transition-transform transform hover:scale-105 z-0"
+                src="model.png"
+                alt="Modelo"
+            />
+        </div>
     </div>
-  </section>
-  
+</section>

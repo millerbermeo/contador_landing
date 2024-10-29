@@ -1,0 +1,21 @@
+---
+// Define tus imágenes aquí
+const images = [
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS-tgllcvgvGkRWXvtv5Q4cUtCJw860_Fu4w&s",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnUGwTsEVdqnX8sYhMsI2pAIoQcGI_Pkq5rxUEuc0EoVvYrCgexrphScwd7kMPOSCDuI4&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuKL34xONQnlnF9g4ummuzitC32auwzLntx57DJmgAhOBas-fyJVEXm9BCjsTbufgFk08&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd1Fd6NuzhmMzE_LcdR8569oZSGzXSoxKXjM5m7oIsa4QhcrsGnxNmlQyXenaB7DKwFjo&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS-tgllcvgvGkRWXvtv5Q4cUtCJw860_Fu4w&s",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnUGwTsEVdqnX8sYhMsI2pAIoQcGI_Pkq5rxUEuc0EoVvYrCgexrphScwd7kMPOSCDuI4&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuKL34xONQnlnF9g4ummuzitC32auwzLntx57DJmgAhOBas-fyJVEXm9BCjsTbufgFk08&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd1Fd6NuzhmMzE_LcdR8569oZSGzXSoxKXjM5m7oIsa4QhcrsGnxNmlQyXenaB7DKwFjo&usqp=CAU",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS-tgllcvgvGkRWXvtv5Q4cUtCJw860_Fu4w&s",
+
+];
+---
+
+<div class="flex overflow-x-auto space-x-4 p-4 overflow-hidden max-w-full">
+  {images.map((image) => (
+    <img src={image} alt="Imagen de galería" class="w-48 h-auto object-cover rounded-lg shadow-lg" />
+  ))}
+</div>
