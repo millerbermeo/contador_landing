@@ -2,62 +2,60 @@
 const { percentage, serviceName } = Astro.props;
 ---
 
-<div class="flex flex-col items-center justify-start mt-10"> <!-- Cambiar items-start a items-center -->
+<div class="flex flex-col items-center justify-start mt-8">
+    <!-- Cambiar items-start a items-center -->
     <div class="loader-circle" style={`--final-percentage: ${percentage}%`}>
         <div class="loader-inner">
             <span class="loader-text">{percentage}%</span>
         </div>
     </div>
 
-    <div class="flex items-center gap-3 mt-2 whitespace-pre-line max-w-20 text-center justify-center"> <!-- Cambiar items-end a items-center y w-32 a w-auto -->
-        <h2 class="text-xl font-light">{serviceName}</h2>
+    <div
+        class="flex items-center gap-3 mt-2 whitespace-pre-line max-w-20 text-center justify-center"
+    >
+        <!-- Cambiar items-end a items-center y w-32 a w-auto -->
+        <h2 class="text-base font-normal">{serviceName}</h2>
     </div>
 </div>
 
 <style>
-.loader-circle {
-    position: relative;
-    width: 70px; /* Reducido para hacer el borde más delgado */
-    height: 70px;
-    border-radius: 50%;
-    background: conic-gradient(
-        #4dbb4b 0%, 
-        #e5e7eb 0% 
-    );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fill-animation 1s ease-out forwards;
-}
-
-.loader-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px; /* Reducido para hacer el borde más delgado */
-    height: 60px;
-    border-radius: 50%;
-    background-color: #ffffff;
-}
-
-.loader-text {
-    font-size: 1.2rem; /* Ajuste para mantener proporción */
-    font-weight: bold;
-    color: #85bb4b;
-}
-
-@keyframes fill-animation {
-    0% {
-        background: conic-gradient(
-            #4dbb4b 0%, 
-            #e5e7eb 0% 
-        );
+    .loader-circle {
+        position: relative;
+        width: 70px; /* Reducido para hacer el borde más delgado */
+        height: 70px;
+        border-radius: 50%;
+        background: conic-gradient(#4dbb4b 0%, #e5e7eb 0%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fill-animation 1s ease-out forwards;
     }
-    100% {
-        background: conic-gradient(
-            #4dbb4b var(--final-percentage), 
-            #e5e7eb var(--final-percentage)
-        );
+
+    .loader-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px; /* Reducido para hacer el borde más delgado */
+        height: 60px;
+        border-radius: 50%;
+        background-color: #ffffff;
     }
-}
+
+    .loader-text {
+        font-size: 1.2rem; /* Ajuste para mantener proporción */
+        font-weight: bold;
+        color: #85bb4b;
+    }
+
+    @keyframes fill-animation {
+        0% {
+            background: conic-gradient(#4dbb4b 0%, #e5e7eb 0%);
+        }
+        100% {
+            background: conic-gradient(
+                #4dbb4b var(--final-percentage),
+                #e5e7eb var(--final-percentage)
+            );
+        }
+    }
 </style>

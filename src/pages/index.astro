@@ -9,64 +9,71 @@ import AboutMe from "../components/AboutMe.astro";
 import ImageCarousel from "../components/ImageCarousel.astro";
 
 const services = [
-	{
-		icon: "https://cdn-icons-png.flaticon.com/512/1458/1458564.png",
-		title: "Asesoría Tributaria y Fiscal",
-		items: [
-			"Optimización de obligaciones fiscales a través de estrategias legales.",
-			"Declaración de renta para personas naturales y jurídicas.",
-			"Manejo de impuestos nacionales y territoriales.",
-			"Representación ante la DIAN y entidades gubernamentales.",
-		],
-	},
-	{
-		icon: "https://cdn-icons-png.flaticon.com/512/2071/2071065.png",
-		title: "Contabilidad General y Financiera",
-		items: [
-			"Diseño e implementación de sistemas contables adaptados a cada negocio.",
-			"Registro y control de operaciones contables en tiempo real.",
-			"Elaboración de estados financieros.",
-			"Análisis financiero para toma de decisiones.",
-		],
-	},
-	{
-		icon: "https://cdn-icons-png.flaticon.com/512/504/504673.png",
-		title: "Revisoría Fiscal y Auditoría",
-		items: [
-			"Auditoría exhaustiva de procesos internos.",
-			"Revisoría fiscal para transparencia en informes financieros.",
-			"Auditorías de control interno para optimizar procesos.",
-		],
-	},
-	{
-		icon: "https://cdn-icons-png.flaticon.com/512/9822/9822342.png",
-		title: "Asesoría y Gestión Laboral",
-		items: [
-			"Liquidación de nómina y aportes a seguridad social.",
-			"Gestión de contratos laborales y obligaciones parafiscales.",
-			"Acompañamiento en procesos de desvinculación y liquidación laboral.",
-			"Asesoría en normativa laboral actualizada.",
-		],
-	},
-	{
-		icon: "https://cdn-icons-png.flaticon.com/512/9135/9135771.png",
-		title: "Planeación Financiera y Presupuestaria",
-		items: [
-			"Creación de presupuestos y pronósticos financieros.",
-			"Análisis de rentabilidad y costos.",
-			"Estrategias de ahorro y reinversión para maximizar el valor del negocio.",
-		],
-	},
-	{
-		icon: "https://cdn-icons-png.flaticon.com/512/6982/6982961.png",
-		title: "Asesoría en Constitución y Transformación Empresarial",
-		items: [
-			"Orientación en la creación de empresas en Colombia.",
-			"Consultoría para transformaciones empresariales.",
-			"Estructuración de proyectos de emprendimiento.",
-		],
-	},
+    {
+        icon: "https://cdn-icons-png.flaticon.com/512/1458/1458564.png",
+        title: "Asesoría Tributaria y Fiscal",
+        items: [
+            "Optimización de obligaciones fiscales a través de estrategias legales.",
+            "Declaración de renta para personas naturales y jurídicas.",
+            "Manejo de impuestos nacionales y territoriales.",
+            "Representación ante la DIAN y entidades gubernamentales.",
+        ],
+        whatsappMessage: "🌟 Hola, me gustaría solicitar asesoría tributaria y fiscal. ¡Gracias! 📊",
+    },
+    {
+        icon: "https://cdn-icons-png.flaticon.com/512/2071/2071065.png",
+        title: "Contabilidad General y Financiera",
+        items: [
+            "Diseño e implementación de sistemas contables adaptados a cada negocio.",
+            "Registro y control de operaciones contables en tiempo real.",
+            "Elaboración de estados financieros.",
+            "Análisis financiero para toma de decisiones.",
+        ],
+        whatsappMessage: "📈 Hola, estoy interesado en contabilidad general y financiera. ¡Gracias! 💼",
+    },
+    {
+        icon: "https://cdn-icons-png.flaticon.com/512/504/504673.png",
+        title: "Revisoría Fiscal y Auditoría",
+        items: [
+            "Auditoría exhaustiva de procesos internos.",
+            "Revisoría fiscal para transparencia en informes financieros.",
+            "Auditorías de control interno para optimizar procesos.",
+        ],
+        whatsappMessage: "🔍 Hola, necesito información sobre revisoría fiscal y auditoría. ¡Gracias! 📑",
+    },
+    {
+        icon: "https://cdn-icons-png.flaticon.com/512/9822/9822342.png",
+        title: "Asesoría y Gestión Laboral",
+        items: [
+            "Liquidación de nómina y aportes a seguridad social.",
+            "Gestión de contratos laborales y obligaciones parafiscales.",
+            "Acompañamiento en procesos de desvinculación y liquidación laboral.",
+            "Asesoría en normativa laboral actualizada.",
+        ],
+        whatsappMessage: "👥 Hola, requiero asesoría en gestión laboral. ¡Gracias! 📋",
+    },
+    {
+        icon: "https://cdn-icons-png.flaticon.com/512/9135/9135771.png",
+        title: "Planeación Financiera y Presupuestaria",
+        items: [
+            "Creación de presupuestos y pronósticos financieros.",
+            "Análisis de rentabilidad y costos.",
+            "Estrategias de ahorro y reinversión para maximizar el valor del negocio.",
+        ],
+        whatsappMessage: "💰 Hola, me interesa la planeación financiera y presupuestaria. ¡Gracias! 📊",
+    },
+    {
+        icon: "https://cdn-icons-png.flaticon.com/512/6982/6982961.png",
+        title: "Asesoría en Constitución y Transformación Empresarial",
+        items: [
+            "Orientación en la creación de empresas en Colombia.",
+            "Consultoría para transformaciones empresariales.",
+            "Estructuración de proyectos de emprendimiento.",
+        ],
+        whatsappMessage: "🏢 Hola, necesito asesoría en la creación de empresas. ¡Gracias! ✨",
+    },
 ];
+
 ---
 
 <html lang="en">
@@ -75,7 +82,8 @@ const services = [
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta name="description" content="Contador Público en Colombia. Ofrezco asesoría contable y fiscal personalizada para empresas y personas. Garantizo precisión y cumplimiento normativo.">
+		<title>Contador Público en Colombia | Asesoría Financiera y Contable</title>
 	</head>
 	<body>
 		<Header />
@@ -83,27 +91,28 @@ const services = [
 		<Whatsapp />
 		<main class="w-full">
 			<Home />
-			<!-- <CountUpCom /> -->
-		
 		</main>
 		<section class="w-full">
 			<AuthorCard />
 		</section>
 
-		<section class="container mx-auto py-16 px-8 bg-gray-100 text-gray-800">
-			<h2 class="text-4xl font-bold text-center mb-10">
-				Servicios Ofrecidos
-			</h2>
-			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{
-					services.map((service) => (
-						<ServiceCard
-							icon={service.icon}
-							title={service.title}
-							items={service.items}
-						/>
-					))
-				}
+		<section class="w-full bg-gray-50">
+			<div class="container mx-auto py-16 px-8 text-gray-800">
+				<h2 class="text-4xl text-[#4dbb4b] font-bold text-center mb-10">
+					Portafolio de Servicios
+				</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{
+						services.map((service) => (
+							<ServiceCard
+								icon={service.icon}
+								title={service.title}
+								items={service.items}
+								whatsappMessage={service.whatsappMessage}
+							/>
+						))
+					}
+				</div>
 			</div>
 		</section>
 

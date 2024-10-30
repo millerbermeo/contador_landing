@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/react": "^3.6.2",
     "@astrojs/tailwind": "^5.1.2",
+    "@heroicons/react": "^1.0.6",
     "astro": "^4.16.7",
     "countup.js": "^2.8.0",
     "gsap": "^3.12.5",
