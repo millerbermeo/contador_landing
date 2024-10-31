@@ -1,85 +1,68 @@
 ---
 import Loader from "../components/Loader.astro";
+import Qr from "./Qr.astro";
+import 'aos/dist/aos.css';
 
+// Inicializa AOS directamente en el script
 const loadings = [
     { serviceName: "Clientes Satisfechos", percentage: 90 },
     { serviceName: "Transparencia", percentage: 100 },
-    { serviceName: "Visitas ", percentage: 75 },
+    { serviceName: "Visitas", percentage: 75 },
 ];
 ---
 
-<section
-    class="bg-red-400 bg-gradient-to-b from-gray-100 to-white w-full flex justify-center py-10 2xl:py-28"
->
-    <div
-        class="container mx-auto px-6 md:px-12 lg:px-20 flex flex-col lg:flex-row items-center gap-12"
-    >
-        <!-- Contenido Principal -->
-        <div class="lg:w-1/2 text-left flex flex-col items-start 2xl:gap-y-3">
-            <h1 class="text-2xl font-light text-gray-800 mb-4">
-                Contador Público
-            </h1>
-            <h2
-                class="text-4xl 2xl:text-5xl font-bold text-gray-900 leading-tight mb-6"
-            >
-                Líderes en contabilidad, ofreciendo <span
-                class="text-[#4dbb4b]"> servicios financieros exclusivos para empresas.</span
-                >
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js" onload="AOS.init({ duration: 1000 })"></script>
+</head>
+
+<section class="imagenfondo bg-gradient-to-b from-[#fffefe] to-[#fff] w-full flex justify-center py-10 2xl:py-28">
+    <div class="container mx-auto px-6 md:px-12 lg:px-20 flex flex-col lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2 text-left flex flex-col items-start 2xl:gap-y-3 -translate-y-10 2xl:-translate-x-0">
+            <h1 data-aos="fade-up" class="text-lg 2xl:text-2xl font-light text-gray-800 mb-4">Contador Público</h1>
+            <h2 data-aos="fade-up" data-aos-delay="100" class="text-3xl 2xl:text-5xl font-bold text-gray-900 leading-tight mb-2 2xl:mb-6">
+                Líderes en contabilidad, ofreciendo <span class="text-[#4dbb4b]">servicios financieros exclusivos para empresas.</span>
             </h2>
-            <p class="text-lg lg:text-xl text-gray-600 mb-6">
-                Aseguramos cumplimiento y optimización para llevar su empresa al
-                siguiente nivel.
-            </p>
+            <p data-aos="fade-up" data-aos-delay="200" class="text-lg lg:text-xl text-gray-600 mb-6">Aseguramos cumplimiento y optimización para llevar su empresa al siguiente nivel.</p>
             <div class="flex gap-3 justify-start lg:items-end flex-col lg:flex-row mx-auto lg:mx-0">
-                <button
-                class="bg-[#4dbb4b] hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105"
-            >
-                Conócenos
-            </button>
-
-            <span>
-                Contacta a Tu Asesor Contable
-            </span>
+                <button class="bg-[#4dbb4b] hover:bg-[#4dbb4b] flex items-center gap-2 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                    Conócenos
+                    <ion-icon name="arrow-forward-sharp"></ion-icon>
+                </button>
             </div>
-
             <div class="flex gap-6 w-full mx-auto justify-center lg:justify-start">
                 {
                     loadings.map(({ serviceName, percentage }) => (
-                        <Loader
-                            percentage={percentage}
-                            serviceName={serviceName}
-                        />
+                        <Loader percentage={percentage} serviceName={serviceName} />
                     ))
                 }
             </div>
         </div>
 
-        <!-- Imagen -->
         <div class="lg:w-1/2 mx-auto flex justify-center items-start 2xl:items-center -translate-y-3 p-5 2xl:p-0 2xl:translate-y-0 relative scale-90 2xl:scale-100">
-            <div
-                class="w-64 hidden lg:flex h-64 rounded-full absolute -top-10 -right-16 z-10 bg-[#4dbb4b] flex-col items-center justify-center text-center p-4 shadow-lg"
-            >
-                <img
-                    src="logo2.png"
-                    alt=""
-                    class="w-24 h-24 rounded-full border-4 border-white shadow-md"
-                />
-                <h2 class="text-xl font-bold text-white">
-                    Brian Pedraza Osorio
-                </h2>
-                <h3 class="text-lg font-semibold text-white text-opacity-90">
-                    Universidad de la Amazonia
-                </h3>
-                <p class="text-sm text-gray-200">
-                    Contador público con tarjeta profesional vigente.
-                </p>
+            <div class="w-64 hidden lg:flex h-64 rounded-full absolute -top-10 -right-16 z-10 bg-[#4dbb4b] flex-col items-center justify-center text-center p-4 shadow-lg">
+                <img src="logo2.png" alt="" class="w-24 h-24 rounded-full border-4 border-white shadow-md" />
+                <h2 class="text-xl font-bold text-white">Brian Pedraza Osorio</h2>
+                <h3 class="text-lg font-semibold text-white text-opacity-90">Universidad de la Amazonia</h3>
+                <p class="text-sm text-gray-200">Contador público con tarjeta profesional vigente.</p>
             </div>
 
-            <img
-                class="w-full h-auto max-w-xl rounded-full bg-[#85bb4b] transition-transform transform hover:scale-105 z-0"
-                src="model.png"
-                alt="Modelo"
-            />
+            <div class="relative flex flex-col items-center gap-y-2 cursor-pointer">
+                <img class="w-full h-full max-w-xl rounded-full bg-[#fff] scale-90 2xl:scale-100 transition-transform transform hover:scale-105 z-0" src="fotobrian.jpg" alt="Modelo" />
+                
+                <div class="absolute inset-0 bg-green-700 bg-opacity-80 rounded-full flex flex-col gap-y-5 items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                    <h3 class="italic text-2xl font-normal text-center text-white px-4">
+                        Actuando con seguridad y <br /> transparencia para su empresa.
+                    </h3>
+                    <Qr />
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+<style>
+    .imagenfondo {
+        background-image: url("fondob.jpg");
+        background-size: cover;
+    }
+</style>

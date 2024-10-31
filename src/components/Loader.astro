@@ -2,16 +2,28 @@
 const { percentage, serviceName } = Astro.props;
 ---
 
-<div class="flex flex-col items-center justify-start mt-8">
+<div 
+    class="flex flex-col items-center justify-start mt-8" 
+    data-aos="fade-right" 
+    data-aos-delay="100"
+>
     <!-- Cambiar items-start a items-center -->
-    <div class="loader-circle" style={`--final-percentage: ${percentage}%`}>
+    <div 
+        class="loader-circle" 
+        style={`--final-percentage: ${percentage}%`}
+        data-aos="zoom-in"
+    >
         <div class="loader-inner">
-            <span class="loader-text">{percentage}%</span>
+            <span class="loader-text" data-aos="fade-in" data-aos-delay="200">
+                {percentage}%
+            </span>
         </div>
     </div>
 
     <div
         class="flex items-center gap-3 mt-2 whitespace-pre-line max-w-20 text-center justify-center"
+        data-aos="fade-right" 
+        data-aos-delay="300"
     >
         <!-- Cambiar items-end a items-center y w-32 a w-auto -->
         <h2 class="text-base font-normal">{serviceName}</h2>
