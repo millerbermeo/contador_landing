@@ -8,94 +8,10 @@ import Whatsapp from "../components/Whatsapp.astro";
 import AboutMe from "../components/AboutMe.astro";
 import ImageCarousel from "../components/ImageCarousel.astro";
 import Footer from "../components/Footer.astro";
-import TikTokCarousel from "../components/TikTokCarousel.astro";
-
-const services = [
-    {
-        icon: "https://cdn-icons-png.flaticon.com/512/1458/1458564.png",
-        title: "Asesoría Tributaria y Fiscal",
-        items: [
-            "Optimización de obligaciones fiscales a través de estrategias legales.",
-            "Declaración de renta para personas naturales y jurídicas.",
-            "Manejo de impuestos nacionales y territoriales.",
-            "Representación ante la DIAN y entidades gubernamentales.",
-        ],
-        whatsappMessage:
-            "🌟 Hola, me gustaría solicitar asesoría tributaria y fiscal. ¡Gracias! 📊",
-    },
-    {
-        icon: "https://cdn-icons-png.flaticon.com/512/2071/2071065.png",
-        title: "Contabilidad General y Financiera",
-        items: [
-            "Diseño e implementación de sistemas contables adaptados a cada negocio.",
-            "Registro y control de operaciones contables en tiempo real.",
-            "Elaboración de estados financieros.",
-            "Análisis financiero para toma de decisiones.",
-        ],
-        whatsappMessage:
-            "📈 Hola, estoy interesado en contabilidad general y financiera. ¡Gracias! 💼",
-    },
-    {
-        icon: "https://cdn-icons-png.flaticon.com/512/504/504673.png",
-        title: "Revisoría Fiscal y Auditoría",
-        items: [
-            "Auditoría exhaustiva de procesos internos.",
-            "Revisoría fiscal para transparencia en informes financieros.",
-            "Auditorías de control interno para optimizar procesos.",
-        ],
-        whatsappMessage:
-            "🔍 Hola, necesito información sobre revisoría fiscal y auditoría. ¡Gracias! 📑",
-    },
-    {
-        icon: "https://cdn-icons-png.flaticon.com/512/9822/9822342.png",
-        title: "Asesoría y Gestión Laboral",
-        items: [
-            "Liquidación de nómina y aportes a seguridad social.",
-            "Gestión de contratos laborales y obligaciones parafiscales.",
-            "Acompañamiento en procesos de desvinculación y liquidación laboral.",
-            "Asesoría en normativa laboral actualizada.",
-        ],
-        whatsappMessage:
-            "👥 Hola, requiero asesoría en gestión laboral. ¡Gracias! 📋",
-    },
-    {
-        icon: "https://cdn-icons-png.flaticon.com/512/9135/9135771.png",
-        title: "Planeación Financiera y Presupuestaria",
-        items: [
-            "Creación de presupuestos y pronósticos financieros.",
-            "Análisis de rentabilidad y costos.",
-            "Estrategias de ahorro y reinversión para maximizar el valor del negocio.",
-        ],
-        whatsappMessage:
-            "💰 Hola, me interesa la planeación financiera y presupuestaria. ¡Gracias! 📊",
-    },
-    {
-        icon: "https://cdn-icons-png.flaticon.com/512/6982/6982961.png",
-        title: "Asesoría en Constitución y Transformación Empresarial",
-        items: [
-            "Orientación en la creación de empresas en Colombia.",
-            "Consultoría para transformaciones empresariales.",
-            "Estructuración de proyectos de emprendimiento.",
-        ],
-        whatsappMessage:
-            "🏢 Hola, necesito asesoría en la creación de empresas. ¡Gracias! ✨",
-    },
-];
-
-    const images = [
-        ['https://americana.edu.co/medellin/wp-content/uploads/2023/04/destacada-contaduria-publica.jpg',
-            'https://americana.edu.co/monteria/wp-content/uploads/2022/02/shutterstock_1895845201-2.jpg',
-            'https://virtual.cuc.edu.co/hubfs/Imported_Blog_Media/perfil-contaduria-publica.jpg',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo7TklHOHiL9Y5kPtHRG44dRPGfL4xyBRuldUPwM9HU89q5fYX1Cb4DIDq-QZbR5MwRSc&usqp=CAU/',
-            'https://cdn.forbes.com.mx/2023/05/contaduria-publica.jpg',
-            'https://media.licdn.com/dms/image/v2/C5612AQH8UwmiencH1g/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1555700962713?e=2147483647&v=beta&t=Jb4gggqc6Y7jlTe4KmgvKEBN4puV1i7oRfslqpCIc-Y',
-            'https://www.nur.edu/wp-content/uploads/2022/09/ESTUDIACONTADURIA1200x6285-1024x536.jpg'
-
-        ]
-    ]
-
+import { services } from "../utils/Services.astro";
+import Articulos from "../components/Articulos.astro";
+import MenuAcordeon from "../components/MenuAcordeon.astro";
 ---
-
 
 <html lang="es">
     <head>
@@ -108,7 +24,8 @@ const services = [
             content="Contador Público en Colombia. Ofrezco asesoría contable y fiscal personalizada para empresas y personas, con precisión, transparencia y cumplimiento legal. Servicios de análisis integral, planificación fiscal, y automatización de procesos para maximizar beneficios y reducir costos. Consultoría estratégica y soporte personalizado con actualización constante y generación de informes."
         />
         <title>
-            Contador Público en Colombia | Asesoría Financiera y Contable - Precisión, Transparencia, y Optimización
+            Contador Público en Colombia | Asesoría Financiera y Contable -
+            Precisión, Transparencia, y Optimización
         </title>
         <script
             type="module"
@@ -119,24 +36,21 @@ const services = [
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
         ></script>
     </head>
-    
+
     <body>
         <Header />
         <Navbar />
         <Whatsapp />
-        <main class="w-full">
-            <Home />
-        </main>
-        <section class="w-full">
-            <AuthorCard />
-        </section>
-
+        <Home />
+        <AuthorCard />
         <section class="w-full bg-gray-50" id="servicios">
             <div class="container mx-auto py-16 px-8 text-gray-800">
                 <h2 class="text-4xl text-[#4dbb4b] font-bold text-center mb-10">
                     Portafolio de Servicios
                 </h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 scale-90 2xl:scale-100">
+                <div
+                    class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 scale-90 2xl:scale-100"
+                >
                     {
                         services.map((service) => (
                             <ServiceCard
@@ -150,30 +64,17 @@ const services = [
                 </div>
             </div>
         </section>
-
-        <section>
-            <AboutMe />
-        </section>
-
-        <!-- <section>
-            <ImageCarousel />
-        </section> -->
-
-
-        {
-            images.map((img) => (
-                <TikTokCarousel
-                images={img}
-                />
-            ))
-        }
+        <AboutMe />
+        <div class="flex w-full container mx-auto justify-center items-start gap-x-4">
+            <Articulos />
+            <MenuAcordeon />
+            <div>
+                <img class="w-96" src="tarifas.jpg" alt="">
+                <span class="text-xl font-normal hover:text-gray-700 cursor-pointer my-2 underline">Conocer mas sobre tarifas y costos</span>
+            </div>
+        </div>
+        <ImageCarousel />
 
         <Footer />
     </body>
 </html>
-
-<style>
-    html {
-        scroll-behavior: smooth;
-    }
-</style>

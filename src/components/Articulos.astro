@@ -1,0 +1,80 @@
+---
+const articles = [
+    {
+        title: "Suscripción Gratuita a Actualícese",
+        link: "https://actualicese.com/suscripcion-gratuita/",
+        description:
+            "Obtén acceso a información contable y fiscal actualizada.",
+        icon: "fa-solid fa-file-alt",
+        image: "https://w7.pngwing.com/pngs/539/354/png-transparent-accountant-sit-illustration.png", // Cambia la URL de la imagen según sea necesario
+    },
+    {
+        title: "Leyes con Contenido Tributario y Contable",
+        link: "https://www.ambitojuridico.com/noticias/blog-contable-yo-tributario/tributario-y-contable/leyes-con-contenido-tributario-y",
+        description:
+            "Descubre las leyes recientes que impactan el ámbito tributario.",
+        icon: "fa-solid fa-gavel",
+        image: "https://w7.pngwing.com/pngs/539/354/png-transparent-accountant-sit-illustration.png", // Cambia la URL de la imagen según sea necesario
+    },
+    {
+        title: "Guía Tributaria 2024 para Fiscales y Contables en Colombia",
+        link: "https://jlcauditors.com/guia-tributaria-2024-fiscales-contables-colombia/",
+        description:
+            "Una guía completa sobre obligaciones fiscales para el año 2024.",
+        icon: "fa-solid fa-book",
+        image: "https://w7.pngwing.com/pngs/539/354/png-transparent-accountant-sit-illustration.png", // Cambia la URL de la imagen según sea necesario
+    },
+    {
+        title: "Comunidad Contable",
+        link: "https://www.comunidadcontable.com/home.asp",
+        description: "Recursos y herramientas para contadores en Colombia.",
+        icon: "fa-solid fa-users",
+        image: "https://w7.pngwing.com/pngs/539/354/png-transparent-accountant-sit-illustration.png", // Cambia la URL de la imagen según sea necesario
+    },
+];
+---
+
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="logotipo.jpeg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <meta
+            name="description"
+            content="Contador Público en Colombia. Ofrezco asesoría contable y fiscal personalizada para empresas y personas, con precisión, transparencia y cumplimiento legal. Servicios de análisis integral, planificación fiscal, y automatización de procesos para maximizar beneficios y reducir costos. Consultoría estratégica y soporte personalizado con actualización constante y generación de informes."
+        />
+      <meta charset="utf-8" />
+    </head>
+  <section class="articulos py-10 bg-gray-100">
+   
+    <div class="container mx-auto px-4">
+      <h1 class="text-3xl font-bold mb-6 text-center">Artículos Recientes</h1>
+      <div class="relative flex w-96 flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
+        <nav class="flex min-w-[240px] flex-col gap-1 p-1.5">
+          {articles.map((article) => (
+            <div
+              role="button"
+              class="text-slate-800 flex w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
+            >
+              <div class="mr-4 grid place-items-center">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"
+                />
+              </div>
+              <div>
+                <h6 class="text-slate-800 font-medium">
+                  <a href={article.link} target="_blank" class="hover:underline">
+                    {article.title}
+                  </a>
+                </h6>
+                <p class="text-slate-500 text-sm">{article.description}</p>
+              </div>
+            </div>
+          ))}
+        </nav>
+      </div>
+    </div>
+  </section>
