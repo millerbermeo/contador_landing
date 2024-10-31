@@ -8,6 +8,7 @@ import Whatsapp from "../components/Whatsapp.astro";
 import AboutMe from "../components/AboutMe.astro";
 import ImageCarousel from "../components/ImageCarousel.astro";
 import Footer from "../components/Footer.astro";
+import TikTokCarousel from "../components/TikTokCarousel.astro";
 
 const services = [
     {
@@ -80,12 +81,26 @@ const services = [
             "🏢 Hola, necesito asesoría en la creación de empresas. ¡Gracias! ✨",
     },
 ];
+
+    const images = [
+        ['https://americana.edu.co/medellin/wp-content/uploads/2023/04/destacada-contaduria-publica.jpg',
+            'https://americana.edu.co/monteria/wp-content/uploads/2022/02/shutterstock_1895845201-2.jpg',
+            'https://virtual.cuc.edu.co/hubfs/Imported_Blog_Media/perfil-contaduria-publica.jpg',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo7TklHOHiL9Y5kPtHRG44dRPGfL4xyBRuldUPwM9HU89q5fYX1Cb4DIDq-QZbR5MwRSc&usqp=CAU/',
+            'https://cdn.forbes.com.mx/2023/05/contaduria-publica.jpg',
+            'https://media.licdn.com/dms/image/v2/C5612AQH8UwmiencH1g/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1555700962713?e=2147483647&v=beta&t=Jb4gggqc6Y7jlTe4KmgvKEBN4puV1i7oRfslqpCIc-Y',
+            'https://www.nur.edu/wp-content/uploads/2022/09/ESTUDIACONTADURIA1200x6285-1024x536.jpg'
+
+        ]
+    ]
+
 ---
+
 
 <html lang="es">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="logotipo.jpeg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <meta
@@ -140,9 +155,18 @@ const services = [
             <AboutMe />
         </section>
 
-        <section>
+        <!-- <section>
             <ImageCarousel />
-        </section>
+        </section> -->
+
+
+        {
+            images.map((img) => (
+                <TikTokCarousel
+                images={img}
+                />
+            ))
+        }
 
         <Footer />
     </body>
