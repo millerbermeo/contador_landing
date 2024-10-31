@@ -1,0 +1,40 @@
+---
+// Tarifa.astro
+const tarifas = [
+    {
+        servicio: "Asesoría Básica",
+        descripcion: "Dudas generales sobre impuestos, registros contables simples, trámites ante la DIAN",
+        precio: "$50,000 - $150,000 COP por hora"
+    },
+    {
+        servicio: "Asesoría Especializada",
+        descripcion: "Planeación tributaria, gestión de nómina, estructuración de costos, liquidación de impuestos complejos",
+        precio: "$150,000 - $300,000 COP por hora"
+    },
+    {
+        servicio: "Asesoría para Empresas o PYMES",
+        descripcion: "Paquete mensual que incluye asesorías y soporte contable constante",
+        precio: "$300,000 - $1,500,000 COP mensuales"
+    },
+    {
+        servicio: "Consultoría Puntual o Paquete de Asesorías",
+        descripcion: "Paquetes de asesoría por un número de horas determinado a precios más accesibles",
+        precio: "Precios accesibles"
+    }
+];
+---
+
+<section class="w-full bg-gray-50 py-16">
+    <div class="container mx-auto px-8">
+        <h2 class="text-4xl text-[#4dbb4b] font-bold text-center mb-10">Precios y Tarifas</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {tarifas.map((tarifa) => (
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-800">{tarifa.servicio}</h3>
+                    <p class="text-gray-600 mb-4">{tarifa.descripcion}</p>
+                    <p class="text-lg font-bold text-gray-800">{tarifa.precio}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
