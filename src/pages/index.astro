@@ -44,12 +44,12 @@ import MenuAcordeon from "../components/MenuAcordeon.astro";
         <Home />
         <AuthorCard />
         <section class="w-full bg-gray-50" id="servicios">
-            <div class="container mx-auto py-16 px-8 text-gray-800">
-                <h2 class="text-4xl text-[#000] font-bold text-center mb-10">
+            <div class="container mx-auto py-16 px-3 lg:px-8 text-gray-800">
+                <h2 class="text-4xl text-[#000] font-bold text-center lg:mb-10">
                     Portafolio de Servicios
                 </h2>
                 <div
-                    class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 scale-90 2xl:scale-100"
+                    class="grid md:grid-cols-2 -mt-20 lg:mt-0 lg:grid-cols-3 gap-3 lg:gap-8 scale-90 2xl:scale-100"
                 >
                     {
                         services.map((service) => (
@@ -65,7 +65,7 @@ import MenuAcordeon from "../components/MenuAcordeon.astro";
             </div>
         </section>
         <AboutMe />
-        <div class="flex w-full container mx-auto justify-center items-start gap-x-4 my-24">
+        <div class="flex w-full flex-wrap container mx-auto justify-center items-start gap-x-4 my-24">
             <Articulos />
             <MenuAcordeon />
             <div>

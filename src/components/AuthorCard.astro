@@ -15,7 +15,7 @@ const author = {
 <section class="flex justify-center container mx-auto py-5 lg:my-16">
   <div class="flex flex-col lg:flex-row items-center space-x-0 lg:space-x-6 max-w-4xl gap-5 p-8 lg:p-0">
     <!-- Sección de texto animada desde la derecha -->
-    <div class="flex flex-col w-full p-10 break-all" data-aos="fade-right">
+    <div class="flex flex-col w-full lg:p-10 break-all" data-aos="fade-right">
       <h4 class="text-lg font-light text-gray-500">Sobre mí</h4>
       <h3 class="text-3xl font-semibold">
         {author.name} — <span class="font-normal">{author.title}</span>
@@ -27,7 +27,7 @@ const author = {
     <img
       src={author.imageSrc}
       alt={author.name}
-      class="w-28 h-24 rounded-full object-cover lg:order-first lg:mb-0 mb-4"
+      class="w-28 hidden lg:flex h-24 rounded-full object-cover lg:order-first lg:mb-0 mb-4"
       data-aos="fade-left"
     />
   </div>
