@@ -17,7 +17,7 @@ const { icon, title, items, whatsappMessage } = Astro.props;
 
 <!-- Servicio Card con animación de olas en el fondo con colores verdes -->
 <div 
-  class="relative bg-white cursor-pointer p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:bg-slate-200 transition-shadow duration-300 h-[420px] 2xl:h-96 flex flex-col justify-between text-gray-800 overflow-hidden playing"
+  class="relative bg-white mt-20 cursor-pointer p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:bg-slate-200 transition-shadow duration-300 h-[420px] 2xl:h-96 flex flex-col justify-between text-gray-800 overflow-hidden playing"
   data-aos="fade-up"
 >
   <!-- Olas animadas de fondo -->
@@ -36,7 +36,7 @@ const { icon, title, items, whatsappMessage } = Astro.props;
   </div>
 
   <!-- Icono y Botón de WhatsApp -->
-  <div class="z-10 flex justify-between items-end mt-auto" data-aos="fade-up" data-aos-delay="200">
+  <div class="z-10 flex justify-between items-end mt-auto" data-aos="fade-up" data-aos-delay="100">
       <div class="flex justify-start">
           <img class="w-16 h-16 object-contain bg-white rounded-full" src={icon} alt="" />
       </div>

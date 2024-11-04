@@ -7,20 +7,20 @@ import Carousel from "./Carousel.astro";
 <div aria-labelledby="services-section" class="my-28" data-aos="fade-down" data-aos-delay="200">
     <h2 id="services-section" class="sr-only">Servicios ofrecidos</h2>
     
-    <div class="flex items-center justify-center flex-wrap p-4 gap-2 2xl:gap-7 mx-auto bg-gray-50 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out py-12">
+    <div class="flex items-center justify-center flex-wrap p-4 gap-2 2xl:gap-7 mx-auto transition-shadow duration-300 ease-in-out py-12">
         <div class="w-full lg:w-[55%] 2xl:max-w-6xl">
             {images.map((img) => (
                 <Carousel images={img} />
             ))}
         </div>
         
-        <div class="w-96 flex flex-col bg-white p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+        <div class="w-96 flex flex-col bg-white p-6  transition-transform duration-300 hover:scale-105">
             <h3 class="text-2xl font-bold mb-2 text-gray-800">¿Por qué Elegir Mis Servicios?</h3>
             <p class="text-gray-700 leading-relaxed mb-4">
                 Enfoco cada trabajo en generar tranquilidad y confianza. Mi compromiso es mantener la transparencia y el cumplimiento, asegurando que cada paso sea oportuno y profesional. Conmigo, su empresa o proyecto estará en manos expertas, listas para asumir cada reto fiscal y contable de la mejor manera.
             </p>
             <a href="https://wa.me/573054188289" class="mt-4 inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow hover:bg-green-700 transition-colors duration-300" target="_blank" rel="noopener noreferrer" aria-label="Contactar a través de WhatsApp">
-                Contáctame
+                Contáctame  
             </a>
         </div>
     </div>
