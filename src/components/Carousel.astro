@@ -6,21 +6,20 @@ export interface Props {
 const { images } = Astro.props;
 ---
 
-<section id="gallery" class="relative w-4/5 mx-auto overflow-hidden">
+<section id="gallery" class="relative w-4/5 mx-auto overflow-hidden" aria-label="Galería de imágenes">
   <div class="gallery-container flex transition-transform duration-300 ease-in-out">
     {images.map((image, index) => (
-      <figure class="gallery-item min-w-full box-border flex justify-center items-center h-[500px] bg-gray-100">
-        <img src={image} alt={`Imagen ${index + 1}`} class="w-full h-full object-cover" />
-        {/* <figcaption class="absolute bottom-4 left-0 right-0 text-center text-gray-600 bg-white bg-opacity-70 p-2">{`Descripción de la imagen ${index + 1}`}</figcaption> */}
+      <figure class="gallery-item min-w-full box-border flex justify-center items-center h-[500px] bg-gray-100" aria-hidden={index !== 0}>
+        <img src={image} alt={`Imagen ${index + 1}`} class="w-full h-full object-cover" loading="lazy" />
       </figure>
     ))}
   </div>
 
-  <nav class="gallery-navigation absolute inset-y-0 left-0 right-0 flex justify-between items-center px-4">
-    <button class="nav-button prev-button flex items-center justify-center text-gray-200 hover:text-[#4dbb4b] rounded-full">
+  <nav class="gallery-navigation absolute inset-y-0 left-0 right-0 flex justify-between items-center px-4" aria-label="Navegación de la galería">
+    <button class="nav-button prev-button flex items-center justify-center text-gray-200 hover:text-[#4dbb4b] rounded-full" aria-label="Imagen anterior">
       <ion-icon name="chevron-back-circle" class="text-5xl"></ion-icon>
     </button>
-    <button class="nav-button next-button flex items-center justify-center text-gray-200 hover:text-[#4dbb4b] rounded-full">
+    <button class="nav-button next-button flex items-center justify-center text-gray-200 hover:text-[#4dbb4b] rounded-full" aria-label="Siguiente imagen">
       <ion-icon name="chevron-forward-circle" class="text-5xl"></ion-icon>
     </button>
   </nav>
@@ -47,5 +46,10 @@ const { images } = Astro.props;
       const offset = -currentIndex * 100;
       galleryContainer.style.transform = `translateX(${offset}%)`;
     }
+
+    // Set up automatic navigation every 4 seconds
+    setInterval(() => {
+      navigate(1);
+    }, 4000); // Cambia la imagen cada 4 segundos
   });
 </script>

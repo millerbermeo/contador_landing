@@ -2,46 +2,28 @@
 import { images } from "../utils/ImagesSlider.astro";
 import Tarifa from "./Tarifa.astro";
 import Carousel from "./Carousel.astro";
-
-
 ---
-<section>
-<div class="flex items-center justify-center p-4 gap-7 mx-auto my-28 bg-gray-50 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
-    <div class="max-w-6xl">
-        {images.map((img) => <Carousel images={img} />)}
+
+<section aria-labelledby="services-section" class="my-28">
+    <h2 id="services-section" class="sr-only">Servicios ofrecidos</h2>
+    
+    <div class="flex items-center justify-center p-4 gap-7 mx-auto bg-gray-50 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out py-12">
+        <div class="max-w-6xl">
+            {images.map((img) => (
+                <Carousel images={img} />
+            ))}
+        </div>
+        
+        <div class="w-96 hidden lg:flex flex-col bg-white p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+            <h3 class="text-2xl font-bold mb-2 text-gray-800">¿Por qué Elegir Mis Servicios?</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                Enfoco cada trabajo en generar tranquilidad y confianza. Mi compromiso es mantener la transparencia y el cumplimiento, asegurando que cada paso sea oportuno y profesional. Conmigo, su empresa o proyecto estará en manos expertas, listas para asumir cada reto fiscal y contable de la mejor manera.
+            </p>
+            <a href="https://wa.me/573054188289" class="mt-4 inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow hover:bg-green-700 transition-colors duration-300" target="_blank" rel="noopener noreferrer" aria-label="Contactar a través de WhatsApp">
+                Contáctame
+            </a>
+        </div>
     </div>
-    <div class="w-96 hidden lg:flex flex-col bg-gradient-to-r from-green-400 to-blue-500 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
-        <h3 class="text-2xl font-bold mb-2 text-white">¿Por qué Elegir Mis Servicios?</h3>
-        <p class="text-white leading-relaxed">
-          Enfoco cada trabajo en generar tranquilidad y confianza. Mi compromiso es mantener la transparencia y el cumplimiento, asegurando que cada paso sea oportuno y profesional. Conmigo, su empresa o proyecto estará en manos expertas, listas para asumir cada reto fiscal y contable de la mejor manera.
-        </p>
-        <a href="mailto:tuemail@ejemplo.com" class="mt-4 inline-block bg-white text-green-600 font-bold py-2 px-4 rounded-full shadow hover:bg-green-600 hover:text-white transition-colors duration-300">
-          Contáctame
-        </a>
-      </div>
-      
-</div>
 
-<Tarifa />
-
-
-<!-- <div class="flex flex-col items-center justify-center p-8 w-[80%] mx-auto my-20 bg-gray-100 rounded-lg shadow-lg">
-  <h2 class="text-3xl font-bold text-gray-800 mb-6">Nuestra Misión y Visión</h2>
-  
-  <div class="flex flex-col md:flex-row gap-10">
-      <div class="bg-white p-6 rounded-lg shadow-md transition-transform duration-300 ease-in-out transform hover:scale-105">
-          <h3 class="text-2xl font-semibold text-blue-600 mb-4">Misión</h3>
-          <p class="text-gray-700 leading-relaxed">
-              Brindar un respaldo integral en el manejo de finanzas y obligaciones fiscales para empresas y personas naturales en Colombia, permitiendo que nuestros clientes se concentren en su crecimiento y éxito.
-          </p>
-      </div>
-      
-      <div class="bg-white p-6 rounded-lg shadow-md transition-transform duration-300 ease-in-out transform hover:scale-105">
-          <h3 class="text-2xl font-semibold text-blue-600 mb-4">Visión</h3>
-          <p class="text-gray-700 leading-relaxed">
-              Ser reconocidos como líderes en asesoría contable y financiera en Colombia, destacando por nuestra transparencia, compromiso ético y eficacia en el cumplimiento de normativas fiscales, contribuyendo al desarrollo de nuestros clientes.
-          </p>
-      </div>
-  </div>
-</div> -->
+    <Tarifa />
 </section>

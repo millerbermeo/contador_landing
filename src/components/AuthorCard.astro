@@ -26,9 +26,10 @@ const author = {
     <!-- Imagen animada desde la izquierda -->
     <img
       src={author.imageSrc}
-      alt={author.name}
+      alt={`Foto de ${author.name}`}
       class="w-28 hidden lg:flex h-24 rounded-full object-cover lg:order-first lg:mb-0 mb-4"
       data-aos="fade-left"
+      loading="lazy"
     />
   </div>
 </div>

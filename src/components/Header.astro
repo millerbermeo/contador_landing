@@ -1,47 +1,46 @@
 <!-- src/components/Header.astro -->
-<header id="contador" class="bg-[#4dbb4b] hidden text-white w-full p-0.5 2xl:p-1 px-8 lg:flex items-center justify-between">
-    <!-- Sección de información de contacto -->
+<header id="contador" class="bg-[#4dbb4b] hidden text-white w-full p-0.5 2xl:p-1 px-8 lg:flex items-center justify-between" aria-label="Información de contacto y redes sociales">
+  <!-- Sección de información de contacto -->
   <div class="container mx-auto flex justify-between">
     <div class="flex items-center space-x-6">
-        <!-- Correo -->
-        <a href="mailto:tuemail@example.com" class="flex items-center space-x-2 hover:text-blue-500">
-          <ion-icon name="mail"></ion-icon>
-          <span>b.pedraza247@gmail.com</span>
-        </a>
-    
-        <!-- WhatsApp -->
-        <a href="https://wa.me/3134299697" class="flex items-center space-x-2 hover:text-green-500">
-          <ion-icon name="logo-whatsapp"></ion-icon>
-          <span>3054188289</span>
-       
-        </a>
+      <!-- Correo -->
+      <a href="mailto:b.pedraza247@gmail.com" class="flex items-center space-x-2 hover:text-blue-500" aria-label="Correo electrónico">
+        <ion-icon name="mail"></ion-icon>
+        <span>b.pedraza247@gmail.com</span>
+      </a>
+      
+      <!-- WhatsApp -->
+      <a href="https://wa.me/3054188289" class="flex items-center space-x-2 hover:text-green-500" aria-label="Contacto por WhatsApp">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+        <span>305 418 8289</span>
+      </a>
 
-        <a href="https://wa.me/3054188289" class="flex items-center space-x-2 hover:text-green-500">
-          <ion-icon name="call"></ion-icon>
-          <span>3134299697</span>
-        </a>
-    
-        <!-- Ubicación -->
-        <a href="https://goo.gl/maps/yourlocation" target="_blank" class="flex items-center space-x-2 hover:text-red-500">
-          <ion-icon name="location-sharp"></ion-icon>
-          <span>Florencia</span>
-        </a>
-      </div>
-    
-      <!-- Redes Sociales -->
-      <div class="flex items-center space-x-6 text-xl">
-        <a href="https://facebook.com" target="_blank" class="hover:text-blue-600 text-2xl">
-          <ion-icon name="logo-facebook"></ion-icon>
-        </a>
-    
-        <a href="https://tiktok.com" target="_blank" class="hover:text-gray-900">
-          <ion-icon name="logo-tiktok"></ion-icon>
-        </a>
-    
-        <a href="https://instagram.com" target="_blank" class="hover:text-pink-500">
-          <ion-icon name="logo-instagram"></ion-icon>
-        </a>
-      </div>
+      <!-- Teléfono -->
+      <a href="tel:+573134299697" class="flex items-center space-x-2 hover:text-green-500" aria-label="Llamar al teléfono">
+        <ion-icon name="call"></ion-icon>
+        <span>313 429 9697</span>
+      </a>
+      
+      <!-- Ubicación -->
+      <a href="https://goo.gl/maps/yourlocation" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 hover:text-red-500" aria-label="Ubicación en Google Maps">
+        <ion-icon name="location-sharp"></ion-icon>
+        <span>Florencia</span>
+      </a>
+    </div>
+
+    <!-- Redes Sociales -->
+    <div class="flex items-center space-x-6 text-xl">
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 text-2xl" aria-label="Facebook">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </a>
+
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="hover:text-gray-900" aria-label="TikTok">
+        <ion-icon name="logo-tiktok"></ion-icon>
+      </a>
+
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-pink-500" aria-label="Instagram">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </a>
+    </div>
   </div>
-  </header>
-  
+</header>

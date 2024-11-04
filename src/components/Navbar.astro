@@ -15,35 +15,17 @@
 
 <nav class="bg-white text-black p-1 sticky top-0 z-20">
   <div class="container mx-auto flex justify-between items-center">
-    <!-- Logo -->
-    <!-- <div class="text-2xl flex gap-2"><h3 class="text-[#4dbb4b] font-extrabold">BP</h3> <span class="text-[#252525] font-extralight">Asesorías Contables</span></div> -->
     <div class="text-3xl lg:text-xl 2xl:text-2xl items-end flex gap-2">
       <img class="h-[70px] lg:h-[50px] 2xl:h-[60px]" src="logotipo.jpeg" alt="" />
       <span class="text-[#252525] font-bold lg:font-extralight">Asesorías <br /> Contables</span>
     </div>
 
-    <!-- Botón hamburguesa en móviles -->
-    <button
-      type="button"
-      class="md:hidden block focus:outline-none"
-      id="menu-toggle"
-    >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16m-7 6h7"></path>
+    <button type="button" class="md:hidden block focus:outline-none" id="menu-toggle" aria-expanded="false">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
       </svg>
     </button>
 
-    <!-- Links de navegación para escritorio -->
     <div class="hidden text-xl font-normal md:flex space-x-8">
       <a href="#contador" class="hover:text-gray-300">Inicio</a>
       <a href="#servicios" class="hover:text-gray-300">Servicios</a>
@@ -52,11 +34,7 @@
     </div>
   </div>
 
-  <!-- Menú lateral en móviles (oculto por defecto) -->
-  <div
-    id="mobile-menu"
-    class="fixed top-0 left-0 h-full w-64 bg-blue-600 text-white p-4 transform -translate-x-full slide-out md:hidden"
-  >
+  <div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-blue-600 text-white p-4 transform -translate-x-full slide-out md:hidden">
     <a href="#inicio" class="block py-2 hover:bg-blue-700">Inicio</a>
     <a href="#servicios" class="block py-2 hover:bg-blue-700">Servicios</a>
     <a href="#contacto" class="block py-2 hover:bg-blue-700">Contacto</a>
@@ -66,9 +44,7 @@
 
 <script>
   window.addEventListener("scroll", () => {
-    const navbar = document.querySelector("nav"); // Selecciona el navbar
-
-    // Si la posición del scroll es mayor a 0, agrega la clase
+    const navbar = document.querySelector("nav");
     if (window.scrollY > 0) {
       navbar.classList.add("nav-shadow");
     } else {
@@ -76,20 +52,29 @@
     }
   });
 
-  // Seleccionar el botón de menú y el menú lateral
   document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById("menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
 
     menuToggle.addEventListener("click", () => {
-      // Alterna las clases para mostrar u ocultar el menú lateral
       if (mobileMenu.classList.contains("slide-out")) {
         mobileMenu.classList.remove("slide-out");
         mobileMenu.classList.add("slide-in");
+        menuToggle.setAttribute("aria-expanded", "true");
       } else {
         mobileMenu.classList.remove("slide-in");
         mobileMenu.classList.add("slide-out");
+        menuToggle.setAttribute("aria-expanded", "false");
       }
+    });
+
+    const menuLinks = mobileMenu.querySelectorAll("a");
+    menuLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("slide-in");
+        mobileMenu.classList.add("slide-out");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
     });
   });
 </script>
