@@ -38,13 +38,13 @@ const { icon, title, items, whatsappMessage } = Astro.props;
   <!-- Icono y Botón de WhatsApp -->
   <div class="z-10 flex justify-between items-end mt-auto" data-aos="fade-up" data-aos-delay="200">
       <div class="flex justify-start">
-          <img class="w-16 h-16 object-contain" src={icon} alt="" />
+          <img class="w-16 h-16 object-contain bg-white rounded-full" src={icon} alt="" />
       </div>
       <a
           href={`https://api.whatsapp.com/send?phone=573054188289&text=${encodeURIComponent(whatsappMessage)}`}
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-[#4dbb4b] text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300"
+          class="bg-[#4dbb4b] text-white px-4 hover:scale-110 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300"
       >
           Contactar por WhatsApp
       </a>

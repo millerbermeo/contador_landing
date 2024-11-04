@@ -1,0 +1,51 @@
+---
+export interface Props {
+  images: string[];
+}
+
+const { images } = Astro.props;
+---
+
+<section id="gallery" class="relative w-4/5 mx-auto overflow-hidden">
+  <div class="gallery-container flex transition-transform duration-300 ease-in-out">
+    {images.map((image, index) => (
+      <figure class="gallery-item min-w-full box-border flex justify-center items-center h-[500px] bg-gray-100">
+        <img src={image} alt={`Imagen ${index + 1}`} class="w-full h-full object-cover" />
+        {/* <figcaption class="absolute bottom-4 left-0 right-0 text-center text-gray-600 bg-white bg-opacity-70 p-2">{`Descripción de la imagen ${index + 1}`}</figcaption> */}
+      </figure>
+    ))}
+  </div>
+
+  <nav class="gallery-navigation absolute inset-y-0 left-0 right-0 flex justify-between items-center px-4">
+    <button class="nav-button prev-button flex items-center justify-center text-gray-200 hover:text-[#4dbb4b] rounded-full">
+      <ion-icon name="chevron-back-circle" class="text-5xl"></ion-icon>
+    </button>
+    <button class="nav-button next-button flex items-center justify-center text-gray-200 hover:text-[#4dbb4b] rounded-full">
+      <ion-icon name="chevron-forward-circle" class="text-5xl"></ion-icon>
+    </button>
+  </nav>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let currentIndex = 0;
+    const galleryContainer = document.querySelector('.gallery-container') as HTMLElement;
+    const prevButton = document.querySelector('.prev-button') as HTMLButtonElement;
+    const nextButton = document.querySelector('.next-button') as HTMLButtonElement;
+    const totalImages = document.querySelectorAll('.gallery-item').length;
+
+    prevButton.addEventListener('click', () => {
+      navigate(-1);
+    });
+
+    nextButton.addEventListener('click', () => {
+      navigate(1);
+    });
+
+    function navigate(direction: number) {
+      currentIndex = (currentIndex + direction + totalImages) % totalImages;
+      const offset = -currentIndex * 100;
+      galleryContainer.style.transform = `translateX(${offset}%)`;
+    }
+  });
+</script>

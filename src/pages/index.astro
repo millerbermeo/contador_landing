@@ -28,11 +28,9 @@ import MenuAcordeon from "../components/MenuAcordeon.astro";
             Precisión, Transparencia, y Optimización
         </title>
         <script
-            type="module"
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
         ></script>
         <script
-            nomodule
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
         ></script>
     </head>
@@ -42,8 +40,10 @@ import MenuAcordeon from "../components/MenuAcordeon.astro";
         <Navbar />
         <Whatsapp />
         <Home />
-        <AuthorCard />
-        <section class="w-full bg-gray-50" id="servicios">
+        <section class="bg-gray-100">
+            <AuthorCard />
+        </section>
+        <section class="w-full flex justify-center" id="servicios">
             <div class="container mx-auto py-16 px-3 lg:px-8 text-gray-800">
                 <h2 class="text-4xl text-[#000] font-bold text-center lg:mb-10">
                     Portafolio de Servicios
@@ -78,3 +78,15 @@ import MenuAcordeon from "../components/MenuAcordeon.astro";
         <Footer />
     </body>
 </html>
+
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+</style>
