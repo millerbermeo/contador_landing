@@ -1,10 +1,9 @@
 ---
 import { images } from "../utils/ImagesSlider.astro";
-import Tarifa from "./Tarifa.astro";
 import Carousel from "./Carousel.astro";
 ---
 
-<div aria-labelledby="services-section" class="my-28" data-aos="fade-down" data-aos-delay="200">
+<div aria-labelledby="services-section" class="my-28 py-40" data-aos="fade-down" data-aos-delay="200" style={{backgroundImage: 'url(fondoeverde1.jpeg)'}}>
     <h2 id="services-section" class="sr-only">Servicios ofrecidos</h2>
     
     <div class="flex items-center justify-center flex-wrap p-4 gap-2 2xl:gap-7 mx-auto transition-shadow duration-300 ease-in-out py-12">
@@ -24,6 +23,4 @@ import Carousel from "./Carousel.astro";
             </a>
         </div>
     </div>
-
-    <Tarifa />
   </div>
