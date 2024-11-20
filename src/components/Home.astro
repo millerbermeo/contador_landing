@@ -1,4 +1,6 @@
 ---
+
+
 import Loader from "../components/Loader.astro";
 import Qr from "./Qr.astro";
 import 'aos/dist/aos.css';
@@ -8,53 +10,54 @@ const loadings = [
     { serviceName: "Transparencia", percentage: 100 },
     { serviceName: "Eficiencia", percentage: 100 },
 ];
-
-const loadAOS = () => {
-    if (typeof window !== 'undefined') {
-        import('aos').then(AOS => {
-            AOS.init({ duration: 1000 });
-        });
-    }
-};
-
-loadAOS();
 ---
-
-<main class="w-full flex justify-center py-10 2xl:py-28 bg-[#ffffff] mb-32">
+<main class="w-full flex justify-center py-10 2xl:py-28 bg-gray-50 mb-32">
+    
     <div class="container mx-auto px-6 md:px-12 lg:px-20 flex flex-col lg:flex-row items-center gap-12">
+        <!-- Contenido del lado izquierdo -->
         <div class="lg:w-1/2 mt-12 lg:mt-0 text-left flex flex-col items-start 2xl:gap-y-3 -translate-y-10 2xl:-translate-x-0">
-            <h1 data-aos="fade-up" class="text-lg 2xl:text-2xl font-light text-gray-800 mb-4">Contador Público <ion-icon name="stats-chart-outline"></ion-icon></h1>
-            <h2 data-aos="fade-up" data-aos-delay="100" class="text-3xl 2xl:text-5xl font-bold text-gray-900 leading-tight mb-2 2xl:mb-6">
-                Líderes en contabilidad, ofreciendo <span class="text-[#4dbb4b]">servicios financieros exclusivos para empresas.</span>
+            <!-- Títulos y texto descriptivo -->
+            <h1 data-aos="fade-up" class="text-lg 2xl:text-2xl font-light text-[#0960ae] mb-4">
+                Contador Público <ion-icon name="stats-chart-outline"></ion-icon>
+            </h1>
+            <h2 data-aos="fade-up" data-aos-delay="100" class="text-3xl 2xl:text-5xl font-bold text-[#333333] leading-tight mb-2 2xl:mb-6">
+                Líderes en contabilidad, ofreciendo <span class="text-[#0960ae]">servicios financieros exclusivos para personas y empresas.</span>
             </h2>
-            <p data-aos="fade-up" data-aos-delay="100" class="text-lg lg:text-xl text-gray-600 mb-6">Aseguramos cumplimiento y optimización para llevar su empresa al siguiente nivel.</p>
+            <p data-aos="fade-up" data-aos-delay="100" class="text-lg lg:text-xl text-gray-600 mb-6">
+                Aseguramos cumplimiento y optimización para llevar su empresa al siguiente nivel.
+            </p>
+            <!-- Botón de acción -->
             <div class="flex gap-3 justify-start lg:items-end flex-col lg:flex-row mx-auto lg:mx-0">
-                <button class="bg-[#4dbb4b] hover:bg-[#4dbb4b] flex items-center gap-2 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                <button aria-label="Conócenos, más sobre nuestros servicios" class="bg-[#64a6e3] hover:bg-[#4dbb4b] flex items-center gap-2 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105">
                     Conócenos
                     <ion-icon name="arrow-forward-sharp"></ion-icon>
                 </button>
             </div>
+            <!-- Loaders -->
             <div class="flex gap-6 w-full mx-auto justify-center lg:justify-start">
-                {loadings.map(({ serviceName, percentage }) => (
-                    <Loader percentage={percentage} serviceName={serviceName} />
+                {loadings.map(({ serviceName, percentage }, index) => (
+                    <Loader key={index} percentage={percentage} serviceName={serviceName} />
                 ))}
             </div>
         </div>
 
+        <!-- Contenido del lado derecho -->
         <div class="lg:w-1/2 mx-auto -mt-12 lg:mt-0 flex justify-center items-start 2xl:items-center -translate-y-3 p-5 2xl:p-0 2xl:translate-y-0 relative scale-90 2xl:scale-100" data-aos="fade-up" data-aos-delay="200">
-            <div class="w-64 hidden lg:flex h-64 rounded-full absolute -top-10 -right-16 z-10 bg-[#4dbb4b] flex-col items-center justify-center text-center p-4 shadow-lg scale-90 2xl:scale-100">
+            <!-- Bloque de información -->
+            <div class="w-64 hidden lg:flex h-64 rounded-full absolute -top-10 -right-16 z-10 bg-[#4CAF50] flex-col items-center justify-center text-center p-4 shadow-lg scale-90 2xl:scale-100">
                 <div>
-                    <img src="estadistica.png" alt="Gráfico estadístico" class="w-20 h-20 rounded-full border-4 -mt-6 mb-2 border-white shadow-md" />
+                    <img src="estadistica.png" alt="Gráfico estadístico representando el desempeño financiero" class="w-20 h-20 rounded-full border-4 -mt-6 mb-2 border-white shadow-md" />
                 </div>
                 <h2 class="text-xl font-bold text-white">Brian Pedraza Osorio</h2>
                 <h3 class="text-lg font-semibold text-white text-opacity-90">Universidad de la Amazonia</h3>
                 <p class="text-sm text-gray-200">Contador público con tarjeta profesional vigente.</p>
             </div>
 
+            <!-- Imagen y QR -->
             <div class="relative flex flex-col items-center gap-y-2 cursor-pointer">
-                <img class="w-full h-full max-w-xl rounded-full bg-[#fff] scale-90 2xl:scale-100 transition-transform transform hover:scale-105 z-0" src="fotobrianopt.jpg" alt="Brian Pedraza Osorio" />
+                <img class="w-full h-full max-w-xl rounded-full bg-[#ffffff] scale-90 2xl:scale-105 transition-transform transform hover:scale-110 z-0" src="prueba.jpg" alt="Foto de Brian Pedraza Osorio, contador público" />
                 
-                <div class="absolute inset-0 bg-green-700 scale-90 2xl:scale-100 bg-opacity-80 rounded-full flex flex-col gap-y-5 items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                <div class="absolute inset-0 bg-[#64a6e3] scale-90 2xl:scale-105 bg-opacity-80 rounded-full flex flex-col gap-y-5 items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
                     <h3 class="italic text-2xl font-normal text-center text-white px-4">
                         Actuando con seguridad y <br /> transparencia para su empresa.
                     </h3>
@@ -64,3 +67,11 @@ loadAOS();
         </div>
     </div>
 </main>
+
+<script>
+    if (typeof window !== 'undefined') {
+        import('aos').then(AOS => {
+            AOS.init({ duration: 1000 });
+        });
+    }
+</script>

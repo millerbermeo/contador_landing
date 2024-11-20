@@ -38,22 +38,29 @@ import Tarifa from "../components/Tarifa.astro";
 
     <body>
         <Header />
+        <!-- <div
+            class="absolute top-0 left-0 rotate-180 w-full h-full z-0 border-t-[100vh] border-t-transparent border-r-[100vh] border-r-[#f8f7f7]"
+        >
+        </div> -->
+
         <Navbar />
         <Whatsapp />
         <Home />
 
         <section
-            class="w-full lg:h-[1200px] flex justify-center items-center bg-gradient-to-l from-white to-green-300"
+            class="w-full lg:h-[1200px] flex justify-center items-start bg-[#ffffff]"
             id="servicios"
         >
-            <div class="container mx-auto py-16 px-4 lg:px-8 text-gray-800">
+            <div class="container mx-auto pb-16 px-4 lg:px-8 text-gray-800">
                 <h2
-                    class="text-3xl lg:text-4xl font-bold text-center text-[#000] lg:mb-10 mb-6 break-all flex-wrap translate-y-6 2xl:translate-x-0"
+                    class="text-3xl lg:text-6xl font-bold text-center text-gray-900 lg:mb-10 mb-6 break-all flex-wrap translate-y-6 2xl:translate-x-0"
                 >
                     Portafolio de Servicios
                 </h2>
 
-                <span class="block text-center mx-auto text-gray-500 mb-8 translate-y-8 2xl:translate-x-0">
+                <span
+                    class="block text-center mx-auto text-xl text-gray-600 mb-8 translate-y-8 2xl:translate-x-0"
+                >
                     Buenas decisiones para tu empresa
                 </span>
 
@@ -76,7 +83,7 @@ import Tarifa from "../components/Tarifa.astro";
 
         <AuthorCard />
 
-        <!-- <AboutMe /> -->
+        <AboutMe />
         <Tarifa />
         <section
             class="my-16 flex w-full flex-wrap mx-auto justify-center items-start gap-y-40 gap-x-4"

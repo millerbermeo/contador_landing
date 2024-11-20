@@ -1,5 +1,6 @@
 ---
-// Props para recibir los datos del servicio
+
+
 export interface ServiceProps {
     icon: string;
     title: string;
@@ -15,36 +16,36 @@ const { icon, title, items, whatsappMessage } = Astro.props;
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" />
 </head>
 
-<!-- Servicio Card con animación de olas en el fondo con colores verdes -->
+<!-- Card de servicio con animación y estilo mejorado -->
 <div 
-  class="relative bg-white mt-20 cursor-pointer p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:bg-slate-200 transition-shadow duration-300 h-[420px] 2xl:h-96 flex flex-col justify-between text-gray-800 overflow-hidden playing"
+  class="relative bg-[#ffffff] mt-20 cursor-pointer p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-[420px] 2xl:h-96 flex flex-col justify-between text-gray-800 overflow-hidden playing"
   data-aos="fade-up"
 >
   <!-- Olas animadas de fondo -->
-  <div class="wave"></div>
-  <div class="wave"></div>
-  <div class="wave"></div>
+  <div class="wave wave-1"></div>
+  <div class="wave wave-2"></div>
+  <div class="wave wave-3"></div>
 
   <!-- Contenido principal de la card -->
-  <div class="z-10" data-aos="fade-in">
-      <h3 class="text-3xl font-semibold mb-4">{title}</h3>
-      <ul class="text-gray-700 text-left space-y-2">
+  <div class="z-10 space-y-4" data-aos="fade-in">
+      <h3 class="text-3xl font-semibold text-[#00509E]">{title}</h3>
+      <ul class="text-gray-900 text-left space-y-2">
           {items.map((item) => (
-            <li class="text-[17px]" data-aos="fade-up" data-aos-delay="100">• {item}</li>
+            <li class="text-[17px] pl-4 before:content-['•'] before:text-[#4CAF50] before:pr-2">{item}</li>
           ))}
       </ul>
   </div>
 
   <!-- Icono y Botón de WhatsApp -->
-  <div class="z-10 flex justify-between items-end mt-auto" data-aos="fade-up" data-aos-delay="100">
+  <div class="z-10 flex justify-between items-end mt-auto">
       <div class="flex justify-start">
-          <img class="w-16 h-16 object-contain bg-white rounded-full" src={icon} alt="" />
+          <img class="w-16 h-16 object-contain bg-white rounded-full shadow-md border-4 border-[#D1D5DB]" src={icon} alt="" />
       </div>
       <a
           href={`https://api.whatsapp.com/send?phone=573054188289&text=${encodeURIComponent(whatsappMessage)}`}
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-[#4dbb4b] text-white px-4 hover:scale-110 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300"
+          class="bg-[#4CAF50] text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg hover:bg-[#00509E] transition duration-300"
       >
           Contactar por WhatsApp
       </a>
@@ -58,34 +59,45 @@ const { icon, title, items, whatsappMessage } = Astro.props;
   overflow: hidden;
 }
 
-/* Olas animadas con paleta verde clara */
+/* Olas animadas con paleta verde y azul clara */
 .wave {
   position: absolute;
-  width: 540px;
-  height: 700px;
-  opacity: 0.3;
-  background: linear-gradient(744deg, #b0eac9, #7dd3a5 60%, #5ec380);
+  width: 550px;
+  height: 650px;
+  background: linear-gradient(135deg, #b8e3fa, #a0d5e6 50%, #84c5d4);
   border-radius: 40%;
-  animation: wave 55s infinite linear;
+  opacity: 0.15;
+  animation: waveMovement 20s infinite linear;
 }
 
-.wave:nth-child(2) {
-  top: 210px;
-  animation-duration: 50s;
+.wave-1 {
+  top: -100px;
+  left: -200px;
+  animation-duration: 20s;
 }
 
-.wave:nth-child(3) {
-  top: 210px;
-  animation-duration: 45s;
+.wave-2 {
+  top: -180px;
+  left: -150px;
+  animation-duration: 25s;
+}
+
+.wave-3 {
+  top: -160px;
+  left: -100px;
+  animation-duration: 30s;
 }
 
 /* Animación de las olas */
-@keyframes wave {
+@keyframes waveMovement {
   0% {
-      transform: rotate(0deg);
+      transform: translateX(0px) translateY(0px) rotate(0deg);
+  }
+  50% {
+      transform: translateX(20px) translateY(15px) rotate(180deg);
   }
   100% {
-      transform: rotate(360deg);
+      transform: translateX(0px) translateY(0px) rotate(360deg);
   }
 }
 </style>
