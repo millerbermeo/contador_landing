@@ -1,22 +1,42 @@
 ---
-import { images } from "../utils/ImagesSlider.astro";
-import Carousel from "./Carousel.astro";
----
 
-<div aria-labelledby="services-section" class="my-28 py-40" data-aos="fade-down" data-aos-delay="200" style={{backgroundImage: 'url(fondoeverde1.jpeg)'}}>
-    <h2 id="services-section" class="sr-only">Servicios ofrecidos</h2>
-    
-    <div class="flex items-center justify-center flex-wrap p-4 gap-2 2xl:gap-7 mx-auto transition-shadow duration-300 ease-in-out py-12">
-        <img class="w-96" src="poster.png" alt="">
-        
-        <div class="w-96 flex flex-col bg-white p-6  transition-transform duration-300 hover:scale-105">
-            <h3 class="text-2xl font-bold mb-2 text-gray-800">¿Por qué Elegir Mis Servicios?</h3>
-            <p class="text-gray-700 leading-relaxed mb-4">
-                Enfoco cada trabajo en generar tranquilidad y confianza. Mi compromiso es mantener la transparencia y el cumplimiento, asegurando que cada paso sea oportuno y profesional. Conmigo, su empresa o proyecto estará en manos expertas, listas para asumir cada reto fiscal y contable de la mejor manera.
-            </p>
-            <a href="https://wa.me/573054188289" class="mt-4 inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow hover:bg-green-700 transition-colors duration-300" target="_blank" rel="noopener noreferrer" aria-label="Contactar a través de WhatsApp">
-                Contáctame  
-            </a>
+---
+<section class="w-full bg-gray-50 py-20 px-8" data-aos="fade-down" data-aos-delay="100">
+    <div class="container mx-auto max-w-7xl">
+      <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">
+        ¿Por qué Elegir Mis Servicios?
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Ventaja 1 -->
+        <div class="flex flex-col items-center text-center p-6 transition-transform duration-300 hover:scale-105">
+            <img src="icono1.png" class="w-16 h-16 mb-4" alt="">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Tranquilidad y Confianza</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Cada trabajo está enfocado en brindar tranquilidad a nuestros clientes a través de un servicio transparente y profesional.
+          </p>
         </div>
+        <!-- Ventaja 2 -->
+        <div class="flex flex-col items-center text-center p-6 transition-transform duration-300 hover:scale-105">
+          <img src="icono2.png" class="w-16 h-16 mb-4" alt="">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Cumplimiento Garantizado</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Aseguro cada paso de su proceso fiscal y contable, siempre oportuno y en cumplimiento con la normativa vigente.
+          </p>
+        </div>
+        <!-- Ventaja 3 -->
+        <div class="flex flex-col items-center text-center p-6 transition-transform duration-300 hover:scale-105">
+            <img src="icono3.png" class="w-16 h-16 mb-4" alt="">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Asesoramiento Experto</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Experiencia y conocimiento listos para enfrentar cualquier reto fiscal o contable que su proyecto requiera.
+          </p>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <a href="https://wa.me/573054188289" class="inline-block bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-green-700 transition-colors duration-300" target="_blank" rel="noopener noreferrer" aria-label="Contactar a través de WhatsApp">
+          ¡Contáctame Ahora!
+        </a>
+      </div>
     </div>
-  </div>
+  </section>
+  

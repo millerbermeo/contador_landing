@@ -7,34 +7,35 @@ const { percentage, serviceName } = Astro.props;
     data-aos="fade-right" 
     data-aos-delay="100"
 >
-    <!-- Cambiar items-start a items-center -->
+    <!-- Loader Circular -->
     <div 
         class="loader-circle" 
         style={`--final-percentage: ${percentage}%`}
         data-aos="zoom-in"
     >
-        <div class="loader-inner text-gray-600">
-            <span class="loader-text">
+        <div class="loader-inner text-gray-800">
+            <span class="loader-text text-[#065f46]">
                 {percentage}%
             </span>
         </div>
     </div>
 
+    <!-- Nombre del Servicio -->
     <div
         class="flex items-center gap-3 mt-2 whitespace-pre-line max-w-20 text-center justify-center"
     >
-        <!-- Cambiar items-end a items-center y w-32 a w-auto -->
-        <h2 class="text-lg italic font-normal">{serviceName}</h2>
+        <h2 class="text-lg italic font-normal text-[#1b4332]">{serviceName}</h2>
     </div>
 </div>
 
 <style>
+    /* Loader Circular */
     .loader-circle {
         position: relative;
-        width: 70px; /* Reducido para hacer el borde más delgado */
-        height: 70px;
+        width: 80px; /* Ajustado para mejor visibilidad */
+        height: 80px;
         border-radius: 50%;
-        background: conic-gradient(#0960ae 0%, #e5e7eb 0%);
+        background: conic-gradient(#2d6a4f 0%, #e5e7eb 0%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -45,24 +46,25 @@ const { percentage, serviceName } = Astro.props;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 60px; /* Reducido para hacer el borde más delgado */
-        height: 60px;
+        width: 65px; /* Ajustado para proporción */
+        height: 65px;
         border-radius: 50%;
         background-color: #ffffff;
     }
 
     .loader-text {
-        font-size: 1.2rem; /* Ajuste para mantener proporción */
+        font-size: 1.2rem; 
         font-weight: bold;
     }
 
+    /* Animación del Loader */
     @keyframes fill-animation {
         0% {
-            background: conic-gradient(#4dbb4b 0%, #e5e7eb 0%);
+            background: conic-gradient(#52b788 0%, #e5e7eb 0%);
         }
         100% {
             background: conic-gradient(
-                #0960ae var(--final-percentage),
+                #2d6a4f var(--final-percentage),
                 #e5e7eb var(--final-percentage)
             );
         }

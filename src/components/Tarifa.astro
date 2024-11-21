@@ -23,19 +23,17 @@ const tarifas = [
     }
 ];
 ---
-
-<section class="w-full bg-[#4dbb4b] py-16 lg:my-60 lg:h-[300px]" data-aos="fade-up" data-aos-delay="100">
-    <div class="container mx-auto px-8 lg:-translate-y-64">
-      <h2 class="text-4xl text-gray-800 font-bold text-center mb-12">Precios y Tarifas</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {tarifas.map((tarifa) => (
-          <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer transition-transform transform hover:-translate-y-3 hover:shadow-xl hover:text-white hover:bg-[#10B981] duration-300 focus:bg-green-500">
-            <h3 class="text-2xl font-semibold mb-2 transition-colors duration-300 group-hover:text-white">{tarifa.servicio}</h3>
-            <p class="mb-4 transition-colors duration-300 group-hover:text-white">{tarifa.descripcion}</p>
-            <p class="text-xl font-bold transition-colors duration-300 group-hover:text-white">{tarifa.precio}</p>
-          </div>
-        ))}
-      </div>
+<section class="w-full bg-[#E6F5E6] py-16" data-aos="fade-up" data-aos-delay="100">
+  <div class="container mx-auto px-8">
+    <h2 class="text-6xl text-[#000] font-extrabold text-center mb-24">Precios y Tarifas</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {tarifas.map((tarifa) => (
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">{tarifa.servicio}</h3>
+          <p class="text-gray-600 mb-6 leading-relaxed">{tarifa.descripcion}</p>
+          <p class="text-xl font-semibold text-[#10b981]">{tarifa.precio}</p>
+        </div>
+      ))}
     </div>
-  </section>
-  
+  </div>
+</section>

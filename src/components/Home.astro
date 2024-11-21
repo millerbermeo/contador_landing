@@ -17,40 +17,49 @@ const loadings = [
         <!-- Contenido del lado izquierdo -->
         <div class="lg:w-1/2 mt-12 lg:mt-0 text-left flex flex-col items-start 2xl:gap-y-3 -translate-y-10 2xl:-translate-x-0">
             <!-- Títulos y texto descriptivo -->
-            <h1 data-aos="fade-up" class="text-lg 2xl:text-2xl font-light text-[#0960ae] mb-4">
-                Contador Público <ion-icon name="stats-chart-outline"></ion-icon>
+            <h1 data-aos="fade-up" class="text-lg 2xl:text-2xl font-light text-[#065f46] mb-4">
+              Contador Público <ion-icon name="stats-chart-outline"></ion-icon>
             </h1>
-            <h2 data-aos="fade-up" data-aos-delay="100" class="text-3xl 2xl:text-5xl font-bold text-[#333333] leading-tight mb-2 2xl:mb-6">
-                Líderes en contabilidad, ofreciendo <span class="text-[#0960ae]">servicios financieros exclusivos para personas y empresas.</span>
+            <h2
+              data-aos="fade-up"
+              data-aos-delay="100"
+              class="text-3xl 2xl:text-5xl font-bold text-[#1b4332] leading-tight mb-2 2xl:mb-6"
+            >
+              Líderes en contabilidad, ofreciendo 
+              <span class="text-[#2d6a4f]">servicios financieros exclusivos para personas y empresas.</span>
             </h2>
-            <p data-aos="fade-up" data-aos-delay="100" class="text-lg lg:text-xl text-gray-600 mb-6">
-                Aseguramos cumplimiento y optimización para llevar su empresa al siguiente nivel.
+            <p data-aos="fade-up" data-aos-delay="100" class="text-lg italic lg:text-xl text-[#4b5563] mb-6">
+              Aseguramos cumplimiento y optimización para llevar su empresa al siguiente nivel.
             </p>
             <!-- Botón de acción -->
             <div class="flex gap-3 justify-start lg:items-end flex-col lg:flex-row mx-auto lg:mx-0">
-                <button aria-label="Conócenos, más sobre nuestros servicios" class="bg-[#64a6e3] hover:bg-[#4dbb4b] flex items-center gap-2 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-                    Conócenos
-                    <ion-icon name="arrow-forward-sharp"></ion-icon>
-                </button>
+              <button
+                aria-label="Conócenos, más sobre nuestros servicios"
+                class="bg-[#52b788] hover:bg-[#2d6a4f] flex items-center gap-2 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+              >
+                Conócenos
+                <ion-icon name="arrow-forward-sharp"></ion-icon>
+              </button>
             </div>
             <!-- Loaders -->
             <div class="flex gap-6 w-full mx-auto justify-center lg:justify-start">
-                {loadings.map(({ serviceName, percentage }, index) => (
-                    <Loader key={index} percentage={percentage} serviceName={serviceName} />
-                ))}
+              {loadings.map(({ serviceName, percentage }, index) => (
+                <Loader key={index} percentage={percentage} serviceName={serviceName} />
+              ))}
             </div>
-        </div>
+          </div>
+          
 
         <!-- Contenido del lado derecho -->
         <div class="lg:w-1/2 mx-auto -mt-12 lg:mt-0 flex justify-center items-start 2xl:items-center -translate-y-3 p-5 2xl:p-0 2xl:translate-y-0 relative scale-90 2xl:scale-100" data-aos="fade-up" data-aos-delay="200">
             <!-- Bloque de información -->
-            <div class="w-64 hidden lg:flex h-64 rounded-full absolute -top-10 -right-16 z-10 bg-[#4CAF50] flex-col items-center justify-center text-center p-4 shadow-lg scale-90 2xl:scale-100">
+            <div class="w-64 hidden lg:flex h-64 rounded-full absolute -top-10 -right-16 z-10 bg-[#2d6a4f] flex-col items-center justify-center text-center p-4 shadow-lg scale-90 2xl:scale-100">
                 <div>
-                    <img src="estadistica.png" alt="Gráfico estadístico representando el desempeño financiero" class="w-20 h-20 rounded-full border-4 -mt-6 mb-2 border-white shadow-md" />
+                    <img src="grafica.png" alt="Gráfico estadístico representando el desempeño financiero" class="w-20 h-20 rounded-full p-1 -mt-6 mb-2 bg-white shadow-md" />
                 </div>
                 <h2 class="text-xl font-bold text-white">Brian Pedraza Osorio</h2>
-                <h3 class="text-lg font-semibold text-white text-opacity-90">Universidad de la Amazonia</h3>
-                <p class="text-sm text-gray-200">Contador público con tarjeta profesional vigente.</p>
+                <h3 class="text-lg font-semibold text-white">Universidad de la Amazonia</h3>
+                <p class="text-sm text-white px-2.7 pt-1">Contador público con tarjeta profesional vigente.</p>
             </div>
 
             <!-- Imagen y QR -->
