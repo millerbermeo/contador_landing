@@ -1,64 +1,91 @@
 ---
-
-
 export interface ServiceProps {
-    icon: string;
-    title: string;
-    items: string[];
-    whatsappMessage: string; // Agregamos una nueva prop para el mensaje de WhatsApp
+  icon: string;
+  title: string;
+  items: string[];
+  whatsappMessage: string; // Agregamos una nueva prop para el mensaje de WhatsApp
 }
 
 const { icon, title, items, whatsappMessage } = Astro.props;
 ---
 
 <head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js" onload="AOS.init({ duration: 100 })"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" />
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"
+    onload="AOS.init({ duration: 10 })"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css"
+  />
 </head>
-<div 
-  class="relative bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 mt-16 p-8 rounded-3xl  hover:shadow-xl transition-shadow duration-300 h-[500px] flex flex-col justify-between text-gray-800"
-  data-aos="fade-up"
->
-  <!-- Contenido principal -->
-  <div class="space-y-6">
-    <h3 class="text-3xl font-semibold text-gray-900 text-center">
-      {title}
-    </h3>
-    <ul class="text-gray-700 text-lg space-y-3">
-      {items.map((item) => (
-        <li class="pl-4 before:content-['✓'] before:text-green-600 before:pr-2">
-          {item}
-        </li>
-      ))}
-    </ul>
-  </div>
-
-  <!-- Icono y botón de acción -->
-  <div class="flex items-center justify-between mt-auto">
-    <img 
-      src={icon} 
-      alt="Icono del servicio" 
-      class="w-20 h-20 bg-white rounded-full shadow-md border-4 border-gray-300"
-    />
-    <a
-      href={`https://api.whatsapp.com/send?phone=573054188289&text=${encodeURIComponent(whatsappMessage)}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="bg-green-600 text-white font-bold px-6 py-3 rounded-full shadow-md hover:bg-green-700 hover:shadow-lg transition-transform transform hover:scale-105"
-    >
-      Contactar por WhatsApp
+<div class="hover:scale-105 hover:-translate-y-5 duration-300">
+  <div
+    class="group bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 mt-16 p-8 rounded-3xl hover:shadow-xl transition-shadow duration-300 h-[500px] flex flex-col justify-between text-gray-800"
+    data-aos="fade-up"
+  >
+    <!-- Contenido principal -->
+    <a href={`https://api.whatsapp.com/send?phone=573054188289&text=${encodeURIComponent(whatsappMessage)}`}   target="_blank"
+    rel="noopener noreferrer" class="space-y-6 cursor-pointer">
+      <h3 class="text-3xl font-semibold text-gray-900 text-center group-hover:text-white">
+        {title}
+      </h3>
+      <ul class="text-gray-700 text-lg space-y-3">
+        {
+          items.map((item) => (
+            <li class="pl-4 before:content-['✓'] before:text-green-600 before:pr-2 group-hover:text-white">
+              {item}
+            </li>
+          ))
+        }
+      </ul>
     </a>
+
+    <!-- Icono y botón de acción -->
+    <div class="flex items-center justify-between mt-auto">
+      <img
+        src={icon}
+        alt="Icono del servicio"
+        class="w-20 h-20 bg-white rounded-full shadow-md border-4 border-gray-300"
+      />
+      <a
+        href={`https://api.whatsapp.com/send?phone=573054188289&text=${encodeURIComponent(whatsappMessage)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-green-600 text-white font-bold px-6 py-3 rounded-full shadow-md hover:bg-green-700 hover:shadow-lg transition-transform transform hover:scale-105"
+      >
+        Contactar por WhatsApp
+      </a>
+    </div>
   </div>
 </div>
 
 <style>
+  .bg-gradient-to-r:hover {
+    background: #52b788;
+    color: #fff;
+  }
+</style>
+
+
+
+
+
+
+
+
+<!-- <style>
 /* Fondo degradado suave */
 .bg-gradient-to-r {
   background: linear-gradient(to right, #e3f2fd, #eaf4ff, #e3f2fd);
+}
+
+.bg-gradient-to-r:hover {
+  background: #00ff3c;
+  color: #fff;
 }
 
 /* Transiciones de hover */
 a:hover {
   transition: all 0.3s ease-in-out;
 }
-</style>
+</style> -->
