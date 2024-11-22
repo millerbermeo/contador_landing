@@ -1,39 +1,56 @@
 ---
 // Tarifa.astro
 const tarifas = [
-    {
-        servicio: "Asesoría Básica",
-        descripcion: "Dudas generales sobre impuestos, registros contables simples, trámites ante la DIAN",
-        precio: "$30,000 - $50,000 COP"
-    },
-    {
-        servicio: "Asesoría Especializada",
-        descripcion: "Planeación tributaria, gestión de nómina, estructuración de costos, liquidación de impuestos complejos",
-        precio: "$150,000 - $300,000 COP"
-    },
-    {
-        servicio: "Asesoría para Empresas o PYMES",
-        descripcion: "Paquete mensual que incluye asesorías y soporte contable constante",
-        precio: "$300,000 - $1,500,000 COP mensuales"
-    },
-    {
-        servicio: "Consultoría Puntual o Paquete de Asesorías",
-        descripcion: "Paquetes de asesoría por un número de horas determinado a precios más accesibles",
-        precio: "Precios accesibles"
-    }
+  {
+    servicio: "Asesoría Básica",
+    descripcion:
+      "Dudas generales sobre impuestos, registros contables simples, trámites ante la DIAN",
+    precio: "$30,000 - $50,000 COP",
+  },
+  {
+    servicio: "Asesoría Especializada",
+    descripcion:
+      "Planeación tributaria, gestión de nómina, estructuración de costos, liquidación de impuestos complejos",
+    precio: "$150,000 - $300,000 COP",
+  },
+  {
+    servicio: "Asesoría para Empresas o PYMES",
+    descripcion:
+      "Paquete mensual que incluye asesorías y soporte contable constante",
+    precio: "$300,000 - $1,500,000 COP mensuales",
+  },
+  {
+    servicio: "Consultoría Puntual o Paquete de Asesorías",
+    descripcion:
+      "Paquetes de asesoría por un número de horas determinado a precios más accesibles",
+    precio: "Precios accesibles",
+  },
 ];
 ---
-<section class="w-full bg-[#E6F5E6] py-16" data-aos="fade-up" data-aos-delay="100">
+
+<section
+  class="w-full bg-[#52b788] py-16 mb-8 lg:mb-40"
+  data-aos="fade-up"
+  data-aos-delay="100"
+>
   <div class="container mx-auto px-8">
-    <h2 class="text-6xl text-[#000] font-extrabold text-center mb-24">Precios y Tarifas</h2>
+    <h2 class="text-3xl lg:text-6xl text-[#fff] lg:font-extrabold text-center mb-14 lg:mb-24">
+      Precios y Tarifas
+    </h2>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {tarifas.map((tarifa) => (
-        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
-          <h3 class="text-2xl font-bold text-gray-800 mb-4">{tarifa.servicio}</h3>
-          <p class="text-gray-600 mb-6 leading-relaxed">{tarifa.descripcion}</p>
-          <p class="text-xl font-semibold text-[#10b981]">{tarifa.precio}</p>
-        </div>
-      ))}
+      {
+        tarifas.map((tarifa) => (
+          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">
+              {tarifa.servicio}
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              {tarifa.descripcion}
+            </p>
+            <p class="text-xl font-semibold text-[#10b981]">{tarifa.precio}</p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

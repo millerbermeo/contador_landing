@@ -20,12 +20,12 @@ const { icon, title, items, whatsappMessage } = Astro.props;
 </head>
 <div class="lg:hover:scale-105 lg:hover:-translate-y-5 duration-300">
   <div
-    class="group bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 mt-16 p-8 rounded-3xl hover:shadow-xl transition-shadow duration-300 h-[500px] flex flex-col justify-between text-gray-800"
+    class="lg:group bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 mt-16 p-8 rounded-3xl hover:shadow-xl transition-shadow duration-300 h-[500px] flex flex-col justify-between text-gray-800"
     data-aos="fade-up"
   >
     <!-- Contenido principal -->
     <div class="space-y-6 cursor-pointer">
-      <h3 class="text-3xl font-semibold text-gray-900 text-center lg:group-hover:text-white">
+      <h3 class="text-2xl lg:text-3xl font-semibold text-gray-900 text-center lg:group-hover:text-white">
         {title}
       </h3>
       <ul class="text-gray-700 text-lg space-y-3">
@@ -63,6 +63,12 @@ const { icon, title, items, whatsappMessage } = Astro.props;
     background: #52b788;
     color: #fff;
   }
+  @media (hover: none) {
+  .bg-gradient-to-r:hover {
+    background: inherit; /* Elimina el fondo aplicado en hover */
+    color: inherit;      /* Elimina el color aplicado en hover */
+  }
+}
 </style>
 
 
