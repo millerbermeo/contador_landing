@@ -31,30 +31,36 @@ const articles = [
 ];
 ---
 
-<div class="articulos mx-auto flex py-20 bg-gray-100 w-full justify-center my-32">
+<div class="articulos mx-auto py-20 bg-[#f4f4f9] w-full justify-center my-32">
     <div class="container mx-auto px-4 w-full">
-        <h4 class="text-5xl font-bold text-center mb-16">Artículos Que Te Pueden Interesar</h4>
+        <h4 class="text-5xl font-bold text-center mb-16 text-[#2d6a4f]">Artículos Que Te Pueden Interesar</h4>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <!-- Map over articles and render each one -->
             {articles.map((article) => (
-                <div
-                    class="relative flex flex-col rounded-lg border border-slate-200 bg-white shadow-sm hover:shadow-lg transition-shadow duration-300"
-                >
+                <div class="relative flex flex-col rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-all duration-300 bg-white">
                     <a 
                         href={article.link} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        class="flex flex-col h-full p-4 hover:bg-slate-100 rounded-lg"
+                        class="flex flex-col h-full p-6 hover:bg-[#f1f1f1] rounded-lg transition-all duration-300"
                         aria-label={`Leer sobre ${article.title}`}
                     >
-                        <div class="mr-4 grid place-items-center mb-4">
+                        <!-- Image with rounded corners -->
+                        <div class="mr-4 grid place-items-center mb-6">
                             <img
                                 src={article.image}
                                 alt={article.title}
-                                class="h-32 w-full object-cover rounded-lg"
+                                class="h-48 w-full object-cover rounded-lg transition-transform duration-500 ease-in-out transform hover:scale-110"
                             />
                         </div>
-                        <h6 class="text-slate-800 font-medium">{article.title}</h6>
-                        <p class="text-slate-500 text-sm">{article.description}</p>
+                        <!-- Article Title with bold, larger font -->
+                        <h6 class="text-[#2d6a4f] font-semibold text-xl mb-2">{article.title}</h6>
+                        <!-- Article description with lighter text -->
+                        <p class="text-gray-700 text-base mb-4">{article.description}</p>
+                        <!-- Icon for extra flair -->
+                        <div class="absolute top-4 right-4 text-gray-700 text-3xl">
+                            <i class={article.icon}></i>
+                        </div>
                     </a>
                 </div>
             ))}

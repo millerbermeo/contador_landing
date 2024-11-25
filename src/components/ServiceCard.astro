@@ -18,17 +18,19 @@ const { icon, title, items, whatsappMessage } = Astro.props;
     href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css"
   />
 </head>
-<div class="lg:hover:scale-105 lg:hover:-translate-y-5 duration-300">
+<div class="lg:hover:-translate-y-5 cursor-pointer duration-300">
   <div
-    class="lg:group bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 mt-16 p-8 rounded-3xl hover:shadow-xl transition-shadow duration-300 h-[500px] flex flex-col justify-between text-gray-800"
+    class="lg:group bg-[#52b788] mt-16 p-8 rounded-3xl hover:shadow-xl transition-shadow duration-300 h-[500px] flex flex-col justify-between text-gray-800"
     data-aos="fade-up"
   >
     <!-- Contenido principal -->
     <div class="space-y-6 cursor-pointer">
-      <h3 class="text-2xl lg:text-3xl font-semibold text-gray-900 text-center lg:group-hover:text-white">
+      <h3
+        class="text-2xl lg:text-3xl font-semibold text-white text-center lg:group-hover:text-white"
+      >
         {title}
       </h3>
-      <ul class="text-gray-700 text-lg space-y-3">
+      <ul class="text-gray-700 text-base lg:text-xl space-y-3">
         {
           items.map((item) => (
             <li class="pl-4 before:content-['✓'] before:text-green-600 before:pr-2 group-hover:text-white">
@@ -50,7 +52,7 @@ const { icon, title, items, whatsappMessage } = Astro.props;
         href={`https://api.whatsapp.com/send?phone=573054188289&text=${encodeURIComponent(whatsappMessage)}`}
         target="_blank"
         rel="noopener noreferrer"
-        class="bg-green-600 text-white font-bold px-6 py-3 rounded-full shadow-md hover:bg-green-700 hover:shadow-lg transition-transform transform hover:scale-105"
+        class="bg-[#2d6a4f] text-white text-lg px-6 py-3 rounded-full shadow-md hover:bg-green-700 hover:shadow-lg transition-transform transform hover:scale-105"
       >
         Contactar por WhatsApp
       </a>
@@ -64,33 +66,9 @@ const { icon, title, items, whatsappMessage } = Astro.props;
     color: #fff;
   }
   @media (hover: none) {
-  .bg-gradient-to-r:hover {
-    background: inherit; /* Elimina el fondo aplicado en hover */
-    color: inherit;      /* Elimina el color aplicado en hover */
+    .bg-gradient-to-r:hover {
+      background: inherit;
+      color: inherit;
+    }
   }
-}
 </style>
-
-
-
-
-
-
-
-
-<!-- <style>
-/* Fondo degradado suave */
-.bg-gradient-to-r {
-  background: linear-gradient(to right, #e3f2fd, #eaf4ff, #e3f2fd);
-}
-
-.bg-gradient-to-r:hover {
-  background: #00ff3c;
-  color: #fff;
-}
-
-/* Transiciones de hover */
-a:hover {
-  transition: all 0.3s ease-in-out;
-}
-</style> -->
