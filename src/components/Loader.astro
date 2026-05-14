@@ -14,7 +14,7 @@ const { percentage, serviceName } = Astro.props;
         data-aos="zoom-in"
     >
         <div class="loader-inner text-gray-800">
-            <span class="loader-text text-[#065f46]">
+            <span class="loader-text text-[#2d4012]">
                 {percentage}%
             </span>
         </div>
@@ -24,7 +24,7 @@ const { percentage, serviceName } = Astro.props;
     <div
         class="flex items-center gap-3 mt-2 whitespace-pre-line max-w-20 text-center justify-center"
     >
-        <h2 class="text-lg italic font-normal text-[#1b4332]">{serviceName}</h2>
+        <h2 class="text-lg italic font-normal text-[#2d4012]">{serviceName}</h2>
     </div>
 </div>
 
@@ -35,7 +35,7 @@ const { percentage, serviceName } = Astro.props;
         width: 80px; /* Ajustado para mejor visibilidad */
         height: 80px;
         border-radius: 50%;
-        background: conic-gradient(#2d6a4f 0%, #e5e7eb 0%);
+        background: conic-gradient(#486d21 0%, #e5e7eb 0%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -60,11 +60,11 @@ const { percentage, serviceName } = Astro.props;
     /* Animación del Loader */
     @keyframes fill-animation {
         0% {
-            background: conic-gradient(#52b788 0%, #e5e7eb 0%);
+            background: conic-gradient(#84b84b 0%, #e5e7eb 0%);
         }
         100% {
             background: conic-gradient(
-                #2d6a4f var(--final-percentage),
+                #486d21 var(--final-percentage),
                 #e5e7eb var(--final-percentage)
             );
         }

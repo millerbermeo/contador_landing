@@ -44,10 +44,10 @@ const tarifas = [
 
     <!-- Encabezado -->
     <div class="text-center mb-16" data-aos="fade-up">
-      <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#52b788] bg-[#f0fdf4] border border-[#b7e4c7] px-4 py-1.5 rounded-full mb-4">
+      <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#84b84b] bg-[#f3f3f3] border border-[#cbdbba] px-4 py-1.5 rounded-full mb-4">
         Planes y Tarifas
       </span>
-      <h2 class="text-4xl lg:text-5xl font-extrabold text-[#1b4332] mb-4">
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-[#2d4012] mb-4">
         Precios Claros y Accesibles
       </h2>
       <p class="text-lg text-gray-500 max-w-2xl mx-auto">
@@ -61,7 +61,7 @@ const tarifas = [
         <div
           class={`relative rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1 ${
             tarifa.destacado
-              ? "bg-gradient-to-br from-[#2d6a4f] to-[#1b4332] shadow-2xl shadow-[#2d6a4f]/30 border-0 ring-2 ring-[#52b788]"
+              ? "bg-gradient-to-br from-[#486d21] to-[#2d4012] shadow-2xl shadow-[#486d21]/30 border-0 ring-2 ring-[#84b84b]"
               : "bg-white border border-gray-100 shadow-sm hover:shadow-lg"
           }`}
           data-aos="fade-up"
@@ -70,8 +70,8 @@ const tarifas = [
           {tarifa.badge && (
             <div class={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
               tarifa.destacado
-                ? "bg-[#52b788] text-white"
-                : "bg-[#1b4332] text-white"
+                ? "bg-[#84b84b] text-white"
+                : "bg-[#2d4012] text-white"
             }`}>
               {tarifa.badge}
             </div>
@@ -79,17 +79,17 @@ const tarifas = [
 
           <div class="p-7 flex flex-col flex-1">
             <!-- Nombre del plan -->
-            <h3 class={`text-lg font-bold mb-3 ${tarifa.destacado ? "text-white" : "text-[#1b4332]"}`}>
+            <h3 class={`text-lg font-bold mb-3 ${tarifa.destacado ? "text-white" : "text-[#2d4012]"}`}>
               {tarifa.servicio}
             </h3>
 
             <!-- Precio -->
             <div class="mb-5">
-              <div class={`text-2xl font-extrabold leading-tight ${tarifa.destacado ? "text-white" : "text-[#2d6a4f]"}`}>
+              <div class={`text-2xl font-extrabold leading-tight ${tarifa.destacado ? "text-white" : "text-[#486d21]"}`}>
                 {tarifa.precio}
               </div>
               {tarifa.moneda && (
-                <div class={`text-xs font-medium mt-0.5 ${tarifa.destacado ? "text-[#b7e4c7]" : "text-gray-400"}`}>
+                <div class={`text-xs font-medium mt-0.5 ${tarifa.destacado ? "text-[#cbdbba]" : "text-gray-400"}`}>
                   {tarifa.moneda}
                 </div>
               )}
@@ -110,8 +110,8 @@ const tarifas = [
               rel="noopener noreferrer"
               class={`flex items-center justify-center gap-2 w-full py-3 px-5 rounded-xl font-semibold text-sm transition-all duration-300 ${
                 tarifa.destacado
-                  ? "bg-white text-[#2d6a4f] hover:bg-[#52b788] hover:text-white"
-                  : "bg-[#f0fdf4] text-[#2d6a4f] border border-[#b7e4c7] hover:bg-[#2d6a4f] hover:text-white hover:border-[#2d6a4f]"
+                  ? "bg-white text-[#486d21] hover:bg-[#84b84b] hover:text-white"
+                  : "bg-[#f3f3f3] text-[#486d21] border border-[#cbdbba] hover:bg-[#486d21] hover:text-white hover:border-[#486d21]"
               }`}
             >
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -127,7 +127,7 @@ const tarifas = [
     <!-- Nota de pie -->
     <p class="text-center text-sm text-gray-400 mt-10" data-aos="fade-up">
       Los precios pueden variar según la complejidad y el alcance de cada caso.
-      <a href="https://wa.me/573054188289" target="_blank" rel="noopener noreferrer" class="text-[#2d6a4f] font-medium hover:underline ml-1">
+      <a href="https://wa.me/573054188289" target="_blank" rel="noopener noreferrer" class="text-[#486d21] font-medium hover:underline ml-1">
         Contáctenos para una cotización personalizada →
       </a>
     </p>
