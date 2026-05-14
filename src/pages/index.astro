@@ -191,11 +191,12 @@ import 'aos/dist/aos.css';
     <Footer />
 
     <!-- Ionicons (cargado al final para no bloquear render) -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script is:inline type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script is:inline nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <!-- AOS — inicializado una sola vez -->
     <script>
+      // @ts-ignore
       import AOS from 'aos';
       AOS.init({
         duration: 700,
@@ -212,6 +213,11 @@ import 'aos/dist/aos.css';
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   html {

@@ -65,21 +65,25 @@
 
     <!-- Links escritorio -->
     <div class="hidden md:flex items-center gap-8" role="navigation">
-      <a href="#contador" class="nav-link text-gray-600 font-medium text-sm lg:text-base hover:text-[#2d6a4f] transition-colors relative group pb-0.5">
+      <a href="#contador" data-scroll-to="contador"
+         class="desk-nav-link text-gray-600 font-medium text-sm lg:text-base hover:text-[#2d6a4f] transition-colors relative group pb-0.5">
         Inicio
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#52b788] group-hover:w-full transition-all duration-300 rounded-full"></span>
+        <span class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-[#52b788] group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
-      <a href="#servicios" class="nav-link text-gray-600 font-medium text-sm lg:text-base hover:text-[#2d6a4f] transition-colors relative group pb-0.5">
+      <a href="#servicios" data-scroll-to="servicios"
+         class="desk-nav-link text-gray-600 font-medium text-sm lg:text-base hover:text-[#2d6a4f] transition-colors relative group pb-0.5">
         Servicios
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#52b788] group-hover:w-full transition-all duration-300 rounded-full"></span>
+        <span class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-[#52b788] group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
-      <a href="#nosotros" class="nav-link text-gray-600 font-medium text-sm lg:text-base hover:text-[#2d6a4f] transition-colors relative group pb-0.5">
+      <a href="#nosotros" data-scroll-to="nosotros"
+         class="desk-nav-link text-gray-600 font-medium text-sm lg:text-base hover:text-[#2d6a4f] transition-colors relative group pb-0.5">
         Nosotros
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#52b788] group-hover:w-full transition-all duration-300 rounded-full"></span>
+        <span class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-[#52b788] group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
-      <a href="#precios" class="nav-link text-gray-600 font-medium text-sm lg:text-base hover:text-[#2d6a4f] transition-colors relative group pb-0.5">
+      <a href="#precios" data-scroll-to="precios"
+         class="desk-nav-link text-gray-600 font-medium text-sm lg:text-base hover:text-[#2d6a4f] transition-colors relative group pb-0.5">
         Planes
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#52b788] group-hover:w-full transition-all duration-300 rounded-full"></span>
+        <span class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-[#52b788] group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
       <a
         href="https://wa.me/573054188289"
@@ -149,31 +153,36 @@
 
   <!-- Links del drawer -->
   <nav class="flex flex-col p-4 gap-1 flex-1" aria-label="Menú móvil">
-    <a href="#contador" class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
+    <a href="#contador" data-scroll-to="contador"
+       class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
       <svg class="w-5 h-5 text-[#52b788] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
       </svg>
       Inicio
     </a>
-    <a href="#servicios" class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
+    <a href="#servicios" data-scroll-to="servicios"
+       class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
       <svg class="w-5 h-5 text-[#52b788] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
       </svg>
       Servicios
     </a>
-    <a href="#nosotros" class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
+    <a href="#nosotros" data-scroll-to="nosotros"
+       class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
       <svg class="w-5 h-5 text-[#52b788] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
       </svg>
       Nosotros
     </a>
-    <a href="#precios" class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
+    <a href="#precios" data-scroll-to="precios"
+       class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
       <svg class="w-5 h-5 text-[#52b788] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
       </svg>
       Planes
     </a>
-    <a href="#faq" class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
+    <a href="#faq" data-scroll-to="faq"
+       class="mobile-link flex items-center gap-3 py-3 px-4 rounded-xl text-gray-700 font-medium hover:bg-[#f0fdf4] hover:text-[#2d6a4f] transition-colors duration-200">
       <svg class="w-5 h-5 text-[#52b788] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
       </svg>
@@ -198,45 +207,100 @@
 </aside>
 
 <script>
-  const mainNav = document.getElementById('main-nav');
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileOverlay = document.getElementById('mobile-overlay');
-  const closeMenu = document.getElementById('close-menu');
-  const hamburgerIcon = document.getElementById('hamburger-icon');
-  const closeIcon = document.getElementById('close-icon');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) {
-      mainNav?.classList.add('shadow-md');
-    } else {
-      mainNav?.classList.remove('shadow-md');
-    }
-  }, { passive: true });
+  // ─── Mobile menu ───────────────────────────────────────────
+  const mainNav     = document.getElementById('main-nav') as HTMLElement;
+  const menuToggle  = document.getElementById('menu-toggle') as HTMLButtonElement;
+  const mobileMenu  = document.getElementById('mobile-menu') as HTMLElement;
+  const mobileOverlay = document.getElementById('mobile-overlay') as HTMLElement;
+  const closeMenuBtn  = document.getElementById('close-menu') as HTMLButtonElement;
+  const hamburgerIcon = document.getElementById('hamburger-icon') as HTMLElement;
+  const closeIcon     = document.getElementById('close-icon') as HTMLElement;
 
   function openMenu() {
-    mobileMenu?.classList.remove('translate-x-full');
-    mobileMenu?.setAttribute('aria-hidden', 'false');
-    mobileOverlay?.classList.remove('opacity-0', 'invisible');
-    menuToggle?.setAttribute('aria-expanded', 'true');
-    hamburgerIcon?.classList.add('hidden');
-    closeIcon?.classList.remove('hidden');
+    mobileMenu.classList.remove('translate-x-full');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    mobileOverlay.classList.remove('opacity-0', 'invisible');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    hamburgerIcon.classList.add('hidden');
+    closeIcon.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
   }
 
   function closeMenuFn() {
-    mobileMenu?.classList.add('translate-x-full');
-    mobileMenu?.setAttribute('aria-hidden', 'true');
-    mobileOverlay?.classList.add('opacity-0', 'invisible');
-    menuToggle?.setAttribute('aria-expanded', 'false');
-    hamburgerIcon?.classList.remove('hidden');
-    closeIcon?.classList.add('hidden');
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileOverlay.classList.add('opacity-0', 'invisible');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    hamburgerIcon.classList.remove('hidden');
+    closeIcon.classList.add('hidden');
     document.body.style.overflow = '';
   }
 
-  menuToggle?.addEventListener('click', openMenu);
-  closeMenu?.addEventListener('click', closeMenuFn);
-  mobileOverlay?.addEventListener('click', closeMenuFn);
-  mobileLinks.forEach(link => link.addEventListener('click', closeMenuFn));
+  menuToggle.addEventListener('click', openMenu);
+  closeMenuBtn.addEventListener('click', closeMenuFn);
+  mobileOverlay.addEventListener('click', closeMenuFn);
+
+  // ─── Shadow on scroll ──────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    mainNav.classList.toggle('shadow-md', window.scrollY > 10);
+  }, { passive: true });
+
+  // ─── Smooth scroll con offset del navbar ───────────────────
+  function scrollToSection(id: string) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const offset = mainNav.offsetHeight + 8;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+    history.pushState(null, '', `#${id}`);
+  }
+
+  // Interceptar todos los links con data-scroll-to
+  document.querySelectorAll<HTMLAnchorElement>('[data-scroll-to]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = link.getAttribute('data-scroll-to')!;
+      scrollToSection(id);
+      // Cerrar drawer si estaba abierto
+      if (!mobileMenu.classList.contains('translate-x-full')) {
+        closeMenuFn();
+      }
+    });
+  });
+
+  // ─── Active section via IntersectionObserver ───────────────
+  const sectionIds = ['contador', 'servicios', 'nosotros', 'precios', 'faq'];
+  const deskLinks  = document.querySelectorAll<HTMLAnchorElement>('.desk-nav-link');
+
+  function setActive(activeId: string) {
+    deskLinks.forEach(link => {
+      const id        = link.getAttribute('data-scroll-to');
+      const indicator = link.querySelector<HTMLElement>('.nav-indicator');
+      const isActive  = id === activeId;
+      link.classList.toggle('text-[#2d6a4f]', isActive);
+      link.classList.toggle('font-semibold', isActive);
+      link.classList.toggle('text-gray-600', !isActive);
+      if (indicator) indicator.style.width = isActive ? '100%' : '';
+    });
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: `-${mainNav.offsetHeight}px 0px -55% 0px`,
+    }
+  );
+
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) io.observe(el);
+  });
+
+  // Activar "Inicio" por defecto
+  setActive('contador');
 </script>
