@@ -1,86 +1,154 @@
 ---
-
-
 import Loader from "../components/Loader.astro";
 import Qr from "./Qr.astro";
-import 'aos/dist/aos.css';
 
-const loadings = [
-    { serviceName: "Clientes Satisfechos", percentage: 90 },
-    { serviceName: "Transparencia", percentage: 100 },
-    { serviceName: "Eficiencia", percentage: 100 },
+const stats = [
+  { serviceName: "Clientes Satisfechos", percentage: 90 },
+  { serviceName: "Transparencia", percentage: 100 },
+  { serviceName: "Eficiencia", percentage: 100 },
 ];
 ---
-<main id="contador" class="w-full flex justify-center py-10 2xl:py-28 bg-gray-50 mb-32">
-    
-    <div class="container mx-auto px-6 md:px-12 lg:px-20 flex flex-col lg:flex-row items-center gap-12">
-        <!-- Contenido del lado izquierdo -->
-        <div class="lg:w-1/2 mt-12 lg:mt-0 text-left flex flex-col items-start 2xl:gap-y-3 -translate-y-10 2xl:-translate-x-0">
-            <!-- Títulos y texto descriptivo -->
-            <h1 data-aos="fade-up" class="text-lg 2xl:text-2xl font-light text-[#065f46] mb-4">
-              Contador Público <ion-icon name="stats-chart-outline"></ion-icon>
-            </h1>
-            <h2
-              data-aos="fade-up"
-              data-aos-delay="100"
-              class="text-3xl 2xl:text-5xl font-bold text-[#1b4332] leading-tight mb-2 2xl:mb-6"
-            >
-              Líderes en contabilidad, ofreciendo 
-              <span class="text-[#2d6a4f]">servicios financieros exclusivos para personas y empresas.</span>
-            </h2>
-            <p data-aos="fade-up" data-aos-delay="100" class="text-lg italic lg:text-xl text-[#4b5563] mb-6">
-              Aseguramos cumplimiento y optimización para llevar su empresa al siguiente nivel.
-            </p>
-            <!-- Botón de acción -->
-            <div class="flex gap-3 justify-start lg:items-end flex-col lg:flex-row mx-auto lg:mx-0">
-              <button
-                aria-label="Conócenos, más sobre nuestros servicios"
-                class="bg-[#52b788] hover:bg-[#2d6a4f] flex items-center gap-2 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105"
-              >
-                Conócenos
-                <ion-icon name="arrow-forward-sharp"></ion-icon>
-              </button>
-            </div>
-            <!-- Loaders -->
-            <div class="flex gap-6 w-full mx-auto justify-center lg:justify-start">
-              {loadings.map(({ serviceName, percentage }, index) => (
-                <Loader key={index} percentage={percentage} serviceName={serviceName} />
-              ))}
-            </div>
-          </div>
-          
 
-        <!-- Contenido del lado derecho -->
-        <div class="lg:w-1/2 mx-auto -mt-12 lg:mt-0 flex justify-center items-start 2xl:items-center -translate-y-3 p-5 2xl:p-0 2xl:translate-y-0 relative scale-90 2xl:scale-100" data-aos="fade-up" data-aos-delay="200">
-            <!-- Bloque de información -->
-            <div class="w-64 hidden lg:flex h-64 rounded-full absolute -top-10 -right-16 z-10 bg-[#2d6a4f] flex-col items-center justify-center text-center p-4 shadow-lg scale-90 2xl:scale-100">
-                <div>
-                    <img src="grafica.png" alt="Gráfico estadístico representando el desempeño financiero" class="w-20 h-20 rounded-full p-1 -mt-6 mb-2 bg-white shadow-md" />
-                </div>
-                <h2 class="text-xl font-bold text-white">Brian Pedraza Osorio</h2>
-                <h3 class="text-lg font-semibold text-white">Universidad de la Amazonia</h3>
-                <p class="text-sm text-white px-2.7 pt-1">Contador público con tarjeta profesional vigente.</p>
-            </div>
+<section
+  id="contador"
+  class="relative min-h-screen bg-gradient-to-br from-[#f0fdf4] via-white to-[#e8f5e9] overflow-hidden flex items-center"
+>
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-[#52b788]/8 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-[#2d6a4f]/6 rounded-full blur-2xl pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] pointer-events-none" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#2d6a4f" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>
+  </div>
 
-            <!-- Imagen y QR -->
-            <div class="relative flex flex-col items-center gap-y-2 cursor-pointer">
-                <img class="w-full h-full max-w-xl rounded-full bg-[#ffffff] scale-90 2xl:scale-105 transition-transform transform hover:scale-110 z-0" src="hd-max.jpg" alt="Foto de Brian Pedraza Osorio, contador público" />
-                
-                <div class="absolute inset-0 bg-[#52b788] scale-90 2xl:scale-105 bg-opacity-80 rounded-full flex flex-col gap-y-5 items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
-                    <h3 class="italic text-2xl font-normal text-center text-white px-4">
-                        Actuando con seguridad y <br /> transparencia para su empresa.
-                    </h3>
-                    <Qr />
-                </div>
-            </div>
+  <div class="container mx-auto px-4 lg:px-8 py-20 lg:py-28">
+    <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+
+      <!-- Columna izquierda -->
+      <div class="lg:w-1/2 flex flex-col items-start gap-7 order-2 lg:order-1">
+
+        <!-- Badge -->
+        <div data-aos="fade-down" class="flex items-center gap-2 bg-[#1b4332] text-[#b7e4c7] px-4 py-2 rounded-full text-sm font-semibold shadow-md">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          Contador Público Certificado · Colombia
         </div>
-    </div>
-</main>
 
-<script>
-    if (typeof window !== 'undefined') {
-        import('aos').then(AOS => {
-            AOS.init({ duration: 1000 });
-        });
-    }
-</script>
+        <!-- Titular -->
+        <h1
+          data-aos="fade-up"
+          data-aos-delay="100"
+          class="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-[#1b4332] leading-[1.1] tracking-tight"
+        >
+          Líderes en
+          <span class="text-[#2d6a4f]"> contabilidad</span>,
+          <br class="hidden lg:block" />
+          con servicios financieros exclusivos para
+          <span class="relative inline-block text-[#52b788]">
+            personas y empresas
+            <svg class="absolute -bottom-1.5 left-0 w-full" viewBox="0 0 300 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M2 6 Q75 2 150 5 Q225 8 298 4" stroke="#52b788" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </span>.
+        </h1>
+
+        <!-- Descripción -->
+        <p
+          data-aos="fade-up"
+          data-aos-delay="200"
+          class="text-lg lg:text-xl text-gray-500 leading-relaxed max-w-xl"
+        >
+          Aseguramos cumplimiento y optimización para llevar su empresa al siguiente nivel con transparencia y profesionalismo.
+        </p>
+
+        <!-- CTAs -->
+        <div data-aos="fade-up" data-aos-delay="300" class="flex flex-wrap gap-4">
+          <a
+            href="#servicios"
+            class="bg-[#2d6a4f] text-white px-7 py-3.5 rounded-full font-semibold hover:bg-[#1b4332] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2 text-base"
+          >
+            Ver Servicios
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a
+            href="https://wa.me/573054188289"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Contactar por WhatsApp"
+            class="border-2 border-[#2d6a4f] text-[#2d6a4f] px-7 py-3.5 rounded-full font-semibold hover:bg-[#2d6a4f] hover:text-white transition-all duration-300 flex items-center gap-2 text-base"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Contactar ahora
+          </a>
+        </div>
+
+        <!-- Métricas circulares -->
+        <div data-aos="fade-up" data-aos-delay="400" class="flex gap-8 mt-2">
+          {stats.map(({ serviceName, percentage }) => (
+            <Loader percentage={percentage} serviceName={serviceName} />
+          ))}
+        </div>
+      </div>
+
+      <!-- Columna derecha (foto + tarjeta credencial) -->
+      <div
+        class="lg:w-1/2 flex justify-center items-center relative order-1 lg:order-2"
+        data-aos="fade-left"
+        data-aos-delay="150"
+      >
+        <!-- Tarjeta flotante (credencial) -->
+        <div class="absolute -top-6 -right-2 lg:-right-6 xl:right-0 bg-white rounded-2xl shadow-xl p-4 z-20 max-w-[190px] border border-gray-100 hidden sm:block">
+          <img
+            src="/grafica.png"
+            alt="Gráfico estadístico financiero"
+            class="w-12 h-12 rounded-xl object-contain mb-2 bg-[#f0fdf4] p-1"
+            loading="lazy"
+          />
+          <h4 class="font-bold text-[#1b4332] text-xs leading-tight mb-0.5">Brian Pedraza Osorio</h4>
+          <p class="text-xs text-gray-500 leading-tight mb-2">Universidad de la Amazonia</p>
+          <span class="inline-block text-xs bg-[#f0fdf4] text-[#2d6a4f] px-2.5 py-1 rounded-full font-semibold border border-[#b7e4c7]">
+            ✓ Tarjeta Profesional Vigente
+          </span>
+        </div>
+
+        <!-- Anillos decorativos -->
+        <div class="absolute w-72 h-72 lg:w-96 lg:h-96 rounded-full border-2 border-[#52b788]/20 animate-pulse" aria-hidden="true"></div>
+        <div class="absolute w-80 h-80 lg:w-[440px] lg:h-[440px] rounded-full border border-[#52b788]/10" aria-hidden="true"></div>
+
+        <!-- Foto con hover overlay -->
+        <div class="relative cursor-pointer group">
+          <img
+            class="w-64 h-64 lg:w-96 lg:h-96 rounded-full object-cover shadow-2xl border-4 border-white ring-4 ring-[#52b788]/30 transition-transform duration-500 group-hover:scale-105"
+            src="/hd-max.jpg"
+            alt="Brian Pedraza Osorio, Contador Público en Colombia"
+          />
+          <!-- Overlay al hover -->
+          <div class="absolute inset-0 bg-[#1b4332]/90 rounded-full flex flex-col gap-4 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400 p-8">
+            <p class="italic text-lg font-light text-center text-white leading-relaxed">
+              Actuando con seguridad y transparencia para su empresa.
+            </p>
+            <Qr />
+          </div>
+        </div>
+
+        <!-- Insignia de experiencia -->
+        <div class="absolute -bottom-4 left-4 lg:-left-6 xl:left-0 bg-[#1b4332] text-white rounded-2xl shadow-xl p-4 z-20">
+          <div class="text-3xl font-extrabold leading-none">+5</div>
+          <div class="text-xs text-[#b7e4c7] font-medium mt-0.5">años de experiencia</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

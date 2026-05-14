@@ -1,109 +1,119 @@
-<div>
-  <div class="max-w-lg p-4 rounded-lg shadow-lg flex flex-col gap-y-1">
-    <h2 class="text-2xl font-bold text-gray-700 mb-4">Preguntas Frecuentes</h2>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Cuánto debo pagar en impuestos?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Los clientes suelen preguntar sobre sus obligaciones fiscales y cuánto deben pagar, especialmente en cuanto al IVA, renta y retenciones.
+---
+const faqs = [
+  {
+    question: "¿Cuánto debo pagar en impuestos?",
+    answer: "Depende del tipo de contribuyente y su actividad económica. Los principales impuestos son IVA, renta y retenciones. Con una asesoría personalizada determinamos exactamente cuánto debe pagar según su caso.",
+  },
+  {
+    question: "¿Cuándo debo presentar la declaración de impuestos?",
+    answer: "Las fechas varían según el tipo de impuesto y la categoría del contribuyente. La DIAN publica el calendario tributario cada año. Le ayudamos a no perder ningún plazo.",
+  },
+  {
+    question: "¿Cómo puedo deducir gastos en mi declaración de renta?",
+    answer: "Puede deducir arrendamientos, servicios públicos, intereses de préstamos, salarios y otros gastos relacionados con la actividad productora de renta. Revisamos cada caso para maximizar sus deducciones.",
+  },
+  {
+    question: "¿Qué tipo de contabilidad debo llevar?",
+    answer: "Depende del tamaño y tipo de empresa. Las grandes empresas aplican NIIF plenas; las PYMES aplican NIIF para PYMES; y los microempresarios pueden optar por contabilidad simplificada.",
+  },
+  {
+    question: "¿Cómo afecta el pago de impuestos mi flujo de caja?",
+    answer: "Una buena planificación tributaria minimiza el impacto en la liquidez. Diseñamos estrategias para distribuir los pagos fiscales y no afectar las operaciones del negocio.",
+  },
+  {
+    question: "¿Cuál es el régimen tributario más adecuado para mi empresa?",
+    answer: "Existen el régimen simple de tributación, el régimen ordinario y el especial. Cada uno tiene ventajas distintas. Lo asesoramos para elegir el que genere menor carga fiscal.",
+  },
+  {
+    question: "¿Cómo facturar electrónicamente y cumplir con la DIAN?",
+    answer: "La facturación electrónica es obligatoria para la mayoría de contribuyentes. Le acompañamos en la implementación del sistema autorizado por la DIAN y el proceso de habilitación.",
+  },
+  {
+    question: "¿Cuáles son los costos de contratar un contador?",
+    answer: "Los costos varían según el tipo de servicio. Desde asesorías puntuales desde $30.000 hasta paquetes mensuales completos. Contáctenos para una cotización personalizada sin compromiso.",
+  },
+];
+---
+
+<div class="space-y-3">
+  {faqs.map((faq, i) => (
+    <div class="faq-item border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
+      <button
+        class="accordion w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 hover:text-[#2d6a4f] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#52b788] focus-visible:ring-inset"
+        aria-expanded="false"
+        aria-controls={`panel-${i}`}
+        id={`accordion-${i}`}
+      >
+        <span class="pr-4 text-sm lg:text-base leading-snug">{faq.question}</span>
+        <span class="toggle-icon shrink-0 w-7 h-7 rounded-full bg-[#f0fdf4] border border-[#b7e4c7] flex items-center justify-center text-[#2d6a4f] transition-transform duration-300">
+          <svg class="plus-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v12M6 12h12"/>
+          </svg>
+          <svg class="minus-icon w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 12h12"/>
+          </svg>
+        </span>
+      </button>
+
+      <div
+        id={`panel-${i}`}
+        role="region"
+        aria-labelledby={`accordion-${i}`}
+        class="panel overflow-hidden max-h-0 transition-all duration-300 ease-in-out"
+      >
+        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
+          {faq.answer}
+        </p>
+      </div>
     </div>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Cuándo debo presentar la declaración de impuestos?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Las fechas de presentación y pago de impuestos son una consulta frecuente, ya que los calendarios varían según el tipo de impuesto y la categoría del contribuyente.
-    </div>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Cómo puedo deducir gastos en mi declaración de renta?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Es común que los clientes pregunten sobre los gastos deducibles, como arrendamientos, servicios públicos, intereses de préstamos, etc., y cómo pueden disminuir su carga tributaria.
-    </div>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Qué tipo de contabilidad debo llevar?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Según el tamaño y tipo de empresa, los clientes desean saber si deben llevar contabilidad bajo NIIF para pymes, contabilidad simplificada u otros.
-    </div>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Cómo afecta mi flujo de caja el pago de impuestos?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Los clientes buscan entender cómo sus pagos fiscales impactarán su liquidez y si existe alguna forma de minimizar este impacto.
-    </div>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Cuál es el régimen tributario más adecuado para mi empresa?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Preguntan sobre los regímenes tributarios (simplificado, ordinario, especial) y cuál les generará menos obligaciones y beneficios fiscales.
-    </div>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Qué implicaciones tiene contratar empleados en términos fiscales y contables?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Suelen consultar sobre las obligaciones con los empleados, como pagos de seguridad social, prestaciones, y cómo afecta esto su situación contable.
-    </div>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Cómo facturar electrónicamente y cumplir con la DIAN?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Con la implementación de la facturación electrónica, muchos buscan asesoría sobre cómo hacerlo correctamente y cumplir con los requisitos.
-    </div>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Cómo llevar la contabilidad de una empresa pequeña?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Pymes y nuevos empresarios consultan sobre la organización contable y el manejo de registros.
-    </div>
-  
-    <button class="accordion flex justify-between items-center w-full py-4 px-6 text-lg font-semibold text-white bg-[#2d6a4f] rounded-lg shadow-md hover:bg-[#25533d] focus:outline-none focus:ring-4 focus:ring-[#81c784] transition">
-      ¿Cuáles son los costos de contratar un contador?
-      <span class="toggle-icon">+</span>
-    </button>
-    <div class="panel hidden px-4 py-2 text-gray-700 bg-gray-50">
-      Una pregunta básica, pero común, es el costo de los servicios contables y si se ajustan a su presupuesto.
-    </div>
-  </div>
+  ))}
 </div>
 
 <script>
   const accordions = document.querySelectorAll('.accordion');
 
-  accordions.forEach((accordion) => {
-    accordion.addEventListener('click', function () {
-      const panel = this.nextElementSibling;
-      const icon = this.querySelector('.toggle-icon');
-      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+  accordions.forEach((btn) => {
+    btn.addEventListener('click', function(this: HTMLButtonElement) {
+      const panel = this.nextElementSibling as HTMLElement;
+      const isOpen = this.getAttribute('aria-expanded') === 'true';
+      const plusIcon = this.querySelector('.plus-icon') as HTMLElement;
+      const minusIcon = this.querySelector('.minus-icon') as HTMLElement;
+      const toggleIcon = this.querySelector('.toggle-icon') as HTMLElement;
 
-      this.setAttribute('aria-expanded', !isExpanded);
-      panel.classList.toggle('hidden');
-      icon.textContent = isExpanded ? '+' : '-';
-
-      document.querySelectorAll('.panel').forEach((p) => {
-        if (p !== panel) {
-          p.classList.add('hidden');
-          p.previousElementSibling.setAttribute('aria-expanded', 'false');
-          p.previousElementSibling.querySelector('.toggle-icon').textContent = '+';
+      // Cerrar todos los demás
+      accordions.forEach((other) => {
+        if (other !== this) {
+          const otherPanel = other.nextElementSibling as HTMLElement;
+          const otherPlus = other.querySelector('.plus-icon') as HTMLElement;
+          const otherMinus = other.querySelector('.minus-icon') as HTMLElement;
+          const otherToggle = other.querySelector('.toggle-icon') as HTMLElement;
+          other.setAttribute('aria-expanded', 'false');
+          if (otherPanel) otherPanel.style.maxHeight = '0';
+          if (otherPlus) otherPlus.classList.remove('hidden');
+          if (otherMinus) otherMinus.classList.add('hidden');
+          if (otherToggle) {
+            otherToggle.classList.remove('bg-[#2d6a4f]', 'border-[#2d6a4f]', 'text-white');
+            otherToggle.classList.add('bg-[#f0fdf4]', 'border-[#b7e4c7]', 'text-[#2d6a4f]');
+          }
         }
       });
+
+      // Toggle el actual
+      if (isOpen) {
+        this.setAttribute('aria-expanded', 'false');
+        panel.style.maxHeight = '0';
+        plusIcon?.classList.remove('hidden');
+        minusIcon?.classList.add('hidden');
+        toggleIcon?.classList.remove('bg-[#2d6a4f]', 'border-[#2d6a4f]', 'text-white');
+        toggleIcon?.classList.add('bg-[#f0fdf4]', 'border-[#b7e4c7]', 'text-[#2d6a4f]');
+      } else {
+        this.setAttribute('aria-expanded', 'true');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        plusIcon?.classList.add('hidden');
+        minusIcon?.classList.remove('hidden');
+        toggleIcon?.classList.add('bg-[#2d6a4f]', 'border-[#2d6a4f]', 'text-white');
+        toggleIcon?.classList.remove('bg-[#f0fdf4]', 'border-[#b7e4c7]', 'text-[#2d6a4f]');
+      }
     });
   });
 </script>

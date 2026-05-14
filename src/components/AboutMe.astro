@@ -1,46 +1,88 @@
-<section class="w-full bg-[#ffffff] py-24 px-8 lg:px-32" id="nosotros" data-aos="fade-down" data-aos-delay="100">
-  <div class="container mx-auto max-w-7xl">
-    <h2 class="text-3xl lg:text-6xl font-extrabold text-gray-800 text-center lg:mb-20">
-      ¿Por qué Elegir<span class="text-[#2d6a4f]"> Mis Servicios?</span>
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
-      <!-- Ventaja 1 -->
-      <div class="flex flex-col items-center text-center space-y-6">
-        <div class="flex items-center justify-center w-32 h-32 bg-[#52b788] rounded-full">
-          <img src="icono1.png" class="w-20 h-20 object-contain" alt="Tranquilidad y Confianza">
-        </div>
-        <h3 class="text-3xl font-semibold text-[#52b788]">Tranquilidad y Confianza</h3>
-        <p class="text-lg text-gray-600 leading-relaxed max-w-sm">
-          Cada trabajo está enfocado en brindar tranquilidad a nuestros clientes a través de un servicio transparente y profesional.
-        </p>
-      </div>
-      <!-- Ventaja 2 -->
-      <div class="flex flex-col items-center text-center space-y-6">
-        <div class="flex items-center justify-center w-32 h-32 bg-[#52b788] rounded-full">
-          <img src="icono2.png" class="w-20 h-20 object-contain" alt="Cumplimiento Garantizado">
-        </div>
-        <h3 class="text-3xl font-semibold text-[#52b788]">Cumplimiento Garantizado</h3>
-        <p class="text-lg text-gray-600 leading-relaxed max-w-sm">
-          Aseguro cada paso de su proceso fiscal y contable, siempre oportuno y en cumplimiento con la normativa vigente.
-        </p>
-      </div>
-      <!-- Ventaja 3 -->
-      <div class="flex flex-col items-center text-center space-y-6">
-        <div class="flex items-center justify-center w-32 h-32 bg-[#52b788] rounded-full">
-          <img src="icono3.png" class="w-20 h-20 object-contain" alt="Asesoramiento Experto">
-        </div>
-        <h3 class="text-3xl font-semibold text-[#52b788]">Asesoramiento Experto</h3>
-        <p class="text-lg text-gray-600 leading-relaxed max-w-sm">
-          Experiencia y conocimiento listos para enfrentar cualquier reto fiscal o contable que su proyecto requiera.
-        </p>
-      </div>
+---
+const features = [
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>`,
+    title: "Tranquilidad y Confianza",
+    description: "Cada trabajo está enfocado en brindar tranquilidad a nuestros clientes a través de un servicio transparente y profesional.",
+    image: "icono1.png",
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>`,
+    title: "Cumplimiento Garantizado",
+    description: "Aseguro cada paso de su proceso fiscal y contable, siempre oportuno y en cumplimiento con la normativa vigente.",
+    image: "icono2.png",
+  },
+  {
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>`,
+    title: "Asesoramiento Experto",
+    description: "Experiencia y conocimiento listos para enfrentar cualquier reto fiscal o contable que su proyecto requiera.",
+    image: "icono3.png",
+  },
+];
+---
+
+<section class="py-24 bg-gradient-to-br from-[#1b4332] to-[#2d6a4f] relative overflow-hidden">
+  <!-- Fondo decorativo -->
+  <div class="absolute inset-0 opacity-5" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="2" fill="white"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#dots)" />
+    </svg>
+  </div>
+
+  <div class="container mx-auto px-4 lg:px-8 relative z-10">
+    <!-- Encabezado -->
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#b7e4c7] bg-white/10 border border-white/20 px-4 py-1.5 rounded-full mb-4">
+        Diferenciadores
+      </span>
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-white mb-4">
+        ¿Por qué Elegir <span class="text-[#b7e4c7]">Mis Servicios?</span>
+      </h2>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto">
+        Tres razones que distinguen mi trabajo y aseguran el éxito de su empresa.
+      </p>
     </div>
-    <div class="text-center mt-20">
-      <a href="https://wa.me/573054188289" 
-         class="inline-block bg-green-600 text-white font-bold text-2xl py-4 px-12 rounded-full hover:bg-green-700 transition-colors duration-300" 
-         target="_blank" rel="noopener noreferrer" 
-         aria-label="Contactar a través de WhatsApp">
-        ¡Contáctame Ahora!
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      {features.map((f, i) => (
+        <div
+          class="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 text-center flex flex-col items-center gap-5"
+          data-aos="fade-up"
+          data-aos-delay={i * 120}
+        >
+          <div class="w-20 h-20 rounded-2xl bg-[#52b788] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <img
+              src={`/${f.image}`}
+              alt={f.title}
+              class="w-12 h-12 object-contain"
+              loading="lazy"
+            />
+          </div>
+          <h3 class="text-xl font-bold text-white">{f.title}</h3>
+          <p class="text-white/70 text-base leading-relaxed">{f.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA central -->
+    <div class="text-center" data-aos="fade-up">
+      <a
+        href="https://wa.me/573054188289"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contactar a través de WhatsApp"
+        class="inline-flex items-center gap-3 bg-[#52b788] text-white font-bold text-lg py-4 px-10 rounded-full hover:bg-white hover:text-[#2d6a4f] transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-0.5"
+      >
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        ¡Contácteme Ahora!
       </a>
     </div>
   </div>

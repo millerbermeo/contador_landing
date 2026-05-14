@@ -1,56 +1,135 @@
 ---
-// Tarifa.astro
 const tarifas = [
   {
     servicio: "Asesoría Básica",
-    descripcion:
-      "Dudas generales sobre impuestos, registros contables simples, trámites ante la DIAN",
-    precio: "$30,000 - $50,000 COP",
+    descripcion: "Dudas generales sobre impuestos, registros contables simples y trámites ante la DIAN.",
+    precio: "$30.000 – $50.000",
+    moneda: "COP",
+    badge: null,
+    destacado: false,
+    whatsapp: "Hola, me interesa la asesoría básica. ¿Podría darme más información?",
   },
   {
     servicio: "Asesoría Especializada",
-    descripcion:
-      "Planeación tributaria, gestión de nómina, estructuración de costos, liquidación de impuestos complejos",
-    precio: "$150,000 - $300,000 COP",
+    descripcion: "Planeación tributaria, gestión de nómina, estructuración de costos y liquidación de impuestos complejos.",
+    precio: "$150.000 – $300.000",
+    moneda: "COP",
+    badge: "Popular",
+    destacado: true,
+    whatsapp: "Hola, me interesa la asesoría especializada. ¿Podría darme más información?",
   },
   {
     servicio: "Asesoría para Empresas o PYMES",
-    descripcion:
-      "Paquete mensual que incluye asesorías y soporte contable constante",
-    precio: "$300,000 - $1,500,000 COP mensuales",
+    descripcion: "Paquete mensual que incluye asesorías y soporte contable constante para su empresa.",
+    precio: "$300.000 – $1.500.000",
+    moneda: "COP / mes",
+    badge: null,
+    destacado: false,
+    whatsapp: "Hola, me interesa el paquete para empresas o PYMES. ¿Podría darme más información?",
   },
   {
-    servicio: "Consultoría Puntual o Paquete de Asesorías",
-    descripcion:
-      "Paquetes de asesoría por un número de horas determinado a precios más accesibles",
-    precio: "Precios accesibles",
+    servicio: "Consultoría Puntual",
+    descripcion: "Paquetes de asesoría por horas determinadas a precios más accesibles.",
+    precio: "Precio personalizado",
+    moneda: "",
+    badge: "Flexible",
+    destacado: false,
+    whatsapp: "Hola, me interesa una consultoría puntual. ¿Podría darme más información?",
   },
 ];
 ---
 
-<section
-  class="w-full bg-[#52b788] py-16 mb-8 lg:mb-40"
-  data-aos="fade-up"
-  data-aos-delay="100"
->
-  <div class="container mx-auto px-8">
-    <h2 class="text-3xl lg:text-6xl text-[#fff] lg:font-extrabold text-center mb-14 lg:mb-24">
-      Precios y Tarifas
-    </h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {
-        tarifas.map((tarifa) => (
-          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
-            <h3 class="text-2xl font-bold text-gray-800 mb-4">
+<section id="precios" class="py-24 bg-gray-50 scroll-mt-20">
+  <div class="container mx-auto px-4 lg:px-8">
+
+    <!-- Encabezado -->
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#52b788] bg-[#f0fdf4] border border-[#b7e4c7] px-4 py-1.5 rounded-full mb-4">
+        Planes y Tarifas
+      </span>
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-[#1b4332] mb-4">
+        Precios Claros y Accesibles
+      </h2>
+      <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+        Elija el plan que mejor se adapte a sus necesidades. Sin costos ocultos.
+      </p>
+    </div>
+
+    <!-- Grid de planes -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+      {tarifas.map((tarifa, i) => (
+        <div
+          class={`relative rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1 ${
+            tarifa.destacado
+              ? "bg-gradient-to-br from-[#2d6a4f] to-[#1b4332] shadow-2xl shadow-[#2d6a4f]/30 border-0 ring-2 ring-[#52b788]"
+              : "bg-white border border-gray-100 shadow-sm hover:shadow-lg"
+          }`}
+          data-aos="fade-up"
+          data-aos-delay={i * 100}
+        >
+          {tarifa.badge && (
+            <div class={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
+              tarifa.destacado
+                ? "bg-[#52b788] text-white"
+                : "bg-[#1b4332] text-white"
+            }`}>
+              {tarifa.badge}
+            </div>
+          )}
+
+          <div class="p-7 flex flex-col flex-1">
+            <!-- Nombre del plan -->
+            <h3 class={`text-lg font-bold mb-3 ${tarifa.destacado ? "text-white" : "text-[#1b4332]"}`}>
               {tarifa.servicio}
             </h3>
-            <p class="text-gray-600 mb-6 leading-relaxed">
+
+            <!-- Precio -->
+            <div class="mb-5">
+              <div class={`text-2xl font-extrabold leading-tight ${tarifa.destacado ? "text-white" : "text-[#2d6a4f]"}`}>
+                {tarifa.precio}
+              </div>
+              {tarifa.moneda && (
+                <div class={`text-xs font-medium mt-0.5 ${tarifa.destacado ? "text-[#b7e4c7]" : "text-gray-400"}`}>
+                  {tarifa.moneda}
+                </div>
+              )}
+            </div>
+
+            <!-- Descripción -->
+            <p class={`text-sm leading-relaxed flex-1 mb-6 ${tarifa.destacado ? "text-white/80" : "text-gray-500"}`}>
               {tarifa.descripcion}
             </p>
-            <p class="text-xl font-semibold text-[#2d6a4f]">{tarifa.precio}</p>
+
+            <!-- Separador -->
+            <div class={`w-full h-px mb-6 ${tarifa.destacado ? "bg-white/20" : "bg-gray-100"}`}></div>
+
+            <!-- CTA -->
+            <a
+              href={`https://api.whatsapp.com/send?phone=573054188289&text=${encodeURIComponent(tarifa.whatsapp)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`flex items-center justify-center gap-2 w-full py-3 px-5 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                tarifa.destacado
+                  ? "bg-white text-[#2d6a4f] hover:bg-[#52b788] hover:text-white"
+                  : "bg-[#f0fdf4] text-[#2d6a4f] border border-[#b7e4c7] hover:bg-[#2d6a4f] hover:text-white hover:border-[#2d6a4f]"
+              }`}
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Consultar precio
+            </a>
           </div>
-        ))
-      }
+        </div>
+      ))}
     </div>
+
+    <!-- Nota de pie -->
+    <p class="text-center text-sm text-gray-400 mt-10" data-aos="fade-up">
+      Los precios pueden variar según la complejidad y el alcance de cada caso.
+      <a href="https://wa.me/573054188289" target="_blank" rel="noopener noreferrer" class="text-[#2d6a4f] font-medium hover:underline ml-1">
+        Contáctenos para una cotización personalizada →
+      </a>
+    </p>
   </div>
 </section>
