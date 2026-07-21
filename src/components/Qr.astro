@@ -1,3 +1,5 @@
-<div class="">
-    <img class="w-28 lg:w-52 scale-90" src="qr.jpeg" alt="">
-</div>
+---
+import { Image } from 'astro:assets';
+import qrImg from '../assets/qr.jpeg';
+---
+<Image class="w-28 lg:w-40 rounded-xl" src={qrImg} width={160} height={160} alt="Código QR de contacto de BP Asesorías Contables" loading="lazy" />

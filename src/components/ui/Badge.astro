@@ -1,0 +1,22 @@
+---
+/**
+ * Badge / etiqueta del sistema de diseño.
+ * - eyebrow: label pequeño uppercase en verde (encabezado de sección)
+ * - soft: pill de fondo lima muy suave
+ * - solid: pill verde bosque sólido
+ */
+interface Props {
+	variant?: 'eyebrow' | 'soft' | 'solid';
+	class?: string;
+}
+
+const { variant = 'soft', class: cls = '' } = Astro.props;
+
+const styles: Record<string, string> = {
+	eyebrow: 'eyebrow',
+	soft: 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-accent-soft text-brand-700 border border-brand-200',
+	solid: 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-700 text-white',
+};
+---
+
+<span class={`${styles[variant]} ${cls}`}><slot /></span>

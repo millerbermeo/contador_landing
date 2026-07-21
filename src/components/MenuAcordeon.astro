@@ -1,119 +1,107 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 const faqs = [
-  {
-    question: "¿Cuánto debo pagar en impuestos?",
-    answer: "Depende del tipo de contribuyente y su actividad económica. Los principales impuestos son IVA, renta y retenciones. Con una asesoría personalizada determinamos exactamente cuánto debe pagar según su caso.",
-  },
-  {
-    question: "¿Cuándo debo presentar la declaración de impuestos?",
-    answer: "Las fechas varían según el tipo de impuesto y la categoría del contribuyente. La DIAN publica el calendario tributario cada año. Le ayudamos a no perder ningún plazo.",
-  },
-  {
-    question: "¿Cómo puedo deducir gastos en mi declaración de renta?",
-    answer: "Puede deducir arrendamientos, servicios públicos, intereses de préstamos, salarios y otros gastos relacionados con la actividad productora de renta. Revisamos cada caso para maximizar sus deducciones.",
-  },
-  {
-    question: "¿Qué tipo de contabilidad debo llevar?",
-    answer: "Depende del tamaño y tipo de empresa. Las grandes empresas aplican NIIF plenas; las PYMES aplican NIIF para PYMES; y los microempresarios pueden optar por contabilidad simplificada.",
-  },
-  {
-    question: "¿Cómo afecta el pago de impuestos mi flujo de caja?",
-    answer: "Una buena planificación tributaria minimiza el impacto en la liquidez. Diseñamos estrategias para distribuir los pagos fiscales y no afectar las operaciones del negocio.",
-  },
-  {
-    question: "¿Cuál es el régimen tributario más adecuado para mi empresa?",
-    answer: "Existen el régimen simple de tributación, el régimen ordinario y el especial. Cada uno tiene ventajas distintas. Lo asesoramos para elegir el que genere menor carga fiscal.",
-  },
-  {
-    question: "¿Cómo facturar electrónicamente y cumplir con la DIAN?",
-    answer: "La facturación electrónica es obligatoria para la mayoría de contribuyentes. Le acompañamos en la implementación del sistema autorizado por la DIAN y el proceso de habilitación.",
-  },
-  {
-    question: "¿Cuáles son los costos de contratar un contador?",
-    answer: "Los costos varían según el tipo de servicio. Desde asesorías puntuales desde $30.000 hasta paquetes mensuales completos. Contáctenos para una cotización personalizada sin compromiso.",
-  },
+	{
+		question: '¿Cuánto debo pagar en impuestos?',
+		answer: 'Depende del tipo de contribuyente y su actividad económica. Los principales impuestos son IVA, renta y retenciones. Con una asesoría personalizada determinamos exactamente cuánto debe pagar según su caso.',
+	},
+	{
+		question: '¿Cuándo debo presentar la declaración de impuestos?',
+		answer: 'Las fechas varían según el tipo de impuesto y la categoría del contribuyente. La DIAN publica el calendario tributario cada año. Le ayudamos a no perder ningún plazo.',
+	},
+	{
+		question: '¿Cómo puedo deducir gastos en mi declaración de renta?',
+		answer: 'Puede deducir arrendamientos, servicios públicos, intereses de préstamos, salarios y otros gastos relacionados con la actividad productora de renta. Revisamos cada caso para maximizar sus deducciones.',
+	},
+	{
+		question: '¿Qué tipo de contabilidad debo llevar?',
+		answer: 'Depende del tamaño y tipo de empresa. Las grandes empresas aplican NIIF plenas; las PYMES aplican NIIF para PYMES; y los microempresarios pueden optar por contabilidad simplificada.',
+	},
+	{
+		question: '¿Cómo afecta el pago de impuestos mi flujo de caja?',
+		answer: 'Una buena planificación tributaria minimiza el impacto en la liquidez. Diseñamos estrategias para distribuir los pagos fiscales y no afectar las operaciones del negocio.',
+	},
+	{
+		question: '¿Cuál es el régimen tributario más adecuado para mi empresa?',
+		answer: 'Existen el régimen simple de tributación, el régimen ordinario y el especial. Cada uno tiene ventajas distintas. Lo asesoramos para elegir el que genere menor carga fiscal.',
+	},
+	{
+		question: '¿Cómo facturar electrónicamente y cumplir con la DIAN?',
+		answer: 'La facturación electrónica es obligatoria para la mayoría de contribuyentes. Le acompañamos en la implementación del sistema autorizado por la DIAN y el proceso de habilitación.',
+	},
+	{
+		question: '¿Cuáles son los costos de contratar un contador?',
+		answer: 'Los costos varían según el tipo de servicio. Desde asesorías puntuales desde $30.000 hasta paquetes mensuales completos. Contáctenos para una cotización personalizada sin compromiso.',
+	},
 ];
 ---
 
 <div class="space-y-3">
-  {faqs.map((faq, i) => (
-    <div class="faq-item border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
-      <button
-        class="accordion w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 hover:text-[#486d21] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#84b84b] focus-visible:ring-inset"
-        aria-expanded="false"
-        aria-controls={`panel-${i}`}
-        id={`accordion-${i}`}
-      >
-        <span class="pr-4 text-sm lg:text-base leading-snug">{faq.question}</span>
-        <span class="toggle-icon shrink-0 w-7 h-7 rounded-full bg-[#f3f3f3] border border-[#cbdbba] flex items-center justify-center text-[#486d21] transition-transform duration-300">
-          <svg class="plus-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v12M6 12h12"/>
-          </svg>
-          <svg class="minus-icon w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 12h12"/>
-          </svg>
-        </span>
-      </button>
-
-      <div
-        id={`panel-${i}`}
-        role="region"
-        aria-labelledby={`accordion-${i}`}
-        class="panel overflow-hidden max-h-0 transition-all duration-300 ease-in-out"
-      >
-        <p class="px-6 pb-5 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
-          {faq.answer}
-        </p>
-      </div>
-    </div>
-  ))}
+	{faqs.map((faq, i) => (
+		<div class="faq-item bg-surface border border-border rounded-2xl overflow-hidden transition-colors duration-200">
+			<button
+				class="accordion w-full flex justify-between items-center gap-4 px-5 py-4 text-left font-semibold text-ink hover:text-brand-700 transition-colors duration-200"
+				aria-expanded="false"
+				aria-controls={`panel-${i}`}
+				id={`accordion-${i}`}
+			>
+				<span class="text-sm lg:text-base leading-snug">{faq.question}</span>
+				<span class="toggle-icon shrink-0 w-8 h-8 rounded-full bg-accent-soft border border-brand-200 grid place-items-center text-brand-600 transition-all duration-300">
+					<Icon name="lucide:plus" class="w-4 h-4" />
+				</span>
+			</button>
+			<div id={`panel-${i}`} role="region" aria-labelledby={`accordion-${i}`} class="panel">
+				<div class="overflow-hidden">
+					<p class="px-5 pb-5 text-muted text-sm leading-relaxed border-t border-border pt-4">{faq.answer}</p>
+				</div>
+			</div>
+		</div>
+	))}
 </div>
 
 <script>
-  const accordions = document.querySelectorAll('.accordion');
+	const accordions = document.querySelectorAll<HTMLButtonElement>('.accordion');
 
-  accordions.forEach((btn) => {
-    btn.addEventListener('click', function(this: HTMLButtonElement) {
-      const panel = this.nextElementSibling as HTMLElement;
-      const isOpen = this.getAttribute('aria-expanded') === 'true';
-      const plusIcon = this.querySelector('.plus-icon') as HTMLElement;
-      const minusIcon = this.querySelector('.minus-icon') as HTMLElement;
-      const toggleIcon = this.querySelector('.toggle-icon') as HTMLElement;
+	function close(btn: HTMLButtonElement) {
+		const panel = btn.nextElementSibling as HTMLElement;
+		const icon = btn.querySelector('.toggle-icon') as HTMLElement;
+		btn.setAttribute('aria-expanded', 'false');
+		panel.classList.remove('open');
+		icon.classList.remove('bg-brand-500', 'border-brand-500', 'text-white', 'rotate-45');
+		icon.classList.add('bg-accent-soft', 'border-brand-200', 'text-brand-600');
+	}
 
-      // Cerrar todos los demás
-      accordions.forEach((other) => {
-        if (other !== this) {
-          const otherPanel = other.nextElementSibling as HTMLElement;
-          const otherPlus = other.querySelector('.plus-icon') as HTMLElement;
-          const otherMinus = other.querySelector('.minus-icon') as HTMLElement;
-          const otherToggle = other.querySelector('.toggle-icon') as HTMLElement;
-          other.setAttribute('aria-expanded', 'false');
-          if (otherPanel) otherPanel.style.maxHeight = '0';
-          if (otherPlus) otherPlus.classList.remove('hidden');
-          if (otherMinus) otherMinus.classList.add('hidden');
-          if (otherToggle) {
-            otherToggle.classList.remove('bg-[#486d21]', 'border-[#486d21]', 'text-white');
-            otherToggle.classList.add('bg-[#f3f3f3]', 'border-[#cbdbba]', 'text-[#486d21]');
-          }
-        }
-      });
+	accordions.forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const isOpen = btn.getAttribute('aria-expanded') === 'true';
+			accordions.forEach((other) => { if (other !== btn) close(other); });
 
-      // Toggle el actual
-      if (isOpen) {
-        this.setAttribute('aria-expanded', 'false');
-        panel.style.maxHeight = '0';
-        plusIcon?.classList.remove('hidden');
-        minusIcon?.classList.add('hidden');
-        toggleIcon?.classList.remove('bg-[#486d21]', 'border-[#486d21]', 'text-white');
-        toggleIcon?.classList.add('bg-[#f3f3f3]', 'border-[#cbdbba]', 'text-[#486d21]');
-      } else {
-        this.setAttribute('aria-expanded', 'true');
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-        plusIcon?.classList.add('hidden');
-        minusIcon?.classList.remove('hidden');
-        toggleIcon?.classList.add('bg-[#486d21]', 'border-[#486d21]', 'text-white');
-        toggleIcon?.classList.remove('bg-[#f3f3f3]', 'border-[#cbdbba]', 'text-[#486d21]');
-      }
-    });
-  });
+			if (isOpen) {
+				close(btn);
+			} else {
+				const panel = btn.nextElementSibling as HTMLElement;
+				const icon = btn.querySelector('.toggle-icon') as HTMLElement;
+				btn.setAttribute('aria-expanded', 'true');
+				panel.classList.add('open');
+				icon.classList.add('bg-brand-500', 'border-brand-500', 'text-white', 'rotate-45');
+				icon.classList.remove('bg-accent-soft', 'border-brand-200', 'text-brand-600');
+			}
+		});
+	});
 </script>
+
+<style>
+	/* Animación de altura robusta (grid-template-rows 0fr→1fr) */
+	.panel {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 0.3s ease-in-out;
+	}
+	.panel.open {
+		grid-template-rows: 1fr;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.panel { transition: none; }
+	}
+</style>

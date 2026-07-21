@@ -1,72 +1,58 @@
 ---
+/**
+ * Stat de anillo fino con count-up al entrar en viewport.
+ * Reemplaza el conic-gradient pesado por un ring SVG elegante.
+ */
+interface Props { percentage: number; serviceName: string }
 const { percentage, serviceName } = Astro.props;
+
+const r = 42;
+const circ = 2 * Math.PI * r;
 ---
 
-<div 
-    class="flex flex-col items-center justify-start mt-8" 
-    data-aos="fade-right" 
-    data-aos-delay="100"
->
-    <!-- Loader Circular -->
-    <div 
-        class="loader-circle" 
-        style={`--final-percentage: ${percentage}%`}
-        data-aos="zoom-in"
-    >
-        <div class="loader-inner text-gray-800">
-            <span class="loader-text text-[#2d4012]">
-                {percentage}%
-            </span>
-        </div>
-    </div>
-
-    <!-- Nombre del Servicio -->
-    <div
-        class="flex items-center gap-3 mt-2 whitespace-pre-line max-w-20 text-center justify-center"
-    >
-        <h2 class="text-lg italic font-normal text-[#2d4012]">{serviceName}</h2>
-    </div>
+<div class="flex flex-col items-center gap-3 text-center">
+	<div class="stat-ring relative w-20 h-20 sm:w-24 sm:h-24" data-value={percentage} data-circ={circ.toFixed(2)}>
+		<svg class="w-full h-full -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
+			<circle cx="50" cy="50" r={r} fill="none" stroke="#E1EED0" stroke-width="6" />
+			<circle
+				class="ring-progress"
+				cx="50" cy="50" r={r} fill="none" stroke="#5A9E2F" stroke-width="6"
+				stroke-linecap="round"
+				stroke-dasharray={circ.toFixed(2)}
+				stroke-dashoffset={circ.toFixed(2)}
+				style="transition: stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1);"
+			/>
+		</svg>
+		<span class="ring-number absolute inset-0 grid place-items-center font-serif font-semibold text-brand-700 text-lg sm:text-xl" aria-hidden="true">0%</span>
+		<span class="sr-only">{percentage}%</span>
+	</div>
+	<span class="text-xs sm:text-sm font-medium text-muted max-w-[6rem] leading-tight">{serviceName}</span>
 </div>
 
-<style>
-    /* Loader Circular */
-    .loader-circle {
-        position: relative;
-        width: 80px; /* Ajustado para mejor visibilidad */
-        height: 80px;
-        border-radius: 50%;
-        background: conic-gradient(#486d21 0%, #e5e7eb 0%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: fill-animation 1s ease-out forwards;
-    }
+<script>
+	import { CountUp } from 'countup.js';
 
-    .loader-inner {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 65px; /* Ajustado para proporción */
-        height: 65px;
-        border-radius: 50%;
-        background-color: #ffffff;
-    }
+	const rings = document.querySelectorAll<HTMLElement>('.stat-ring');
+	const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    .loader-text {
-        font-size: 1.2rem; 
-        font-weight: bold;
-    }
+	function animate(el: HTMLElement) {
+		const value = Number(el.dataset.value || 0);
+		const circ = Number(el.dataset.circ || 0);
+		const progress = el.querySelector<SVGCircleElement>('.ring-progress');
+		const number = el.querySelector<HTMLElement>('.ring-number');
+		if (progress) progress.style.strokeDashoffset = String(circ * (1 - value / 100));
+		if (number) {
+			if (reduce) { number.textContent = `${value}%`; return; }
+			new CountUp(number, value, { suffix: '%', duration: 1.6 }).start();
+		}
+	}
 
-    /* Animación del Loader */
-    @keyframes fill-animation {
-        0% {
-            background: conic-gradient(#84b84b 0%, #e5e7eb 0%);
-        }
-        100% {
-            background: conic-gradient(
-                #486d21 var(--final-percentage),
-                #e5e7eb var(--final-percentage)
-            );
-        }
-    }
-</style>
+	if (reduce || !('IntersectionObserver' in window)) {
+		rings.forEach(animate);
+	} else {
+		const io = new IntersectionObserver((entries, obs) => {
+			entries.forEach((e) => { if (e.isIntersecting) { animate(e.target as HTMLElement); obs.unobserve(e.target); } });
+		}, { threshold: 0.5 });
+		rings.forEach((el) => io.observe(el));
+	}
+</script>

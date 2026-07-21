@@ -1,0 +1,25 @@
+---
+/**
+ * Encabezado de sección reutilizable: eyebrow + H2 serif + subtítulo muted.
+ * Garantiza idéntica jerarquía tipográfica en TODAS las secciones.
+ * - align: left | center
+ */
+import Badge from './Badge.astro';
+
+interface Props {
+	eyebrow?: string;
+	title: string;
+	subtitle?: string;
+	align?: 'left' | 'center';
+	class?: string;
+}
+
+const { eyebrow, title, subtitle, align = 'center', class: cls = '' } = Astro.props;
+const alignCls = align === 'center' ? 'items-center text-center mx-auto' : 'items-start text-left';
+---
+
+<div class={`reveal flex flex-col gap-4 max-w-2xl ${alignCls} ${cls}`}>
+	{eyebrow && <Badge variant="eyebrow">{eyebrow}</Badge>}
+	<h2 set:html={title} />
+	{subtitle && <p class="text-muted text-base sm:text-lg leading-relaxed">{subtitle}</p>}
+</div>

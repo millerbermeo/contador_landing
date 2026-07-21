@@ -1,138 +1,98 @@
 ---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import SectionHeader from './ui/SectionHeader.astro';
+import { SITE, waLink } from '../data/site';
+import brianImg from '../assets/brian.jpeg';
+
 const author = {
-  name: "Brian Pedraza Osorio",
-  title: "Contador Público en Colombia",
-  university: "Universidad de la Amazonia",
-  description: `Contador Público con sólida experiencia en asesoría financiera y contable para empresas y personas naturales en Colombia. Mi misión es brindar a cada cliente un respaldo integral en el manejo de sus finanzas y obligaciones fiscales, permitiendo que se concentren en el crecimiento y éxito de sus negocios. Comprometido con la precisión, la ética y el cumplimiento de las normativas vigentes, ofrezco un servicio personalizado y confiable.`,
-  imageSrc: "brian.jpeg",
+	name: SITE.fullName,
+	title: SITE.role,
+	university: SITE.university,
+	description: `Contador Público con sólida experiencia en asesoría financiera y contable para empresas y personas naturales en Colombia. Mi misión es brindar a cada cliente un respaldo integral en el manejo de sus finanzas y obligaciones fiscales, permitiendo que se concentren en el crecimiento y éxito de sus negocios. Comprometido con la precisión, la ética y el cumplimiento de las normativas vigentes, ofrezco un servicio personalizado y confiable.`,
+	imageSrc: 'brian.jpeg',
 };
+
+const credentials = [
+	{ icon: 'lucide:badge-check', label: 'Tarjeta Profesional Vigente' },
+	{ icon: 'lucide:shield-check', label: 'Contador Certificado' },
+];
+
+const facts = [
+	{ icon: 'lucide:map-pin', label: 'Ubicación', value: SITE.location },
+	{ icon: 'lucide:clock', label: 'Experiencia', value: '+5 años' },
+	{ icon: 'lucide:graduation-cap', label: 'Formación', value: 'Univ. de la Amazonia' },
+	{ icon: 'lucide:badge-check', label: 'Registro', value: 'DIAN Certificado' },
+];
 ---
 
-<section id="nosotros" class="py-24 bg-[#f3f3f3] scroll-mt-20">
-  <div class="container mx-auto px-4 lg:px-8">
-    <div class="text-center mb-16" data-aos="fade-up">
-      <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#84b84b] bg-[#f3f3f3] border border-[#cbdbba] px-4 py-1.5 rounded-full mb-4">
-        Sobre el profesional
-      </span>
-      <h2 class="text-4xl lg:text-5xl font-extrabold text-[#2d4012] mb-4">Conozca al Experto</h2>
-      <p class="text-lg text-gray-500 max-w-2xl mx-auto">
-        Un profesional comprometido con la transparencia y el crecimiento de su empresa.
-      </p>
-    </div>
+<section id="nosotros" class="section bg-bg scroll-mt-20">
+	<div class="container-x flex flex-col items-center gap-14">
+		<SectionHeader
+			eyebrow="Sobre el profesional"
+			title="Conozca al Experto"
+			subtitle="Un profesional comprometido con la transparencia y el crecimiento de su empresa."
+		/>
 
-    <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
-      <div class="flex flex-col lg:flex-row">
+		<div class="reveal w-full max-w-5xl bg-surface rounded-card shadow-soft border border-border overflow-hidden">
+			<div class="grid lg:grid-cols-5">
 
-        <!-- Foto -->
-        <div class="lg:w-2/5 relative bg-gradient-to-br from-[#486d21] to-[#2d4012] flex flex-col items-center justify-center p-12 gap-6" data-aos="fade-right">
-          <div class="relative">
-            <div class="absolute inset-0 rounded-full border-4 border-white/20 scale-110" aria-hidden="true"></div>
-            <img
-              src={`/${author.imageSrc}`}
-              alt={`Foto de ${author.name}, Contador Público`}
-              class="w-44 h-44 rounded-full object-cover border-4 border-white shadow-xl"
-              loading="lazy"
-            />
-          </div>
-          <div class="text-center">
-            <h3 class="text-xl font-bold text-white">{author.name}</h3>
-            <p class="text-[#cbdbba] text-sm mt-1">{author.university}</p>
-          </div>
+				<!-- Panel foto (gradiente oscuro) -->
+				<div class="lg:col-span-2 relative bg-brand-dark flex flex-col items-center justify-center gap-6 p-10 lg:p-12 text-center overflow-hidden">
+					<div class="absolute inset-0 grid-bg opacity-[0.06] pointer-events-none" aria-hidden="true"></div>
+					<div class="relative">
+						<div class="absolute inset-0 rounded-full bg-accent/25 blur-2xl scale-110" aria-hidden="true"></div>
+						<Image src={brianImg} alt={`Foto de ${author.name}, Contador Público`} width={352} height={352} loading="lazy"
+							class="relative w-40 h-40 lg:w-44 lg:h-44 rounded-full object-cover border-4 border-surface ring-2 ring-accent shadow-lift" />
+					</div>
+					<div class="relative">
+						<h3 class="text-white text-xl">{author.name}</h3>
+						<p class="text-accent/90 text-sm mt-1">{author.university}</p>
+					</div>
+					<div class="relative flex flex-wrap gap-2 justify-center">
+						{credentials.map((c) => (
+							<span class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-full">
+								<Icon name={c.icon} class="w-3.5 h-3.5 text-accent" /> {c.label}
+							</span>
+						))}
+					</div>
+				</div>
 
-          <!-- Credenciales -->
-          <div class="flex flex-wrap gap-2 justify-center">
-            <span class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-full">
-              <svg class="w-3.5 h-3.5 text-[#cbdbba]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              Tarjeta Profesional Vigente
-            </span>
-            <span class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-medium px-3 py-1.5 rounded-full">
-              <svg class="w-3.5 h-3.5 text-[#cbdbba]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-              </svg>
-              Contador Certificado
-            </span>
-          </div>
-        </div>
+				<!-- Panel bio -->
+				<div class="lg:col-span-3 p-8 sm:p-10 lg:p-12 flex flex-col justify-center gap-6">
+					<div>
+						<span class="eyebrow">Sobre mí</span>
+						<h3 class="mt-2 text-2xl lg:text-3xl leading-tight">
+							{author.name}
+							<span class="block font-sans text-base font-normal text-brand-500 mt-1">{author.title}</span>
+						</h3>
+					</div>
 
-        <!-- Bio -->
-        <div class="lg:w-3/5 p-10 lg:p-14 flex flex-col justify-center gap-6" data-aos="fade-left">
-          <div>
-            <span class="text-sm font-semibold text-[#84b84b] uppercase tracking-widest">Sobre mí</span>
-            <h3 class="mt-2 text-2xl lg:text-3xl font-bold text-[#2d4012] leading-tight">
-              {author.name}
-              <span class="block text-lg font-normal text-[#486d21] mt-1">{author.title}</span>
-            </h3>
-          </div>
+					<p class="text-muted text-base leading-relaxed">{author.description}</p>
 
-          <p class="text-gray-600 text-base lg:text-lg leading-relaxed">{author.description}</p>
+					<div class="grid sm:grid-cols-2 gap-4 pt-1">
+						{facts.map((f) => (
+							<div class="flex items-center gap-3">
+								<div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center shrink-0">
+									<Icon name={f.icon} class="w-5 h-5 text-brand-500" />
+								</div>
+								<div>
+									<span class="text-[0.7rem] text-muted font-medium uppercase tracking-wide block">{f.label}</span>
+									<span class="text-sm text-ink font-semibold">{f.value}</span>
+								</div>
+							</div>
+						))}
+					</div>
 
-          <!-- Datos clave -->
-          <div class="grid grid-cols-2 gap-4 pt-2">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-[#f3f3f3] flex items-center justify-center shrink-0" aria-hidden="true">
-                <svg class="w-5 h-5 text-[#486d21]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-              </div>
-              <div>
-                <span class="text-xs text-gray-400 font-medium uppercase tracking-wide block">Ubicación</span>
-                <span class="text-sm text-gray-700 font-semibold">Florencia, Caquetá</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-[#f3f3f3] flex items-center justify-center shrink-0" aria-hidden="true">
-                <svg class="w-5 h-5 text-[#486d21]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-              <div>
-                <span class="text-xs text-gray-400 font-medium uppercase tracking-wide block">Experiencia</span>
-                <span class="text-sm text-gray-700 font-semibold">+5 años</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-[#f3f3f3] flex items-center justify-center shrink-0" aria-hidden="true">
-                <svg class="w-5 h-5 text-[#486d21]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                </svg>
-              </div>
-              <div>
-                <span class="text-xs text-gray-400 font-medium uppercase tracking-wide block">Formación</span>
-                <span class="text-sm text-gray-700 font-semibold">Univ. de la Amazonia</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-[#f3f3f3] flex items-center justify-center shrink-0" aria-hidden="true">
-                <svg class="w-5 h-5 text-[#486d21]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-              <div>
-                <span class="text-xs text-gray-400 font-medium uppercase tracking-wide block">Registro</span>
-                <span class="text-sm text-gray-700 font-semibold">DIAN Certificado</span>
-              </div>
-            </div>
-          </div>
+					<div class="pt-1">
+						<a href={waLink('Hola Brian, me gustaría hablar sobre asesoría contable.')} target="_blank" rel="noopener noreferrer"
+							class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
+							Hablar con Brian <Icon name="lucide:arrow-right" class="w-4 h-4" />
+						</a>
+					</div>
+				</div>
 
-          <div class="pt-2">
-            <a
-              href="https://wa.me/573054188289"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 bg-[#486d21] text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-[#2d4012] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
-            >
-              Hablar con Brian
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
+			</div>
+		</div>
+	</div>
 </section>

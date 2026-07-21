@@ -1,234 +1,105 @@
 ---
-import Navbar from "../components/Navbar.astro";
-import Home from "../components/Home.astro";
-import ServiceCard from "../components/ServiceCard.astro";
-import AuthorCard from "../components/AuthorCard.astro";
-import AboutMe from "../components/AboutMe.astro";
-import Tarifa from "../components/Tarifa.astro";
-import MenuAcordeon from "../components/MenuAcordeon.astro";
-import Articulos from "../components/Articulos.astro";
-import ImageCarousel from "../components/ImageCarousel.astro";
-import Footer from "../components/Footer.astro";
-import Whatsapp from "../components/Whatsapp.astro";
-import { services } from "../utils/Services.astro";
-import 'aos/dist/aos.css';
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Whatsapp from '../components/Whatsapp.astro';
+import Home from '../components/Home.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import AuthorCard from '../components/AuthorCard.astro';
+import AboutMe from '../components/AboutMe.astro';
+import Tarifa from '../components/Tarifa.astro';
+import MenuAcordeon from '../components/MenuAcordeon.astro';
+import Articulos from '../components/Articulos.astro';
+import ImageCarousel from '../components/ImageCarousel.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import Footer from '../components/Footer.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import { services } from '../utils/Services.astro';
+import { waLink } from '../data/site';
+import slide3 from '../assets/slide3.jpeg';
+import slide1 from '../assets/slide1-min.jpg';
+import slide2 from '../assets/slide2-min.jpg';
+import slide4 from '../assets/slide4.jpeg';
+
+const faqGallery = [
+	{ src: slide3, alt: 'Servicios contables profesionales' },
+	{ src: slide1, alt: 'Asesoría financiera empresarial' },
+	{ src: slide2, alt: 'Contador público certificado' },
+	{ src: slide4, alt: 'Gestión empresarial y contable' },
+];
 ---
 
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
+<Layout>
+	<Navbar />
+	<Whatsapp />
 
-    <title>Brian Pedraza Osorio | Contador Público en Colombia — Asesoría Contable y Fiscal</title>
-    <meta name="description" content="Contador Público certificado en Colombia. Asesoría contable, tributaria y fiscal para empresas y personas naturales. Cumplimiento legal, optimización fiscal y soporte personalizado. Florencia, Caquetá." />
-    <meta name="keywords" content="contador público Colombia, asesoría contable, declaración de renta, asesoría tributaria, DIAN, Florencia Caquetá, contabilidad PYMES, Brian Pedraza" />
-    <meta name="author" content="Brian Pedraza Osorio" />
-    <meta name="robots" content="index, follow" />
+	<main>
+		<Home />
 
-    <link rel="icon" type="image/jpeg" href="/logotipo.jpeg" />
+		<!-- Servicios -->
+		<section id="servicios" class="section bg-bg scroll-mt-20">
+			<div class="container-x flex flex-col items-center gap-14">
+				<SectionHeader
+					eyebrow="Portafolio"
+					title="Servicios Profesionales"
+					subtitle="Soluciones contables y fiscales adaptadas a las necesidades de su empresa."
+				/>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+					{services.map((service, i) => (
+						<ServiceCard
+							icon={service.icon}
+							title={service.title}
+							items={service.items}
+							whatsappMessage={service.whatsappMessage}
+							delay={(i % 3) * 100}
+						/>
+					))}
+				</div>
+			</div>
+		</section>
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Brian Pedraza Osorio | Contador Público en Colombia" />
-    <meta property="og:description" content="Asesoría contable, tributaria y fiscal para empresas y personas naturales. Cumplimiento legal y optimización fiscal en Colombia." />
-    <meta property="og:image" content="/hd-max.jpg" />
-    <meta property="og:locale" content="es_CO" />
-    <meta property="og:site_name" content="BP Asesorías Contables" />
+		<AuthorCard />
+		<AboutMe />
+		<Tarifa />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Brian Pedraza Osorio | Contador Público en Colombia" />
-    <meta name="twitter:description" content="Asesoría contable, tributaria y fiscal para empresas y personas naturales." />
-    <meta name="twitter:image" content="/hd-max.jpg" />
+		<!-- FAQ + galería -->
+		<section id="faq" class="section bg-brand-50/40 scroll-mt-20">
+			<div class="container-x flex flex-col items-center gap-14">
+				<SectionHeader
+					eyebrow="Preguntas Frecuentes"
+					title="¿Tiene dudas?"
+					subtitle="Resolvemos sus inquietudes sobre contabilidad y finanzas."
+				/>
 
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json" is:inline>
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "BP Asesorías Contables",
-      "description": "Contador Público con servicios de asesoría contable, tributaria y fiscal en Colombia.",
-      "telephone": "+573054188289",
-      "email": "b.pedraza247@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Florencia",
-        "addressRegion": "Caquetá",
-        "addressCountry": "CO"
-      },
-      "founder": {
-        "@type": "Person",
-        "name": "Brian Pedraza Osorio",
-        "jobTitle": "Contador Público"
-      },
-      "sameAs": [
-        "https://www.tiktok.com/@bp.asesorias.contables"
-      ]
-    }
-    </script>
+				<div class="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start w-full">
+					<div class="reveal">
+						<MenuAcordeon />
+					</div>
 
-    <link rel="preload" href="/hd-max.jpg" as="image" />
-  </head>
+					<div class="reveal flex flex-col gap-5" data-reveal-delay="120">
+						<div class="grid grid-cols-2 gap-4">
+							{faqGallery.map((img) => (
+								<Image src={img.src} alt={img.alt} width={300} height={300} loading="lazy"
+									class="w-full aspect-square object-cover rounded-2xl shadow-soft border border-border" />
+							))}
+						</div>
+						<div class="rounded-card bg-surface border border-border shadow-soft p-6 text-center flex flex-col items-center gap-3">
+							<p class="text-ink font-medium">¿Más preguntas sobre tarifas o servicios?</p>
+							<a href={waLink('Hola, tengo algunas preguntas sobre sus servicios.')} target="_blank" rel="noopener noreferrer"
+								class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:-translate-y-0.5 transition-all duration-300">
+								Contáctenos <Icon name="lucide:arrow-right" class="w-4 h-4" />
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <body class="bg-white text-gray-900 antialiased overflow-x-hidden">
-    <Navbar />
-    <Whatsapp />
+		<Articulos />
+		<ImageCarousel />
+		<CtaFinal />
+	</main>
 
-    <main>
-      <Home />
-
-      <!-- Servicios -->
-      <section id="servicios" class="py-24 bg-gray-50 scroll-mt-20">
-        <div class="container mx-auto px-4 lg:px-8">
-          <div class="text-center mb-16" data-aos="fade-up">
-            <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#84b84b] bg-[#f3f3f3] border border-[#cbdbba] px-4 py-1.5 rounded-full mb-4">
-              Portafolio
-            </span>
-            <h2 class="text-4xl lg:text-5xl font-extrabold text-[#2d4012] mb-4">
-              Servicios Profesionales
-            </h2>
-            <p class="text-lg text-gray-500 max-w-2xl mx-auto">
-              Soluciones contables y fiscales adaptadas a las necesidades de su empresa.
-            </p>
-          </div>
-
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, i) => (
-              <ServiceCard
-                icon={service.icon}
-                title={service.title}
-                items={service.items}
-                whatsappMessage={service.whatsappMessage}
-                delay={i * 100}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- Sobre el autor -->
-      <AuthorCard />
-
-      <!-- ¿Por qué elegirme? -->
-      <AboutMe />
-
-      <!-- Precios -->
-      <Tarifa />
-
-      <!-- FAQ + Galería -->
-      <section class="py-24 bg-white scroll-mt-20" id="faq">
-        <div class="container mx-auto px-4 lg:px-8">
-          <div class="text-center mb-16" data-aos="fade-up">
-            <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#84b84b] bg-[#f3f3f3] border border-[#cbdbba] px-4 py-1.5 rounded-full mb-4">
-              Preguntas Frecuentes
-            </span>
-            <h2 class="text-4xl lg:text-5xl font-extrabold text-[#2d4012] mb-4">
-              ¿Tiene Dudas?
-            </h2>
-            <p class="text-lg text-gray-500 max-w-2xl mx-auto">
-              Resolvemos sus inquietudes sobre contabilidad y finanzas.
-            </p>
-          </div>
-
-          <div class="flex flex-col lg:flex-row gap-12 items-start">
-            <div class="w-full lg:w-1/2" data-aos="fade-right">
-              <MenuAcordeon />
-            </div>
-            <div class="w-full lg:w-1/2" data-aos="fade-left">
-              <div class="grid grid-cols-2 gap-4">
-                <img
-                  class="w-full h-52 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform duration-300"
-                  src="/slide3.jpeg"
-                  alt="Servicios contables profesionales"
-                  loading="lazy"
-                />
-                <img
-                  class="w-full h-52 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform duration-300"
-                  src="/slide1-min.jpg"
-                  alt="Asesoría financiera empresarial"
-                  loading="lazy"
-                />
-                <img
-                  class="w-full h-52 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform duration-300"
-                  src="/slide2-min.jpg"
-                  alt="Contador público certificado"
-                  loading="lazy"
-                />
-                <img
-                  class="w-full h-52 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform duration-300"
-                  src="/slide4.jpeg"
-                  alt="Gestión empresarial y contable"
-                  loading="lazy"
-                />
-              </div>
-              <div class="mt-6 text-center">
-                <a
-                  href="https://wa.me/573054188289"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 text-[#486d21] font-semibold hover:text-[#2d4012] transition-colors group"
-                >
-                  ¿Más preguntas sobre tarifas? Contáctenos
-                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Artículos -->
-      <Articulos />
-
-      <!-- Videos TikTok -->
-      <ImageCarousel />
-    </main>
-
-    <Footer />
-
-    <!-- Ionicons (cargado al final para no bloquear render) -->
-    <script is:inline type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script is:inline nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-    <!-- AOS — inicializado una sola vez -->
-    <script>
-      // @ts-ignore
-      import AOS from 'aos';
-      AOS.init({
-        duration: 700,
-        once: true,
-        offset: 80,
-        easing: 'ease-out-cubic',
-      });
-    </script>
-  </body>
-</html>
-
-<style is:global>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html, body {
-    overflow-x: hidden;
-    max-width: 100%;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-
-  .scroll-mt-20 {
-    scroll-margin-top: 5rem;
-  }
-</style>
+	<Footer />
+</Layout>

@@ -1,135 +1,112 @@
 ---
+import { Icon } from 'astro-icon/components';
+import SectionHeader from './ui/SectionHeader.astro';
+import WaIcon from './ui/WaIcon.astro';
+import { waLink } from '../data/site';
+
 const tarifas = [
-  {
-    servicio: "Asesoría Básica",
-    descripcion: "Dudas generales sobre impuestos, registros contables simples y trámites ante la DIAN.",
-    precio: "$30.000 – $50.000",
-    moneda: "COP",
-    badge: null,
-    destacado: false,
-    whatsapp: "Hola, me interesa la asesoría básica. ¿Podría darme más información?",
-  },
-  {
-    servicio: "Asesoría Especializada",
-    descripcion: "Planeación tributaria, gestión de nómina, estructuración de costos y liquidación de impuestos complejos.",
-    precio: "$150.000 – $300.000",
-    moneda: "COP",
-    badge: "Popular",
-    destacado: true,
-    whatsapp: "Hola, me interesa la asesoría especializada. ¿Podría darme más información?",
-  },
-  {
-    servicio: "Asesoría para Empresas o PYMES",
-    descripcion: "Paquete mensual que incluye asesorías y soporte contable constante para su empresa.",
-    precio: "$300.000 – $1.500.000",
-    moneda: "COP / mes",
-    badge: null,
-    destacado: false,
-    whatsapp: "Hola, me interesa el paquete para empresas o PYMES. ¿Podría darme más información?",
-  },
-  {
-    servicio: "Consultoría Puntual",
-    descripcion: "Paquetes de asesoría por horas determinadas a precios más accesibles.",
-    precio: "Precio personalizado",
-    moneda: "",
-    badge: "Flexible",
-    destacado: false,
-    whatsapp: "Hola, me interesa una consultoría puntual. ¿Podría darme más información?",
-  },
+	{
+		servicio: 'Asesoría Básica',
+		descripcion: 'Dudas generales sobre impuestos, registros contables simples y trámites ante la DIAN.',
+		precio: '$30.000 – $50.000',
+		moneda: 'COP',
+		badge: null,
+		destacado: false,
+		whatsapp: 'Hola, me interesa la asesoría básica. ¿Podría darme más información?',
+	},
+	{
+		servicio: 'Asesoría Especializada',
+		descripcion: 'Planeación tributaria, gestión de nómina, estructuración de costos y liquidación de impuestos complejos.',
+		precio: '$150.000 – $300.000',
+		moneda: 'COP',
+		badge: 'Popular',
+		destacado: true,
+		whatsapp: 'Hola, me interesa la asesoría especializada. ¿Podría darme más información?',
+	},
+	{
+		servicio: 'Asesoría para Empresas o PYMES',
+		descripcion: 'Paquete mensual que incluye asesorías y soporte contable constante para su empresa.',
+		precio: '$300.000 – $1.500.000',
+		moneda: 'COP / mes',
+		badge: null,
+		destacado: false,
+		whatsapp: 'Hola, me interesa el paquete para empresas o PYMES. ¿Podría darme más información?',
+	},
+	{
+		servicio: 'Consultoría Puntual',
+		descripcion: 'Paquetes de asesoría por horas determinadas a precios más accesibles.',
+		precio: 'Precio personalizado',
+		moneda: '',
+		badge: 'Flexible',
+		destacado: false,
+		whatsapp: 'Hola, me interesa una consultoría puntual. ¿Podría darme más información?',
+	},
 ];
 ---
 
-<section id="precios" class="py-24 bg-gray-50 scroll-mt-20">
-  <div class="container mx-auto px-4 lg:px-8">
+<section id="precios" class="section bg-bg scroll-mt-20">
+	<div class="container-x flex flex-col items-center gap-14">
+		<SectionHeader
+			eyebrow="Planes y Tarifas"
+			title="Precios Claros y Accesibles"
+			subtitle="Elija el plan que mejor se adapte a sus necesidades. Sin costos ocultos."
+		/>
 
-    <!-- Encabezado -->
-    <div class="text-center mb-16" data-aos="fade-up">
-      <span class="inline-block text-xs font-bold tracking-widest uppercase text-[#84b84b] bg-[#f3f3f3] border border-[#cbdbba] px-4 py-1.5 rounded-full mb-4">
-        Planes y Tarifas
-      </span>
-      <h2 class="text-4xl lg:text-5xl font-extrabold text-[#2d4012] mb-4">
-        Precios Claros y Accesibles
-      </h2>
-      <p class="text-lg text-gray-500 max-w-2xl mx-auto">
-        Elija el plan que mejor se adapte a sus necesidades. Sin costos ocultos.
-      </p>
-    </div>
+		<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch w-full pt-3">
+			{tarifas.map((t, i) => (
+				<div
+					class:list={[
+						'reveal relative rounded-card bg-surface flex flex-col p-7 transition-all duration-300 hover:-translate-y-1',
+						t.destacado
+							? 'border-2 border-accent shadow-glow'
+							: 'border border-border shadow-soft hover:shadow-lift hover:border-accent',
+					]}
+					data-reveal-delay={i * 100}
+				>
+					{t.badge && (
+						<span class:list={[
+							'absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[0.7rem] font-bold uppercase tracking-wider',
+							t.destacado ? 'bg-accent text-brand-900' : 'bg-brand-700 text-white',
+						]}>
+							{t.badge}
+						</span>
+					)}
 
-    <!-- Grid de planes -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-      {tarifas.map((tarifa, i) => (
-        <div
-          class={`relative rounded-2xl flex flex-col transition-all duration-300 hover:-translate-y-1 ${
-            tarifa.destacado
-              ? "bg-gradient-to-br from-[#486d21] to-[#2d4012] shadow-2xl shadow-[#486d21]/30 border-0 ring-2 ring-[#84b84b]"
-              : "bg-white border border-gray-100 shadow-sm hover:shadow-lg"
-          }`}
-          data-aos="fade-up"
-          data-aos-delay={i * 100}
-        >
-          {tarifa.badge && (
-            <div class={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
-              tarifa.destacado
-                ? "bg-[#84b84b] text-white"
-                : "bg-[#2d4012] text-white"
-            }`}>
-              {tarifa.badge}
-            </div>
-          )}
+					<h3 class="text-lg mb-3">{t.servicio}</h3>
 
-          <div class="p-7 flex flex-col flex-1">
-            <!-- Nombre del plan -->
-            <h3 class={`text-lg font-bold mb-3 ${tarifa.destacado ? "text-white" : "text-[#2d4012]"}`}>
-              {tarifa.servicio}
-            </h3>
+					<div class="mb-5">
+						<div class="font-serif text-2xl font-semibold leading-tight text-brand-700">{t.precio}</div>
+						{t.moneda && <div class="text-xs font-medium text-muted mt-0.5">{t.moneda}</div>}
+					</div>
 
-            <!-- Precio -->
-            <div class="mb-5">
-              <div class={`text-2xl font-extrabold leading-tight ${tarifa.destacado ? "text-white" : "text-[#486d21]"}`}>
-                {tarifa.precio}
-              </div>
-              {tarifa.moneda && (
-                <div class={`text-xs font-medium mt-0.5 ${tarifa.destacado ? "text-[#cbdbba]" : "text-gray-400"}`}>
-                  {tarifa.moneda}
-                </div>
-              )}
-            </div>
+					<p class="text-muted text-sm leading-relaxed flex-1 mb-6">{t.descripcion}</p>
 
-            <!-- Descripción -->
-            <p class={`text-sm leading-relaxed flex-1 mb-6 ${tarifa.destacado ? "text-white/80" : "text-gray-500"}`}>
-              {tarifa.descripcion}
-            </p>
+					<div class="w-full h-px bg-border mb-6"></div>
 
-            <!-- Separador -->
-            <div class={`w-full h-px mb-6 ${tarifa.destacado ? "bg-white/20" : "bg-gray-100"}`}></div>
+					<a
+						href={waLink(t.whatsapp)}
+						target="_blank"
+						rel="noopener noreferrer"
+						class:list={[
+							'inline-flex items-center justify-center gap-2 w-full min-h-[44px] px-5 rounded-full font-semibold text-sm transition-all duration-300',
+							t.destacado
+								? 'bg-brand-500 text-white shadow-soft hover:bg-brand-600 hover:shadow-lift'
+								: 'border border-brand-500 text-brand-700 hover:bg-brand-500 hover:text-white',
+						]}
+					>
+						<WaIcon class="w-4 h-4" /> Consultar precio
+					</a>
+				</div>
+			))}
+		</div>
 
-            <!-- CTA -->
-            <a
-              href={`https://api.whatsapp.com/send?phone=573054188289&text=${encodeURIComponent(tarifa.whatsapp)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class={`flex items-center justify-center gap-2 w-full py-3 px-5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                tarifa.destacado
-                  ? "bg-white text-[#486d21] hover:bg-[#84b84b] hover:text-white"
-                  : "bg-[#f3f3f3] text-[#486d21] border border-[#cbdbba] hover:bg-[#486d21] hover:text-white hover:border-[#486d21]"
-              }`}
-            >
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-              Consultar precio
-            </a>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    <!-- Nota de pie -->
-    <p class="text-center text-sm text-gray-400 mt-10" data-aos="fade-up">
-      Los precios pueden variar según la complejidad y el alcance de cada caso.
-      <a href="https://wa.me/573054188289" target="_blank" rel="noopener noreferrer" class="text-[#486d21] font-medium hover:underline ml-1">
-        Contáctenos para una cotización personalizada →
-      </a>
-    </p>
-  </div>
+		<p class="reveal text-center text-sm text-muted max-w-2xl">
+			Los precios pueden variar según la complejidad y el alcance de cada caso.
+			<a href={waLink('Hola, quisiera una cotización personalizada.')} target="_blank" rel="noopener noreferrer"
+				class="inline-flex items-center gap-1 text-brand-600 font-medium hover:text-brand-700 ml-1">
+				Contáctenos para una cotización personalizada
+				<Icon name="lucide:arrow-right" class="w-3.5 h-3.5" />
+			</a>
+		</p>
+	</div>
 </section>

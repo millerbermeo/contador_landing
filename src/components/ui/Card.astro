@@ -1,0 +1,23 @@
+---
+/**
+ * Tarjeta base del sistema de diseño.
+ * - Fondo blanco, borde 1px sutil, radio coherente, sombra difusa.
+ * - hover (por defecto): lift suave + el borde se ilumina en lima.
+ */
+interface Props {
+	class?: string;
+	hover?: boolean;
+	as?: string;
+}
+
+const { class: cls = '', hover = true, as = 'div' } = Astro.props;
+const Tag = as as any;
+
+const hoverCls = hover
+	? 'transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent'
+	: '';
+---
+
+<Tag class={`bg-surface border border-border rounded-card shadow-soft ${hoverCls} ${cls}`}>
+	<slot />
+</Tag>
