@@ -1,0 +1,149 @@
+---
+import { Icon } from 'astro-icon/components';
+import WaIcon from './ui/WaIcon.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import CtaFinal from './CtaFinal.astro';
+import SectionHeader from './ui/SectionHeader.astro';
+import { waLink, SITE } from '../data/site';
+import { serviceSchema } from '../data/schema';
+import type { Service } from '../data/services';
+
+interface Props { service: Service }
+
+const { service: s } = Astro.props;
+---
+
+<Breadcrumbs crumbs={[
+  { label: 'Inicio', href: '/' },
+  { label: 'Servicios', href: '/servicios/' },
+  { label: s.title },
+]} />
+
+<section class="section pt-0">
+  <div class="container-x">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-start gap-6 mb-6">
+        <div class="w-16 h-16 rounded-2xl bg-accent-soft grid place-items-center shrink-0">
+          <Icon name={s.icon} class="w-8 h-8 text-brand-500" />
+        </div>
+        <div>
+          <span class="eyebrow block mb-1">Servicio</span>
+          <h1 class="text-3xl md:text-4xl">{s.title}</h1>
+        </div>
+      </div>
+
+      <p class="text-muted text-lg leading-relaxed mb-8">{s.heroDescription}</p>
+
+      <div class="flex flex-wrap gap-3 mb-10">
+        <a href={waLink(`Hola, me gustaría recibir información sobre ${s.title}.`)} target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
+          <WaIcon class="w-4 h-4" /> Solicitar {s.shortTitle}
+        </a>
+        <a href="/contacto/"
+          class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full border border-brand-500 text-brand-700 font-semibold text-sm hover:bg-brand-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300">
+          <Icon name="lucide:mail" class="w-4 h-4" /> Otros medios de contacto
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <div class="bg-surface rounded-card border border-border shadow-soft p-7">
+          <h2 class="text-xl mb-5 flex items-center gap-2">
+            <Icon name="lucide:check-circle" class="w-5 h-5 text-brand-500" />
+            ¿Qué incluye?
+          </h2>
+          <ul class="space-y-3">
+            {s.features.map((f) => (
+              <li class="flex items-start gap-2.5 text-muted text-sm">
+                <Icon name="lucide:check" class="w-4 h-4 text-brand-500 mt-0.5 shrink-0" />
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="bg-surface rounded-card border border-border shadow-soft p-7">
+          <h2 class="text-xl mb-5 flex items-center gap-2">
+            <Icon name="lucide:zap" class="w-5 h-5 text-amber-500" />
+            Beneficios
+          </h2>
+          <ul class="space-y-3">
+            {s.benefits.map((b) => (
+              <li class="flex items-start gap-2.5 text-muted text-sm">
+                <Icon name="lucide:trending-up" class="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-brand-50/50 rounded-card border border-border shadow-soft p-7 mb-12">
+        <h2 class="text-xl mb-5 flex items-center gap-2">
+          <Icon name="lucide:users" class="w-5 h-5 text-brand-500" />
+          ¿Para quién es este servicio?
+        </h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+          {s.who.map((w) => (
+            <div class="flex items-center gap-3 bg-surface rounded-xl p-3 border border-border/50">
+              <div class="w-8 h-8 rounded-lg bg-accent-soft grid place-items-center shrink-0">
+                <Icon name="lucide:user-check" class="w-4 h-4 text-brand-500" />
+              </div>
+              <span class="text-sm text-ink font-medium">{w}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {s.faq.length > 0 && (
+        <div class="mb-12">
+          <h2 class="text-xl mb-5">Preguntas frecuentes sobre {s.title.toLowerCase()}</h2>
+          <div class="space-y-2">
+            {s.faq.map((item) => (
+              <div class="faq-item bg-surface border border-border rounded-2xl overflow-hidden">
+                <button
+                  class="accordion w-full flex justify-between items-center gap-4 px-5 py-4 text-left font-semibold text-ink hover:text-brand-700 transition-colors duration-200"
+                  aria-expanded="false"
+                >
+                  <span class="text-sm leading-snug">{item.q}</span>
+                  <span class="toggle-icon shrink-0 w-8 h-8 rounded-full bg-accent-soft border border-brand-200 grid place-items-center text-brand-600 transition-all duration-300">
+                    <Icon name="lucide:plus" class="w-4 h-4" />
+                  </span>
+                </button>
+                <div role="region" class="panel">
+                  <p class="px-5 pb-5 text-muted text-sm leading-relaxed border-t border-border pt-4">{item.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div class="bg-brand-dark rounded-card p-8 text-center text-white">
+        <h2 class="text-white text-2xl mb-3">¿Listo para empezar?</h2>
+        <p class="text-white/70 mb-6 max-w-lg mx-auto">Contáctenos hoy y reciba una asesoría personalizada sin compromiso.</p>
+        <a href={waLink(`Hola, quiero contratar el servicio de ${s.title}.`)} target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 min-h-[48px] px-8 rounded-full bg-accent text-brand-900 font-bold shadow-lift hover:bg-white hover:-translate-y-0.5 transition-all duration-300">
+          <WaIcon class="w-5 h-5" /> Contratar {s.shortTitle}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.accordion').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const panel = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !isOpen);
+      if (!isOpen) {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        icon.innerHTML = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+      } else {
+        panel.style.maxHeight = '0';
+        icon.innerHTML = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+      }
+    });
+  });
+</script>

@@ -1,0 +1,173 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Whatsapp from '../components/Whatsapp.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import WaIcon from '../components/ui/WaIcon.astro';
+import { Icon } from 'astro-icon/components';
+import { waLink } from '../data/site';
+import { faqSchema } from '../data/schema';
+
+const faqCategories = [
+  {
+    category: 'Declaración de Renta',
+    icon: 'lucide:file-text',
+    questions: [
+      { q: '¿Cuándo debo presentar mi declaración de renta?', a: 'Depende de su NIT y el calendario tributario que publica la DIAN cada año. Normalmente las fechas para personas naturales van de agosto a octubre. Le notificamos con anticipación para que no pierda ningún plazo.' },
+      { q: '¿Qué gastos puedo deducir en mi declaración de renta?', a: 'Puede deducir salud prepagada, educación del contribuyente y dependientes, intereses de créditos de vivienda, donaciones a entidades aprobadas, y dependientes económicos. Cada caso es único y lo revisamos para maximizar sus deducciones.' },
+      { q: '¿Qué pasa si no presento mi declaración de renta a tiempo?', a: 'La DIAN impone sanciones que van desde el 5% del impuesto a cargo hasta el 10% si hay retraso extremo. Además, puede generar procesos de cobro coactivo. Lo mejor es declarar a tiempo con nosotros.' },
+      { q: '¿Estoy obligado a declarar renta?', a: 'En 2025, debe declarar si sus ingresos brutos superan 4.900 UVT, si tiene patrimonio bruto superior a 4.500 UVT, o si realizó consumos con tarjeta de crédito superiores a 4.900 UVT. Le confirmamos si está obligado.' },
+    ],
+  },
+  {
+    category: 'Facturación Electrónica',
+    icon: 'lucide:file-digit',
+    questions: [
+      { q: '¿Es obligatoria la facturación electrónica para mi negocio?', a: 'Sí, la DIAN ha establecido la obligatoriedad para la mayoría de contribuyentes en Colombia. Si usted emite facturas, debe hacerlo electrónicamente. Le ayudamos a implementarlo.' },
+      { q: '¿Qué necesito para empezar a facturar electrónicamente?', a: 'Necesita RUT actualizado, firma electrónica, un software autorizado por la DIAN y habilitar el sistema de facturación. Nosotros le guiamos en todo el proceso.' },
+      { q: '¿Puedo facturar desde mi celular o tableta?', a: 'Sí, existen aplicaciones móviles autorizadas por la DIAN. Le recomendamos la mejor opción según su volumen de facturación y tipo de negocio.' },
+    ],
+  },
+  {
+    category: 'Asesoría Contable',
+    icon: 'lucide:book-open',
+    questions: [
+      { q: '¿Qué tipo de contabilidad debo llevar según mi empresa?', a: 'Depende del tamaño: las grandes empresas aplican NIIF plenas, las PYMES aplican NIIF para PYMES, y los microempresarios pueden optar por contabilidad simplificada. Analizamos su caso.' },
+      { q: '¿Cada cuánto debo presentar mis estados financieros?', a: 'Internamente recomendamos revisión mensual para toma de decisiones. Legalmente, los estados financieros de fin de ejercicio deben presentarse anualmente ante la Superintendencia de Sociedades.' },
+      { q: '¿Puedo llevar mi contabilidad yo mismo?', a: 'Técnicamente sí, pero el riesgo de errores y sanciones es alto. Un contador profesional garantiza cumplimiento y optimización fiscal que supera el costo del servicio.' },
+    ],
+  },
+  {
+    category: 'Creación de Empresas',
+    icon: 'lucide:building-2',
+    questions: [
+      { q: '¿Cuánto cuesta crear una empresa en Colombia?', a: 'Los costos varían según el tipo societario y el capital. Incluye registro mercantil, escritura pública (si aplica) y formularios de registro. Le damos un presupuesto detallado sin compromiso.' },
+      { q: '¿Qué tipo de sociedad me conviene más?', a: 'La SAS (Sociedad por Acciones Simplificada) es la más popular por su flexibilidad, protección del patrimonio personal y facilidad de constitución. Pero analizamos su caso particular.' },
+      { q: '¿Puedo crear una empresa si soy extranjero?', a: 'Sí, los extranjeros pueden crear empresas en Colombia sin restricciones. Solo necesita cédula de extranjería o pasaporte. Le asesoramos en todo el proceso migratorio y societario.' },
+    ],
+  },
+  {
+    category: 'Consultoría Tributaria',
+    icon: 'lucide:scale',
+    questions: [
+      { q: '¿Qué diferencia hay entre Régimen Simple y Ordinario?', a: 'El Régimen Simple unifica varios impuestos en uno solo con tarifas preferenciales. El Ordinario separa renta, IVA e ICA. La mejor opción depende de sus ingresos y actividad económica.' },
+      { q: '¿Qué hago si recibo un requerimiento de la DIAN?', a: 'No lo ignore. Le representamos y respondemos dentro de los términos legales. Actuar rápido puede evitar sanciones mayores. Contáctenos de inmediato si recibe uno.' },
+      { q: '¿Cómo puedo reducir legalmente el pago de mis impuestos?', a: 'Mediante planeación tributaria: deducciones permitidas, elección del régimen adecuado, diferimiento de ingresos, y aprovechamiento de beneficios tributarios. Todo dentro del marco legal.' },
+    ],
+  },
+  {
+    category: 'Costos y Tarifas',
+    icon: 'lucide:dollar-sign',
+    questions: [
+      { q: '¿Cuánto cuesta una asesoría contable?', a: 'Desde $30.000 para consultas básicas hasta paquetes mensuales para empresas desde $300.000. El precio depende de la complejidad y volumen de trabajo.' },
+      { q: '¿Ofrecen servicios con facturación mensual?', a: 'Sí, tenemos planes de suscripción mensual para empresas que incluyen contabilidad recurrente, nómina y asesoría continua. Precios transparentes sin costos ocultos.' },
+      { q: '¿Tienen algún costo la primera consulta?', a: 'La primera asesoría es gratuita para conocer su caso y explicarle cómo podemos ayudarle. Sin compromiso.' },
+    ],
+  },
+];
+
+const allFaqs = faqCategories.flatMap((c) => c.questions);
+---
+
+<Layout
+  title="Preguntas Frecuentes | BP Asesorías Contables"
+  description="Resuelva sus dudas sobre contabilidad, declaración de renta, facturación electrónica, creación de empresas y consultoría tributaria en Colombia."
+  schema={faqSchema(allFaqs)}
+>
+  <Navbar activePath="/preguntas-frecuentes/" />
+  <Whatsapp />
+
+  <main>
+    <div class="container-x pt-8 pb-4">
+      <Breadcrumbs crumbs={[
+        { label: 'Inicio', href: '/' },
+        { label: 'Preguntas Frecuentes' },
+      ]} />
+    </div>
+
+    <section class="section pt-0">
+      <div class="container-x">
+        <div class="max-w-3xl mx-auto">
+          <SectionHeader
+            eyebrow="FAQ"
+            title="Preguntas Frecuentes"
+            subtitle="Encuentre respuestas a las dudas más comunes sobre nuestros servicios contables y fiscales."
+          />
+
+          <div class="mt-10 space-y-8 faq-page">
+            {faqCategories.map((cat) => (
+              <div class="reveal">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center">
+                    <Icon name={cat.icon} class="w-5 h-5 text-brand-500" />
+                  </div>
+                  <h2 class="text-xl">{cat.category}</h2>
+                </div>
+                <div class="space-y-2">
+                  {cat.questions.map((faq, i) => (
+                    <div class="faq-item bg-surface border border-border rounded-2xl overflow-hidden transition-colors duration-200">
+                      <button
+                        class="accordion w-full flex justify-between items-center gap-4 px-5 py-4 text-left font-semibold text-ink hover:text-brand-700 transition-colors duration-200"
+                        aria-expanded="false"
+                        aria-controls={`faq-panel-${faq.q.slice(0, 20)}`}
+                      >
+                        <span class="text-sm lg:text-base leading-snug">{faq.q}</span>
+                        <span class="toggle-icon shrink-0 w-8 h-8 rounded-full bg-accent-soft border border-brand-200 grid place-items-center text-brand-600 transition-all duration-300">
+                          <Icon name="lucide:plus" class="w-4 h-4" />
+                        </span>
+                      </button>
+                      <div id={`faq-panel-${i}`} role="region" class="panel">
+                        <div class="overflow-hidden">
+                          <p class="px-5 pb-5 text-muted text-sm leading-relaxed border-t border-border pt-4">{faq.a}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-brand-50/40">
+      <div class="container-x text-center">
+        <div class="max-w-xl mx-auto">
+          <h2 class="text-2xl mb-3">¿No encontró lo que buscaba?</h2>
+          <p class="text-muted mb-6">Estamos listos para resolver sus dudas personalmente. Contáctenos sin compromiso.</p>
+          <a href={waLink('Hola, tengo una pregunta que no aparece en las FAQ.')} target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
+            <WaIcon class="w-4 h-4" /> Preguntar ahora
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <CtaFinal />
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  document.querySelectorAll('.accordion').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const panel = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      btn.setAttribute('aria-expanded', !isOpen);
+      if (!isOpen) {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        icon.innerHTML = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+      } else {
+        panel.style.maxHeight = '0';
+        icon.innerHTML = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
+      }
+    });
+  });
+</script>

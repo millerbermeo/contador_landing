@@ -7,9 +7,7 @@ import ServiceCard from '../components/ServiceCard.astro';
 import AuthorCard from '../components/AuthorCard.astro';
 import AboutMe from '../components/AboutMe.astro';
 import Tarifa from '../components/Tarifa.astro';
-import MenuAcordeon from '../components/MenuAcordeon.astro';
-import Articulos from '../components/Articulos.astro';
-import ImageCarousel from '../components/ImageCarousel.astro';
+import MenuAcordeon, { faqs } from '../components/MenuAcordeon.astro';
 import CtaFinal from '../components/CtaFinal.astro';
 import Footer from '../components/Footer.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
@@ -17,89 +15,107 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { services } from '../utils/Services.astro';
 import { waLink } from '../data/site';
+import { accountingServiceSchema, faqSchema } from '../data/schema';
 import slide3 from '../assets/slide3.jpeg';
 import slide1 from '../assets/slide1-min.jpg';
 import slide2 from '../assets/slide2-min.jpg';
 import slide4 from '../assets/slide4.jpeg';
 
 const faqGallery = [
-	{ src: slide3, alt: 'Servicios contables profesionales' },
-	{ src: slide1, alt: 'Asesoría financiera empresarial' },
-	{ src: slide2, alt: 'Contador público certificado' },
-	{ src: slide4, alt: 'Gestión empresarial y contable' },
+  { src: slide3, alt: 'Servicios contables profesionales' },
+  { src: slide1, alt: 'Asesoría financiera empresarial' },
+  { src: slide2, alt: 'Contador público certificado' },
+  { src: slide4, alt: 'Gestión empresarial y contable' },
 ];
 ---
 
-<Layout>
-	<Navbar />
-	<Whatsapp />
+<Layout
+  title="Líderes en Contabilidad | Asesoría Contable y Fiscal en Colombia"
+  description="Contador Público certificado en Colombia. Asesoría contable, tributaria y fiscal para empresas y personas naturales. Cumplimiento legal, optimización fiscal y soporte personalizado en Florencia, Caquetá."
+  schema={accountingServiceSchema()}
+>
+  <Navbar activePath="/" />
+  <Whatsapp />
 
-	<main>
-		<Home />
+  <main>
+    <Home />
 
-		<!-- Servicios -->
-		<section id="servicios" class="section bg-bg scroll-mt-20">
-			<div class="container-x flex flex-col items-center gap-14">
-				<SectionHeader
-					eyebrow="Portafolio"
-					title="Servicios Profesionales"
-					subtitle="Soluciones contables y fiscales adaptadas a las necesidades de su empresa."
-				/>
-				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-					{services.map((service, i) => (
-						<ServiceCard
-							icon={service.icon}
-							title={service.title}
-							items={service.items}
-							whatsappMessage={service.whatsappMessage}
-							delay={(i % 3) * 100}
-						/>
-					))}
-				</div>
-			</div>
-		</section>
+    <section id="servicios" class="section bg-bg scroll-mt-20">
+      <div class="container-x flex flex-col items-center gap-14">
+        <SectionHeader
+          eyebrow="Portafolio"
+          title="Servicios Profesionales"
+          subtitle="Soluciones contables y fiscales adaptadas a las necesidades de su empresa."
+        />
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+          {services.map((service, i) => (
+            <ServiceCard
+              icon={service.icon}
+              title={service.title}
+              items={service.items}
+              whatsappMessage={service.whatsappMessage}
+              href={`/servicios/${service.slug}/`}
+              delay={(i % 3) * 100}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
 
-		<AuthorCard />
-		<AboutMe />
-		<Tarifa />
+    <AuthorCard />
+    <AboutMe />
+    <Tarifa />
 
-		<!-- FAQ + galería -->
-		<section id="faq" class="section bg-brand-50/40 scroll-mt-20">
-			<div class="container-x flex flex-col items-center gap-14">
-				<SectionHeader
-					eyebrow="Preguntas Frecuentes"
-					title="¿Tiene dudas?"
-					subtitle="Resolvemos sus inquietudes sobre contabilidad y finanzas."
-				/>
+    <section id="faq" class="section bg-brand-50/40 scroll-mt-20">
+      <div class="container-x flex flex-col items-center gap-14">
+        <SectionHeader
+          eyebrow="Preguntas Frecuentes"
+          title="¿Tiene dudas?"
+          subtitle="Resolvemos sus inquietudes sobre contabilidad y finanzas."
+        />
 
-				<div class="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start w-full">
-					<div class="reveal">
-						<MenuAcordeon />
-					</div>
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start w-full">
+          <div class="reveal">
+            <MenuAcordeon />
+            <script type="application/ld+json" is:inline set:html={JSON.stringify({
+              '@context': 'https://schema.org',
+              ...faqSchema(faqs.map((f) => ({ q: f.question, a: f.answer }))),
+            })} />
+          </div>
 
-					<div class="reveal flex flex-col gap-5" data-reveal-delay="120">
-						<div class="grid grid-cols-2 gap-4">
-							{faqGallery.map((img) => (
-								<Image src={img.src} alt={img.alt} width={300} height={300} loading="lazy"
-									class="w-full aspect-square object-cover rounded-2xl shadow-soft border border-border" />
-							))}
-						</div>
-						<div class="rounded-card bg-surface border border-border shadow-soft p-6 text-center flex flex-col items-center gap-3">
-							<p class="text-ink font-medium">¿Más preguntas sobre tarifas o servicios?</p>
-							<a href={waLink('Hola, tengo algunas preguntas sobre sus servicios.')} target="_blank" rel="noopener noreferrer"
-								class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:-translate-y-0.5 transition-all duration-300">
-								Contáctenos <Icon name="lucide:arrow-right" class="w-4 h-4" />
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+          <div class="reveal flex flex-col gap-5" data-reveal-delay="120">
+            <div class="faq-gallery flex sm:grid sm:grid-cols-2 gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory">
+              {faqGallery.map((img) => (
+                <div class="w-full shrink-0 snap-center">
+                  <Image src={img.src} alt={img.alt} width={300} height={300} format="webp" loading="lazy"
+                    class="w-full aspect-square object-cover rounded-2xl shadow-soft border border-border" />
+                </div>
+              ))}
+            </div>
+            <div class="rounded-card bg-surface border border-border shadow-soft p-6 text-center flex flex-col items-center gap-3">
+              <p class="text-ink font-medium">¿Más preguntas sobre tarifas o servicios?</p>
+              <a href={waLink('Hola, tengo algunas preguntas sobre sus servicios.')} target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:-translate-y-0.5 transition-all duration-300">
+                Contáctenos <Icon name="lucide:arrow-right" class="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-		<Articulos />
-		<ImageCarousel />
-		<CtaFinal />
-	</main>
+    <CtaFinal />
+  </main>
 
-	<Footer />
+  <Footer />
 </Layout>
+
+<style>
+  .faq-gallery {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .faq-gallery::-webkit-scrollbar {
+    display: none;
+  }
+</style>
