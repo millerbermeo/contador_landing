@@ -30,10 +30,20 @@ const circ = 2 * Math.PI * r;
 </div>
 
 <script>
-	import { CountUp } from 'countup.js';
-
 	const rings = document.querySelectorAll<HTMLElement>('.stat-ring');
 	const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	function countUp(el: HTMLElement, value: number, duration: number) {
+		const start = performance.now();
+		const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+
+		function tick(now: number) {
+			const progress = Math.min((now - start) / duration, 1);
+			el.textContent = `${Math.round(value * ease(progress))}%`;
+			if (progress < 1) requestAnimationFrame(tick);
+		}
+		requestAnimationFrame(tick);
+	}
 
 	function animate(el: HTMLElement) {
 		const value = Number(el.dataset.value || 0);
@@ -43,7 +53,7 @@ const circ = 2 * Math.PI * r;
 		if (progress) progress.style.strokeDashoffset = String(circ * (1 - value / 100));
 		if (number) {
 			if (reduce) { number.textContent = `${value}%`; return; }
-			new CountUp(number, value, { suffix: '%', duration: 1.6 }).start();
+			countUp(number, value, 1600);
 		}
 	}
 

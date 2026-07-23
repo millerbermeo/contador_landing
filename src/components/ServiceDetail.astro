@@ -5,7 +5,7 @@ import Breadcrumbs from './Breadcrumbs.astro';
 import CtaFinal from './CtaFinal.astro';
 import SectionHeader from './ui/SectionHeader.astro';
 import { waLink, SITE } from '../data/site';
-import { serviceSchema } from '../data/schema';
+import { faqSchema } from '../data/schema';
 import type { Service } from '../data/services';
 
 interface Props { service: Service }
@@ -96,6 +96,10 @@ const { service: s } = Astro.props;
 
       {s.faq.length > 0 && (
         <div class="mb-12">
+          <script type="application/ld+json" is:inline set:html={JSON.stringify({
+            '@context': 'https://schema.org',
+            ...faqSchema(s.faq),
+          })} />
           <h2 class="text-xl mb-5">Preguntas frecuentes sobre {s.title.toLowerCase()}</h2>
           <div class="space-y-2">
             {s.faq.map((item) => (
