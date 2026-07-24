@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Whatsapp from '../../components/Whatsapp.astro';
+import Footer from '../../components/Footer.astro';
+import BlogDetail from '../../components/BlogDetail.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import { blogPosts } from '../../data/blog';
+import { blogPostSchema } from '../../data/schema';
+
+const post = blogPosts.find((p) => p.slug === 'cuanto-cuesta-contratar-un-contador')!;
+---
+
+<Layout
+  title={post.title}
+  description={post.metaDescription}
+  type="article"
+  publishedTime={post.date}
+  schema={blogPostSchema(post)}
+>
+  <Navbar activePath="/blog/" />
+  <Whatsapp />
+
+  <main>
+    <div class="container-x pt-8 pb-4">
+      <BlogDetail post={post} />
+    </div>
+    <CtaFinal />
+  </main>
+
+  <Footer />
+</Layout>

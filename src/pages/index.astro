@@ -13,8 +13,28 @@ import Footer from '../components/Footer.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
-import { services } from '../utils/Services.astro';
 import { waLink } from '../data/site';
+
+const serviceGroups = [
+  {
+    icon: 'lucide:building-2',
+    title: 'Empresas',
+    items: ['Contabilidad', 'Nómina', 'Impuestos', 'Facturación electrónica', 'Consultoría financiera'],
+    whatsappMessage: 'Hola, me gustaría información sobre servicios contables para empresas.',
+  },
+  {
+    icon: 'lucide:rocket',
+    title: 'Emprendedores',
+    items: ['Creación de empresas', 'RUT', 'Facturación electrónica', 'Organización contable inicial'],
+    whatsappMessage: 'Hola, estoy emprendiendo y necesito asesoría contable.',
+  },
+  {
+    icon: 'lucide:user-check',
+    title: 'Personas naturales',
+    items: ['Declaración de renta', 'RUT', 'Obligaciones tributarias', 'Orientación financiera'],
+    whatsappMessage: 'Hola, soy persona natural y necesito asesoría contable.',
+  },
+];
 import { accountingServiceSchema, faqSchema } from '../data/schema';
 import slide3 from '../assets/slide3.jpeg';
 import slide1 from '../assets/slide1-min.jpg';
@@ -47,15 +67,15 @@ const faqGallery = [
           title="Servicios Profesionales"
           subtitle="Soluciones contables y fiscales adaptadas a las necesidades de su empresa."
         />
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-          {services.map((service, i) => (
+        <div class="grid md:grid-cols-3 gap-6 w-full">
+          {serviceGroups.map((group, i) => (
             <ServiceCard
-              icon={service.icon}
-              title={service.title}
-              items={service.items}
-              whatsappMessage={service.whatsappMessage}
-              href={`/servicios/${service.slug}/`}
-              delay={(i % 3) * 100}
+              icon={group.icon}
+              title={group.title}
+              items={group.items}
+              whatsappMessage={group.whatsappMessage}
+              href="/servicios/"
+              delay={i * 100}
             />
           ))}
         </div>

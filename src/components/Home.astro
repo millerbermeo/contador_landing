@@ -32,17 +32,18 @@ const stats = [
 				</Badge>
 
 				<h1 class="reveal" data-reveal-delay="60">
-					Líderes en <span class="text-brand-700">contabilidad</span>, con servicios financieros exclusivos para
-					<span class="relative inline-block text-brand-500">
-						personas y empresas
+					Contabilidad 
+					<span class="relative ml-3 inline-block text-brand-500">
+						clara
 						<svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 8" fill="none" aria-hidden="true">
 							<path class="hero-underline" d="M2 6 Q75 2 150 5 Q225 8 298 4" stroke="#8CC63F" stroke-width="3" stroke-linecap="round" />
 						</svg>
-					</span>.
+					</span>
+					para tomar <span class="text-brand-700">mejores decisiones</span>.
 				</h1>
 
 				<p class="reveal text-muted text-base sm:text-lg leading-relaxed max-w-xl" data-reveal-delay="120">
-					Aseguramos cumplimiento y optimización para llevar su empresa al siguiente nivel con transparencia y profesionalismo.
+					Acompaño a empresas, emprendedores y personas naturales en la organización de su información contable, el cumplimiento de sus obligaciones tributarias y la gestión de sus finanzas.
 				</p>
 
 				<div class="reveal flex flex-wrap justify-center w-full sm:w-auto sm:justify-start gap-3" data-reveal-delay="180">
@@ -58,7 +59,7 @@ const stats = [
 				</div>
 
 				<!-- Stats de anillo -->
-				<div class="reveal flex flex-wrap gap-6 sm:gap-8 mt-2" data-reveal-delay="240">
+				<div class="reveal flex flex-wrap justify-center w-full sm:w-auto sm:justify-start gap-6 sm:gap-8 mt-2" data-reveal-delay="240">
 					{stats.map((s) => <Loader percentage={s.percentage} serviceName={s.serviceName} />)}
 				</div>
 			</div>

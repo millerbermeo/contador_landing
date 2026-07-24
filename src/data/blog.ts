@@ -270,4 +270,261 @@ Son gastos personales que la ley permite restar de sus ingresos brutos para calc
 Cada caso es único. En BP Asesorías Contables revisamos su situación particular para identificar todas las deducciones aplicables y asegurar que su declaración sea correcta y optimizada.
     `,
   },
+  {
+    slug: 'quienes-deben-declarar-renta-colombia',
+    title: '¿Quiénes Deben Declarar Renta en Colombia?',
+    description: 'Conozca los topes de ingresos, patrimonio y consumos que determinan si usted está obligado a declarar renta en Colombia.',
+    metaDescription: '¿Quién debe declarar renta en Colombia? Topes de ingresos, patrimonio, consignaciones y consumos con tarjeta de crédito que generan la obligación de declarar.',
+    date: '2025-07-10',
+    category: 'Declaración de Renta',
+    author: 'Brian Pedraza Osorio',
+    content: `
+No todas las personas están obligadas a presentar declaración de renta. La obligación depende de varios topes que la DIAN actualiza cada año en UVT (Unidad de Valor Tributario).
+
+## Condiciones que generan la obligación de declarar
+
+Debe declarar renta si cumple al menos una de estas condiciones durante el año gravable:
+
+- **Ingresos brutos** superiores a 1.400 UVT
+- **Patrimonio bruto** a 31 de diciembre superior a 4.500 UVT
+- **Consumos con tarjeta de crédito** superiores a 1.400 UVT
+- **Compras y consumos totales** superiores a 1.400 UVT
+- **Consignaciones, depósitos o inversiones bancarias** superiores a 1.400 UVT
+- Ser responsable del IVA al cierre del año gravable
+
+## ¿Qué pasa si no estoy obligado pero me retuvieron impuestos?
+
+Si le practicaron retenciones en la fuente y no está obligado a declarar, puede presentar la declaración de forma voluntaria para solicitar la devolución de esos valores.
+
+## No declarar cuando se está obligado tiene consecuencias
+
+Omitir la declaración de renta estando obligado genera sanciones económicas y puede derivar en procesos de fiscalización por parte de la DIAN.
+
+## ¿Cómo saber si estoy obligado?
+
+Cada caso depende de sus ingresos, patrimonio y movimientos financieros del año. En BP Asesorías Contables revisamos su información y le confirmamos si debe declarar y bajo qué condiciones.
+    `,
+  },
+  {
+    slug: 'documentos-necesarios-declarar-renta',
+    title: '¿Qué Documentos Necesito para Declarar Renta?',
+    description: 'Lista de documentos y soportes que debe reunir antes de presentar su declaración de renta como persona natural.',
+    metaDescription: 'Documentos para declarar renta en Colombia: certificados de ingresos, extractos bancarios, soportes de deducciones y más. Prepare su declaración sin contratiempos.',
+    date: '2025-07-03',
+    category: 'Declaración de Renta',
+    author: 'Brian Pedraza Osorio',
+    content: `
+Reunir los documentos correctos antes de declarar renta evita errores, retrasos y omisiones que pueden generar inconsistencias frente a la DIAN.
+
+## Documentos de identificación y acceso
+
+- Cédula de ciudadanía o extranjería
+- RUT actualizado
+- Clave o certificado para ingresar al portal de la DIAN
+
+## Soportes de ingresos
+
+- Certificados de ingresos y retenciones expedidos por el empleador
+- Certificados de honorarios o servicios prestados como independiente
+- Extractos bancarios del año gravable
+- Certificados de rendimientos financieros
+
+## Soportes de patrimonio
+
+- Certificados de saldos de cuentas bancarias y de inversión
+- Certificado de tradición de bienes inmuebles
+- Tarjeta de propiedad de vehículos
+- Extractos de fondos de pensiones voluntarias, si aplica
+
+## Soportes de posibles deducciones
+
+- Certificado de pagos a medicina prepagada
+- Certificados de intereses de crédito de vivienda
+- Soportes de dependientes económicos
+- Certificados de donaciones
+
+## Un buen orden documental facilita el proceso
+
+Entre más organizada esté su información, más preciso será el resultado de su declaración. En BP Asesorías Contables le ayudamos a identificar qué documentos aplican a su caso específico.
+    `,
+  },
+  {
+    slug: 'como-saber-si-debo-actualizar-rut',
+    title: '¿Cómo Saber si Debo Actualizar el RUT?',
+    description: 'Situaciones que obligan a actualizar el RUT ante la DIAN y qué pasa si no lo hace a tiempo.',
+    metaDescription: 'Cuándo actualizar el RUT en Colombia: cambio de actividad económica, dirección, responsabilidades tributarias o régimen. Evite sanciones por RUT desactualizado.',
+    date: '2025-06-26',
+    category: 'Asesoría Contable',
+    author: 'Brian Pedraza Osorio',
+    content: `
+El RUT (Registro Único Tributario) debe reflejar siempre la situación real del contribuyente. Mantenerlo desactualizado puede generar inconvenientes al facturar, contratar o presentar declaraciones.
+
+## Situaciones que obligan a actualizar el RUT
+
+- Cambio de actividad económica principal o secundaria
+- Cambio de dirección de notificación o de establecimiento
+- Cambio de responsabilidades tributarias (por ejemplo, quedar obligado al IVA)
+- Cambio de régimen (Ordinario a Régimen Simple o viceversa)
+- Cambio de datos de contacto: correo electrónico o número telefónico
+- Vinculación o desvinculación de un representante legal o contador
+
+## ¿Cómo saber si el mío está desactualizado?
+
+Revise su RUT vigente y compárelo con su actividad actual: si factura algo distinto a lo registrado, si cambió de domicilio, o si su régimen tributario ya no corresponde a su realidad, es momento de actualizarlo.
+
+## ¿Qué pasa si no lo actualizo?
+
+Puede generar inconsistencias en la facturación electrónica, dificultades para contratar con empresas o entidades públicas, y observaciones por parte de la DIAN en procesos de fiscalización.
+
+## ¿Cómo actualizarlo?
+
+El trámite se realiza virtualmente ante la DIAN, aunque algunos cambios requieren presencialidad según el caso. En BP Asesorías Contables revisamos su RUT y gestionamos la actualización que corresponda.
+    `,
+  },
+  {
+    slug: 'que-es-la-facturacion-electronica',
+    title: '¿Qué es la Facturación Electrónica?',
+    description: 'Explicación clara de qué es la facturación electrónica, cómo funciona y por qué es obligatoria en Colombia.',
+    metaDescription: '¿Qué es la facturación electrónica en Colombia? Cómo funciona, quién debe implementarla y qué requisitos exige la DIAN.',
+    date: '2025-06-19',
+    category: 'Facturación Electrónica',
+    author: 'Brian Pedraza Osorio',
+    content: `
+La facturación electrónica es el documento que soporta las operaciones de venta de bienes o prestación de servicios, generado, validado y transmitido de forma digital ante la DIAN.
+
+## ¿En qué se diferencia de una factura física?
+
+A diferencia de la factura en papel, la factura electrónica se genera en un formato de datos (XML), es validada previamente por la DIAN antes de entregarse al cliente, y queda registrada electrónicamente para efectos de control tributario.
+
+## ¿Cómo funciona el proceso?
+
+1. El negocio genera la factura en un software autorizado
+2. El sistema envía la factura a la DIAN para su validación
+3. La DIAN valida y devuelve la factura con un código único
+4. La factura validada se entrega al cliente en su representación gráfica (PDF)
+
+## ¿Quién debe facturar electrónicamente?
+
+La obligación cubre progresivamente a la mayoría de contribuyentes que venden bienes o prestan servicios en Colombia, incluidas personas naturales con actividad comercial y profesionales independientes.
+
+## Beneficios de facturar electrónicamente
+
+- Cumplimiento automático ante la DIAN
+- Reducción de errores y pérdida de documentos
+- Mayor control de ingresos para su contabilidad
+- Agilidad en procesos de auditoría o revisión
+
+## ¿Necesita implementarla?
+
+En BP Asesorías Contables le ayudamos a habilitar su sistema de facturación electrónica ante la DIAN y a elegir el software adecuado para su negocio.
+    `,
+  },
+  {
+    slug: 'cuanto-cuesta-contratar-un-contador',
+    title: '¿Cuánto Cuesta Contratar un Contador?',
+    description: 'Factores que determinan el costo de un servicio contable en Colombia y cómo elegir la mejor opción para su presupuesto.',
+    metaDescription: 'Cuánto cuesta contratar un contador en Colombia. Factores que influyen en el precio: tipo de servicio, tamaño de la empresa y frecuencia del trabajo.',
+    date: '2025-06-12',
+    category: 'Costos y Tarifas',
+    author: 'Brian Pedraza Osorio',
+    content: `
+El costo de un servicio contable varía según el tipo de cliente, la complejidad de sus operaciones y la frecuencia con la que necesita acompañamiento.
+
+## Factores que influyen en el precio
+
+- **Tipo de contribuyente**: persona natural o empresa
+- **Volumen de operaciones**: cantidad de facturas, movimientos y transacciones mensuales
+- **Tipo de servicio**: asesoría puntual, declaración de renta, o contabilidad mensual completa
+- **Régimen tributario**: el Régimen Simple, por ejemplo, suele requerir menos gestión que el Régimen Ordinario
+- **Obligaciones adicionales**: nómina, facturación electrónica, IVA, ICA
+
+## Modalidades de cobro más comunes
+
+- **Servicios puntuales**: consultas o trámites específicos, como una declaración de renta individual
+- **Honorarios mensuales fijos**: para empresas que requieren contabilidad continua
+- **Paquetes por volumen**: tarifas ajustadas según la cantidad de facturas o empleados
+
+## ¿Cómo elegir la mejor opción?
+
+Más que el precio más bajo, conviene evaluar la experiencia del contador, el cumplimiento de plazos y la calidad del acompañamiento. Un mal manejo contable puede costarle mucho más en sanciones.
+
+## Cotización personalizada
+
+En BP Asesorías Contables analizamos su caso particular y le entregamos una propuesta clara, sin costos ocultos, ajustada a lo que realmente necesita.
+    `,
+  },
+  {
+    slug: 'diferencia-entre-contador-y-revisor-fiscal',
+    title: '¿Qué Diferencia Hay Entre Contador y Revisor Fiscal?',
+    description: 'Entienda las diferencias de funciones, independencia y responsabilidades entre un contador y un revisor fiscal en Colombia.',
+    metaDescription: 'Diferencia entre contador y revisor fiscal en Colombia: funciones, independencia, obligatoriedad y responsabilidades de cada uno.',
+    date: '2025-06-05',
+    category: 'Asesoría Contable',
+    author: 'Brian Pedraza Osorio',
+    content: `
+Aunque ambos son profesionales contables, el contador y el revisor fiscal cumplen funciones distintas dentro de una empresa.
+
+## El contador
+
+Es el encargado de registrar, clasificar y organizar las operaciones económicas de la empresa: lleva la contabilidad, elabora los estados financieros, liquida impuestos y presenta las declaraciones ante la DIAN. Trabaja de manera cercana con la administración del negocio.
+
+## El revisor fiscal
+
+Es un profesional independiente de la administración cuya función es fiscalizar y dar fe pública sobre los estados financieros y el cumplimiento de las normas legales y estatutarias de la empresa. No participa en el registro contable: su rol es de control y auditoría.
+
+## Diferencias clave
+
+- **Independencia**: el revisor fiscal no puede tener vínculo laboral ni participar en la operación contable de la empresa; el contador sí forma parte de la gestión.
+- **Función**: el contador registra y prepara la información; el revisor fiscal la audita y certifica.
+- **Obligatoriedad**: no todas las empresas están obligadas a tener revisor fiscal, mientras que llevar contabilidad es una obligación general para las sociedades.
+
+## ¿Cuándo es obligatorio tener revisor fiscal?
+
+La ley colombiana exige revisor fiscal, entre otros casos, cuando los activos brutos o los ingresos de la empresa superan ciertos topes definidos legalmente, o cuando lo exigen los estatutos de la sociedad.
+
+## ¿Necesita definir su estructura contable?
+
+En BP Asesorías Contables le orientamos sobre si su empresa requiere revisor fiscal y le apoyamos en la gestión contable del día a día.
+    `,
+  },
+  {
+    slug: 'que-tener-en-cuenta-al-contratar-servicio-contable',
+    title: '¿Qué Debe Tener en Cuenta una Empresa al Contratar un Servicio Contable?',
+    description: 'Aspectos clave que toda empresa debe evaluar antes de contratar un contador o firma de contabilidad.',
+    metaDescription: 'Qué evaluar antes de contratar un servicio contable para su empresa: experiencia, alcance del servicio, comunicación y cumplimiento normativo.',
+    date: '2025-05-29',
+    category: 'Asesoría Contable',
+    author: 'Brian Pedraza Osorio',
+    content: `
+Elegir un servicio contable adecuado es una decisión que impacta directamente el cumplimiento normativo y la salud financiera de una empresa. Estos son los aspectos que conviene evaluar.
+
+## 1. Experiencia y formación profesional
+
+Verifique que el contador cuente con tarjeta profesional vigente y experiencia en el tipo de empresa o sector al que pertenece su negocio.
+
+## 2. Alcance real del servicio
+
+Defina con claridad qué incluye el servicio: contabilidad, declaraciones tributarias, nómina, facturación electrónica, o solo algunos de estos componentes. Un alcance mal definido genera vacíos y sobrecostos.
+
+## 3. Cumplimiento de plazos
+
+Un buen servicio contable garantiza que las obligaciones se presenten dentro de los plazos legales, evitando sanciones e intereses de mora.
+
+## 4. Comunicación y disponibilidad
+
+La contabilidad requiere información constante entre la empresa y el contador. Evalúe qué tan accesible y clara es la comunicación antes de contratar.
+
+## 5. Uso de herramientas y software
+
+Un servicio contable moderno debe apoyarse en software confiable para facturación electrónica, nómina y reportes financieros, facilitando el acceso a su información en tiempo real.
+
+## 6. Transparencia en tarifas
+
+Solicite una cotización detallada que especifique qué está incluido y qué se cobra de forma adicional, evitando sorpresas en la facturación del servicio.
+
+## Una decisión estratégica, no solo operativa
+
+Un buen acompañamiento contable no es un gasto, es una inversión que reduce riesgos y aporta información clara para tomar decisiones. En BP Asesorías Contables ofrecemos un servicio transparente, adaptado a las necesidades reales de cada empresa.
+    `,
+  },
 ]
