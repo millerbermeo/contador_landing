@@ -30,6 +30,15 @@ export function organizationSchema() {
   };
 }
 
+export function websiteSchema() {
+  return {
+    '@type': 'WebSite',
+    name: `${SITE.name} ${SITE.nameSuffix}`,
+    url: SITE.url,
+    inLanguage: 'es-CO',
+  };
+}
+
 export function localBusinessSchema() {
   return {
     '@type': ['ProfessionalService', 'LocalBusiness'],
@@ -136,7 +145,7 @@ export function faqSchema(faqs: { q: string; a: string }[]) {
 export function serviceSchema(service: {
   title: string;
   description: string;
-}) {
+}, areaServed: string | string[] = 'Colombia') {
   return {
     '@type': 'Service',
     name: service.title,
@@ -145,7 +154,7 @@ export function serviceSchema(service: {
       '@type': ['ProfessionalService', 'LocalBusiness'],
       name: `${SITE.name} ${SITE.nameSuffix}`,
     },
-    areaServed: 'Colombia',
+    areaServed,
     availableChannel: {
       '@type': 'ServiceChannel',
       serviceUrl: SITE.url,

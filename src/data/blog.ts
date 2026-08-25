@@ -26,10 +26,14 @@ La declaración de renta es una de las obligaciones tributarias más importantes
 
 Está obligado a declarar si cumple alguna de estas condiciones:
 
-- **Ingresos brutos** superiores a 4.900 UVT ($XX millones)
-- **Patrimonio bruto** superior a 4.500 UVT
-- **Consumos con tarjeta de crédito** superiores a 4.900 UVT
-- **Compras y consumos** totales superiores a 4.900 UVT
+- **Ingresos brutos** superiores a 1.400 UVT (aprox. $69.719.000 en 2025)
+- **Patrimonio bruto** superior a 4.500 UVT (aprox. $224.096.000 en 2025)
+- **Consumos con tarjeta de crédito** superiores a 1.400 UVT
+- **Compras y consumos** totales superiores a 1.400 UVT
+- **Consignaciones, depósitos o inversiones bancarias** superiores a 1.400 UVT
+- Ser responsable del IVA al cierre del año gravable
+
+*Cifras calculadas con el valor de la UVT 2025 ($49.799). La DIAN actualiza estos topes cada año.*
 
 ## Fechas clave del calendario tributario 2025
 

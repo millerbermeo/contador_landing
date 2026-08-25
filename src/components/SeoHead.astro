@@ -6,7 +6,7 @@ interface Props {
   image?: string
   type?: string
   publishedTime?: string
-  schema?: Record<string, any>
+  schema?: Record<string, any> | Record<string, any>[]
 }
 
 const {
@@ -42,9 +42,9 @@ const canonicalUrl = canonical || (Astro.site ? new URL(Astro.url.pathname, Astr
 
 {publishedTime && <meta property="article:published_time" content={publishedTime} />}
 
-{schema && (
+{schema && (Array.isArray(schema) ? schema : [schema]).filter((s) => s && Object.keys(s).length > 0).map((s) => (
   <script type="application/ld+json" is:inline set:html={JSON.stringify({
     '@context': 'https://schema.org',
-    ...schema,
+    ...s,
   })} />
-)}
+))}

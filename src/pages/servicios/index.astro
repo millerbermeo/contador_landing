@@ -7,12 +7,12 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CtaFinal from '../../components/CtaFinal.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import { Icon } from 'astro-icon/components';
-import { services } from '../../utils/Services.astro';
-import { SITE, waLink } from '../../data/site';
+import { services } from '../../data/services';
+import { waLink } from '../../data/site';
 ---
 
 <Layout
-  title="Servicios Contables y Fiscales | BP Asesorías Contables"
+  title="Servicios Contables y Fiscales"
   description="Conozca todos nuestros servicios contables en Colombia: asesorías contables, declaración de renta, facturación electrónica, creación de empresas, nómina y consultoría tributaria."
 >
   <Navbar activePath="/servicios/" />
@@ -43,7 +43,7 @@ import { SITE, waLink } from '../../data/site';
                 <Icon name={s.icon} class="w-6 h-6 text-brand-500 group-hover:text-white transition-colors duration-300" />
               </div>
               <h2 class="text-lg leading-tight mb-3">{s.title}</h2>
-              <p class="text-muted text-sm leading-relaxed flex-1 mb-4">{s.items[0]}</p>
+              <p class="text-muted text-sm leading-relaxed flex-1 mb-4">{s.description}</p>
               <span class="inline-flex items-center gap-1 text-brand-500 text-sm font-semibold group-hover:gap-2 transition-all">
                 Ver servicio <Icon name="lucide:arrow-right" class="w-4 h-4" />
               </span>

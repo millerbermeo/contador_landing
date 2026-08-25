@@ -43,58 +43,96 @@ const readTime = Math.max(1, Math.round(words / 200));
   </div>
 
   <div class="prose prose-sm sm:prose-base max-w-none">
-    {post.content.split('\n').map((line) => {
-      if (line.startsWith('## ')) {
-        return <h2 class="text-xl md:text-2xl mt-8 mb-4">{line.replace('## ', '')}</h2>;
-      }
-      if (line.startsWith('### ')) {
-        return <h3 class="text-lg mt-6 mb-3">{line.replace('### ', '')}</h3>;
-      }
-      if (line.startsWith('|')) {
-        return null;
-      }
-      if (line.startsWith('---')) {
-        return null;
-      }
-      if (line.startsWith('- ')) {
-        const parts = line.match(/- \*\*(.+?)\*\*: (.+)/);
-        if (parts) {
-          return (
-            <div class="flex items-start gap-2 mb-1">
-              <span class="text-brand-500 mt-1.5 shrink-0">•</span>
-              <p class="text-muted"><strong>{parts[1]}:</strong> {parts[2]}</p>
+    {(() => {
+      // Parser de markdown ligero: negritas/cursivas inline, encabezados, listas y tablas.
+      const inline = (text: string) => {
+        const nodes: (string | any)[] = [];
+        const re = /\*\*(.+?)\*\*|\*(.+?)\*/g;
+        let last = 0;
+        let m;
+        while ((m = re.exec(text))) {
+          if (m.index > last) nodes.push(text.slice(last, m.index));
+          if (m[1] !== undefined) nodes.push(<strong>{m[1]}</strong>);
+          else nodes.push(<em>{m[2]}</em>);
+          last = re.lastIndex;
+        }
+        if (last < text.length) nodes.push(text.slice(last));
+        return nodes;
+      };
+
+      const lines = post.content.split('\n');
+      const blocks: any[] = [];
+      let i = 0;
+      while (i < lines.length) {
+        const line = lines[i];
+
+        if (line.startsWith('## ')) {
+          blocks.push(<h2 class="text-xl md:text-2xl mt-8 mb-4">{inline(line.replace('## ', ''))}</h2>);
+          i++; continue;
+        }
+        if (line.startsWith('### ')) {
+          blocks.push(<h3 class="text-lg mt-6 mb-3">{inline(line.replace('### ', ''))}</h3>);
+          i++; continue;
+        }
+        if (line.startsWith('|')) {
+          const tableLines: string[] = [];
+          while (i < lines.length && lines[i].startsWith('|')) { tableLines.push(lines[i]); i++; }
+          const rows = tableLines
+            .filter((l) => !/^\|(\s*:?-+:?\s*\|)+$/.test(l))
+            .map((l) => l.split('|').slice(1, -1).map((c) => c.trim()));
+          const [head, ...body] = rows;
+          blocks.push(
+            <div class="overflow-x-auto my-5 rounded-xl border border-border">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-brand-50/60">
+                    {head.map((h) => <th class="text-left px-4 py-2.5 font-semibold text-ink border-b border-border">{inline(h)}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {body.map((row) => (
+                    <tr class="border-b border-border last:border-0">
+                      {row.map((c) => <td class="px-4 py-2.5 text-muted">{inline(c)}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           );
+          continue;
         }
-        const parts2 = line.match(/- (.+?): (.+)/);
-        if (parts2) {
-          return (
+        if (line.startsWith('- ')) {
+          blocks.push(
             <div class="flex items-start gap-2 mb-1">
               <span class="text-brand-500 mt-1.5 shrink-0">•</span>
-              <p class="text-muted"><strong>{parts2[1]}:</strong> {parts2[2]}</p>
+              <p class="text-muted">{inline(line.replace('- ', ''))}</p>
             </div>
           );
+          i++; continue;
         }
-        return (
-          <div class="flex items-start gap-2 mb-1">
-            <span class="text-brand-500 mt-1.5 shrink-0">•</span>
-            <p class="text-muted">{line.replace('- ', '')}</p>
-          </div>
-        );
+        if (line.match(/^\d+\. /)) {
+          const num = line.match(/^(\d+)\. /)?.[1];
+          blocks.push(
+            <div class="flex items-start gap-2 mb-1 ml-4">
+              <span class="text-brand-700 font-semibold shrink-0">{num}.</span>
+              <p class="text-muted">{inline(line.replace(/^\d+\.\s*/, ''))}</p>
+            </div>
+          );
+          i++; continue;
+        }
+        if (line.trim() === '') {
+          blocks.push(<div class="h-3"></div>);
+          i++; continue;
+        }
+        if (line.trim().startsWith('*') && line.trim().endsWith('*') && !line.trim().startsWith('**')) {
+          blocks.push(<p class="text-muted text-xs italic mb-4">{line.trim().slice(1, -1)}</p>);
+          i++; continue;
+        }
+        blocks.push(<p class="text-muted leading-relaxed mb-4">{inline(line)}</p>);
+        i++;
       }
-      if (line.match(/^\d+\. /)) {
-        return (
-          <div class="flex items-start gap-2 mb-1 ml-4">
-            <span class="text-brand-700 font-semibold shrink-0">{line.match(/^(\d+)\. /)?.[1]}.</span>
-            <p class="text-muted">{line.replace(/^\d+\.\s*/, '')}</p>
-          </div>
-        );
-      }
-      if (line.trim() === '') {
-        return <div class="h-3"></div>;
-      }
-      return <p class="text-muted leading-relaxed mb-4">{line}</p>;
-    })}
+      return blocks;
+    })()}
   </div>
 
   <div class="mt-10 pt-6 border-t border-border">

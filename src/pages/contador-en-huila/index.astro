@@ -1,0 +1,160 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Whatsapp from '../../components/Whatsapp.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import WaIcon from '../../components/ui/WaIcon.astro';
+import { Icon } from 'astro-icon/components';
+import { waLink } from '../../data/site';
+import { serviceSchema, faqSchema } from '../../data/schema';
+import { services } from '../../data/services';
+
+const huilaMunicipios = [
+  'Neiva', 'Pitalito', 'Garzón', 'La Plata', 'Campoalegre', 'Gigante',
+  'San Agustín', 'Palermo', 'Rivera', 'Aipe', 'Timaná', 'Isnos', 'Acevedo',
+];
+
+const localServices = services.filter((s) =>
+  ['asesorias-contables', 'declaracion-renta', 'facturacion-electronica', 'creacion-empresas', 'contabilidad-empresas', 'consultoria-tributaria'].includes(s.slug)
+);
+
+const faqs = [
+  { q: '¿Puedo contratar un contador que no tiene oficina en mi ciudad del Huila?', a: 'Sí. La mayoría de la gestión contable y tributaria se puede hacer completamente en línea: envío de documentos por WhatsApp o correo, firma electrónica y reuniones por videollamada. No necesita que el contador esté físicamente en su ciudad.' },
+  { q: '¿Cómo funciona la asesoría contable a distancia?', a: 'Usted envía sus documentos (facturas, extractos, RUT) por WhatsApp o correo electrónico. Revisamos su información, resolvemos dudas por videollamada o llamada, y presentamos sus declaraciones directamente ante la DIAN de forma electrónica.' },
+  { q: '¿Atienden empresas y personas naturales de Neiva y otros municipios del Huila?', a: 'Sí, atendemos empresas, comerciantes, independientes y personas naturales en Neiva, Pitalito, Garzón, La Plata y demás municipios del Huila mediante asesoría remota.' },
+  { q: '¿Es igual de confiable que un contador presencial?', a: 'Sí. Los trámites ante la DIAN y la Cámara de Comercio ya son en su mayoría digitales. Lo importante es la calidad del acompañamiento y el cumplimiento de plazos, no la ubicación física de la oficina.' },
+  { q: '¿Qué necesito para empezar si estoy en el Huila?', a: 'Basta con escribirnos por WhatsApp contándonos su caso. Le indicamos qué documentos enviar y en cuánto tiempo puede tener resuelta su situación contable o tributaria.' },
+];
+---
+
+<Layout
+  title="Contador Público para el Huila (Neiva y municipios)"
+  description="Asesoría contable y tributaria a distancia para Neiva, Pitalito, Garzón, La Plata y demás municipios del Huila. Declaración de renta, facturación electrónica y trámites DIAN por WhatsApp y videollamada."
+  schema={[serviceSchema({ title: 'Servicios contables remotos para el Huila', description: 'Asesoría contable y tributaria a distancia para empresas y personas naturales del Huila.' }, ['Huila', 'Neiva', 'Pitalito', 'Garzón', 'La Plata']), faqSchema(faqs)]}
+>
+  <Navbar activePath="/contador-en-huila/" />
+  <Whatsapp />
+
+  <main>
+    <div class="container-x pt-8 pb-4">
+      <Breadcrumbs crumbs={[
+        { label: 'Inicio', href: '/' },
+        { label: 'Contador para el Huila' },
+      ]} />
+    </div>
+
+    <section class="section pt-0">
+      <div class="container-x">
+        <div class="max-w-3xl">
+          <span class="eyebrow block mb-2 flex items-center gap-2">
+            <Icon name="lucide:map-pin" class="w-4 h-4" /> Huila
+          </span>
+          <h1 class="text-3xl md:text-4xl mb-4">Contador Público para el Huila: Neiva y municipios cercanos</h1>
+          <p class="text-muted text-lg leading-relaxed mb-4">
+            Ofrezco asesoría contable y tributaria a distancia para empresas, comerciantes, independientes y personas naturales del Huila. La gestión documental, la comunicación y la presentación de declaraciones se realizan de forma remota, por WhatsApp, correo electrónico y videollamada, con la misma calidad y cumplimiento de plazos que una atención presencial.
+          </p>
+          <p class="text-muted text-sm mb-6">
+            Cobertura remota en: {huilaMunicipios.join(' · ')} y demás municipios del departamento.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href={waLink('Hola, estoy en el Huila y busco un contador público a distancia.')} target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
+              <WaIcon class="w-4 h-4" /> Escribir por WhatsApp
+            </a>
+            <a href="/contacto/"
+              class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full border border-brand-500 text-brand-700 font-semibold text-sm hover:bg-brand-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300">
+              Otros medios de contacto
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pt-0 bg-brand-50/40">
+      <div class="container-x">
+        <SectionHeader
+          eyebrow="Cómo funciona"
+          title="Asesoría contable a distancia, paso a paso"
+          subtitle="Sin necesidad de desplazarse ni de que el contador esté físicamente en su municipio."
+        />
+        <div class="grid sm:grid-cols-3 gap-5 mt-10">
+          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
+            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
+              <Icon name="lucide:message-circle" class="w-5 h-5 text-brand-500" />
+            </div>
+            <h2 class="text-base mb-2">1. Cuéntenos su caso</h2>
+            <p class="text-muted text-sm leading-relaxed">Escriba por WhatsApp indicando si es persona natural o empresa, y qué necesita: declaración de renta, contabilidad, facturación electrónica u otro trámite.</p>
+          </div>
+          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
+            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
+              <Icon name="lucide:file-up" class="w-5 h-5 text-brand-500" />
+            </div>
+            <h2 class="text-base mb-2">2. Envíe sus documentos</h2>
+            <p class="text-muted text-sm leading-relaxed">RUT, extractos, facturas o soportes se envían digitalmente. Revisamos su información y le confirmamos qué falta, sin necesidad de reuniones presenciales.</p>
+          </div>
+          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
+            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
+              <Icon name="lucide:badge-check" class="w-5 h-5 text-brand-500" />
+            </div>
+            <h2 class="text-base mb-2">3. Presentación y cumplimiento</h2>
+            <p class="text-muted text-sm leading-relaxed">Presentamos su declaración o trámite ante la DIAN de forma electrónica, dentro de los plazos legales, con soporte por videollamada si lo necesita.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container-x">
+        <SectionHeader
+          eyebrow="Servicios"
+          title="Servicios disponibles para el Huila"
+          subtitle="Portafolio de asesoría contable y tributaria disponible de forma remota."
+        />
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+          {localServices.map((s) => (
+            <a href={`/servicios/${s.slug}/`}
+              class="group bg-surface rounded-card border border-border shadow-soft p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent">
+              <div class="w-11 h-11 rounded-xl bg-accent-soft grid place-items-center mb-4 group-hover:bg-brand-500 transition-colors duration-300">
+                <Icon name={s.icon} class="w-5 h-5 text-brand-500 group-hover:text-white transition-colors duration-300" />
+              </div>
+              <h3 class="text-base mb-2">{s.title}</h3>
+              <p class="text-muted text-sm leading-relaxed flex-1">{s.heroDescription}</p>
+              <span class="inline-flex items-center gap-1 text-brand-500 text-sm font-semibold mt-4">
+                Ver servicio <Icon name="lucide:arrow-right" class="w-4 h-4" />
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-brand-50/40">
+      <div class="container-x">
+        <div class="max-w-3xl mx-auto">
+          <SectionHeader
+            eyebrow="Preguntas frecuentes"
+            title="Dudas comunes sobre asesoría contable a distancia"
+          />
+          <div class="mt-8 space-y-2">
+            {faqs.map((faq) => (
+              <details class="faq-item bg-surface border border-border rounded-2xl overflow-hidden group">
+                <summary class="flex justify-between items-center gap-4 px-5 py-4 text-left font-semibold text-ink text-sm cursor-pointer list-none">
+                  {faq.q}
+                  <Icon name="lucide:plus" class="w-4 h-4 text-brand-500 shrink-0 group-open:rotate-45 transition-transform" />
+                </summary>
+                <p class="px-5 pb-5 text-muted text-sm leading-relaxed border-t border-border pt-4">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CtaFinal />
+  </main>
+
+  <Footer />
+</Layout>

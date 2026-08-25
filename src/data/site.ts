@@ -49,3 +49,8 @@ export const FOOTER_LINKS = [
   { label: 'Preguntas Frecuentes', href: '/preguntas-frecuentes/' },
   { label: 'Contacto', href: '/contacto/' },
 ];
+
+export const COVERAGE_LINKS = [
+  { label: 'Contador en Florencia, Caquetá', href: '/florencia-caqueta/' },
+  { label: 'Contador para el Huila', href: '/contador-en-huila/' },
+];

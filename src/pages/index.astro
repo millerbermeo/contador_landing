@@ -14,7 +14,7 @@ import Footer from '../components/Footer.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE, waLink } from '../data/site';
-import { accountingServiceSchema, faqSchema } from '../data/schema';
+import { accountingServiceSchema, faqSchema, organizationSchema, websiteSchema } from '../data/schema';
 
 const serviceGroups = [
   {
@@ -48,7 +48,7 @@ const trustPoints = [
 <Layout
   title="Líderes en Contabilidad | Asesoría Contable, Fiscal y Trámites DIAN"
   description="Contador Público certificado en Colombia. Asesorías contables, declaración de renta, facturación electrónica y trámites ante la DIAN para empresas y personas naturales en Florencia, Caquetá."
-  schema={accountingServiceSchema()}
+  schema={[accountingServiceSchema(), organizationSchema(), websiteSchema()]}
 >
   <Navbar activePath="/" />
   <Whatsapp />

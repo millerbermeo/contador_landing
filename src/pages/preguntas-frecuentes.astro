@@ -19,7 +19,7 @@ const faqCategories = [
       { q: '¿Cuándo debo presentar mi declaración de renta?', a: 'Depende de su NIT y el calendario tributario que publica la DIAN cada año. Normalmente las fechas para personas naturales van de agosto a octubre. Le notificamos con anticipación para que no pierda ningún plazo.' },
       { q: '¿Qué gastos puedo deducir en mi declaración de renta?', a: 'Puede deducir salud prepagada, educación del contribuyente y dependientes, intereses de créditos de vivienda, donaciones a entidades aprobadas, y dependientes económicos. Cada caso es único y lo revisamos para maximizar sus deducciones.' },
       { q: '¿Qué pasa si no presento mi declaración de renta a tiempo?', a: 'La DIAN impone sanciones que van desde el 5% del impuesto a cargo hasta el 10% si hay retraso extremo. Además, puede generar procesos de cobro coactivo. Lo mejor es declarar a tiempo con nosotros.' },
-      { q: '¿Estoy obligado a declarar renta?', a: 'En 2025, debe declarar si sus ingresos brutos superan 4.900 UVT, si tiene patrimonio bruto superior a 4.500 UVT, o si realizó consumos con tarjeta de crédito superiores a 4.900 UVT. Le confirmamos si está obligado.' },
+      { q: '¿Estoy obligado a declarar renta?', a: 'En 2025, debe declarar si sus ingresos brutos superan 1.400 UVT (aprox. $69.719.000), si tiene patrimonio bruto superior a 4.500 UVT, o si realizó consumos con tarjeta de crédito o consignaciones superiores a 1.400 UVT. Le confirmamos si está obligado.' },
     ],
   },
   {
@@ -73,7 +73,7 @@ const allFaqs = faqCategories.flatMap((c) => c.questions);
 ---
 
 <Layout
-  title="Preguntas Frecuentes | BP Asesorías Contables"
+  title="Preguntas Frecuentes"
   description="Resuelva sus dudas sobre contabilidad, declaración de renta, facturación electrónica, creación de empresas y consultoría tributaria en Colombia."
   schema={faqSchema(allFaqs)}
 >
