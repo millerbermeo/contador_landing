@@ -75,15 +75,22 @@
 	/* Scroll-reveal: estado inicial + revelado */
 	.reveal {
 		opacity: 0;
-		transform: translateY(20px);
-		transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-			transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+		transform: translateY(14px);
+		transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 		will-change: opacity, transform;
 	}
 	.reveal.is-visible {
 		opacity: 1;
 		transform: none;
 	}
+}
+
+/* FAQ accordion panels (for standalone FAQ pages, not MenuAcordeon) */
+.faq-page .faq-item .panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Respeta la preferencia de menos movimiento */

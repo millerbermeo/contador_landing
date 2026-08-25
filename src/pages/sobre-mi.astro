@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Whatsapp from '../components/Whatsapp.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AuthorCard from '../components/AuthorCard.astro';
+import AboutMe from '../components/AboutMe.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { SITE, waLink } from '../data/site';
+import { personSchema } from '../data/schema';
+import brianImg from '../assets/brian.jpeg';
+
+const facts = [
+  { icon: 'lucide:map-pin', label: 'Ubicación', value: `${SITE.location}, Colombia` },
+  { icon: 'lucide:clock', label: 'Experiencia', value: '+5 años' },
+  { icon: 'lucide:book-open', label: 'Formación', value: 'Universidad de la Amazonia' },
+  { icon: 'lucide:badge-check', label: 'Registro', value: 'Tarjeta Profesional Vigente' },
+  { icon: 'lucide:scale', label: 'Especialidad', value: 'Contabilidad y Tributaria' },
+  { icon: 'lucide:heart-handshake', label: 'Clientes', value: 'Empresas y Personas Naturales' },
+];
+---
+
+<Layout
+  title="Sobre Mí | Brian Pedraza Osorio — Contador Público en Colombia"
+  description="Conozca a Brian Pedraza Osorio, Contador Público de la Universidad de la Amazonia con más de 5 años de experiencia en asesoría contable, tributaria y fiscal en Florencia, Caquetá."
+  schema={personSchema()}
+>
+  <Navbar activePath="/sobre-mi/" />
+  <Whatsapp />
+
+  <main>
+    <div class="container-x pt-8 pb-4">
+      <Breadcrumbs crumbs={[
+        { label: 'Inicio', href: '/' },
+        { label: 'Sobre Mí' },
+      ]} />
+    </div>
+
+    <section class="section pt-0">
+      <div class="container-x">
+        <div class="max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-5 gap-10 items-center">
+            <div class="md:col-span-2 flex justify-center">
+              <div class="relative">
+                <div class="absolute inset-0 rounded-full bg-accent/20 blur-3xl scale-110"></div>
+                <Image src={brianImg} alt={`${SITE.fullName}, Contador Público en Colombia`} width={352} height={352}
+                  format="webp" loading="eager"
+                  class="relative w-56 h-56 md:w-64 md:h-64 rounded-full object-cover border-4 border-surface ring-2 ring-accent shadow-lift" />
+              </div>
+            </div>
+            <div class="md:col-span-3">
+              <span class="eyebrow mb-2 block">Sobre Mí</span>
+              <h1 class="text-3xl md:text-4xl mb-2">{SITE.fullName}</h1>
+              <p class="text-brand-500 font-semibold text-lg mb-4">{SITE.role}</p>
+              <p class="text-muted leading-relaxed mb-6">
+                Soy Brian Pedraza Osorio, Contador Público. Acompaño a empresarios, emprendedores y personas naturales en la organización de su información contable y el cumplimiento de sus obligaciones tributarias. Mi objetivo es que puedas entender mejor tus números y tomar decisiones con información clara y confiable.
+              </p>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {facts.map((f) => (
+                  <div class="flex items-center gap-2.5 bg-brand-50 rounded-xl p-3">
+                    <div class="w-8 h-8 rounded-lg bg-accent-soft grid place-items-center shrink-0">
+                      <Icon name={f.icon} class="w-4 h-4 text-brand-500" />
+                    </div>
+                    <div class="min-w-0">
+                      <span class="text-[0.6rem] text-muted font-medium uppercase tracking-wide block">{f.label}</span>
+                      <span class="text-xs text-ink font-semibold">{f.value}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div class="mt-6">
+                <a href={waLink('Hola Brian, me gustaría agendar una asesoría contable.')} target="_blank" rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
+                  <Icon name="lucide:calendar-check" class="w-4 h-4" /> Agendar Asesoría
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <AuthorCard />
+    <AboutMe />
+    <CtaFinal />
+  </main>
+
+  <Footer />
+</Layout>

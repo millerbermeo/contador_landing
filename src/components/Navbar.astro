@@ -1,194 +1,168 @@
 ---
 import { Icon } from 'astro-icon/components';
 import WaIcon from './ui/WaIcon.astro';
-import { SITE, waLink, NAV_LINKS } from '../data/site';
+import { SITE, waLink, HEADER_LINKS } from '../data/site';
+
+const { activePath = '/' } = Astro.props;
 
 const social = [
-	{ label: 'Facebook', href: SITE.facebook, icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
-	{ label: 'TikTok', href: SITE.tiktok, icon: 'M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.74a4.84 4.84 0 01-1.01-.05z' },
-	{ label: 'Instagram', href: SITE.instagram, icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z' },
+  { label: 'Facebook', href: SITE.facebook, icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
+  { label: 'TikTok', href: SITE.tiktok, icon: 'M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.74a4.84 4.84 0 01-1.01-.05z' },
+  { label: 'Instagram', href: SITE.instagram, icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z' },
 ];
+
+function isActive(href: string) {
+  if (href === '/') return activePath === '/';
+  return activePath.startsWith(href);
+}
 ---
 
-<!-- Barra de contacto superior (discreta, solo escritorio) -->
 <div id="topbar" class="hidden lg:block bg-brand-900 text-white/85 text-xs transition-all duration-300">
-	<div class="container-x flex justify-between items-center py-2">
-		<div class="flex items-center gap-6">
-			<a href={`mailto:${SITE.email}`} class="flex items-center gap-1.5 hover:text-accent transition-colors">
-				<Icon name="lucide:mail" class="w-3.5 h-3.5" /> {SITE.email}
-			</a>
-			<a href={waLink()} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-accent transition-colors">
-				<WaIcon class="w-3.5 h-3.5" /> {SITE.whatsappDisplay}
-			</a>
-			<a href={`tel:${SITE.phoneRaw}`} class="flex items-center gap-1.5 hover:text-accent transition-colors">
-				<Icon name="lucide:phone" class="w-3.5 h-3.5" /> {SITE.phone}
-			</a>
-			<span class="flex items-center gap-1.5 text-white/60">
-				<Icon name="lucide:map-pin" class="w-3.5 h-3.5" /> {SITE.location}
-			</span>
-		</div>
-		<div class="flex items-center gap-4">
-			{social.map((s) => (
-				<a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} class="text-white/70 hover:text-accent transition-colors">
-					<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
-				</a>
-			))}
-		</div>
-	</div>
+  <div class="container-x flex justify-between items-center py-2">
+    <div class="flex items-center gap-6">
+      <a href={`mailto:${SITE.email}`} class="flex items-center gap-1.5 hover:text-accent transition-colors">
+        <Icon name="lucide:mail" class="w-3.5 h-3.5" /> {SITE.email}
+      </a>
+      <a href={waLink()} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-accent transition-colors">
+        <WaIcon class="w-3.5 h-3.5" /> {SITE.whatsappDisplay}
+      </a>
+      <a href={`tel:${SITE.phoneRaw}`} class="flex items-center gap-1.5 hover:text-accent transition-colors">
+        <Icon name="lucide:phone" class="w-3.5 h-3.5" /> {SITE.phone}
+      </a>
+      <span class="flex items-center gap-1.5 text-white/60">
+        <Icon name="lucide:map-pin" class="w-3.5 h-3.5" /> {SITE.location}
+      </span>
+    </div>
+    <div class="flex items-center gap-4">
+      {social.map((s) => (
+        <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} class="text-white/70 hover:text-accent transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
+        </a>
+      ))}
+    </div>
+  </div>
 </div>
 
-<!-- Navbar principal (sticky, backdrop-blur al scroll) -->
 <nav id="main-nav" class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-border transition-all duration-300" aria-label="Navegación principal">
-	<div class="container-x flex justify-between items-center py-3 lg:py-4">
+  <div class="container-x flex justify-between items-center py-3 lg:py-4">
+    <a href="/" class="flex items-center gap-3 group" aria-label="Ir al inicio">
+      <img src="/logotipo.jpeg" alt={`${SITE.name} ${SITE.nameSuffix}`} width="40" height="40" class="h-10 w-10 rounded-full object-cover ring-1 ring-border group-hover:ring-accent transition-all duration-300" />
+      <div class="leading-tight">
+        <span class="block font-serif font-semibold text-brand-700 text-base tracking-tight">Brian Pedraza</span>
+        <span class="block text-accent text-[0.65rem] font-semibold tracking-[0.2em] uppercase">Contador Público</span>
+        <span class="block text-muted text-[0.6rem] tracking-tight">Fundador de BP Asesorías Contables</span>
+      </div>
+    </a>
 
-		<!-- Logo -->
-		<a href="#contador" data-scroll-to="contador" class="flex items-center gap-3 group" aria-label="Ir al inicio">
-			<img src="/logotipo.jpeg" alt={`${SITE.name} ${SITE.nameSuffix}`} width="40" height="40" class="h-10 w-10 rounded-full object-cover ring-1 ring-border group-hover:ring-accent transition-all duration-300" />
-			<div class="leading-tight">
-				<span class="block font-serif font-semibold text-brand-700 text-base tracking-tight">{SITE.name}</span>
-				<span class="block text-accent text-[0.65rem] font-semibold tracking-[0.2em] uppercase">{SITE.nameSuffix}</span>
-			</div>
-		</a>
+    <div class="hidden md:flex items-center gap-8">
+      {HEADER_LINKS.slice(0, 5).map((link) => (
+        <a href={link.href}
+          class:list={[
+            'desk-nav-link relative text-sm font-medium transition-colors pb-1 group',
+            isActive(link.href) ? 'text-brand-700 font-semibold' : 'text-muted hover:text-brand-700',
+          ]}>
+          {link.label}
+          <span class:list={[
+            'absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 rounded-full',
+            isActive(link.href) ? 'w-full' : 'w-0 group-hover:w-full',
+          ]}></span>
+        </a>
+      ))}
+      <a href={waLink()} target="_blank" rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 min-h-[44px] px-5 rounded-full bg-brand-500 text-white text-sm font-semibold shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
+        <WaIcon class="w-4 h-4" /> Contactar ahora
+      </a>
+    </div>
 
-		<!-- Links escritorio -->
-		<div class="hidden md:flex items-center gap-8">
-			{NAV_LINKS.slice(0, 4).map((link) => (
-				<a href={`#${link.href}`} data-scroll-to={link.href}
-					class="desk-nav-link relative text-muted font-medium text-sm hover:text-brand-700 transition-colors pb-1 group">
-					{link.label}
-					<span class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300 rounded-full"></span>
-				</a>
-			))}
-			<a href={waLink()} target="_blank" rel="noopener noreferrer"
-				class="inline-flex items-center gap-2 min-h-[44px] px-5 rounded-full border border-brand-500 text-brand-700 text-sm font-semibold hover:bg-brand-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300">
-				<WaIcon class="w-4 h-4" /> Contactar ahora
-			</a>
-		</div>
-
-		<!-- Hamburguesa (móvil) -->
-		<button type="button" id="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu"
-			class="md:hidden grid place-items-center w-11 h-11 rounded-xl text-brand-700 hover:bg-brand-50 transition-colors">
-			<Icon id="hamburger-icon" name="lucide:menu" class="w-6 h-6" />
-			<Icon id="close-icon" name="lucide:x" class="w-6 h-6 hidden" />
-		</button>
-	</div>
+    <button type="button" id="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu"
+      class="md:hidden grid place-items-center w-11 h-11 rounded-xl text-brand-700 hover:bg-brand-50 transition-colors">
+      <Icon id="hamburger-icon" name="lucide:menu" class="w-6 h-6" />
+      <Icon id="close-icon" name="lucide:x" class="w-6 h-6 hidden" />
+    </button>
+  </div>
 </nav>
 
-<!-- Overlay móvil -->
 <div id="mobile-overlay" class="fixed inset-0 bg-brand-900/50 backdrop-blur-sm z-40 opacity-0 invisible transition-all duration-300 md:hidden" aria-hidden="true"></div>
 
-<!-- Drawer móvil -->
 <aside id="mobile-menu" class="fixed top-0 right-0 h-full w-[min(20rem,85vw)] bg-surface z-50 translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl flex flex-col" aria-hidden="true" aria-label="Menú de navegación móvil">
-	<div class="flex items-center justify-between p-5 border-b border-border">
-		<div class="flex items-center gap-3">
-			<img src="/logotipo.jpeg" alt="" width="36" height="36" class="h-9 w-9 rounded-full object-cover" />
-			<div class="leading-tight">
-				<span class="block font-serif font-semibold text-brand-700 text-sm">{SITE.name}</span>
-				<span class="block text-accent text-[0.6rem] font-semibold tracking-[0.2em] uppercase">{SITE.nameSuffix}</span>
-			</div>
-		</div>
-		<button id="close-menu" class="grid place-items-center w-10 h-10 rounded-xl text-muted hover:bg-brand-50 transition-colors" aria-label="Cerrar menú">
-			<Icon name="lucide:x" class="w-5 h-5" />
-		</button>
-	</div>
+  <div class="flex items-center justify-between p-5 border-b border-border">
+    <div class="flex items-center gap-3">
+      <img src="/logotipo.jpeg" alt="" width="36" height="36" class="h-9 w-9 rounded-full object-cover" />
+      <div class="leading-tight">
+        <span class="block font-serif font-semibold text-brand-700 text-sm">Brian Pedraza</span>
+        <span class="block text-accent text-[0.6rem] font-semibold tracking-[0.2em] uppercase">Contador Público</span>
+        <span class="block text-muted text-[0.55rem] tracking-tight">Fundador de BP Asesorías Contables</span>
+      </div>
+    </div>
+    <button id="close-menu" class="grid place-items-center w-10 h-10 rounded-xl text-muted hover:bg-brand-50 transition-colors" aria-label="Cerrar menú">
+      <Icon name="lucide:x" class="w-5 h-5" />
+    </button>
+  </div>
 
-	<nav class="flex flex-col p-4 gap-1 flex-1" aria-label="Menú móvil">
-		{NAV_LINKS.map((link) => (
-			<a href={`#${link.href}`} data-scroll-to={link.href}
-				class="mobile-link flex items-center gap-3 min-h-[44px] px-4 rounded-xl text-ink font-medium hover:bg-brand-50 hover:text-brand-700 transition-colors">
-				<span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
-				{link.label}
-			</a>
-		))}
-	</nav>
+  <nav class="flex flex-col p-4 gap-1 flex-1" aria-label="Menú móvil">
+    {HEADER_LINKS.map((link) => (
+      <a href={link.href}
+        class:list={[
+          'mobile-link flex items-center gap-3 min-h-[44px] px-4 rounded-xl transition-colors',
+          isActive(link.href) ? 'bg-brand-50 text-brand-700 font-semibold' : 'text-ink font-medium hover:bg-brand-50 hover:text-brand-700',
+        ]}>
+        <span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
+        {link.label}
+      </a>
+    ))}
+  </nav>
 
-	<div class="p-4 border-t border-border">
-		<a href={waLink()} target="_blank" rel="noopener noreferrer"
-			class="mobile-link flex items-center justify-center gap-2 w-full min-h-[48px] bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors shadow-soft">
-			<WaIcon class="w-5 h-5" /> Contactar por WhatsApp
-		</a>
-	</div>
+  <div class="p-4 border-t border-border">
+    <a href={waLink()} target="_blank" rel="noopener noreferrer"
+      class="flex items-center justify-center gap-2 w-full min-h-[48px] bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors shadow-soft">
+      <WaIcon class="w-5 h-5" /> Contactar por WhatsApp
+    </a>
+  </div>
 </aside>
 
 <script>
-	const mainNav = document.getElementById('main-nav') as HTMLElement;
-	const menuToggle = document.getElementById('menu-toggle') as HTMLButtonElement;
-	const mobileMenu = document.getElementById('mobile-menu') as HTMLElement;
-	const overlay = document.getElementById('mobile-overlay') as HTMLElement;
-	const closeBtn = document.getElementById('close-menu') as HTMLButtonElement;
-	const hamburger = document.getElementById('hamburger-icon') as HTMLElement;
-	const closeIcon = document.getElementById('close-icon') as HTMLElement;
+  const mainNav = document.getElementById('main-nav');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-overlay');
+  const closeBtn = document.getElementById('close-menu');
+  const hamburger = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
 
-	function openMenu() {
-		mobileMenu.classList.remove('translate-x-full');
-		mobileMenu.setAttribute('aria-hidden', 'false');
-		overlay.classList.remove('opacity-0', 'invisible');
-		menuToggle.setAttribute('aria-expanded', 'true');
-		hamburger.classList.add('hidden');
-		closeIcon.classList.remove('hidden');
-		document.body.style.overflow = 'hidden';
-		(mobileMenu.querySelector('a') as HTMLElement)?.focus();
-	}
-	function closeMenu() {
-		mobileMenu.classList.add('translate-x-full');
-		mobileMenu.setAttribute('aria-hidden', 'true');
-		overlay.classList.add('opacity-0', 'invisible');
-		menuToggle.setAttribute('aria-expanded', 'false');
-		hamburger.classList.remove('hidden');
-		closeIcon.classList.add('hidden');
-		document.body.style.overflow = '';
-	}
-	const isOpen = () => !mobileMenu.classList.contains('translate-x-full');
+  function openMenu() {
+    mobileMenu.classList.remove('translate-x-full');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    overlay.classList.remove('opacity-0', 'invisible');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    hamburger.classList.add('hidden');
+    closeIcon.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    mobileMenu.querySelector('a')?.focus();
+  }
+  function closeMenu() {
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    overlay.classList.add('opacity-0', 'invisible');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    hamburger.classList.remove('hidden');
+    closeIcon.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+  const isOpen = () => !mobileMenu.classList.contains('translate-x-full');
 
-	menuToggle.addEventListener('click', openMenu);
-	closeBtn.addEventListener('click', () => { closeMenu(); menuToggle.focus(); });
-	overlay.addEventListener('click', closeMenu);
-	document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen()) { closeMenu(); menuToggle.focus(); } });
+  menuToggle.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', () => { closeMenu(); menuToggle.focus(); });
+  overlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen()) { closeMenu(); menuToggle.focus(); } });
 
-	// Sombra + fondo más opaco al hacer scroll
-	window.addEventListener('scroll', () => {
-		const scrolled = window.scrollY > 10;
-		mainNav.classList.toggle('shadow-soft', scrolled);
-		mainNav.classList.toggle('bg-bg/95', scrolled);
-		mainNav.classList.toggle('bg-bg/80', !scrolled);
-	}, { passive: true });
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 10;
+    mainNav.classList.toggle('shadow-soft', scrolled);
+    mainNav.classList.toggle('bg-bg/95', scrolled);
+    mainNav.classList.toggle('bg-bg/80', !scrolled);
+  }, { passive: true });
 
-	// Smooth scroll con offset del navbar
-	function scrollToSection(id: string) {
-		const target = document.getElementById(id);
-		if (!target) return;
-		const offset = mainNav.offsetHeight + 8;
-		const top = target.getBoundingClientRect().top + window.scrollY - offset;
-		window.scrollTo({ top, behavior: 'smooth' });
-		history.pushState(null, '', `#${id}`);
-	}
-	document.querySelectorAll<HTMLAnchorElement>('[data-scroll-to]').forEach((link) => {
-		link.addEventListener('click', (e) => {
-			e.preventDefault();
-			scrollToSection(link.getAttribute('data-scroll-to')!);
-			if (isOpen()) closeMenu();
-		});
-	});
-
-	// Sección activa
-	const deskLinks = document.querySelectorAll<HTMLAnchorElement>('.desk-nav-link');
-	function setActive(activeId: string) {
-		deskLinks.forEach((link) => {
-			const isActive = link.getAttribute('data-scroll-to') === activeId;
-			const indicator = link.querySelector<HTMLElement>('.nav-indicator');
-			link.classList.toggle('text-brand-700', isActive);
-			link.classList.toggle('font-semibold', isActive);
-			link.classList.toggle('text-muted', !isActive);
-			if (indicator) indicator.style.width = isActive ? '100%' : '';
-		});
-	}
-	const io = new IntersectionObserver(
-		(entries) => entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); }),
-		{ threshold: 0.15, rootMargin: `-${mainNav.offsetHeight}px 0px -55% 0px` }
-	);
-	['contador', 'servicios', 'nosotros', 'precios', 'faq'].forEach((id) => {
-		const el = document.getElementById(id);
-		if (el) io.observe(el);
-	});
-	setActive('contador');
+  document.querySelectorAll('.mobile-link').forEach((link) => {
+    link.addEventListener('click', () => { if (isOpen()) closeMenu(); });
+  });
 </script>

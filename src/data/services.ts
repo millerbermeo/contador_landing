@@ -1,0 +1,288 @@
+export interface Service {
+  icon: string
+  slug: string
+  title: string
+  shortTitle: string
+  description: string
+  metaDescription: string
+  heroDescription: string
+  features: string[]
+  benefits: string[]
+  who: string[]
+  faq: { q: string; a: string }[]
+}
+
+export const services: Service[] = [
+  {
+    icon: 'lucide:book-open',
+    slug: 'asesorias-contables',
+    title: 'Asesorías Contables',
+    shortTitle: 'Asesorías Contables',
+    description: 'Servicio integral de asesoría contable para empresas y personas naturales en Colombia. Cumplimiento normativo, organización financiera y soporte profesional.',
+    metaDescription: 'Asesoría contable profesional en Colombia para empresas y personas naturales. Cumplimiento normativo, organización financiera y soporte experto. Contáctenos.',
+    heroDescription: 'Soluciones contables a la medida de su negocio. Organizamos sus finanzas y garantizamos el cumplimiento normativo.',
+    features: [
+      'Diseño e implementación de sistemas contables adaptados a su negocio',
+      'Registro y control de operaciones contables en tiempo real',
+      'Elaboración y análisis de estados financieros',
+      'Conciliaciones bancarias y contables',
+      'Clasificación y análisis de cuentas contables',
+      'Soporte contable continuo y personalizado',
+    ],
+    benefits: [
+      'Tome decisiones informadas con información financiera clara y oportuna',
+      'Reduzca riesgos de sanciones por incumplimiento normativo',
+      'Ahorre tiempo y enfoque en lo que realmente importa: su negocio',
+      'Tenga visibilidad completa de la salud financiera de su empresa',
+    ],
+    who: [
+      'Pequeñas y medianas empresas (PYMES) que buscan orden financiero',
+      'Emprendedores que inician y necesitan base contable sólida',
+      'Profesionales independientes que requieren organización fiscal',
+      'Empresas en crecimiento que necesitan escalar su gestión contable',
+    ],
+    faq: [
+      { q: '¿Con qué frecuencia debo enviar mis registros contables?', a: 'Lo ideal es mantener un registro actualizado semanal o mensualmente para evitar acumulación y errores. Nosotros nos adaptamos a su flujo de trabajo.' },
+      { q: '¿Qué documentos necesito para iniciar el servicio?', a: 'RUT, cámara de comercio, extractos bancarios, facturas de compra y venta, y soportes de gastos. Le guiaremos en todo el proceso.' },
+      { q: '¿Pueden ayudarme si ya tengo retraso en mi contabilidad?', a: 'Sí. Realizamos una revisión completa y regularizamos su situación contable, sin importar el tiempo de retraso.' },
+    ],
+  },
+  {
+    icon: 'lucide:file-text',
+    slug: 'declaracion-renta',
+    title: 'Declaración de Renta',
+    shortTitle: 'Declaración de Renta',
+    description: 'Liquidación y presentación de declaración de renta para personas naturales y jurídicas. Maximizamos sus deducciones y minimizamos el riesgo de sanciones.',
+    metaDescription: 'Declaración de renta para personas naturales y jurídicas en Colombia. Maximizamos deducciones, minimizamos riesgos. Precios desde $30.000.',
+    heroDescription: 'Cumpla con la DIAN y optimice su declaración de renta con acompañamiento profesional completo.',
+    features: [
+      'Liquidación precisa de la declaración de renta',
+      'Identificación y aplicación de todas las deducciones permitidas',
+      'Preparación de documentos soporte requeridos por la DIAN',
+      'Presentación electrónica de la declaración',
+      'Revisión de declaraciones de años anteriores',
+      'Representación ante la DIAN en caso de requerimientos',
+    ],
+    benefits: [
+      'Pague solo lo que realmente le corresponde, ni un peso más',
+      'Evite sanciones y requerimientos de la DIAN',
+      'Maximice sus deducciones legales con estrategia fiscal',
+      'Tranquilidad durante toda la temporada de impuestos',
+    ],
+    who: [
+      'Personas naturales con ingresos superiores a 4.900 UVT',
+      'Empresas y sociedades comerciales',
+      'Profesionales liberales con ingresos por honorarios',
+      'Independientes con actividad económica',
+    ],
+    faq: [
+      { q: '¿Cuándo debo presentar mi declaración de renta?', a: 'Depende de su NIT y el calendario tributario que publica la DIAN cada año. Normalmente entre agosto y octubre para personas naturales.' },
+      { q: '¿Qué gastos puedo deducir?', a: 'Salud prepagada, educación, intereses de vivienda, donaciones, dependientes económicos, entre otros. Revisamos su caso particular.' },
+      { q: '¿Qué pasa si no declaro a tiempo?', a: 'La DIAN aplica sanciones que pueden ir desde el 5% del impuesto a cargo hasta el cierre del establecimiento. Es mejor declarar con nosotros y evitar contratiempos.' },
+    ],
+  },
+  {
+    icon: 'lucide:file-digit',
+    slug: 'facturacion-electronica',
+    title: 'Facturación Electrónica',
+    shortTitle: 'Facturación Electrónica',
+    description: 'Implementación y gestión de facturación electrónica conforme a los requisitos de la DIAN. Sistema ágil, cumplimiento garantizado.',
+    metaDescription: 'Facturación electrónica DIAN en Colombia. Implementación, habilitación y gestión de su sistema de facturación. Cumplimiento garantizado.',
+    heroDescription: 'Implementamos su facturación electrónica conforme a la DIAN. Rápido, ágil y sin complicaciones.',
+    features: [
+      'Habilitación del sistema de facturación ante la DIAN',
+      'Configuración de software de facturación electrónica',
+      'Emisión y envío de facturas electrónicas',
+      'Generación de documentos equivalentes (nómina, nota crédito, etc.)',
+      'Reporte de facturación a la DIAN',
+      'Soporte técnico continuo y actualizaciones normativas',
+    ],
+    benefits: [
+      'Cumpla con la obligación legal de facturar electrónicamente',
+      'Evite sanciones por no implementar el sistema a tiempo',
+      'Automatice su proceso de facturación y ahorre tiempo',
+      'Tenga respaldo digital de todas sus transacciones',
+    ],
+    who: [
+      'Empresas obligadas a facturar electrónicamente según la DIAN',
+      'Profesionales independientes que emiten facturas',
+      'Negocios que quieren modernizar su proceso de facturación',
+      'PYMES que necesitan cumplimiento normativo sin complicaciones',
+    ],
+    faq: [
+      { q: '¿Es obligatoria la facturación electrónica?', a: 'Sí, para la mayoría de contribuyentes en Colombia. La DIAN ha establecido calendarios progresivos de implementación.' },
+      { q: '¿Qué software necesito?', a: 'Un software autorizado por la DIAN. Nosotros le asesoramos y configuramos la mejor opción para su negocio.' },
+      { q: '¿Puedo facturar desde mi celular?', a: 'Sí, existen soluciones móviles autorizadas. Le recomendamos la más adecuada según su volumen de facturación.' },
+    ],
+  },
+  {
+    icon: 'lucide:building-2',
+    slug: 'creacion-empresas',
+    title: 'Creación de Empresas',
+    shortTitle: 'Creación de Empresas',
+    description: 'Asesoría completa para la creación de empresas en Colombia. Tipo societario, registro mercantil, RUT y obligaciones tributarias.',
+    metaDescription: 'Creación de empresas en Colombia con acompañamiento profesional. SAS, Limitada, Sociedad Anónima. Registro mercantil, RUT y obligaciones tributarias.',
+    heroDescription: 'Creamos su empresa en Colombia de forma rápida y segura. Elegimos el tipo societario ideal para su proyecto.',
+    features: [
+      'Asesoría en la elección del tipo societario (SAS, Ltda., S.A., etc.)',
+      'Elaboración de documentos de constitución',
+      'Registro mercantil ante la Cámara de Comercio',
+      'Obtención del RUT y firma electrónica',
+      'Inscripción en la DIAN y autorización de facturación',
+      'Apertura de cuenta bancaria empresarial',
+    ],
+    benefits: [
+      'Evite errores en la constitución que generen costos después',
+      'Elija la estructura legal que más beneficie a su negocio',
+      'Inicie operaciones en el menor tiempo posible',
+      'Cumpla desde el día uno con todas las obligaciones legales',
+    ],
+    who: [
+      'Emprendedores con una idea de negocio lista para ejecutar',
+      'Profesionales que quieren formalizar su actividad',
+      'Inversionistas que buscan establecer una sociedad en Colombia',
+      'Empresas extranjeras que desean abrir filial en el país',
+    ],
+    faq: [
+      { q: '¿Cuánto tiempo toma crear una empresa en Colombia?', a: 'Entre 1 y 3 semanas, dependiendo del tipo societario y la complejidad. Con SAS podemos hacerlo en pocos días.' },
+      { q: '¿Qué tipo de sociedad me recomienda?', a: 'La SAS es la más popular por su flexibilidad y protección de patrimonio. Pero analizamos su caso para recomendar la mejor opción.' },
+      { q: '¿Cuánto cuesta crear una empresa?', a: 'Depende del capital y tipo societario. Los costos incluyen registro mercantil, escritura pública y formularios. Le damos un presupuesto claro.' },
+    ],
+  },
+  {
+    icon: 'lucide:users',
+    slug: 'nomina',
+    title: 'Nómina y Gestión Laboral',
+    shortTitle: 'Nómina',
+    description: 'Liquidación de nómina, seguridad social, contratos laborales y obligaciones parafiscales. Gestión completa del recurso humano de su empresa.',
+    metaDescription: 'Servicio de nómina y gestión laboral en Colombia. Liquidación, seguridad social, contratos, parafiscales. Cumplimiento normativo laboral.',
+    heroDescription: 'Gestione la nómina de su empresa sin errores ni retrasos. Liquidación, seguridad social y obligaciones laborales al día.',
+    features: [
+      'Liquidación mensual de nómina precisa y oportuna',
+      'Cálculo y pago de aportes a seguridad social',
+      'Gestión de parafiscales (SENA, ICBF, CCF)',
+      'Elaboración y gestión de contratos laborales',
+      'Liquidación de prestaciones sociales y vacaciones',
+      'Acompañamiento en procesos de desvinculación laboral',
+    ],
+    benefits: [
+      'Evite demandas laborales por errores en la liquidación',
+      'Cumpla con todas las obligaciones laborales y parafiscales',
+      'Automatice el proceso de nómina y reduzca tiempo administrativo',
+      'Mantenga a sus empleados tranquilos con pagos correctos y a tiempo',
+    ],
+    who: [
+      'PYMES con empleados que tercerizan su gestión de nómina',
+      'Empresas en crecimiento que necesitan escalar su área de RH',
+      'Negocios que quieren evitar errores en liquidación de nómina',
+      'Startups que necesitan estructura laboral desde el inicio',
+    ],
+    faq: [
+      { q: '¿Qué incluye la liquidación de nómina?', a: 'Salarios, horas extra, recargos, comisiones, auxilio de transporte, aportes a seguridad social, parafiscales y prestaciones sociales.' },
+      { q: '¿Qué pasa si no pago a tiempo la seguridad social?', a: 'Genera mora e intereses, y los empleados pierden cobertura. Nosotros gestionamos los pagos para que nunca se venzan.' },
+      { q: '¿Cómo se liquidan las vacaciones y cesantías?', a: 'Las vacaciones son 15 días hábiles por año laborado. Las cesantías equivalen a un salario mensual por año. Calculamos todo correctamente.' },
+    ],
+  },
+  {
+    icon: 'lucide:scale',
+    slug: 'consultoria-tributaria',
+    title: 'Consultoría Tributaria',
+    shortTitle: 'Consultoría Tributaria',
+    description: 'Asesoría especializada en planeación tributaria, optimización fiscal, representación ante la DIAN y cumplimiento de obligaciones fiscales.',
+    metaDescription: 'Consultoría tributaria en Colombia. Planeación fiscal, optimización de impuestos, representación DIAN, régimen simple, IVA, retenciones. Estrategia fiscal.',
+    heroDescription: 'Estrategia fiscal inteligente para minimizar su carga tributaria dentro del marco legal.',
+    features: [
+      'Planeación tributaria estratégica para reducir su carga fiscal',
+      'Optimización del régimen tributario (Simple, Ordinario, Especial)',
+      'Liquidación y presentación de IVA y retenciones',
+      'Representación y defensa ante requerimientos de la DIAN',
+      'Revisión de procesos fiscales y detección de riesgos',
+      'Actualización permanente en reformas tributarias',
+    ],
+    benefits: [
+      'Pague menos impuestos de forma legal y transparente',
+      'Elimine el miedo a una fiscalización de la DIAN',
+      'Tenga una estrategia fiscal alineada con sus objetivos de negocio',
+      'Esté siempre actualizado con los cambios tributarios en Colombia',
+    ],
+    who: [
+      'Empresas que buscan optimizar su carga tributaria',
+      'Contribuyentes con requerimientos o procesos con la DIAN',
+      'Profesionales que necesitan asesoría fiscal especializada',
+      'Organizaciones que enfrentan una reforma tributaria',
+    ],
+    faq: [
+      { q: '¿Qué es la planeación tributaria?', a: 'Es la estrategia legal para organizar sus finanzas y operaciones de manera que pague la menor cantidad de impuestos posible, cumpliendo la ley.' },
+      { q: '¿Régimen Simple o Régimen Ordinario?', a: 'Depende de sus ingresos, actividades y estructura de costos. Analizamos su caso para recomendar el régimen más beneficioso.' },
+      { q: '¿Qué hago si recibo un requerimiento de la DIAN?', a: 'No lo ignore. Le representamos y respondemos dentro de los términos legales. Actuar rápido puede evitar sanciones mayores.' },
+    ],
+  },
+  {
+    icon: 'lucide:building',
+    slug: 'contabilidad-empresas',
+    title: 'Contabilidad para Empresas',
+    shortTitle: 'Contabilidad Empresas',
+    description: 'Gestión contable integral para empresas: estados financieros, NIIF, impuestos, revisoría fiscal. Su socio estratégico en finanzas empresariales.',
+    metaDescription: 'Contabilidad para empresas en Colombia. Estados financieros, NIIF, impuestos, revisoría fiscal. Gestión contable integral para PYMES y grandes empresas.',
+    heroDescription: 'Su empresa merece una contabilidad impecable. Gestión profesional, informes claros y cumplimiento normativo.',
+    features: [
+      'Contabilidad completa bajo Normas NIIF',
+      'Elaboración de estados financieros mensuales y anuales',
+      'Presentación de informes a la Superintendencia de Sociedades',
+      'Revisoría fiscal y auditoría de procesos',
+      'Análisis financiero para toma de decisiones estratégicas',
+      'Coordinación con su revisor fiscal o auditor externo',
+    ],
+    benefits: [
+      'Tome decisiones estratégicas basadas en información financiera real',
+      'Cumpla con todas las obligaciones contables ante entes de control',
+      'Atraiga inversionistas con estados financieros profesionales',
+      'Identifique oportunidades de mejora en la gestión de su empresa',
+    ],
+    who: [
+      'PYMES que necesitan contabilidad profesional bajo NIIF',
+      'Empresas obligadas a reportar a la Superintendencia de Sociedades',
+      'Organizaciones que buscan transparencia financiera',
+      'Compañías en proceso de crecimiento o búsqueda de inversión',
+    ],
+    faq: [
+      { q: '¿Qué son las NIIF y por qué son importantes?', a: 'Son los estándares internacionales de contabilidad. En Colombia son obligatorios y permiten que sus estados financieros sean comparables globalmente.' },
+      { q: '¿Cada cuánto debo presentar estados financieros?', a: 'Mensualmente para control interno y anualmente para cumplimiento legal. También se requieren cortes semestrales en algunos casos.' },
+      { q: '¿Qué pasa si no presento mis estados financieros a tiempo?', a: 'Puede generar multas de la Superintendencia de Sociedades y afectar su historial crediticio. Nosotros nos encargamos de las fechas límite.' },
+    ],
+  },
+  {
+    icon: 'lucide:user-check',
+    slug: 'contabilidad-personas',
+    title: 'Contabilidad para Personas Naturales',
+    shortTitle: 'Contabilidad Personas',
+    description: 'Organización financiera personal, declaración de renta, facturación como independiente. Control total de sus finanzas personales.',
+    metaDescription: 'Contabilidad para personas naturales en Colombia. Finanzas personales, declaración de renta, facturación como independiente. Organice sus impuestos.',
+    heroDescription: 'Organice sus finanzas personales y cumpla con la DIAN sin estrés. Acompañamiento cercano y precios justos.',
+    features: [
+      'Organización de ingresos y gastos personales',
+      'Declaración de renta para personas naturales',
+      'Facturación electrónica como independiente',
+      'Cálculo y pago de impuestos personales',
+      'Planeación financiera personal',
+      'Asesoría en compra de vivienda e inversiones',
+    ],
+    benefits: [
+      'Duerma tranquilo sabiendo que sus impuestos están al día',
+      'Aproveche todas las deducciones personales permitidas',
+      'Evite sanciones por no declarar o declarar incorrectamente',
+      'Tenga control total de sus finanzas personales',
+    ],
+    who: [
+      'Profesionales independientes que emiten facturas',
+      'Empleados con ingresos adicionales por honorarios',
+      'Personas naturales con patrimonio superior a 4.500 UVT',
+      'Independientes que necesitan organizar su situación fiscal',
+    ],
+    faq: [
+      { q: '¿Como independiente, estoy obligado a llevar contabilidad?', a: 'No formalmente, pero debe llevar un registro de sus ingresos y gastos para declarar renta y facturar electrónicamente.' },
+      { q: '¿Qué impuestos debo pagar como persona natural?', a: 'Principalmente renta, y si factura, también IVA y retenciones según su actividad económica.' },
+      { q: '¿Puedo deducir los gastos de mi vivienda si trabajo desde casa?', a: 'Sí, parcialmente. Gastos de internet, servicios públicos y adecuación del espacio de trabajo pueden ser deducibles en proporción.' },
+    ],
+  },
+]

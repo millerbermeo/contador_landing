@@ -1,0 +1,112 @@
+---
+import { Icon } from 'astro-icon/components';
+import WaIcon from './ui/WaIcon.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import type { BlogPost } from '../data/blog';
+import { SITE, waLink } from '../data/site';
+
+interface Props { post: BlogPost }
+
+const { post } = Astro.props;
+
+const words = post.content.split(/\s+/).length;
+const readTime = Math.max(1, Math.round(words / 200));
+---
+
+<Breadcrumbs crumbs={[
+  { label: 'Inicio', href: '/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: post.title },
+]} />
+
+<article class="max-w-3xl mx-auto">
+  <div class="flex flex-wrap items-center gap-3 mb-4">
+    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-accent-soft text-brand-700 border border-brand-200">
+      {post.category}
+    </span>
+    <span class="text-xs text-muted">{post.date}</span>
+    <span class="text-xs text-muted flex items-center gap-1">
+      <Icon name="lucide:clock" class="w-3 h-3" /> {readTime} min de lectura
+    </span>
+  </div>
+
+  <h1 class="text-3xl md:text-4xl mb-4">{post.title}</h1>
+
+  <div class="flex items-center gap-3 mb-8 pb-6 border-b border-border">
+    <div class="w-10 h-10 rounded-full bg-brand-700 grid place-items-center text-white text-sm font-semibold">
+      {post.author.split(' ').map(w => w[0]).join('').slice(0, 2)}
+    </div>
+    <div>
+      <span class="block text-sm font-semibold text-ink">{post.author}</span>
+      <span class="text-xs text-muted">{SITE.role}</span>
+    </div>
+  </div>
+
+  <div class="prose prose-sm sm:prose-base max-w-none">
+    {post.content.split('\n').map((line) => {
+      if (line.startsWith('## ')) {
+        return <h2 class="text-xl md:text-2xl mt-8 mb-4">{line.replace('## ', '')}</h2>;
+      }
+      if (line.startsWith('### ')) {
+        return <h3 class="text-lg mt-6 mb-3">{line.replace('### ', '')}</h3>;
+      }
+      if (line.startsWith('|')) {
+        return null;
+      }
+      if (line.startsWith('---')) {
+        return null;
+      }
+      if (line.startsWith('- ')) {
+        const parts = line.match(/- \*\*(.+?)\*\*: (.+)/);
+        if (parts) {
+          return (
+            <div class="flex items-start gap-2 mb-1">
+              <span class="text-brand-500 mt-1.5 shrink-0">•</span>
+              <p class="text-muted"><strong>{parts[1]}:</strong> {parts[2]}</p>
+            </div>
+          );
+        }
+        const parts2 = line.match(/- (.+?): (.+)/);
+        if (parts2) {
+          return (
+            <div class="flex items-start gap-2 mb-1">
+              <span class="text-brand-500 mt-1.5 shrink-0">•</span>
+              <p class="text-muted"><strong>{parts2[1]}:</strong> {parts2[2]}</p>
+            </div>
+          );
+        }
+        return (
+          <div class="flex items-start gap-2 mb-1">
+            <span class="text-brand-500 mt-1.5 shrink-0">•</span>
+            <p class="text-muted">{line.replace('- ', '')}</p>
+          </div>
+        );
+      }
+      if (line.match(/^\d+\. /)) {
+        return (
+          <div class="flex items-start gap-2 mb-1 ml-4">
+            <span class="text-brand-700 font-semibold shrink-0">{line.match(/^(\d+)\. /)?.[1]}.</span>
+            <p class="text-muted">{line.replace(/^\d+\.\s*/, '')}</p>
+          </div>
+        );
+      }
+      if (line.trim() === '') {
+        return <div class="h-3"></div>;
+      }
+      return <p class="text-muted leading-relaxed mb-4">{line}</p>;
+    })}
+  </div>
+
+  <div class="mt-10 pt-6 border-t border-border">
+    <div class="bg-brand-50/60 rounded-card p-6 flex flex-col sm:flex-row items-center gap-4">
+      <div class="text-center sm:text-left">
+        <h3 class="text-base mb-1">¿Necesita ayuda con este tema?</h3>
+        <p class="text-muted text-sm">Consulte a nuestro equipo de expertos sin compromiso.</p>
+      </div>
+      <a href={waLink(`Hola, vi el artículo "${post.title}" y me gustaría recibir asesoría.`)} target="_blank" rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300 shrink-0">
+        <WaIcon class="w-4 h-4" /> Consultar ahora
+      </a>
+    </div>
+  </div>
+</article>

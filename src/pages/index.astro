@@ -8,102 +8,126 @@ import AuthorCard from '../components/AuthorCard.astro';
 import AboutMe from '../components/AboutMe.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Tarifa from '../components/Tarifa.astro';
-import MenuAcordeon from '../components/MenuAcordeon.astro';
-import Articulos from '../components/Articulos.astro';
-import ImageCarousel from '../components/ImageCarousel.astro';
+import MenuAcordeon, { faqs } from '../components/MenuAcordeon.astro';
 import CtaFinal from '../components/CtaFinal.astro';
 import Footer from '../components/Footer.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import { Icon } from 'astro-icon/components';
-import { services } from '../utils/Services.astro';
 import { SITE, waLink } from '../data/site';
+import { accountingServiceSchema, faqSchema } from '../data/schema';
+
+const serviceGroups = [
+  {
+    icon: 'lucide:building-2',
+    title: 'Empresas',
+    items: ['Contabilidad', 'Nómina', 'Impuestos', 'Facturación electrónica', 'Consultoría financiera'],
+    whatsappMessage: 'Hola, me gustaría información sobre servicios contables para empresas.',
+  },
+  {
+    icon: 'lucide:rocket',
+    title: 'Emprendedores',
+    items: ['Creación de empresas', 'RUT', 'Facturación electrónica', 'Organización contable inicial'],
+    whatsappMessage: 'Hola, estoy emprendiendo y necesito asesoría contable.',
+  },
+  {
+    icon: 'lucide:user-check',
+    title: 'Personas naturales',
+    items: ['Declaración de renta', 'RUT', 'Obligaciones tributarias', 'Orientación financiera'],
+    whatsappMessage: 'Hola, soy persona natural y necesito asesoría contable.',
+  },
+];
 
 const trustPoints = [
-	{ icon: 'lucide:badge-check', label: 'Tarjeta profesional vigente' },
-	{ icon: 'lucide:clock', label: '+5 años de experiencia' },
-	{ icon: 'lucide:shield-check', label: 'Cumplimiento normativo DIAN' },
-	{ icon: 'lucide:message-circle', label: 'Respuesta rápida por WhatsApp' },
+  { icon: 'lucide:badge-check', label: 'Tarjeta profesional vigente' },
+  { icon: 'lucide:clock', label: '+5 años de experiencia' },
+  { icon: 'lucide:shield-check', label: 'Cumplimiento normativo DIAN' },
+  { icon: 'lucide:message-circle', label: 'Respuesta rápida por WhatsApp' },
 ];
 ---
 
-<Layout>
-	<Navbar />
-	<Whatsapp />
+<Layout
+  title="Líderes en Contabilidad | Asesoría Contable, Fiscal y Trámites DIAN"
+  description="Contador Público certificado en Colombia. Asesorías contables, declaración de renta, facturación electrónica y trámites ante la DIAN para empresas y personas naturales en Florencia, Caquetá."
+  schema={accountingServiceSchema()}
+>
+  <Navbar activePath="/" />
+  <Whatsapp />
 
-	<main>
-		<Home />
+  <main>
+    <Home />
 
-		<!-- Servicios -->
-		<section id="servicios" class="section bg-bg scroll-mt-20">
-			<div class="container-x flex flex-col items-center gap-14">
-				<SectionHeader
-					eyebrow="Portafolio"
-					title="Servicios Profesionales"
-					subtitle="Soluciones contables y fiscales adaptadas a las necesidades de su empresa."
-				/>
-				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-					{services.map((service, i) => (
-						<ServiceCard
-							icon={service.icon}
-							title={service.title}
-							items={service.items}
-							whatsappMessage={service.whatsappMessage}
-							delay={(i % 3) * 100}
-						/>
-					))}
-				</div>
-			</div>
-		</section>
+    <section id="servicios" class="section bg-bg scroll-mt-20">
+      <div class="container-x flex flex-col items-center gap-14">
+        <SectionHeader
+          eyebrow="Portafolio"
+          title="Servicios Profesionales"
+          subtitle="Soluciones contables y fiscales adaptadas a las necesidades de su empresa."
+        />
+        <div class="grid md:grid-cols-3 gap-6 w-full">
+          {serviceGroups.map((group, i) => (
+            <ServiceCard
+              icon={group.icon}
+              title={group.title}
+              items={group.items}
+              whatsappMessage={group.whatsappMessage}
+              href="/servicios/"
+              delay={i * 100}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
 
-		<AuthorCard />
-		<AboutMe />
-		<Testimonials />
-		<Tarifa />
+    <AuthorCard />
+    <AboutMe />
+    <Testimonials />
+    <Tarifa />
 
-		<!-- FAQ + galería -->
-		<section id="faq" class="section bg-brand-50/40 scroll-mt-20">
-			<div class="container-x flex flex-col items-center gap-14">
-				<SectionHeader
-					eyebrow="Preguntas Frecuentes"
-					title="¿Tiene dudas?"
-					subtitle="Resolvemos sus inquietudes sobre contabilidad y finanzas."
-				/>
+    <section id="faq" class="section bg-brand-50/40 scroll-mt-20">
+      <div class="container-x flex flex-col items-center gap-14">
+        <SectionHeader
+          eyebrow="Preguntas Frecuentes"
+          title="¿Tiene dudas?"
+          subtitle="Resolvemos sus inquietudes sobre contabilidad y finanzas."
+        />
 
-				<div class="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start w-full">
-					<div class="reveal">
-						<MenuAcordeon />
-					</div>
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start w-full">
+          <div class="reveal">
+            <MenuAcordeon />
+            <script type="application/ld+json" is:inline set:html={JSON.stringify({
+              '@context': 'https://schema.org',
+              ...faqSchema(faqs.map((f) => ({ q: f.question, a: f.answer }))),
+            })} />
+          </div>
 
-					<div class="reveal flex flex-col gap-5" data-reveal-delay="120">
-						<div class="rounded-card bg-surface border border-border shadow-soft p-7 flex flex-col gap-5">
-							<h3 class="text-lg">Por qué confiar en {SITE.fullName}</h3>
-							<ul class="grid sm:grid-cols-2 gap-4" role="list">
-								{trustPoints.map((t) => (
-									<li class="flex items-center gap-3">
-										<div class="w-9 h-9 rounded-xl bg-accent-soft grid place-items-center shrink-0">
-											<Icon name={t.icon} class="w-4 h-4 text-brand-500" />
-										</div>
-										<span class="text-sm text-ink font-medium leading-tight">{t.label}</span>
-									</li>
-								))}
-							</ul>
-						</div>
-						<div class="rounded-card bg-surface border border-border shadow-soft p-6 text-center flex flex-col items-center gap-3">
-							<p class="text-ink font-medium">¿Más preguntas sobre tarifas o servicios?</p>
-							<a href={waLink('Hola, tengo algunas preguntas sobre sus servicios.')} target="_blank" rel="noopener noreferrer"
-								class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full border border-brand-500 text-brand-700 font-semibold text-sm hover:bg-brand-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300">
-								Contáctenos <Icon name="lucide:arrow-right" class="w-4 h-4" />
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+          <div class="reveal flex flex-col gap-5" data-reveal-delay="120">
+            <div class="rounded-card bg-surface border border-border shadow-soft p-7 flex flex-col gap-5">
+              <h3 class="text-lg">Por qué confiar en {SITE.fullName}</h3>
+              <ul class="grid sm:grid-cols-2 gap-4" role="list">
+                {trustPoints.map((t) => (
+                  <li class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-accent-soft grid place-items-center shrink-0">
+                      <Icon name={t.icon} class="w-4 h-4 text-brand-500" />
+                    </div>
+                    <span class="text-sm text-ink font-medium leading-tight">{t.label}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="rounded-card bg-surface border border-border shadow-soft p-6 text-center flex flex-col items-center gap-3">
+              <p class="text-ink font-medium">¿Más preguntas sobre tarifas o servicios?</p>
+              <a href={waLink('Hola, tengo algunas preguntas sobre sus servicios.')} target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full border border-brand-500 text-brand-700 font-semibold text-sm hover:bg-brand-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300">
+                Contáctenos <Icon name="lucide:arrow-right" class="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-		<Articulos />
-		<ImageCarousel />
-		<CtaFinal />
-	</main>
+    <CtaFinal />
+  </main>
 
-	<Footer />
+  <Footer />
 </Layout>

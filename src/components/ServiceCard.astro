@@ -4,43 +4,51 @@ import WaIcon from './ui/WaIcon.astro';
 import { waLink } from '../data/site';
 
 export interface ServiceProps {
-	icon: string;
-	title: string;
-	items: string[];
-	whatsappMessage: string;
-	delay?: number;
+  icon: string;
+  title: string;
+  items: string[];
+  whatsappMessage: string;
+  href?: string;
+  delay?: number;
 }
 
-const { icon, title, items, whatsappMessage, delay = 0 } = Astro.props;
+const { icon, title, items, whatsappMessage, href, delay = 0 } = Astro.props;
 ---
 
 <article
-	class="reveal group bg-surface rounded-card border border-border shadow-soft p-7 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent"
-	data-reveal-delay={delay}
+  class="reveal group bg-surface rounded-card border border-border shadow-soft p-7 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent"
+  data-reveal-delay={delay}
 >
-	<!-- Ícono de línea en badge suave -->
-	<div class="w-12 h-12 rounded-xl bg-accent-soft grid place-items-center mb-5 group-hover:bg-brand-500 transition-colors duration-300">
-		<Icon name={icon} class="w-6 h-6 text-brand-500 group-hover:text-white transition-colors duration-300" />
-	</div>
+  <div class="w-12 h-12 rounded-xl bg-accent-soft grid place-items-center mb-5 group-hover:bg-brand-500 transition-colors duration-300">
+    <Icon name={icon} class="w-6 h-6 text-brand-500 group-hover:text-white transition-colors duration-300" />
+  </div>
 
-	<h3 class="text-lg leading-tight mb-4">{title}</h3>
+  <h3 class="text-lg leading-tight mb-4">{title}</h3>
 
-	<ul class="space-y-3 flex-1 mb-6" role="list">
-		{items.map((item) => (
-			<li class="flex items-start gap-2.5 text-muted text-sm leading-relaxed">
-				<Icon name="lucide:check" class="w-4 h-4 text-brand-500 mt-0.5 shrink-0" />
-				<span>{item}</span>
-			</li>
-		))}
-	</ul>
+  <ul class="space-y-3 flex-1 mb-6" role="list">
+    {items.map((item) => (
+      <li class="flex items-start gap-2.5 text-muted text-sm leading-relaxed">
+        <Icon name="lucide:check" class="w-4 h-4 text-brand-500 mt-0.5 shrink-0" />
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
 
-	<a
-		href={waLink(whatsappMessage)}
-		target="_blank"
-		rel="noopener noreferrer"
-		aria-label={`Contactar sobre ${title}`}
-		class="inline-flex items-center justify-center gap-2 w-full min-h-[44px] px-5 rounded-full border border-brand-500 text-brand-700 font-semibold text-sm hover:bg-brand-500 hover:text-white transition-all duration-300"
-	>
-		<WaIcon class="w-4 h-4" /> Solicitar por WhatsApp
-	</a>
+  <div class="flex flex-col gap-2">
+    {href && (
+      <a href={href}
+        class="inline-flex items-center justify-center gap-2 w-full min-h-[44px] px-5 rounded-full border border-brand-200 text-brand-700 font-medium text-sm hover:bg-brand-50 transition-all duration-300">
+        <Icon name="lucide:info" class="w-4 h-4" /> Ver más
+      </a>
+    )}
+    <a
+      href={waLink(whatsappMessage)}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Contactar sobre ${title}`}
+      class="inline-flex items-center justify-center gap-2 w-full min-h-[44px] px-5 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift transition-all duration-300"
+    >
+      <WaIcon class="w-4 h-4" /> Solicitar por WhatsApp
+    </a>
+  </div>
 </article>

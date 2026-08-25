@@ -1,0 +1,42 @@
+---
+interface Crumb { label: string; href?: string }
+interface Props { crumbs: Crumb[] }
+
+const { crumbs } = Astro.props;
+
+const items = crumbs.map((c, i) => ({
+  ...c,
+  isLast: i === crumbs.length - 1,
+  position: i + 1,
+}));
+---
+
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex flex-wrap items-center gap-1.5 text-sm text-muted">
+    {items.map((item) => (
+      <li class="flex items-center gap-1.5">
+        {!item.isLast ? (
+          <>
+            <a href={item.href} class="hover:text-brand-500 transition-colors">{item.label}</a>
+            <svg class="w-3.5 h-3.5 text-border" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </>
+        ) : (
+          <span class="text-ink font-medium" aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item) => ({
+    '@type': 'ListItem',
+    position: item.position,
+    name: item.label,
+    item: item.isLast ? undefined : `${Astro.site?.origin || ''}${item.href}`,
+  })),
+})} />
