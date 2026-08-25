@@ -6,6 +6,7 @@ import Home from '../components/Home.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import AuthorCard from '../components/AuthorCard.astro';
 import AboutMe from '../components/AboutMe.astro';
+import Testimonials from '../components/Testimonials.astro';
 import Tarifa from '../components/Tarifa.astro';
 import MenuAcordeon from '../components/MenuAcordeon.astro';
 import Articulos from '../components/Articulos.astro';
@@ -14,19 +15,14 @@ import CtaFinal from '../components/CtaFinal.astro';
 import Footer from '../components/Footer.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
 import { services } from '../utils/Services.astro';
-import { waLink } from '../data/site';
-import slide3 from '../assets/slide3.jpeg';
-import slide1 from '../assets/slide1-min.jpg';
-import slide2 from '../assets/slide2-min.jpg';
-import slide4 from '../assets/slide4.jpeg';
+import { SITE, waLink } from '../data/site';
 
-const faqGallery = [
-	{ src: slide3, alt: 'Servicios contables profesionales' },
-	{ src: slide1, alt: 'Asesoría financiera empresarial' },
-	{ src: slide2, alt: 'Contador público certificado' },
-	{ src: slide4, alt: 'Gestión empresarial y contable' },
+const trustPoints = [
+	{ icon: 'lucide:badge-check', label: 'Tarjeta profesional vigente' },
+	{ icon: 'lucide:clock', label: '+5 años de experiencia' },
+	{ icon: 'lucide:shield-check', label: 'Cumplimiento normativo DIAN' },
+	{ icon: 'lucide:message-circle', label: 'Respuesta rápida por WhatsApp' },
 ];
 ---
 
@@ -61,6 +57,7 @@ const faqGallery = [
 
 		<AuthorCard />
 		<AboutMe />
+		<Testimonials />
 		<Tarifa />
 
 		<!-- FAQ + galería -->
@@ -78,16 +75,23 @@ const faqGallery = [
 					</div>
 
 					<div class="reveal flex flex-col gap-5" data-reveal-delay="120">
-						<div class="grid grid-cols-2 gap-4">
-							{faqGallery.map((img) => (
-								<Image src={img.src} alt={img.alt} width={300} height={300} loading="lazy"
-									class="w-full aspect-square object-cover rounded-2xl shadow-soft border border-border" />
-							))}
+						<div class="rounded-card bg-surface border border-border shadow-soft p-7 flex flex-col gap-5">
+							<h3 class="text-lg">Por qué confiar en {SITE.fullName}</h3>
+							<ul class="grid sm:grid-cols-2 gap-4" role="list">
+								{trustPoints.map((t) => (
+									<li class="flex items-center gap-3">
+										<div class="w-9 h-9 rounded-xl bg-accent-soft grid place-items-center shrink-0">
+											<Icon name={t.icon} class="w-4 h-4 text-brand-500" />
+										</div>
+										<span class="text-sm text-ink font-medium leading-tight">{t.label}</span>
+									</li>
+								))}
+							</ul>
 						</div>
 						<div class="rounded-card bg-surface border border-border shadow-soft p-6 text-center flex flex-col items-center gap-3">
 							<p class="text-ink font-medium">¿Más preguntas sobre tarifas o servicios?</p>
 							<a href={waLink('Hola, tengo algunas preguntas sobre sus servicios.')} target="_blank" rel="noopener noreferrer"
-								class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:-translate-y-0.5 transition-all duration-300">
+								class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full border border-brand-500 text-brand-700 font-semibold text-sm hover:bg-brand-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300">
 								Contáctenos <Icon name="lucide:arrow-right" class="w-4 h-4" />
 							</a>
 						</div>

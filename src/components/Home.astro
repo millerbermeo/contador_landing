@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import Loader from './Loader.astro';
 import Qr from './Qr.astro';
 import Badge from './ui/Badge.astro';
 import WaIcon from './ui/WaIcon.astro';
@@ -8,10 +7,10 @@ import { Icon } from 'astro-icon/components';
 import { SITE, waLink } from '../data/site';
 import heroImg from '../assets/hd-max.jpg';
 
-const stats = [
-	{ serviceName: 'Clientes Satisfechos', percentage: 90 },
-	{ serviceName: 'Transparencia', percentage: 100 },
-	{ serviceName: 'Eficiencia', percentage: 100 },
+const credibility = [
+	{ icon: 'lucide:clock', label: '+5 años de experiencia' },
+	{ icon: 'lucide:badge-check', label: 'Contador Público certificado' },
+	{ icon: 'lucide:handshake', label: 'Atención personalizada y cercana' },
 ];
 ---
 
@@ -33,12 +32,12 @@ const stats = [
 
 				<h1 class="reveal" data-reveal-delay="60">
 					Líderes en <span class="text-brand-700">contabilidad</span>, con servicios financieros exclusivos para
-					<span class="relative inline-block text-brand-500">
-						personas y empresas
-						<svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 8" fill="none" aria-hidden="true">
+					<span class="relative inline-block text-brand-500 underline decoration-accent decoration-[3px] underline-offset-8 sm:no-underline">
+						personas y empresas.
+						<svg class="hidden sm:block absolute -bottom-1 left-0 w-full" viewBox="0 0 300 8" fill="none" aria-hidden="true">
 							<path class="hero-underline" d="M2 6 Q75 2 150 5 Q225 8 298 4" stroke="#8CC63F" stroke-width="3" stroke-linecap="round" />
 						</svg>
-					</span>.
+					</span>
 				</h1>
 
 				<p class="reveal text-muted text-base sm:text-lg leading-relaxed max-w-xl" data-reveal-delay="120">
@@ -57,9 +56,13 @@ const stats = [
 					</a>
 				</div>
 
-				<!-- Stats de anillo -->
-				<div class="reveal flex flex-wrap gap-6 sm:gap-8 mt-2" data-reveal-delay="240">
-					{stats.map((s) => <Loader percentage={s.percentage} serviceName={s.serviceName} />)}
+				<!-- Credenciales de confianza -->
+				<div class="reveal flex flex-wrap gap-3 mt-2" data-reveal-delay="240">
+					{credibility.map((c) => (
+						<span class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface border border-border shadow-soft text-sm font-medium text-ink">
+							<Icon name={c.icon} class="w-4 h-4 text-brand-500 shrink-0" /> {c.label}
+						</span>
+					))}
 				</div>
 			</div>
 
@@ -69,8 +72,11 @@ const stats = [
 					<!-- Glow detrás de la foto -->
 					<div class="absolute inset-0 rounded-full bg-accent/25 blur-3xl scale-90 pointer-events-none" aria-hidden="true"></div>
 
+				<!-- Foto (envoltorio con recorte fijo) -->
+				<div class="relative w-full h-full group cursor-pointer">
+
 					<!-- Tarjeta credencial flotante (desktop) -->
-					<div class="absolute -top-6 -right-2 lg:-right-6 bg-surface rounded-card shadow-lift p-4 z-20 w-44 border border-border hidden sm:block">
+					<div class="absolute -top-6 -right-2 lg:-right-6 bg-surface rounded-card shadow-lift p-4 z-20 w-44 border border-border hidden sm:block transition-opacity duration-300 group-hover:opacity-0">
 						<div class="w-10 h-10 rounded-xl bg-brand-50 grid place-items-center mb-2">
 							<Icon name="lucide:line-chart" class="w-5 h-5 text-brand-500" />
 						</div>
@@ -85,24 +91,32 @@ const stats = [
 					<div class="absolute inset-0 rounded-full border border-accent/30 scale-[1.1] animate-pulse-soft pointer-events-none" aria-hidden="true"></div>
 					<div class="absolute inset-0 rounded-full border border-accent/15 scale-[1.22] pointer-events-none" aria-hidden="true"></div>
 
-					<!-- Foto -->
-					<div class="relative w-full h-full group cursor-pointer">
+					<div class="relative w-full h-full rounded-full overflow-hidden shadow-lift border-4 border-surface ring-2 ring-accent/40">
 						<Image src={heroImg} alt={`${SITE.fullName}, Contador Público en Colombia`} width={480} height={480}
 							loading="eager" fetchpriority="high"
-							class="w-full h-full rounded-full object-cover shadow-lift border-4 border-surface ring-2 ring-accent/40 transition-transform duration-500 group-hover:scale-105" />
-						<div class="absolute inset-0 rounded-full bg-brand-900/90 flex flex-col gap-4 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-8">
-							<p class="italic text-sm font-light text-center text-white leading-relaxed">
+							class="absolute inset-x-0 top-0 w-full h-[168%] object-cover object-top transition-transform duration-500 group-hover:scale-110" />
+						<!-- Velo de marca para unificar tono -->
+						<div class="absolute inset-0 bg-gradient-to-t from-brand-900/35 via-transparent to-transparent mix-blend-multiply pointer-events-none" aria-hidden="true"></div>
+						<div class="absolute inset-0 bg-brand-700/10 mix-blend-color pointer-events-none" aria-hidden="true"></div>
+
+						<!-- Overlay hover -->
+						<div class="absolute inset-0 z-30 bg-brand-900/95 flex flex-col gap-3 items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-6">
+							<p class="italic text-xs sm:text-sm font-light text-white leading-relaxed max-w-[14rem]">
 								Actuando con seguridad y transparencia para su empresa.
 							</p>
 							<Qr />
+							<span class="inline-flex items-center gap-1.5 text-[0.7rem] text-accent font-semibold">
+								<WaIcon class="w-3.5 h-3.5" /> Escanéame para escribirme
+							</span>
 						</div>
 					</div>
 
 					<!-- Badge experiencia -->
-					<div class="absolute -bottom-4 -left-2 lg:-left-4 bg-brand-dark text-white rounded-card shadow-lift px-4 py-3 z-20">
+					<div class="absolute -bottom-4 -left-2 lg:-left-4 bg-brand-dark text-white rounded-card shadow-lift px-4 py-3 z-20 transition-opacity duration-300 group-hover:opacity-0">
 						<div class="font-serif text-2xl sm:text-3xl font-semibold leading-none">+5</div>
 						<div class="text-[0.65rem] text-white/70 font-medium mt-0.5">años de experiencia</div>
 					</div>
+				</div>
 				</div>
 			</div>
 

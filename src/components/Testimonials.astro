@@ -1,0 +1,60 @@
+---
+import { Icon } from 'astro-icon/components';
+import SectionHeader from './ui/SectionHeader.astro';
+
+/**
+ * EJEMPLO: reemplaza estos datos por testimonios reales de clientes
+ * (nombre, cargo/empresa, texto). Las iniciales se muestran si no hay foto.
+ */
+const testimonials = [
+	{
+		name: 'María Fernanda Rojas',
+		role: 'Gerente, Comercial Rojas SAS',
+		quote: 'Brian llevó mi contabilidad al día y me ayudó a evitar sanciones con la DIAN. Explica todo con claridad y siempre responde rápido.',
+		initials: 'MR',
+	},
+	{
+		name: 'Carlos Andrés Muñoz',
+		role: 'Emprendedor independiente',
+		quote: 'Empecé mi negocio sin saber nada de impuestos. Con su asesoría entendí mis obligaciones y ahora declaro tranquilo cada año.',
+		initials: 'CM',
+	},
+	{
+		name: 'Luisa Fernanda Trujillo',
+		role: 'Persona natural declarante',
+		quote: 'Atención muy personalizada y a tiempo. Resolvió mis dudas sobre la declaración de renta sin tecnicismos innecesarios.',
+		initials: 'LT',
+	},
+];
+---
+
+<section class="section bg-bg">
+	<div class="container-x flex flex-col items-center gap-14">
+		<SectionHeader
+			eyebrow="Testimonios"
+			title="Lo que dicen mis clientes"
+			subtitle="Experiencias reales de personas y empresas que confiaron en la asesoría."
+		/>
+
+		<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+			{testimonials.map((t, i) => (
+				<article
+					class="reveal relative bg-surface rounded-card border border-border shadow-soft p-7 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent"
+					data-reveal-delay={i * 120}
+				>
+					<Icon name="lucide:quote" class="w-8 h-8 text-brand-100" aria-hidden="true" />
+					<p class="text-ink text-sm leading-relaxed flex-1">"{t.quote}"</p>
+					<div class="flex items-center gap-3 pt-2 border-t border-border">
+						<div class="w-11 h-11 rounded-full bg-accent-soft border border-brand-200 grid place-items-center shrink-0">
+							<span class="font-serif font-semibold text-brand-700 text-sm">{t.initials}</span>
+						</div>
+						<div class="min-w-0">
+							<p class="font-semibold text-ink text-sm leading-tight truncate">{t.name}</p>
+							<p class="text-muted text-xs leading-tight truncate">{t.role}</p>
+						</div>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
