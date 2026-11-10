@@ -21,10 +21,8 @@ const post = blogPosts.find((p) => p.slug === 'que-es-la-facturacion-electronica
   <Navbar activePath="/blog/" />
   <Whatsapp />
 
-  <main>
-    <div class="container-x pt-8 pb-4">
-      <BlogDetail post={post} />
-    </div>
+  <main id="contenido" tabindex="-1" class="focus:outline-none">
+    <BlogDetail post={post} />
     <CtaFinal />
   </main>
 

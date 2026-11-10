@@ -44,68 +44,57 @@ const tarifas = [
 ];
 ---
 
-<section id="precios" class="section bg-bg scroll-mt-20">
-	<div class="container-x flex flex-col items-center gap-14">
+<section id="precios" class="section">
+	<div class="container-x flex flex-col items-center gap-12 sm:gap-16">
 		<SectionHeader
 			eyebrow="Planes y Tarifas"
 			title="Precios Claros y Accesibles"
 			subtitle="Elija el plan que mejor se adapte a sus necesidades. Sin costos ocultos."
 		/>
 
-		<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch w-full pt-3">
+		<ul class="grid w-full items-stretch gap-5 pt-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4 xl:gap-5" role="list">
 			{tarifas.map((t, i) => (
-				<div
+				<li
 					class:list={[
-						'reveal relative rounded-card bg-surface flex flex-col p-7 transition-all duration-300 hover:-translate-y-1',
-						t.destacado
-							? 'border-2 border-accent shadow-glow'
-							: 'border border-border shadow-soft hover:shadow-lift hover:border-accent',
+						'reveal card card-interactive relative flex flex-col p-6 sm:p-7',
+						t.destacado && 'border-transparent bg-brand-dark text-white shadow-float lg:-my-3 lg:py-10',
 					]}
-					data-reveal-delay={i * 100}
+					data-reveal-delay={i * 80}
 				>
 					{t.badge && (
 						<span class:list={[
-							'absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[0.7rem] font-bold uppercase tracking-wider',
-							t.destacado ? 'bg-accent text-brand-900' : 'bg-brand-700 text-white',
+							'absolute -top-3 left-6 rounded-full px-3 py-1 text-2xs font-bold uppercase tracking-[0.12em]',
+							t.destacado ? 'bg-accent text-brand-950 shadow-lift' : 'bg-surface text-brand-700 ring-1 ring-inset ring-brand-200',
 						]}>
 							{t.badge}
 						</span>
 					)}
 
-					<h3 class="text-lg mb-3">{t.servicio}</h3>
+					<h3 class:list={['text-h4 font-sans font-semibold tracking-tight', t.destacado && 'text-white']}>{t.servicio}</h3>
 
-					<div class="mb-5">
-						<div class="font-serif text-2xl font-semibold leading-tight text-brand-700">{t.precio}</div>
-						{t.moneda && <div class="text-xs font-medium text-muted mt-0.5">{t.moneda}</div>}
-					</div>
+					<p class="mt-4">
+						<span class:list={['block font-serif text-[1.75rem] font-semibold leading-[1.1] tracking-[-0.02em] tabular-nums', t.destacado ? 'text-white' : 'text-ink']}>{t.precio}</span>
+						{t.moneda && <span class:list={['mt-1 block text-xs font-medium', t.destacado ? 'text-brand-200' : 'text-muted']}>{t.moneda}</span>}
+					</p>
 
-					<p class="text-muted text-sm leading-relaxed flex-1 mb-6">{t.descripcion}</p>
+					<p class:list={['mt-5 flex-1 text-sm leading-relaxed', t.destacado ? 'text-white/80' : 'text-muted']}>{t.descripcion}</p>
 
-					<div class="w-full h-px bg-border mb-6"></div>
+					<div class:list={['my-6 h-px w-full', t.destacado ? 'bg-white/15' : 'bg-border']} aria-hidden="true"></div>
 
-					<a
-						href={waLink(t.whatsapp)}
-						target="_blank"
-						rel="noopener noreferrer"
-						class:list={[
-							'inline-flex items-center justify-center gap-2 w-full min-h-[44px] px-5 rounded-full font-semibold text-sm transition-all duration-300',
-							t.destacado
-								? 'bg-brand-500 text-white shadow-soft hover:bg-brand-600 hover:shadow-lift'
-								: 'border border-brand-500 text-brand-700 hover:bg-brand-500 hover:text-white',
-						]}
-					>
-						<WaIcon class="w-4 h-4" /> Consultar precio
+					<a href={waLink(t.whatsapp)} target="_blank" rel="noopener noreferrer"
+						aria-label={`Consultar precio: ${t.servicio}`}
+						class:list={['btn btn-block', t.destacado ? 'btn-inverse' : 'btn-secondary']}>
+						<WaIcon class="h-4 w-4" /> Consultar precio
 					</a>
-				</div>
+				</li>
 			))}
-		</div>
+		</ul>
 
-		<p class="reveal text-center text-sm text-muted max-w-2xl">
+		<p class="reveal max-w-2xl text-center text-sm text-muted">
 			Los precios pueden variar según la complejidad y el alcance de cada caso.
-			<a href={waLink('Hola, quisiera una cotización personalizada.')} target="_blank" rel="noopener noreferrer"
-				class="inline-flex items-center gap-1 text-brand-600 font-medium hover:text-brand-700 ml-1">
+			<a href={waLink('Hola, quisiera una cotización personalizada.')} target="_blank" rel="noopener noreferrer" class="link ml-1 inline-flex items-center gap-1">
 				Contáctenos para una cotización personalizada
-				<Icon name="lucide:arrow-right" class="w-3.5 h-3.5" />
+				<Icon name="lucide:arrow-right" class="h-3.5 w-3.5" aria-hidden="true" />
 			</a>
 		</p>
 	</div>

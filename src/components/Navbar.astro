@@ -3,7 +3,8 @@ import { Icon } from 'astro-icon/components';
 import WaIcon from './ui/WaIcon.astro';
 import { SITE, waLink, HEADER_LINKS } from '../data/site';
 
-const { activePath = '/' } = Astro.props;
+interface Props { activePath?: string }
+const { activePath = '' } = Astro.props;
 
 const social = [
   { label: 'Facebook', href: SITE.facebook, icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
@@ -17,152 +18,250 @@ function isActive(href: string) {
 }
 ---
 
-<div id="topbar" class="hidden lg:block bg-brand-900 text-white/85 text-xs transition-all duration-300">
-  <div class="container-x flex justify-between items-center py-2">
-    <div class="flex items-center gap-6">
-      <a href={`mailto:${SITE.email}`} class="flex items-center gap-1.5 hover:text-accent transition-colors">
-        <Icon name="lucide:mail" class="w-3.5 h-3.5" /> {SITE.email}
-      </a>
-      <a href={waLink()} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-accent transition-colors">
-        <WaIcon class="w-3.5 h-3.5" /> {SITE.whatsappDisplay}
-      </a>
-      <a href={`tel:${SITE.phoneRaw}`} class="flex items-center gap-1.5 hover:text-accent transition-colors">
-        <Icon name="lucide:phone" class="w-3.5 h-3.5" /> {SITE.phone}
-      </a>
-      <span class="flex items-center gap-1.5 text-white/60">
-        <Icon name="lucide:map-pin" class="w-3.5 h-3.5" /> {SITE.location}
-      </span>
-    </div>
-    <div class="flex items-center gap-4">
-      {social.map((s) => (
-        <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} class="text-white/70 hover:text-accent transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
+<!-- Barra de contacto (solo escritorio) -->
+<div class="hidden bg-brand-950 text-[0.8125rem] text-white/80 lg:block">
+  <div class="container-x flex h-10 items-center justify-between">
+    <ul class="flex items-center gap-6" role="list">
+      <li>
+        <a href={`mailto:${SITE.email}`} class="inline-flex min-h-[32px] items-center gap-1.5 rounded-md transition-colors duration-150 hover:text-white">
+          <Icon name="lucide:mail" class="h-3.5 w-3.5 text-brand-300" aria-hidden="true" /> {SITE.email}
         </a>
+      </li>
+      <li>
+        <a href={waLink()} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[32px] items-center gap-1.5 rounded-md transition-colors duration-150 hover:text-white">
+          <WaIcon class="h-3.5 w-3.5 text-brand-300" /> {SITE.whatsappDisplay}
+        </a>
+      </li>
+      <li>
+        <a href={`tel:${SITE.phoneRaw}`} class="inline-flex min-h-[32px] items-center gap-1.5 rounded-md transition-colors duration-150 hover:text-white">
+          <Icon name="lucide:phone" class="h-3.5 w-3.5 text-brand-300" aria-hidden="true" /> {SITE.phone}
+        </a>
+      </li>
+      <li class="inline-flex items-center gap-1.5 text-white/70">
+        <Icon name="lucide:map-pin" class="h-3.5 w-3.5 text-brand-300" aria-hidden="true" /> {SITE.location}
+      </li>
+    </ul>
+    <ul class="flex items-center gap-1" role="list">
+      {social.map((s) => (
+        <li>
+          <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+            class="grid h-8 w-8 place-items-center rounded-full text-white/75 transition-colors duration-150 hover:bg-white/10 hover:text-white">
+            <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
   </div>
 </div>
 
-<nav id="main-nav" class="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-border transition-all duration-300" aria-label="Navegación principal">
-  <div class="container-x flex justify-between items-center py-3 lg:py-4">
-    <a href="/" class="flex items-center gap-3 group" aria-label="Ir al inicio">
-      <img src="/logotipo.jpeg" alt={`${SITE.name} ${SITE.nameSuffix}`} width="40" height="40" class="h-10 w-10 rounded-full object-cover ring-1 ring-border group-hover:ring-accent transition-all duration-300" />
-      <div class="leading-tight">
-        <span class="block font-serif font-semibold text-brand-700 text-base tracking-tight">Brian Pedraza</span>
-        <span class="block text-accent text-[0.65rem] font-semibold tracking-[0.2em] uppercase">Contador Público</span>
-        <span class="block text-muted text-[0.6rem] tracking-tight">Fundador de BP Asesorías Contables</span>
-      </div>
+<header id="site-header" class="site-header sticky top-0 z-50">
+  <nav class="container-x flex h-16 items-center justify-between gap-4" aria-label="Navegación principal">
+    <a href="/" class="group flex min-w-0 items-center gap-3 rounded-xl" aria-label={`${SITE.fullName}, Contador Público. Ir al inicio`}>
+      <img src="/logotipo.jpeg" alt="" width="40" height="40"
+        class="h-10 w-10 shrink-0 rounded-full object-cover ring-1 ring-border transition-transform duration-250 ease-spring group-hover:scale-105" />
+      <span class="min-w-0 leading-tight">
+        <span class="block truncate font-serif text-[1.0625rem] font-semibold tracking-tight text-ink">Brian Pedraza</span>
+        <span class="block truncate text-2xs font-semibold uppercase tracking-[0.16em] text-brand-700">Contador Público</span>
+        <span class="hidden truncate text-2xs text-muted sm:block">Fundador de BP Asesorías Contables</span>
+      </span>
     </a>
 
-    <div class="hidden md:flex items-center gap-8">
+    <ul class="hidden items-center gap-0.5 lg:flex" role="list">
       {HEADER_LINKS.slice(0, 5).map((link) => (
-        <a href={link.href}
-          class:list={[
-            'desk-nav-link relative text-sm font-medium transition-colors pb-1 group',
-            isActive(link.href) ? 'text-brand-700 font-semibold' : 'text-muted hover:text-brand-700',
-          ]}>
-          {link.label}
-          <span class:list={[
-            'absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 rounded-full',
-            isActive(link.href) ? 'w-full' : 'w-0 group-hover:w-full',
-          ]}></span>
-        </a>
+        <li>
+          <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}
+            class="inline-flex h-10 items-center rounded-full px-3.5 text-sm font-medium text-ink-soft transition-colors duration-150 hover:bg-ink/[0.05] hover:text-ink aria-[current=page]:bg-brand-50 aria-[current=page]:text-brand-700">
+            {link.label}
+          </a>
+        </li>
       ))}
-      <a href={waLink()} target="_blank" rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 min-h-[44px] px-5 rounded-full bg-brand-500 text-white text-sm font-semibold shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
-        <WaIcon class="w-4 h-4" /> Contactar ahora
+    </ul>
+
+    <div class="flex shrink-0 items-center gap-2">
+      <a href={waLink()} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm hidden sm:inline-flex">
+        <WaIcon class="h-4 w-4" /> Contactar ahora
       </a>
+
+      <button id="menu-toggle" type="button"
+        class="relative grid h-11 w-11 place-items-center rounded-full text-ink transition-colors duration-150 hover:bg-ink/[0.06] lg:hidden"
+        aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
+        <span class="burger" aria-hidden="true"><span></span><span></span></span>
+      </button>
     </div>
-
-    <button type="button" id="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu"
-      class="md:hidden grid place-items-center w-11 h-11 rounded-xl text-brand-700 hover:bg-brand-50 transition-colors">
-      <Icon id="hamburger-icon" name="lucide:menu" class="w-6 h-6" />
-      <Icon id="close-icon" name="lucide:x" class="w-6 h-6 hidden" />
-    </button>
-  </div>
-</nav>
-
-<div id="mobile-overlay" class="fixed inset-0 bg-brand-900/50 backdrop-blur-sm z-40 opacity-0 invisible transition-all duration-300 md:hidden" aria-hidden="true"></div>
-
-<aside id="mobile-menu" class="fixed top-0 right-0 h-full w-[min(20rem,85vw)] bg-surface z-50 translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl flex flex-col" aria-hidden="true" aria-label="Menú de navegación móvil">
-  <div class="flex items-center justify-between p-5 border-b border-border">
-    <div class="flex items-center gap-3">
-      <img src="/logotipo.jpeg" alt="" width="36" height="36" class="h-9 w-9 rounded-full object-cover" />
-      <div class="leading-tight">
-        <span class="block font-serif font-semibold text-brand-700 text-sm">Brian Pedraza</span>
-        <span class="block text-accent text-[0.6rem] font-semibold tracking-[0.2em] uppercase">Contador Público</span>
-        <span class="block text-muted text-[0.55rem] tracking-tight">Fundador de BP Asesorías Contables</span>
-      </div>
-    </div>
-    <button id="close-menu" class="grid place-items-center w-10 h-10 rounded-xl text-muted hover:bg-brand-50 transition-colors" aria-label="Cerrar menú">
-      <Icon name="lucide:x" class="w-5 h-5" />
-    </button>
-  </div>
-
-  <nav class="flex flex-col p-4 gap-1 flex-1" aria-label="Menú móvil">
-    {HEADER_LINKS.map((link) => (
-      <a href={link.href}
-        class:list={[
-          'mobile-link flex items-center gap-3 min-h-[44px] px-4 rounded-xl transition-colors',
-          isActive(link.href) ? 'bg-brand-50 text-brand-700 font-semibold' : 'text-ink font-medium hover:bg-brand-50 hover:text-brand-700',
-        ]}>
-        <span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
-        {link.label}
-      </a>
-    ))}
   </nav>
 
-  <div class="p-4 border-t border-border">
-    <a href={waLink()} target="_blank" rel="noopener noreferrer"
-      class="flex items-center justify-center gap-2 w-full min-h-[48px] bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-colors shadow-soft">
-      <WaIcon class="w-5 h-5" /> Contactar por WhatsApp
-    </a>
+  <!-- Menú móvil: hoja que baja desde la barra (misma ruta de entrada y salida) -->
+  <div id="menu-scrim" class="menu-scrim lg:hidden" aria-hidden="true"></div>
+  <div id="mobile-menu" class="menu-panel lg:hidden" inert aria-label="Menú principal" role="dialog" aria-modal="true">
+    <div class="container-x max-h-[calc(100dvh-4rem)] overflow-y-auto pb-6 pt-2">
+      <ul class="flex flex-col" role="list">
+        {HEADER_LINKS.map((link) => (
+          <li class="border-b border-border last:border-b-0">
+            <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}
+              class="flex min-h-[52px] items-center justify-between text-lg font-medium text-ink transition-colors duration-150 hover:text-brand-700 aria-[current=page]:text-brand-700">
+              {link.label}
+              <Icon name="lucide:chevron-right" class="h-5 w-5 text-border-strong" aria-hidden="true" />
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a href={waLink()} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg btn-block mt-5">
+        <WaIcon class="h-5 w-5" /> Contactar por WhatsApp
+      </a>
+
+      <ul class="mt-6 grid gap-1 text-sm text-muted" role="list">
+        <li><a href={`tel:${SITE.phoneRaw}`} class="inline-flex min-h-[44px] items-center gap-2 hover:text-ink"><Icon name="lucide:phone" class="h-4 w-4 text-brand-700" aria-hidden="true" /> {SITE.phone}</a></li>
+        <li><a href={`mailto:${SITE.email}`} class="inline-flex min-h-[44px] items-center gap-2 break-all hover:text-ink"><Icon name="lucide:mail" class="h-4 w-4 text-brand-700" aria-hidden="true" /> {SITE.email}</a></li>
+        <li class="inline-flex min-h-[44px] items-center gap-2"><Icon name="lucide:map-pin" class="h-4 w-4 text-brand-700" aria-hidden="true" /> {SITE.location}</li>
+      </ul>
+
+      <ul class="mt-4 flex gap-2" role="list">
+        {social.map((s) => (
+          <li>
+            <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+              class="grid h-11 w-11 place-items-center rounded-full border border-border bg-surface text-ink-soft transition-colors duration-150 hover:border-border-strong hover:text-ink">
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
-</aside>
+</header>
+
+<style>
+  /* Material translúcido tipo Apple: blur + saturate; el borde aparece solo al desplazarse (scroll-edge). */
+  .site-header {
+    background: var(--material-bg);
+    -webkit-backdrop-filter: var(--material-filter);
+    backdrop-filter: var(--material-filter);
+    box-shadow: 0 1px 0 transparent;
+    transition: box-shadow 250ms ease, background-color 250ms ease;
+  }
+  .site-header[data-scrolled] {
+    box-shadow: 0 1px 0 rgba(20, 28, 13, 0.08), 0 8px 24px -16px rgba(20, 28, 13, 0.18);
+  }
+  .site-header[data-open] {
+    background: rgba(250, 250, 246, 0.96);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .site-header { background: rgba(250, 250, 246, 0.97); }
+  }
+
+  /* Hamburguesa a X */
+  .burger { position: relative; display: block; width: 18px; height: 12px; }
+  .burger span {
+    position: absolute; left: 0; right: 0; height: 1.75px; border-radius: 2px; background: currentColor;
+    transition: transform 250ms var(--ease-spring);
+  }
+  .burger span:first-child { top: 2px; }
+  .burger span:last-child { bottom: 2px; }
+  [aria-expanded='true'] .burger span:first-child { transform: translateY(3.125px) rotate(45deg); }
+  [aria-expanded='true'] .burger span:last-child { transform: translateY(-3.125px) rotate(-45deg); }
+
+  /* Hoja del menú: entra y sale por la misma ruta, con origen en la barra. */
+  .menu-panel {
+    position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 24px 48px -24px rgba(20, 28, 13, 0.25);
+    transform-origin: top center;
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+    visibility: hidden;
+    transition:
+      opacity 200ms var(--ease-spring),
+      transform 250ms var(--ease-spring),
+      visibility 0s linear 250ms;
+  }
+  .menu-panel[data-open] {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  .menu-scrim {
+    position: fixed; inset: 4rem 0 0 0;
+    background: rgba(20, 28, 13, 0.32);
+    opacity: 0; visibility: hidden;
+    transition: opacity 250ms ease, visibility 0s linear 250ms;
+  }
+  .menu-scrim[data-open] { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-panel { transform: none; transition: opacity 150ms ease, visibility 0s linear 150ms; }
+    .menu-panel[data-open] { transition-delay: 0s; }
+    .burger span { transition: none; }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .site-header { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-contrast: more) {
+    .site-header { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 1px 0 var(--ink); }
+    .menu-panel { border-bottom-color: var(--ink); }
+  }
+</style>
 
 <script>
-  const mainNav = document.getElementById('main-nav');
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const overlay = document.getElementById('mobile-overlay');
-  const closeBtn = document.getElementById('close-menu');
-  const hamburger = document.getElementById('hamburger-icon');
-  const closeIcon = document.getElementById('close-icon');
+  const header = document.getElementById('site-header') as HTMLElement;
+  const toggle = document.getElementById('menu-toggle') as HTMLButtonElement;
+  const panel = document.getElementById('mobile-menu') as HTMLElement;
+  const scrim = document.getElementById('menu-scrim') as HTMLElement;
 
-  function openMenu() {
-    mobileMenu.classList.remove('translate-x-full');
-    mobileMenu.setAttribute('aria-hidden', 'false');
-    overlay.classList.remove('opacity-0', 'invisible');
-    menuToggle.setAttribute('aria-expanded', 'true');
-    hamburger.classList.add('hidden');
-    closeIcon.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-    mobileMenu.querySelector('a')?.focus();
+  // Borde/sombra solo cuando hay contenido bajo la barra
+  const onScroll = () => header.toggleAttribute('data-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  let isOpen = false;
+  const focusables = () => [toggle, ...panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')];
+
+  function setOpen(next: boolean, restoreFocus = true) {
+    if (isOpen === next) return;
+    isOpen = next;
+    toggle.setAttribute('aria-expanded', String(next));
+    toggle.setAttribute('aria-label', next ? 'Cerrar menú' : 'Abrir menú');
+    [panel, scrim, header].forEach((el) => el.toggleAttribute('data-open', next));
+    panel.inert = !next;
+    document.documentElement.style.overflow = next ? 'hidden' : '';
+    if (next) {
+      panel.querySelector<HTMLElement>('a[href]')?.focus({ preventScroll: true });
+    } else if (restoreFocus) {
+      toggle.focus({ preventScroll: true });
+    }
   }
-  function closeMenu() {
-    mobileMenu.classList.add('translate-x-full');
-    mobileMenu.setAttribute('aria-hidden', 'true');
-    overlay.classList.add('opacity-0', 'invisible');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    hamburger.classList.remove('hidden');
-    closeIcon.classList.add('hidden');
-    document.body.style.overflow = '';
-  }
-  const isOpen = () => !mobileMenu.classList.contains('translate-x-full');
 
-  menuToggle.addEventListener('click', openMenu);
-  closeBtn.addEventListener('click', () => { closeMenu(); menuToggle.focus(); });
-  overlay.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen()) { closeMenu(); menuToggle.focus(); } });
+  toggle.addEventListener('click', () => setOpen(!isOpen));
+  scrim.addEventListener('click', () => setOpen(false));
+  panel.addEventListener('click', (ev) => {
+    if ((ev.target as HTMLElement).closest('a')) setOpen(false, false);
+  });
 
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY > 10;
-    mainNav.classList.toggle('shadow-soft', scrolled);
-    mainNav.classList.toggle('bg-bg/95', scrolled);
-    mainNav.classList.toggle('bg-bg/80', !scrolled);
-  }, { passive: true });
+  document.addEventListener('keydown', (ev: KeyboardEvent) => {
+    if (!isOpen) return;
+    if (ev.code === 'Escape') {
+      ev.preventDefault();
+      setOpen(false);
+      return;
+    }
+    if (ev.code === 'Tab') {
+      // Trampa de foco: botón de cierre + enlaces del panel
+      const items = focusables();
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (ev.shiftKey && document.activeElement === first) {
+        ev.preventDefault();
+        last.focus();
+      } else if (!ev.shiftKey && document.activeElement === last) {
+        ev.preventDefault();
+        first.focus();
+      }
+    }
+  });
 
-  document.querySelectorAll('.mobile-link').forEach((link) => {
-    link.addEventListener('click', () => { if (isOpen()) closeMenu(); });
+  // Al pasar a escritorio el menú móvil deja de existir
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', (mq) => {
+    if (mq.matches) setOpen(false, false);
   });
 </script>

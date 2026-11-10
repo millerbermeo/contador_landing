@@ -6,6 +6,7 @@ import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CtaFinal from '../../components/CtaFinal.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
+import Accordion from '../../components/ui/Accordion.astro';
 import WaIcon from '../../components/ui/WaIcon.astro';
 import { Icon } from 'astro-icon/components';
 import { waLink } from '../../data/site';
@@ -38,69 +39,33 @@ const faqs = [
   <Navbar activePath="/contador-en-huila/" />
   <Whatsapp />
 
-  <main>
-    <div class="container-x pt-8 pb-4">
+  <main id="contenido" tabindex="-1" class="focus:outline-none">
+    <section class="relative isolate overflow-hidden border-b border-border">
+      <div class="bg-aurora pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+      <div class="bg-dots pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true"></div>
+      <div class="container-x pb-14 pt-8 sm:pb-20 sm:pt-10">
       <Breadcrumbs crumbs={[
         { label: 'Inicio', href: '/' },
         { label: 'Contador para el Huila' },
       ]} />
-    </div>
-
-    <section class="section pt-0">
-      <div class="container-x">
-        <div class="max-w-3xl">
-          <span class="eyebrow block mb-2 flex items-center gap-2">
-            <Icon name="lucide:map-pin" class="w-4 h-4" /> Huila
+        <div class="mt-8 max-w-3xl sm:mt-12">
+          <span class="reveal eyebrow">
+            <Icon name="lucide:map-pin" class="h-3.5 w-3.5" aria-hidden="true" /> Huila
           </span>
-          <h1 class="text-3xl md:text-4xl mb-4">Contador Público para el Huila: Neiva y municipios cercanos</h1>
-          <p class="text-muted text-lg leading-relaxed mb-4">
+          <h1 class="reveal mt-4" data-reveal-delay="60">Contador Público para el Huila: Neiva y municipios cercanos</h1>
+          <p class="reveal lead mt-5" data-reveal-delay="120">
             Ofrezco asesoría contable y tributaria a distancia para empresas, comerciantes, independientes y personas naturales del Huila. La gestión documental, la comunicación y la presentación de declaraciones se realizan de forma remota, por WhatsApp, correo electrónico y videollamada, con la misma calidad y cumplimiento de plazos que una atención presencial.
           </p>
-          <p class="text-muted text-sm mb-6">
+          <p class="reveal mt-4 text-sm text-muted" data-reveal-delay="160">
             Cobertura remota en: {huilaMunicipios.join(' · ')} y demás municipios del departamento.
           </p>
-          <div class="flex flex-wrap gap-3">
-            <a href={waLink('Hola, estoy en el Huila y busco un contador público a distancia.')} target="_blank" rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
-              <WaIcon class="w-4 h-4" /> Escribir por WhatsApp
+          <div class="reveal mt-8 flex flex-col gap-3 sm:flex-row" data-reveal-delay="200">
+            <a href={waLink('Hola, estoy en el Huila y busco un contador público a distancia.')} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+              <WaIcon class="h-4 w-4" /> Escribir por WhatsApp
             </a>
-            <a href="/contacto/"
-              class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full border border-brand-500 text-brand-700 font-semibold text-sm hover:bg-brand-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300">
+            <a href="/contacto/" class="btn btn-secondary btn-lg">
               Otros medios de contacto
             </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section pt-0 bg-brand-50/40">
-      <div class="container-x">
-        <SectionHeader
-          eyebrow="Cómo funciona"
-          title="Asesoría contable a distancia, paso a paso"
-          subtitle="Sin necesidad de desplazarse ni de que el contador esté físicamente en su municipio."
-        />
-        <div class="grid sm:grid-cols-3 gap-5 mt-10">
-          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
-            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
-              <Icon name="lucide:message-circle" class="w-5 h-5 text-brand-500" />
-            </div>
-            <h2 class="text-base mb-2">1. Cuéntenos su caso</h2>
-            <p class="text-muted text-sm leading-relaxed">Escriba por WhatsApp indicando si es persona natural o empresa, y qué necesita: declaración de renta, contabilidad, facturación electrónica u otro trámite.</p>
-          </div>
-          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
-            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
-              <Icon name="lucide:file-up" class="w-5 h-5 text-brand-500" />
-            </div>
-            <h2 class="text-base mb-2">2. Envíe sus documentos</h2>
-            <p class="text-muted text-sm leading-relaxed">RUT, extractos, facturas o soportes se envían digitalmente. Revisamos su información y le confirmamos qué falta, sin necesidad de reuniones presenciales.</p>
-          </div>
-          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
-            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
-              <Icon name="lucide:badge-check" class="w-5 h-5 text-brand-500" />
-            </div>
-            <h2 class="text-base mb-2">3. Presentación y cumplimiento</h2>
-            <p class="text-muted text-sm leading-relaxed">Presentamos su declaración o trámite ante la DIAN de forma electrónica, dentro de los plazos legales, con soporte por videollamada si lo necesita.</p>
           </div>
         </div>
       </div>
@@ -109,46 +74,72 @@ const faqs = [
     <section class="section">
       <div class="container-x">
         <SectionHeader
-          eyebrow="Servicios"
-          title="Servicios disponibles para el Huila"
-          subtitle="Portafolio de asesoría contable y tributaria disponible de forma remota."
+          eyebrow="Cómo funciona"
+          title="Asesoría contable a distancia, paso a paso"
+          subtitle="Sin necesidad de desplazarse ni de que el contador esté físicamente en su municipio."
         />
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {localServices.map((s) => (
-            <a href={`/servicios/${s.slug}/`}
-              class="group bg-surface rounded-card border border-border shadow-soft p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent">
-              <div class="w-11 h-11 rounded-xl bg-accent-soft grid place-items-center mb-4 group-hover:bg-brand-500 transition-colors duration-300">
-                <Icon name={s.icon} class="w-5 h-5 text-brand-500 group-hover:text-white transition-colors duration-300" />
-              </div>
-              <h3 class="text-base mb-2">{s.title}</h3>
-              <p class="text-muted text-sm leading-relaxed flex-1">{s.heroDescription}</p>
-              <span class="inline-flex items-center gap-1 text-brand-500 text-sm font-semibold mt-4">
-                Ver servicio <Icon name="lucide:arrow-right" class="w-4 h-4" />
-              </span>
-            </a>
-          ))}
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6" data-stagger>
+          <div class="reveal card p-6 sm:p-7">
+            <span class="icon-tile mb-5">
+              <Icon name="lucide:message-circle" class="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h3 class="mb-2 font-sans text-base font-semibold text-ink">1. Cuéntenos su caso</h3>
+            <p class="text-muted text-sm leading-relaxed">Escriba por WhatsApp indicando si es persona natural o empresa, y qué necesita: declaración de renta, contabilidad, facturación electrónica u otro trámite.</p>
+          </div>
+          <div class="reveal card p-6 sm:p-7">
+            <span class="icon-tile mb-5">
+              <Icon name="lucide:file-up" class="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h3 class="mb-2 font-sans text-base font-semibold text-ink">2. Envíe sus documentos</h3>
+            <p class="text-muted text-sm leading-relaxed">RUT, extractos, facturas o soportes se envían digitalmente. Revisamos su información y le confirmamos qué falta, sin necesidad de reuniones presenciales.</p>
+          </div>
+          <div class="reveal card p-6 sm:p-7">
+            <span class="icon-tile mb-5">
+              <Icon name="lucide:badge-check" class="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h3 class="mb-2 font-sans text-base font-semibold text-ink">3. Presentación y cumplimiento</h3>
+            <p class="text-muted text-sm leading-relaxed">Presentamos su declaración o trámite ante la DIAN de forma electrónica, dentro de los plazos legales, con soporte por videollamada si lo necesita.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section bg-brand-50/40">
+    <section class="section section-tint">
+      <div class="container-x">
+        <SectionHeader
+          eyebrow="Servicios"
+          title="Servicios disponibles para el Huila"
+          subtitle="Portafolio de asesoría contable y tributaria disponible de forma remota."
+        />
+        <ul class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6" role="list" data-stagger>
+          {localServices.map((s) => (
+            <li class="reveal">
+              <article class="card card-interactive group relative flex h-full flex-col p-6 sm:p-7">
+                <span class="icon-tile mb-5">
+                  <Icon name={s.icon} class="h-6 w-6" aria-hidden="true" />
+                </span>
+                <h3 class="mb-2 font-sans text-base font-semibold text-ink">
+                  <a href={`/servicios/${s.slug}/`} class="stretched-link">{s.title}</a>
+                </h3>
+                <p class="flex-1 text-sm leading-relaxed text-muted">{s.heroDescription}</p>
+                <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700" aria-hidden="true">
+                  Ver servicio <Icon name="lucide:arrow-right" class="arrow h-4 w-4" />
+                </span>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
       <div class="container-x">
         <div class="max-w-3xl mx-auto">
           <SectionHeader
             eyebrow="Preguntas frecuentes"
             title="Dudas comunes sobre asesoría contable a distancia"
           />
-          <div class="mt-8 space-y-2">
-            {faqs.map((faq) => (
-              <details class="faq-item bg-surface border border-border rounded-2xl overflow-hidden group">
-                <summary class="flex justify-between items-center gap-4 px-5 py-4 text-left font-semibold text-ink text-sm cursor-pointer list-none">
-                  {faq.q}
-                  <Icon name="lucide:plus" class="w-4 h-4 text-brand-500 shrink-0 group-open:rotate-45 transition-transform" />
-                </summary>
-                <p class="px-5 pb-5 text-muted text-sm leading-relaxed border-t border-border pt-4">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+          <Accordion items={faqs} name="faq-huila" class="reveal mt-10" />
         </div>
       </div>
     </section>

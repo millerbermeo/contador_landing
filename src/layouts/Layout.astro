@@ -38,34 +38,65 @@ const {
     <meta name="author" content={SITE.fullName} />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
     <link rel="icon" type="image/jpeg" href="/logotipo.jpeg" />
+    <meta name="theme-color" content="#FAFAF6" />
+    <!--
+      Progressive enhancement: el contenido "reveal" solo se oculta si hay JS.
+      Si el módulo de animaciones no arranca en 2,5 s, se retira la clase y todo queda visible.
+    -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      setTimeout(function () {
+        if (!window.__reveal) document.documentElement.classList.remove('js');
+      }, 2500);
+    </script>
 
     <SeoHead {title} {description} {canonical} {image} {type} {publishedTime}
       schema={[...(includeOrgSchema ? [localBusinessSchema()] : []), ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])]} />
   </head>
 
   <body>
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brand-700 focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white focus:shadow-float"
+    >
+      Saltar al contenido
+    </a>
     <slot />
 
     <script>
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const els = document.querySelectorAll('.reveal');
+      // Reveal on scroll: IntersectionObserver + transiciones CSS (opacity/transform).
+      const w = window as unknown as { __reveal?: boolean };
+      w.__reveal = true;
 
-      if (prefersReduced || !('IntersectionObserver' in window)) {
-        els.forEach((el) => el.classList.add('is-visible'));
+      const els = document.querySelectorAll<HTMLElement>('.reveal');
+      const show = (el: HTMLElement) => el.classList.add('is-visible');
+
+      els.forEach((el) => {
+        const d = el.dataset.revealDelay;
+        if (d) el.style.setProperty('--reveal-delay', `${d}ms`);
+      });
+
+      // Stagger automático para hijos de [data-stagger]
+      document.querySelectorAll<HTMLElement>('[data-stagger]').forEach((group) => {
+        const step = Number(group.dataset.stagger) || 70;
+        group.querySelectorAll<HTMLElement>(':scope > .reveal').forEach((child, i) => {
+          child.style.setProperty('--reveal-delay', `${Math.min(i, 6) * step}ms`);
+        });
+      });
+
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(show);
       } else {
         const io = new IntersectionObserver(
           (entries, obs) => {
-            entries.forEach((entry) => {
+            for (const entry of entries) {
               if (entry.isIntersecting) {
-                const el = entry.target;
-                const delay = el.dataset.revealDelay;
-                if (delay) el.style.transitionDelay = `${delay}ms`;
-                el.classList.add('is-visible');
-                obs.unobserve(el);
+                show(entry.target as HTMLElement);
+                obs.unobserve(entry.target);
               }
-            });
+            }
           },
-          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+          { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
         );
         els.forEach((el) => io.observe(el));
       }

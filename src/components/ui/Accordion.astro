@@ -1,0 +1,36 @@
+---
+/**
+ * Acordeón accesible con <details>/<summary> nativo: funciona sin JS,
+ * teclado (Enter/Espacio) y lector de pantalla incluidos.
+ * - name: agrupa los items para que solo uno quede abierto (exclusivo).
+ * - headingLevel: envuelve la pregunta en un heading para la jerarquía del documento.
+ */
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	items: { q: string; a: string }[];
+	name?: string;
+	headingLevel?: 'h3' | 'h4' | null;
+	openFirst?: boolean;
+	class?: string;
+}
+
+const { items, name, headingLevel = 'h3', openFirst = false, class: cls = '' } = Astro.props;
+const H = headingLevel ?? 'span';
+---
+
+<div class={`flex flex-col gap-3 ${cls}`}>
+	{
+		items.map((item, i) => (
+			<details class="faq-item" name={name} open={openFirst && i === 0 ? true : undefined}>
+				<summary>
+					<H class="font-sans text-base font-semibold leading-snug tracking-normal text-inherit">{item.q}</H>
+					<span class="faq-icon" aria-hidden="true">
+						<Icon name="lucide:plus" class="h-4 w-4" />
+					</span>
+				</summary>
+				<div class="faq-answer px-5 pb-5 pr-14 text-[0.9375rem] leading-relaxed text-muted" set:html={item.a} />
+			</details>
+		))
+	}
+</div>

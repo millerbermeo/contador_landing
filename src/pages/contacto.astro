@@ -3,10 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Whatsapp from '../components/Whatsapp.astro';
 import Footer from '../components/Footer.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaFinal from '../components/CtaFinal.astro';
-import SectionHeader from '../components/ui/SectionHeader.astro';
-import WaIcon from '../components/ui/WaIcon.astro';
+import PageHero from '../components/ui/PageHero.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE, waLink } from '../data/site';
 
@@ -17,7 +15,6 @@ const contactMethods = [
     value: SITE.whatsappDisplay,
     action: waLink('Hola, me gustaría contactarlos.'),
     label: 'Escribir por WhatsApp',
-    color: 'bg-brand-500',
   },
   {
     icon: 'lucide:mail',
@@ -25,7 +22,6 @@ const contactMethods = [
     value: SITE.email,
     action: `mailto:${SITE.email}`,
     label: 'Enviar correo',
-    color: 'bg-blue-500',
   },
   {
     icon: 'lucide:phone',
@@ -33,7 +29,6 @@ const contactMethods = [
     value: SITE.phone,
     action: `tel:${SITE.phoneRaw}`,
     label: 'Llamar ahora',
-    color: 'bg-emerald-500',
   },
   {
     icon: 'lucide:map-pin',
@@ -41,7 +36,6 @@ const contactMethods = [
     value: `${SITE.location}, Colombia`,
     action: 'https://maps.google.com/?q=Florencia+Caqueta+Colombia',
     label: 'Ver en Google Maps',
-    color: 'bg-rose-500',
   },
 ];
 ---
@@ -53,59 +47,61 @@ const contactMethods = [
   <Navbar activePath="/contacto/" />
   <Whatsapp />
 
-  <main>
-    <div class="container-x pt-8 pb-4">
-      <Breadcrumbs crumbs={[
+  <main id="contenido" tabindex="-1" class="focus:outline-none">
+    <PageHero
+      eyebrow="Contacto"
+      title="Estamos para Ayudarle"
+      lead="Elija el canal de su preferencia y recibirá atención personalizada."
+      crumbs={[
         { label: 'Inicio', href: '/' },
         { label: 'Contacto' },
-      ]} />
-    </div>
+      ]}
+    />
 
-    <section class="section pt-0">
+    <section class="section">
       <div class="container-x">
-        <div class="max-w-4xl mx-auto">
-          <SectionHeader
-            eyebrow="Contacto"
-            title="Estamos para Ayudarle"
-            subtitle="Elija el canal de su preferencia y recibirá atención personalizada."
-          />
+        <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <ul class="grid gap-5 sm:grid-cols-2 lg:col-span-8" role="list" data-stagger aria-label="Canales de contacto">
+            {contactMethods.map((m, i) => {
+              const external = m.action.startsWith('http');
+              return (
+                <li class="reveal">
+                  <article class={`card card-interactive group relative flex h-full flex-col p-6 sm:p-7 ${i === 0 ? 'ring-1 ring-inset ring-brand-200' : ''}`}>
+                    <span class="icon-tile mb-5">
+                      <Icon name={m.icon} class="h-6 w-6" aria-hidden="true" />
+                    </span>
+                    <h2 class="text-base font-sans font-semibold text-ink">{m.title}</h2>
+                    <p class="mt-1 break-words text-sm text-muted">{m.value}</p>
+                    <a href={m.action} class="stretched-link mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700"
+                      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                      {m.label}
+                      <Icon name="lucide:arrow-right" class="arrow h-4 w-4" aria-hidden="true" />
+                    </a>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
 
-          <div class="grid sm:grid-cols-2 gap-6 mt-10">
-            {contactMethods.map((m, i) => (
-              <a href={m.action} target={m.icon === 'lucide:phone' ? undefined : '_blank'} rel="noopener noreferrer"
-                class="reveal group bg-surface rounded-card border border-border shadow-soft p-6 flex items-start gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent"
-                data-reveal-delay={i * 100}>
-                <div class={`w-12 h-12 rounded-xl ${m.color} grid place-items-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon name={m.icon} class="w-6 h-6 text-white" />
+          <aside class="reveal lg:col-span-4" aria-labelledby="horario">
+            <div class="card bg-sunken p-7 shadow-none lg:sticky lg:top-28">
+              <span class="icon-tile mb-5"><Icon name="lucide:clock" class="h-6 w-6" aria-hidden="true" /></span>
+              <h2 id="horario" class="text-h4">Horario de Atención</h2>
+              <dl class="mt-5 divide-y divide-border text-sm">
+                <div class="flex items-center justify-between gap-4 py-3">
+                  <dt class="font-semibold text-ink">Lunes a Viernes:</dt>
+                  <dd class="text-muted tabular-nums">8:00 AM — 6:00 PM</dd>
                 </div>
-                <div class="min-w-0">
-                  <h3 class="text-base mb-0.5">{m.title}</h3>
-                  <p class="text-muted text-sm mb-2">{m.value}</p>
-                  <span class="inline-flex items-center gap-1 text-brand-500 text-sm font-semibold">
-                    {m.label}
-                    <Icon name="lucide:arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                <div class="flex items-center justify-between gap-4 py-3">
+                  <dt class="font-semibold text-ink">Sábados:</dt>
+                  <dd class="text-muted tabular-nums">8:00 AM — 1:00 PM</dd>
                 </div>
-              </a>
-            ))}
-          </div>
-
-          <div class="mt-12 bg-brand-50/60 rounded-card border border-border p-8 text-center">
-            <h2 class="text-2xl mb-3">Horario de Atención</h2>
-            <div class="inline-flex flex-col items-center gap-2 text-muted">
-              <div class="flex items-center gap-2">
-                <Icon name="lucide:clock" class="w-4 h-4 text-brand-500" />
-                <span class="font-semibold text-ink">Lunes a Viernes:</span> 8:00 AM — 6:00 PM
-              </div>
-              <div class="flex items-center gap-2">
-                <Icon name="lucide:clock" class="w-4 h-4 text-brand-500" />
-                <span class="font-semibold text-ink">Sábados:</span> 8:00 AM — 1:00 PM
-              </div>
+              </dl>
+              <p class="mt-5 text-sm leading-relaxed text-muted">
+                También puede contactarnos por WhatsApp fuera del horario laboral. Le responderemos a la brevedad.
+              </p>
             </div>
-            <p class="text-muted text-sm mt-4">
-              También puede contactarnos por WhatsApp fuera del horario laboral. Le responderemos a la brevedad.
-            </p>
-          </div>
+          </aside>
         </div>
       </div>
     </section>

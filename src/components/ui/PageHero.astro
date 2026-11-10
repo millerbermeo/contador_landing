@@ -1,0 +1,47 @@
+---
+/**
+ * Cabecera de página interior: breadcrumbs + eyebrow + H1 + lead + acciones.
+ * Fondo con aurora suave para dar continuidad visual con el hero de la home.
+ */
+import Breadcrumbs from '../Breadcrumbs.astro';
+import Badge from './Badge.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	title: string;
+	eyebrow?: string;
+	lead?: string;
+	crumbs?: { label: string; href?: string }[];
+	icon?: string;
+	align?: 'left' | 'center';
+	class?: string;
+}
+
+const { title, eyebrow, lead, crumbs, icon, align = 'left', class: cls = '' } = Astro.props;
+const center = align === 'center';
+---
+
+<section class={`relative isolate overflow-hidden border-b border-border ${cls}`}>
+	<div class="bg-aurora pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+	<div class="bg-dots pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true"></div>
+	<div class="container-x pb-14 pt-8 sm:pb-20 sm:pt-10">
+		{crumbs && <Breadcrumbs crumbs={crumbs} />}
+		<div class={`mt-8 flex max-w-3xl flex-col gap-5 sm:mt-12 ${center ? 'mx-auto items-center text-center' : ''}`}>
+			{icon && (
+				<span class="icon-tile reveal h-14 w-14 rounded-2xl shadow-xs">
+					<Icon name={icon} class="h-7 w-7" aria-hidden="true" />
+				</span>
+			)}
+			{eyebrow && <Badge variant="eyebrow" class="reveal">{eyebrow}</Badge>}
+			<h1 class="reveal" data-reveal-delay="60" set:html={title} />
+			{lead && <p class="lead reveal max-w-[60ch]" data-reveal-delay="120">{lead}</p>}
+			{
+				Astro.slots.has('default') && (
+					<div class={`reveal mt-2 flex flex-wrap gap-3 ${center ? 'justify-center' : ''}`} data-reveal-delay="180">
+						<slot />
+					</div>
+				)
+			}
+		</div>
+	</div>
+</section>

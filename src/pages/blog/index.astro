@@ -3,12 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Whatsapp from '../../components/Whatsapp.astro';
 import Footer from '../../components/Footer.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CtaFinal from '../../components/CtaFinal.astro';
-import SectionHeader from '../../components/ui/SectionHeader.astro';
+import PageHero from '../../components/ui/PageHero.astro';
 import { Icon } from 'astro-icon/components';
 import { blogPosts } from '../../data/blog';
-import { SITE } from '../../data/site';
+const fmt = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 
 <Layout
@@ -18,65 +17,58 @@ import { SITE } from '../../data/site';
   <Navbar activePath="/blog/" />
   <Whatsapp />
 
-  <main>
-    <div class="container-x pt-8 pb-4">
-      <Breadcrumbs crumbs={[
+  <main id="contenido" tabindex="-1" class="focus:outline-none">
+    <PageHero
+      eyebrow="Blog"
+      title="Artículos y Guías"
+      lead="Información actualizada sobre contabilidad, tributaria y finanzas en Colombia."
+      crumbs={[
         { label: 'Inicio', href: '/' },
         { label: 'Blog' },
-      ]} />
-    </div>
+      ]}
+    />
 
-    <section class="section pt-0">
+    <section class="section" aria-label="Artículos">
       <div class="container-x">
-        <SectionHeader
-          eyebrow="Blog"
-          title="Artículos y Guías"
-          subtitle="Información actualizada sobre contabilidad, tributaria y finanzas en Colombia."
-        />
-
-        <div class="mt-10 space-y-8">
-          {blogPosts.map((post, i) => {
+        <ul class="grid gap-5 md:grid-cols-2 lg:gap-6" role="list" data-stagger>
+          {blogPosts.map((post) => {
             const words = post.content.split(/\s+/).length;
             const readTime = Math.max(1, Math.round(words / 200));
             return (
-              <article class="reveal group bg-surface rounded-card border border-border shadow-soft p-6 md:p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift hover:border-accent" data-reveal-delay={i * 80}>
-                <div class="flex flex-wrap items-center gap-3 mb-3">
-                  <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-accent-soft text-brand-700 border border-brand-200">
-                    {post.category}
-                  </span>
-                  <span class="text-xs text-muted">{post.date}</span>
-                  <span class="text-xs text-muted flex items-center gap-1">
-                    <Icon name="lucide:clock" class="w-3 h-3" /> {readTime} min de lectura
-                  </span>
-                </div>
-                <h2 class="text-xl md:text-2xl mb-2 group-hover:text-brand-500 transition-colors">
-                  <a href={`/blog/${post.slug}/`} class="no-underline">{post.title}</a>
-                </h2>
-                <p class="text-muted text-sm leading-relaxed mb-4">{post.description}</p>
-                <div class="flex items-center justify-between">
-                  <span class="text-xs text-muted">Por {post.author}</span>
-                  <a href={`/blog/${post.slug}/`}
-                    class="inline-flex items-center gap-1 text-brand-500 text-sm font-semibold group-hover:gap-2 transition-all">
-                    Leer artículo <Icon name="lucide:arrow-right" class="w-4 h-4" />
-                  </a>
-                </div>
-              </article>
+              <li class="reveal">
+                <article class="card card-interactive group relative flex h-full flex-col p-6 sm:p-8">
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted">
+                    <span class="chip-brand">{post.category}</span>
+                    <time datetime={post.date}>{fmt.format(new Date(post.date))}</time>
+                    <span class="inline-flex items-center gap-1">
+                      <Icon name="lucide:clock" class="h-3 w-3" aria-hidden="true" /> {readTime} min de lectura
+                    </span>
+                  </div>
+                  <h2 class="mt-4 text-h4 leading-snug">
+                    <a href={`/blog/${post.slug}/`} class="stretched-link">{post.title}</a>
+                  </h2>
+                  <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{post.description}</p>
+                  <div class="mt-6 flex items-center justify-between gap-4 border-t border-border pt-4">
+                    <span class="text-xs text-muted">Por {post.author}</span>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700" aria-hidden="true">
+                      Leer artículo <Icon name="lucide:arrow-right" class="arrow h-4 w-4" />
+                    </span>
+                  </div>
+                </article>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
 
-    <section class="section bg-brand-50/40">
-      <div class="container-x text-center">
-        <div class="max-w-xl mx-auto">
-          <Icon name="lucide:rss" class="w-10 h-10 text-brand-500 mx-auto mb-4" />
-          <h2 class="text-2xl mb-3">¿Temas de interés?</h2>
-          <p class="text-muted mb-6">Si desea que escribamos sobre un tema contable específico, contáctenos y lo tendremos en cuenta.</p>
-          <a href="/contacto/"
-            class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
-            Sugerir tema
-          </a>
+    <section class="section-tight">
+      <div class="container-x">
+        <div class="reveal card mx-auto flex max-w-3xl flex-col items-center gap-5 bg-sunken p-8 text-center shadow-none sm:p-10">
+          <span class="icon-tile"><Icon name="lucide:rss" class="h-6 w-6" aria-hidden="true" /></span>
+          <h2 class="text-h3">¿Temas de interés?</h2>
+          <p class="max-w-md text-muted">Si desea que escribamos sobre un tema contable específico, contáctenos y lo tendremos en cuenta.</p>
+          <a href="/contacto/" class="btn btn-secondary">Sugerir tema</a>
         </div>
       </div>
     </section>

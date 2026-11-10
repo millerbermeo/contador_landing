@@ -1,43 +1,54 @@
 ---
 /**
  * Botón / enlace del sistema de diseño.
- * - Renderiza <a> si recibe `href`, si no <button>.
- * - Área táctil mínima 44px (accesibilidad móvil).
- * - variant: primary | outline | whatsapp | ghost
+ * - <a> si recibe `href`; si no, <button>.
+ * - Variantes: primary | secondary | ghost | inverse | outline-inverse
+ *   (alias heredados: outline → secondary, whatsapp → primary).
+ * - Tamaños: sm | md | lg. Área táctil mínima 44px.
+ * - Estados: hover, :active scale(.97) instantáneo, focus-visible y disabled (ver global.css).
  */
 interface Props {
-	variant?: 'primary' | 'outline' | 'whatsapp' | 'ghost';
+	variant?: 'primary' | 'secondary' | 'ghost' | 'inverse' | 'outline-inverse' | 'outline' | 'whatsapp';
+	size?: 'sm' | 'md' | 'lg';
 	href?: string;
 	type?: 'button' | 'submit';
+	block?: boolean;
+	disabled?: boolean;
 	class?: string;
 	[key: string]: any;
 }
 
-const { variant = 'primary', href, type = 'button', class: cls = '', ...rest } = Astro.props;
+const {
+	variant = 'primary',
+	size = 'md',
+	href,
+	type = 'button',
+	block = false,
+	disabled = false,
+	class: cls = '',
+	...rest
+} = Astro.props;
 
-const base =
-	'inline-flex items-center justify-center gap-2 min-h-[44px] px-6 rounded-full font-semibold text-sm leading-none transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg';
-
-const styles: Record<string, string> = {
-	primary:
-		'bg-brand-500 text-white shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5',
-	outline:
-		'border border-brand-500 text-brand-700 hover:bg-brand-500 hover:text-white hover:-translate-y-0.5',
-	whatsapp:
-		'bg-brand-500 text-white shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5',
-	ghost: 'text-brand-700 hover:text-brand-500',
-};
-
-const classes = `${base} ${styles[variant]} ${cls}`;
+const alias: Record<string, string> = { outline: 'secondary', whatsapp: 'primary' };
+const v = alias[variant] ?? variant;
+const sizeCls = size === 'lg' ? 'btn-lg' : size === 'sm' ? 'btn-sm' : '';
+const classes = ['btn', `btn-${v}`, sizeCls, block && 'btn-block', cls].filter(Boolean).join(' ');
+const isExternal = href?.startsWith('http');
 ---
 
 {
 	href ? (
-		<a href={href} class={classes} {...rest}>
+		<a
+			href={disabled ? undefined : href}
+			class={classes}
+			aria-disabled={disabled ? 'true' : undefined}
+			{...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+			{...rest}
+		>
 			<slot />
 		</a>
 	) : (
-		<button type={type} class={classes} {...rest}>
+		<button type={type} class={classes} disabled={disabled} {...rest}>
 			<slot />
 		</button>
 	)

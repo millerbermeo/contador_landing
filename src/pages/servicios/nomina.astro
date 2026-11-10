@@ -19,10 +19,8 @@ const service = services.find((s) => s.slug === 'nomina')!;
   <Navbar activePath="/servicios/nomina/" />
   <Whatsapp />
 
-  <main>
-    <div class="container-x pt-8 pb-4">
-      <ServiceDetail service={service} />
-    </div>
+  <main id="contenido" tabindex="-1" class="focus:outline-none">
+    <ServiceDetail service={service} />
     <CtaFinal />
   </main>
 

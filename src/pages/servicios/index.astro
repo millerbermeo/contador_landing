@@ -3,9 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Whatsapp from '../../components/Whatsapp.astro';
 import Footer from '../../components/Footer.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CtaFinal from '../../components/CtaFinal.astro';
-import SectionHeader from '../../components/ui/SectionHeader.astro';
+import PageHero from '../../components/ui/PageHero.astro';
 import { Icon } from 'astro-icon/components';
 import { services } from '../../data/services';
 import { waLink } from '../../data/site';
@@ -18,48 +17,46 @@ import { waLink } from '../../data/site';
   <Navbar activePath="/servicios/" />
   <Whatsapp />
 
-  <main>
-    <div class="container-x pt-8 pb-4">
-      <Breadcrumbs crumbs={[
+  <main id="contenido" tabindex="-1" class="focus:outline-none">
+    <PageHero
+      eyebrow="Portafolio"
+      title="Servicios Profesionales"
+      lead="Soluciones contables y fiscales diseñadas para impulsar el crecimiento de su empresa y garantizar el cumplimiento normativo."
+      crumbs={[
         { label: 'Inicio', href: '/' },
         { label: 'Servicios' },
-      ]} />
-    </div>
+      ]}
+    />
 
-    <section class="section pt-0">
+    <section class="section" aria-label="Listado de servicios">
       <div class="container-x">
-        <SectionHeader
-          eyebrow="Portafolio"
-          title="Servicios Profesionales"
-          subtitle="Soluciones contables y fiscales diseñadas para impulsar el crecimiento de su empresa y garantizar el cumplimiento normativo."
-        />
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {services.map((s, i) => (
-            <a href={`/servicios/${s.slug}/`}
-              class="reveal group bg-surface rounded-card border border-border shadow-soft p-7 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent"
-              data-reveal-delay={(i % 3) * 100}>
-              <div class="w-12 h-12 rounded-xl bg-accent-soft grid place-items-center mb-5 group-hover:bg-brand-500 transition-colors duration-300">
-                <Icon name={s.icon} class="w-6 h-6 text-brand-500 group-hover:text-white transition-colors duration-300" />
-              </div>
-              <h2 class="text-lg leading-tight mb-3">{s.title}</h2>
-              <p class="text-muted text-sm leading-relaxed flex-1 mb-4">{s.description}</p>
-              <span class="inline-flex items-center gap-1 text-brand-500 text-sm font-semibold group-hover:gap-2 transition-all">
-                Ver servicio <Icon name="lucide:arrow-right" class="w-4 h-4" />
-              </span>
-            </a>
+        <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6" role="list" data-stagger>
+          {services.map((s) => (
+            <li class="reveal">
+              <article class="card card-interactive group relative flex h-full flex-col p-7">
+                <span class="icon-tile mb-6">
+                  <Icon name={s.icon} class="h-6 w-6" aria-hidden="true" />
+                </span>
+                <h2 class="text-h4 font-sans font-semibold leading-snug">
+                  <a href={`/servicios/${s.slug}/`} class="stretched-link">{s.title}</a>
+                </h2>
+                <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{s.description}</p>
+                <span class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700" aria-hidden="true">
+                  Ver servicio <Icon name="lucide:arrow-right" class="arrow h-4 w-4" />
+                </span>
+              </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
 
-    <section class="section bg-brand-50/40">
-      <div class="container-x text-center">
-        <div class="max-w-xl mx-auto">
-          <h2 class="text-2xl mb-3">¿No encuentra el servicio que busca?</h2>
-          <p class="text-muted mb-6">Contáctenos y creamos un paquete personalizado para su empresa.</p>
-          <a href={waLink('Hola, quiero un servicio personalizado.')} target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
+    <section class="section-tight">
+      <div class="container-x">
+        <div class="reveal card mx-auto flex max-w-3xl flex-col items-center gap-5 bg-sunken p-8 text-center shadow-none sm:p-10">
+          <h2 class="text-h3">¿No encuentra el servicio que busca?</h2>
+          <p class="max-w-md text-muted">Contáctenos y creamos un paquete personalizado para su empresa.</p>
+          <a href={waLink('Hola, quiero un servicio personalizado.')} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
             Solicitar cotización personalizada
           </a>
         </div>

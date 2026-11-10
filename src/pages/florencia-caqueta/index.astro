@@ -6,6 +6,7 @@ import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CtaFinal from '../../components/CtaFinal.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
+import Accordion from '../../components/ui/Accordion.astro';
 import WaIcon from '../../components/ui/WaIcon.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE, waLink } from '../../data/site';
@@ -33,73 +34,30 @@ const faqs = [
   <Navbar activePath="/florencia-caqueta/" />
   <Whatsapp />
 
-  <main>
-    <div class="container-x pt-8 pb-4">
+  <main id="contenido" tabindex="-1" class="focus:outline-none">
+    <section class="relative isolate overflow-hidden border-b border-border">
+      <div class="bg-aurora pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+      <div class="bg-dots pointer-events-none absolute inset-0 -z-10 opacity-60" aria-hidden="true"></div>
+      <div class="container-x pb-14 pt-8 sm:pb-20 sm:pt-10">
       <Breadcrumbs crumbs={[
         { label: 'Inicio', href: '/' },
         { label: 'Contador en Florencia, Caquetá' },
       ]} />
-    </div>
-
-    <section class="section pt-0">
-      <div class="container-x">
-        <div class="max-w-3xl">
-          <span class="eyebrow block mb-2 flex items-center gap-2">
-            <Icon name="lucide:map-pin" class="w-4 h-4" /> Florencia, Caquetá
+        <div class="mt-8 max-w-3xl sm:mt-12">
+          <span class="reveal eyebrow">
+            <Icon name="lucide:map-pin" class="h-3.5 w-3.5" aria-hidden="true" /> Florencia, Caquetá
           </span>
-          <h1 class="text-3xl md:text-4xl mb-4">Contador Público en Florencia, Caquetá</h1>
-          <p class="text-muted text-lg leading-relaxed mb-6">
+          <h1 class="reveal mt-4" data-reveal-delay="60">Contador Público en Florencia, Caquetá</h1>
+          <p class="reveal lead mt-5" data-reveal-delay="120">
             Soy {SITE.fullName}, Contador Público de la Universidad de la Amazonia, con oficina en Florencia. Acompaño a comerciantes, transportadores, independientes, agricultores y empresas del Caquetá en su contabilidad, declaración de renta y trámites ante la DIAN y la Cámara de Comercio de Florencia.
           </p>
-          <div class="flex flex-wrap gap-3">
-            <a href={waLink('Hola, busco un contador público en Florencia, Caquetá.')} target="_blank" rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full bg-brand-500 text-white font-semibold text-sm shadow-soft hover:bg-brand-600 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300">
-              <WaIcon class="w-4 h-4" /> Escribir por WhatsApp
+          <div class="reveal mt-8 flex flex-col gap-3 sm:flex-row" data-reveal-delay="200">
+            <a href={waLink('Hola, busco un contador público en Florencia, Caquetá.')} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+              <WaIcon class="h-4 w-4" /> Escribir por WhatsApp
             </a>
-            <a href="/contacto/"
-              class="inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full border border-brand-500 text-brand-700 font-semibold text-sm hover:bg-brand-500 hover:text-white hover:-translate-y-0.5 transition-all duration-300">
+            <a href="/contacto/" class="btn btn-secondary btn-lg">
               Agendar cita presencial
             </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section pt-0 bg-brand-50/40">
-      <div class="container-x">
-        <SectionHeader
-          eyebrow="Cómo ayudamos"
-          title="Trámites y necesidades contables comunes en Florencia"
-          subtitle="Los requerimientos más frecuentes de negocios y personas naturales de la región."
-        />
-        <div class="grid sm:grid-cols-2 gap-5 mt-10">
-          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
-            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
-              <Icon name="lucide:building-2" class="w-5 h-5 text-brand-500" />
-            </div>
-            <h2 class="text-base mb-2">Registro ante la Cámara de Comercio de Florencia</h2>
-            <p class="text-muted text-sm leading-relaxed">Constitución de empresas (SAS, persona natural comerciante), matrícula mercantil y renovación anual ante la Cámara de Comercio de Florencia para el Caquetá.</p>
-          </div>
-          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
-            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
-              <Icon name="lucide:tractor" class="w-5 h-5 text-brand-500" />
-            </div>
-            <h2 class="text-base mb-2">Comercio, transporte y sector agropecuario</h2>
-            <p class="text-muted text-sm leading-relaxed">Contabilidad y régimen tributario adaptados a comerciantes, transportadores y negocios ganaderos o agrícolas de Florencia y el Caquetá.</p>
-          </div>
-          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
-            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
-              <Icon name="lucide:file-text" class="w-5 h-5 text-brand-500" />
-            </div>
-            <h2 class="text-base mb-2">Declaración de renta e independientes</h2>
-            <p class="text-muted text-sm leading-relaxed">Declaración de renta para personas naturales del Caquetá y facturación electrónica para independientes y profesionales de la región.</p>
-          </div>
-          <div class="bg-surface rounded-card border border-border shadow-soft p-6">
-            <div class="w-10 h-10 rounded-xl bg-accent-soft grid place-items-center mb-3">
-              <Icon name="lucide:shield-check" class="w-5 h-5 text-brand-500" />
-            </div>
-            <h2 class="text-base mb-2">Cumplimiento ante la DIAN</h2>
-            <p class="text-muted text-sm leading-relaxed">RUT, actualizaciones, IVA, retenciones y representación ante requerimientos de la DIAN para negocios y personas del Caquetá.</p>
           </div>
         </div>
       </div>
@@ -108,46 +66,79 @@ const faqs = [
     <section class="section">
       <div class="container-x">
         <SectionHeader
-          eyebrow="Servicios"
-          title="Servicios disponibles en Florencia"
-          subtitle="Portafolio completo de asesoría contable y tributaria."
+          eyebrow="Cómo ayudamos"
+          title="Trámites y necesidades contables comunes en Florencia"
+          subtitle="Los requerimientos más frecuentes de negocios y personas naturales de la región."
         />
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-          {localServices.map((s) => (
-            <a href={`/servicios/${s.slug}/`}
-              class="group bg-surface rounded-card border border-border shadow-soft p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent">
-              <div class="w-11 h-11 rounded-xl bg-accent-soft grid place-items-center mb-4 group-hover:bg-brand-500 transition-colors duration-300">
-                <Icon name={s.icon} class="w-5 h-5 text-brand-500 group-hover:text-white transition-colors duration-300" />
-              </div>
-              <h3 class="text-base mb-2">{s.title}</h3>
-              <p class="text-muted text-sm leading-relaxed flex-1">{s.heroDescription}</p>
-              <span class="inline-flex items-center gap-1 text-brand-500 text-sm font-semibold mt-4">
-                Ver servicio <Icon name="lucide:arrow-right" class="w-4 h-4" />
-              </span>
-            </a>
-          ))}
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-2 lg:gap-6" data-stagger>
+          <div class="reveal card p-6 sm:p-7">
+            <span class="icon-tile mb-5">
+              <Icon name="lucide:building-2" class="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h3 class="mb-2 font-sans text-base font-semibold text-ink">Registro ante la Cámara de Comercio de Florencia</h3>
+            <p class="text-muted text-sm leading-relaxed">Constitución de empresas (SAS, persona natural comerciante), matrícula mercantil y renovación anual ante la Cámara de Comercio de Florencia para el Caquetá.</p>
+          </div>
+          <div class="reveal card p-6 sm:p-7">
+            <span class="icon-tile mb-5">
+              <Icon name="lucide:tractor" class="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h3 class="mb-2 font-sans text-base font-semibold text-ink">Comercio, transporte y sector agropecuario</h3>
+            <p class="text-muted text-sm leading-relaxed">Contabilidad y régimen tributario adaptados a comerciantes, transportadores y negocios ganaderos o agrícolas de Florencia y el Caquetá.</p>
+          </div>
+          <div class="reveal card p-6 sm:p-7">
+            <span class="icon-tile mb-5">
+              <Icon name="lucide:file-text" class="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h3 class="mb-2 font-sans text-base font-semibold text-ink">Declaración de renta e independientes</h3>
+            <p class="text-muted text-sm leading-relaxed">Declaración de renta para personas naturales del Caquetá y facturación electrónica para independientes y profesionales de la región.</p>
+          </div>
+          <div class="reveal card p-6 sm:p-7">
+            <span class="icon-tile mb-5">
+              <Icon name="lucide:shield-check" class="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h3 class="mb-2 font-sans text-base font-semibold text-ink">Cumplimiento ante la DIAN</h3>
+            <p class="text-muted text-sm leading-relaxed">RUT, actualizaciones, IVA, retenciones y representación ante requerimientos de la DIAN para negocios y personas del Caquetá.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section bg-brand-50/40">
+    <section class="section section-tint">
+      <div class="container-x">
+        <SectionHeader
+          eyebrow="Servicios"
+          title="Servicios disponibles en Florencia"
+          subtitle="Portafolio completo de asesoría contable y tributaria."
+        />
+        <ul class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6" role="list" data-stagger>
+          {localServices.map((s) => (
+            <li class="reveal">
+              <article class="card card-interactive group relative flex h-full flex-col p-6 sm:p-7">
+                <span class="icon-tile mb-5">
+                  <Icon name={s.icon} class="h-6 w-6" aria-hidden="true" />
+                </span>
+                <h3 class="mb-2 font-sans text-base font-semibold text-ink">
+                  <a href={`/servicios/${s.slug}/`} class="stretched-link">{s.title}</a>
+                </h3>
+                <p class="flex-1 text-sm leading-relaxed text-muted">{s.heroDescription}</p>
+                <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700" aria-hidden="true">
+                  Ver servicio <Icon name="lucide:arrow-right" class="arrow h-4 w-4" />
+                </span>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
       <div class="container-x">
         <div class="max-w-3xl mx-auto">
           <SectionHeader
             eyebrow="Preguntas frecuentes"
             title="Dudas comunes en Florencia y el Caquetá"
           />
-          <div class="mt-8 space-y-2">
-            {faqs.map((faq) => (
-              <details class="faq-item bg-surface border border-border rounded-2xl overflow-hidden group">
-                <summary class="flex justify-between items-center gap-4 px-5 py-4 text-left font-semibold text-ink text-sm cursor-pointer list-none">
-                  {faq.q}
-                  <Icon name="lucide:plus" class="w-4 h-4 text-brand-500 shrink-0 group-open:rotate-45 transition-transform" />
-                </summary>
-                <p class="px-5 pb-5 text-muted text-sm leading-relaxed border-t border-border pt-4">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+          <Accordion items={faqs} name="faq-florencia" class="reveal mt-10" />
         </div>
       </div>
     </section>

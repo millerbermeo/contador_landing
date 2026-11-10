@@ -1,8 +1,9 @@
 ---
 /**
- * Encabezado de sección reutilizable: eyebrow + H2 serif + subtítulo muted.
- * Garantiza idéntica jerarquía tipográfica en TODAS las secciones.
+ * Encabezado de sección: eyebrow + titular serif + subtítulo.
+ * - as: 'h1' en cabeceras de página, 'h2' (por defecto) en secciones.
  * - align: left | center
+ * - El título acepta HTML (para <span class="mark">).
  */
 import Badge from './Badge.astro';
 
@@ -11,15 +12,18 @@ interface Props {
 	title: string;
 	subtitle?: string;
 	align?: 'left' | 'center';
+	as?: 'h1' | 'h2';
+	id?: string;
 	class?: string;
 }
 
-const { eyebrow, title, subtitle, align = 'center', class: cls = '' } = Astro.props;
+const { eyebrow, title, subtitle, align = 'center', as = 'h2', id, class: cls = '' } = Astro.props;
+const Heading = as;
 const alignCls = align === 'center' ? 'items-center text-center mx-auto' : 'items-start text-left';
 ---
 
-<div class={`reveal flex flex-col gap-4 max-w-2xl ${alignCls} ${cls}`}>
+<div class={`reveal flex max-w-2xl flex-col gap-4 ${alignCls} ${cls}`}>
 	{eyebrow && <Badge variant="eyebrow">{eyebrow}</Badge>}
-	<h2 set:html={title} />
-	{subtitle && <p class="text-muted text-base sm:text-lg leading-relaxed">{subtitle}</p>}
+	<Heading id={id} class={as === 'h1' ? 'text-h1' : ''} set:html={title} />
+	{subtitle && <p class="lead max-w-[60ch]">{subtitle}</p>}
 </div>

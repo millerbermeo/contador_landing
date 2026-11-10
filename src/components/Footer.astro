@@ -10,109 +10,127 @@ const social = [
 ];
 ---
 
-<footer class="bg-brand-900 text-white" aria-labelledby="footer-heading">
+<footer class="relative isolate overflow-hidden bg-brand-950 text-white" aria-labelledby="footer-heading">
   <h2 id="footer-heading" class="sr-only">Pie de página</h2>
+  <div class="pointer-events-none absolute -right-40 -top-40 -z-10 h-[28rem] w-[28rem] rounded-full bg-accent/10 blur-3xl" aria-hidden="true"></div>
 
-  <div class="container-x py-16">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+  <div class="container-x pb-12 pt-16 sm:pt-20">
+    <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
 
-      <div class="sm:col-span-2 lg:col-span-1">
-        <div class="flex items-center gap-3 mb-5">
-          <img src="/logotipo.jpeg" alt={`${SITE.name} ${SITE.nameSuffix}`} width="48" height="48" class="w-12 h-12 rounded-full object-cover ring-2 ring-accent/40" />
-          <div class="leading-tight">
-            <span class="block font-serif font-semibold text-white text-base">Brian Pedraza</span>
-            <span class="block text-accent text-[0.65rem] font-semibold tracking-[0.2em] uppercase">Contador Público</span>
-            <span class="block text-white/50 text-[0.65rem] mt-0.5">Fundador de BP Asesorías Contables</span>
-          </div>
-        </div>
-        <p class="text-white/60 text-sm leading-relaxed mb-6">
+      <div class="sm:col-span-2 lg:col-span-4">
+        <a href="/" class="inline-flex items-center gap-3 rounded-xl" aria-label="Ir al inicio">
+          <img src="/logotipo.jpeg" alt="" width="48" height="48" loading="lazy" class="h-12 w-12 rounded-full object-cover ring-1 ring-white/20" />
+          <span class="leading-tight">
+            <span class="block font-serif text-lg font-semibold text-white">Brian Pedraza</span>
+            <span class="block text-2xs font-semibold uppercase tracking-[0.16em] text-accent">Contador Público</span>
+            <span class="mt-0.5 block text-2xs text-white/65">Fundador de BP Asesorías Contables</span>
+          </span>
+        </a>
+        <p class="mt-6 max-w-sm text-sm leading-relaxed text-white/70">
           {SITE.fullName}, Contador Público certificado con experiencia en asesoría contable y financiera en Colombia. Comprometido con la transparencia y el crecimiento empresarial.
         </p>
-        <div class="flex items-center gap-3">
+        <ul class="mt-6 flex items-center gap-2" role="list">
           {social.map((s) => (
-            <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
-              class="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-500 grid place-items-center transition-colors duration-200">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
-            </a>
+            <li>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                class="grid h-11 w-11 place-items-center rounded-full bg-white/[0.08] text-white/80 ring-1 ring-inset ring-white/10 transition-colors duration-150 hover:bg-accent hover:text-brand-950">
+                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
-      <div>
-        <h3 class="font-sans text-sm font-bold uppercase tracking-widest text-accent mb-5">Servicios</h3>
-        <ul class="space-y-2.5" role="list">
+      <div class="lg:col-span-3">
+        <h3 class="footer-title">Servicios</h3>
+        <ul class="mt-4 space-y-1" role="list">
           {FOOTER_SERVICES.map((s) => (
-            <li>
-              <a href={s.href} class="group flex items-center gap-2 text-white/60 text-sm hover:text-white transition-colors duration-200">
-                <span class="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
-                {s.label}
-              </a>
-            </li>
+            <li><a href={s.href} class="footer-link">{s.label}</a></li>
           ))}
         </ul>
       </div>
 
-      <div>
-        <h3 class="font-sans text-sm font-bold uppercase tracking-widest text-accent mb-5">Navegación</h3>
-        <ul class="space-y-2.5" role="list">
+      <div class="lg:col-span-2">
+        <h3 class="footer-title">Navegación</h3>
+        <ul class="mt-4 space-y-1" role="list">
           {FOOTER_LINKS.map((e) => (
-            <li>
-              <a href={e.href} class="group flex items-center gap-2 text-white/60 text-sm hover:text-white transition-colors duration-200">
-                <Icon name="lucide:chevron-right" class="w-3.5 h-3.5 text-accent group-hover:translate-x-0.5 transition-transform" />
-                {e.label}
-              </a>
-            </li>
+            <li><a href={e.href} class="footer-link">{e.label}</a></li>
           ))}
         </ul>
       </div>
 
-      <div>
-        <h3 class="font-sans text-sm font-bold uppercase tracking-widest text-accent mb-5">Cobertura</h3>
-        <ul class="space-y-2.5 mb-8" role="list">
+      <div class="lg:col-span-3">
+        <h3 class="footer-title">Cobertura</h3>
+        <ul class="mt-4 space-y-1" role="list">
           {COVERAGE_LINKS.map((c) => (
             <li>
-              <a href={c.href} class="group flex items-center gap-2 text-white/60 text-sm hover:text-white transition-colors duration-200">
-                <Icon name="lucide:map-pin" class="w-3.5 h-3.5 text-accent shrink-0" />
+              <a href={c.href} class="footer-link gap-2">
+                <Icon name="lucide:map-pin" class="h-3.5 w-3.5 text-accent" aria-hidden="true" />
                 {c.label}
               </a>
             </li>
           ))}
         </ul>
 
-        <h3 class="font-sans text-sm font-bold uppercase tracking-widest text-accent mb-5">Contacto</h3>
-        <ul class="space-y-4" role="list">
+        <h3 class="footer-title mt-8">Contacto</h3>
+        <ul class="mt-4 space-y-1" role="list">
           <li>
-            <a href={`mailto:${SITE.email}`} class="flex items-start gap-3 text-white/60 hover:text-white transition-colors duration-200">
-              <Icon name="lucide:mail" class="w-4 h-4 text-accent mt-0.5 shrink-0" />
-              <span class="text-sm break-all">{SITE.email}</span>
+            <a href={`mailto:${SITE.email}`} class="footer-link gap-2.5">
+              <Icon name="lucide:mail" class="h-4 w-4 text-accent" aria-hidden="true" />
+              <span class="break-all">{SITE.email}</span>
             </a>
           </li>
           <li>
-            <a href={waLink()} target="_blank" rel="noopener noreferrer" class="flex items-start gap-3 text-white/60 hover:text-white transition-colors duration-200">
-              <WaIcon class="w-4 h-4 text-accent mt-0.5 shrink-0" />
-              <span class="text-sm">{SITE.whatsappDisplay} (WhatsApp)</span>
+            <a href={waLink()} target="_blank" rel="noopener noreferrer" class="footer-link gap-2.5">
+              <WaIcon class="h-4 w-4 text-accent" />
+              <span>{SITE.whatsappDisplay} (WhatsApp)</span>
             </a>
           </li>
           <li>
-            <a href={`tel:${SITE.phoneRaw}`} class="flex items-start gap-3 text-white/60 hover:text-white transition-colors duration-200">
-              <Icon name="lucide:phone" class="w-4 h-4 text-accent mt-0.5 shrink-0" />
-              <span class="text-sm">{SITE.phone}</span>
+            <a href={`tel:${SITE.phoneRaw}`} class="footer-link gap-2.5">
+              <Icon name="lucide:phone" class="h-4 w-4 text-accent" aria-hidden="true" />
+              <span>{SITE.phone}</span>
             </a>
           </li>
-          <li class="flex items-start gap-3 text-white/60">
-            <Icon name="lucide:map-pin" class="w-4 h-4 text-accent mt-0.5 shrink-0" />
-            <span class="text-sm">{SITE.location}, Colombia</span>
+          <li class="flex min-h-[40px] items-center gap-2.5 text-sm text-white/70">
+            <Icon name="lucide:map-pin" class="h-4 w-4 text-accent" aria-hidden="true" />
+            <span>{SITE.location}, Colombia</span>
           </li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="border-t border-white/10 py-6">
-    <div class="container-x flex justify-center items-center">
-      <p class="text-white/40 text-xs text-center">
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-col items-center justify-between gap-3 py-6 sm:flex-row">
+      <p class="text-center text-xs text-white/65">
         &copy; 2025 {SITE.fullName} — Todos los derechos reservados.
       </p>
+      <a href="#" class="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-medium text-white/70 transition-colors duration-150 hover:text-white">
+        <Icon name="lucide:arrow-up" class="h-3.5 w-3.5" aria-hidden="true" /> Volver arriba
+      </a>
     </div>
   </div>
 </footer>
+
+<style>
+  .footer-title {
+    font-family: theme('fontFamily.sans');
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: theme('colors.accent.DEFAULT');
+  }
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    font-size: 0.875rem;
+    color: rgb(255 255 255 / 0.72);
+    transition: color 150ms ease;
+  }
+  .footer-link:hover { color: #fff; }
+  .footer-link:focus-visible { outline-color: theme('colors.accent.DEFAULT'); }
+</style>
