@@ -8,6 +8,17 @@ import PageHero from '../../components/ui/PageHero.astro';
 import { Icon } from 'astro-icon/components';
 import { blogPosts } from '../../data/blog';
 const fmt = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+const readTime = (content: string) => Math.max(1, Math.round(content.split(/\s+/).length / 200));
+const catSlug = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+// Más recientes primero; el primero se destaca.
+const posts = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date));
+const [featured, ...rest] = posts;
+
+const categories = Object.entries(
+  posts.reduce<Record<string, number>>((acc, p) => ((acc[p.category] = (acc[p.category] ?? 0) + 1), acc), {}),
+).sort((a, b) => b[1] - a[1]);
 ---
 
 <Layout
@@ -26,50 +37,108 @@ const fmt = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long', ye
         { label: 'Inicio', href: '/' },
         { label: 'Blog' },
       ]}
-    />
-
-    <section class="section" aria-label="Artículos">
-      <div class="container-x">
-        <ul class="grid gap-5 md:grid-cols-2 lg:gap-6" role="list" data-stagger>
-          {blogPosts.map((post) => {
-            const words = post.content.split(/\s+/).length;
-            const readTime = Math.max(1, Math.round(words / 200));
-            return (
-              <li class="reveal">
-                <article class="card card-interactive group relative flex h-full flex-col p-6 sm:p-8">
-                  <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted">
-                    <span class="chip-brand">{post.category}</span>
-                    <time datetime={post.date}>{fmt.format(new Date(post.date))}</time>
-                    <span class="inline-flex items-center gap-1">
-                      <Icon name="lucide:clock" class="h-3 w-3" aria-hidden="true" /> {readTime} min de lectura
-                    </span>
-                  </div>
-                  <h2 class="mt-4 text-h4 leading-snug">
-                    <a href={`/blog/${post.slug}/`} class="stretched-link">{post.title}</a>
-                  </h2>
-                  <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{post.description}</p>
-                  <div class="mt-6 flex items-center justify-between gap-4 border-t border-border pt-4">
-                    <span class="text-xs text-muted">Por {post.author}</span>
-                    <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700" aria-hidden="true">
-                      Leer artículo <Icon name="lucide:arrow-right" class="arrow h-4 w-4" />
-                    </span>
-                  </div>
-                </article>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </section>
-
-    <section class="section-tight">
-      <div class="container-x">
-        <div class="reveal card mx-auto flex max-w-3xl flex-col items-center gap-5 bg-sunken p-8 text-center shadow-none sm:p-10">
-          <span class="icon-tile"><Icon name="lucide:rss" class="h-6 w-6" aria-hidden="true" /></span>
-          <h2 class="text-h3">¿Temas de interés?</h2>
-          <p class="max-w-md text-muted">Si desea que escribamos sobre un tema contable específico, contáctenos y lo tendremos en cuenta.</p>
-          <a href="/contacto/" class="btn btn-secondary">Sugerir tema</a>
+    >
+      <dl slot="aside" class="grid grid-cols-3 divide-x divide-border rounded-panel border border-border bg-surface/80 shadow-card backdrop-blur-sm">
+        <div class="flex flex-col-reverse gap-1 p-5 text-center">
+          <dt class="text-xs text-muted">Artículos</dt>
+          <dd class="font-serif text-3xl font-medium leading-none tabular-nums text-ink">{posts.length}</dd>
         </div>
+        <div class="flex flex-col-reverse gap-1 p-5 text-center">
+          <dt class="text-xs text-muted">Categorías</dt>
+          <dd class="font-serif text-3xl font-medium leading-none tabular-nums text-ink">{categories.length}</dd>
+        </div>
+        <div class="flex flex-col-reverse gap-1 p-5 text-center">
+          <dt class="text-xs text-muted">Actualizado</dt>
+          <dd class="font-serif text-lg font-medium leading-tight text-ink">
+            <time datetime={featured.date}>{new Intl.DateTimeFormat('es-CO', { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(featured.date))}</time>
+          </dd>
+        </div>
+      </dl>
+    </PageHero>
+
+    <section class="section" aria-labelledby="articulos-titulo">
+      <div class="container-x">
+        <h2 id="articulos-titulo" class="sr-only">Artículos</h2>
+
+        <!-- Filtro por categoría: solo aparece con JS; sin JS se ven todos los artículos. -->
+        <div data-blog-filter hidden class="mb-10 overflow-x-auto pb-1 sm:overflow-visible">
+          <div role="group" aria-label="Filtrar por categoría" class="flex w-max gap-2 sm:w-auto sm:flex-wrap">
+            <button type="button" class="filter-chip" aria-pressed="true" data-cat="">
+              Todos <span class="count">{posts.length}</span>
+            </button>
+            {categories.map(([cat, n]) => (
+              <button type="button" class="filter-chip" aria-pressed="false" data-cat={catSlug(cat)}>
+                {cat} <span class="count">{n}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <p class="sr-only" aria-live="polite" data-blog-status></p>
+
+        <ul class="grid gap-5 md:grid-cols-2 lg:gap-6 xl:grid-cols-3" role="list" data-stagger data-blog-list>
+          <li class="reveal md:col-span-2 xl:row-span-2" data-cat={catSlug(featured.category)}>
+            <article class="card card-interactive group relative isolate grid h-full overflow-hidden lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+              <div class="flex flex-col p-6 sm:p-10">
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted">
+                  <span class="chip bg-brand-700 text-white">
+                    <Icon name="lucide:sparkles" class="h-3 w-3" aria-hidden="true" /> Más reciente
+                  </span>
+                  <span class="chip-brand">{featured.category}</span>
+                  <time datetime={featured.date}>{fmt.format(new Date(featured.date))}</time>
+                </div>
+                <h3 class="mt-5 text-h2 leading-tight">
+                  <a href={`/blog/${featured.slug}/`} class="stretched-link">{featured.title}</a>
+                </h3>
+                <p class="mt-4 max-w-[60ch] flex-1 leading-relaxed text-muted">{featured.description}</p>
+                <span class="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700" aria-hidden="true">
+                  Leer artículo <Icon name="lucide:arrow-right" class="arrow h-4 w-4" />
+                </span>
+              </div>
+              <div class="relative hidden min-h-[16rem] overflow-hidden bg-brand-dark lg:block" aria-hidden="true">
+                <div class="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-accent/25 blur-3xl"></div>
+                <div class="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+                <div class="absolute inset-x-10 bottom-10 flex flex-col gap-3 text-white">
+                  <Icon name="lucide:newspaper" class="h-8 w-8 text-accent" />
+                  <span class="text-sm text-white/75">{featured.author}</span>
+                  <span class="inline-flex items-center gap-1.5 text-sm text-white/75">
+                    <Icon name="lucide:clock" class="h-3.5 w-3.5" /> {readTime(featured.content)} min de lectura
+                  </span>
+                </div>
+              </div>
+            </article>
+          </li>
+
+          {rest.map((post) => (
+            <li class="reveal md:max-xl:last:col-span-2" data-cat={catSlug(post.category)}>
+              <article class="card card-interactive group relative flex h-full flex-col p-6 sm:p-8">
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted">
+                  <span class="chip-brand">{post.category}</span>
+                  <time datetime={post.date}>{fmt.format(new Date(post.date))}</time>
+                  <span class="inline-flex items-center gap-1">
+                    <Icon name="lucide:clock" class="h-3 w-3" aria-hidden="true" /> {readTime(post.content)} min de lectura
+                  </span>
+                </div>
+                <h3 class="mt-4 text-h4 leading-snug">
+                  <a href={`/blog/${post.slug}/`} class="stretched-link">{post.title}</a>
+                </h3>
+                <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{post.description}</p>
+                <div class="mt-6 flex items-center justify-between gap-4 border-t border-border pt-4">
+                  <span class="text-xs text-muted">Por {post.author}</span>
+                  <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700" aria-hidden="true">
+                    Leer artículo <Icon name="lucide:arrow-right" class="arrow h-4 w-4" />
+                  </span>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+
+        <p class="reveal mt-10 flex flex-col items-start gap-x-4 gap-y-2 border-t border-border pt-8 text-muted sm:flex-row sm:items-center sm:justify-center">
+          <span>¿Temas de interés? Si desea que escribamos sobre un tema contable específico, contáctenos.</span>
+          <a href="/contacto/" class="link inline-flex min-h-[44px] items-center gap-1.5 font-semibold">
+            Sugerir tema <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+          </a>
+        </p>
       </div>
     </section>
 
@@ -78,3 +147,30 @@ const fmt = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long', ye
 
   <Footer />
 </Layout>
+
+<script>
+  const wrap = document.querySelector<HTMLElement>('[data-blog-filter]');
+  const list = document.querySelector<HTMLElement>('[data-blog-list]');
+  const status = document.querySelector<HTMLElement>('[data-blog-status]');
+  if (wrap && list) {
+    wrap.hidden = false;
+    const buttons = [...wrap.querySelectorAll<HTMLButtonElement>('button[data-cat]')];
+    const items = [...list.querySelectorAll<HTMLElement>(':scope > li')];
+    buttons.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.cat ?? '';
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        let shown = 0;
+        items.forEach((li) => {
+          const match = !cat || li.dataset.cat === cat;
+          li.hidden = !match;
+          if (match) {
+            shown++;
+            li.classList.add('is-visible');
+          }
+        });
+        if (status) status.textContent = `${shown} ${shown === 1 ? 'artículo' : 'artículos'}`;
+      }),
+    );
+  }
+</script>

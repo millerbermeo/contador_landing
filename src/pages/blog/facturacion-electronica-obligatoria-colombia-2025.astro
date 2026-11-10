@@ -4,7 +4,6 @@ import Navbar from '../../components/Navbar.astro';
 import Whatsapp from '../../components/Whatsapp.astro';
 import Footer from '../../components/Footer.astro';
 import BlogDetail from '../../components/BlogDetail.astro';
-import CtaFinal from '../../components/CtaFinal.astro';
 import { blogPosts } from '../../data/blog';
 import { blogPostSchema } from '../../data/schema';
 
@@ -23,7 +22,6 @@ const post = blogPosts.find((p) => p.slug === 'facturacion-electronica-obligator
 
   <main id="contenido" tabindex="-1" class="focus:outline-none">
     <BlogDetail post={post} />
-    <CtaFinal />
   </main>
 
   <Footer />

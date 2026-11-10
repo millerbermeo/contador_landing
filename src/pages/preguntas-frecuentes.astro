@@ -90,30 +90,55 @@ const slug = (t: string) => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u
         { label: 'Inicio', href: '/' },
         { label: 'Preguntas Frecuentes' },
       ]}
-    />
+    >
+      <dl slot="aside" class="grid grid-cols-2 divide-x divide-border rounded-panel border border-border bg-surface/80 shadow-card backdrop-blur-sm">
+        <div class="flex flex-col-reverse gap-1 p-5 text-center">
+          <dt class="text-xs text-muted">Preguntas</dt>
+          <dd class="font-serif text-3xl font-medium leading-none tabular-nums text-ink">{allFaqs.length}</dd>
+        </div>
+        <div class="flex flex-col-reverse gap-1 p-5 text-center">
+          <dt class="text-xs text-muted">Temas</dt>
+          <dd class="font-serif text-3xl font-medium leading-none tabular-nums text-ink">{faqCategories.length}</dd>
+        </div>
+      </dl>
+    </PageHero>
 
     <section class="section">
       <div class="container-x">
         <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <nav class="lg:col-span-4" aria-label="Categorías de preguntas">
-            <div class="lg:sticky lg:top-28">
-              <p class="eyebrow hidden lg:inline-flex">Categorías</p>
-              <ul class="-mx-1 flex flex-wrap gap-2 lg:mx-0 lg:mt-5 lg:flex-col lg:gap-1" role="list">
-                {faqCategories.map((cat) => (
-                  <li>
-                    <a href={`#${slug(cat.category)}`} class="faq-cat">
-                      <Icon name={cat.icon} class="h-4 w-4 shrink-0 text-brand-700" aria-hidden="true" />
-                      {cat.category}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </nav>
+          <div class="lg:col-span-4">
+            <div class="flex flex-col gap-6 lg:sticky lg:top-28">
+              <!-- Buscador: solo aparece con JS; sin JS se ven todas las preguntas. -->
+              <div data-faq-search hidden>
+                <label for="faq-q" class="text-sm font-semibold text-ink">Buscar una pregunta</label>
+                <div class="relative mt-2">
+                  <Icon name="lucide:search" class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" aria-hidden="true" />
+                  <input id="faq-q" type="search" autocomplete="off" placeholder="Ej.: renta, RUT, factura"
+                    aria-describedby="faq-status" class="faq-search" />
+                </div>
+                <p id="faq-status" class="mt-2 min-h-[1.375rem] text-sm text-muted" aria-live="polite"></p>
+              </div>
 
-          <div class="space-y-14 lg:col-span-8">
+              <nav aria-label="Temas de preguntas">
+                <p class="eyebrow hidden lg:inline-flex">Temas</p>
+                <ul class="-mx-1 flex flex-wrap gap-2 lg:mx-0 lg:mt-4 lg:flex-col lg:gap-1" role="list">
+                  {faqCategories.map((cat) => (
+                    <li data-faq-nav={slug(cat.category)}>
+                      <a href={`#${slug(cat.category)}`} class="faq-cat">
+                        <Icon name={cat.icon} class="h-4 w-4 shrink-0 text-brand-700" aria-hidden="true" />
+                        <span class="flex-1">{cat.category}</span>
+                        <span class="text-xs tabular-nums text-muted">{cat.questions.length}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-14 lg:col-span-8">
             {faqCategories.map((cat) => (
-              <section id={slug(cat.category)} class="reveal scroll-mt-28" aria-labelledby={`${slug(cat.category)}-titulo`}>
+              <section id={slug(cat.category)} data-faq-cat class="reveal scroll-mt-28" aria-labelledby={`${slug(cat.category)}-titulo`}>
                 <div class="mb-5 flex items-center gap-3">
                   <span class="icon-tile h-10 w-10"><Icon name={cat.icon} class="h-5 w-5" aria-hidden="true" /></span>
                   <h2 id={`${slug(cat.category)}-titulo`} class="text-h3">{cat.category}</h2>
@@ -121,19 +146,23 @@ const slug = (t: string) => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u
                 <Accordion items={cat.questions} name={`faq-${slug(cat.category)}`} />
               </section>
             ))}
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section-tight">
-      <div class="container-x">
-        <div class="reveal card mx-auto flex max-w-3xl flex-col items-center gap-5 bg-sunken p-8 text-center shadow-none sm:p-10">
-          <h2 class="text-h3">¿No encontró lo que buscaba?</h2>
-          <p class="max-w-md text-muted">Estamos listos para resolver sus dudas personalmente. Contáctenos sin compromiso.</p>
-          <a href={waLink('Hola, tengo una pregunta que no aparece en las FAQ.')} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <WaIcon class="h-4 w-4" /> Preguntar ahora
-          </a>
+            <div data-faq-empty hidden class="card flex flex-col items-center gap-3 p-8 text-center">
+              <span class="icon-tile"><Icon name="lucide:search-x" class="h-5 w-5" aria-hidden="true" /></span>
+              <p class="font-semibold text-ink">No hay preguntas que coincidan con su búsqueda.</p>
+              <button type="button" data-faq-clear class="btn btn-secondary btn-sm">Ver todas las preguntas</button>
+            </div>
+
+            <aside class="reveal flex flex-col items-start gap-4 rounded-card bg-sunken p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8" aria-labelledby="faq-mas">
+              <div>
+                <h2 id="faq-mas" class="font-sans text-h4 font-semibold">¿No encontró lo que buscaba?</h2>
+                <p class="mt-1 text-sm text-muted">Estamos listos para resolver sus dudas personalmente. Contáctenos sin compromiso.</p>
+              </div>
+              <a href={waLink('Hola, tengo una pregunta que no aparece en las FAQ.')} target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full shrink-0 sm:w-auto">
+                <WaIcon class="h-4 w-4" /> Preguntar ahora
+              </a>
+            </aside>
+          </div>
         </div>
       </div>
     </section>
@@ -143,6 +172,44 @@ const slug = (t: string) => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u
 
   <Footer />
 </Layout>
+
+<script>
+  const box = document.querySelector<HTMLElement>('[data-faq-search]');
+  const input = document.querySelector<HTMLInputElement>('#faq-q');
+  const status = document.querySelector<HTMLElement>('#faq-status');
+  const empty = document.querySelector<HTMLElement>('[data-faq-empty]');
+  const cats = [...document.querySelectorAll<HTMLElement>('[data-faq-cat]')];
+  const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  if (box && input && status && empty) {
+    box.hidden = false;
+    const apply = () => {
+      const q = norm(input.value.trim());
+      let total = 0;
+      cats.forEach((cat) => {
+        let n = 0;
+        cat.querySelectorAll<HTMLDetailsElement>('details').forEach((d) => {
+          const hit = !q || norm(d.textContent || '').includes(q);
+          d.hidden = !hit;
+          if (hit) n++;
+        });
+        cat.hidden = n === 0;
+        const nav = document.querySelector<HTMLElement>(`[data-faq-nav="${cat.id}"]`);
+        if (nav) nav.hidden = n === 0;
+        total += n;
+      });
+      empty.hidden = total > 0;
+      status.textContent = q ? (total === 1 ? '1 pregunta encontrada' : `${total} preguntas encontradas`) : '';
+    };
+    input.addEventListener('input', apply);
+    input.addEventListener('search', apply);
+    empty.querySelector('[data-faq-clear]')?.addEventListener('click', () => {
+      input.value = '';
+      apply();
+      input.focus();
+    });
+  }
+</script>
 
 <style>
   .faq-cat {
@@ -162,5 +229,24 @@ const slug = (t: string) => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u
   .faq-cat:hover { background: theme('colors.accent.soft'); color: theme('colors.ink.DEFAULT'); border-color: theme('colors.brand.200'); }
   @media (min-width: 1024px) {
     .faq-cat { width: 100%; border-color: transparent; background: transparent; border-radius: 0.75rem; }
+  }
+  .faq-search {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 1rem 0 2.75rem;
+    border-radius: 9999px;
+    border: 1px solid theme('colors.border.strong');
+    background: theme('colors.surface');
+    font-size: 1rem; /* 16px: evita el zoom automático de iOS */
+    color: theme('colors.ink.DEFAULT');
+    box-shadow: theme('boxShadow.xs');
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .faq-search::placeholder { color: theme('colors.muted'); }
+  .faq-search:hover { border-color: rgb(20 28 13 / 0.3); }
+  .faq-search:focus-visible { outline: none; border-color: theme('colors.brand.700'); box-shadow: var(--focus-ring); }
+  @media (prefers-contrast: more) {
+    .faq-search { border-color: theme('colors.ink.soft'); }
   }
 </style>

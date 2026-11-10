@@ -14,6 +14,7 @@ import Footer from '../components/Footer.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE, waLink } from '../data/site';
+import { services } from '../data/services';
 import { accountingServiceSchema, faqSchema, organizationSchema, websiteSchema } from '../data/schema';
 
 const serviceGroups = [
@@ -56,44 +57,52 @@ const trustPoints = [
   <main id="contenido" tabindex="-1" class="focus:outline-none">
     <Home />
 
-    <section id="servicios" class="section">
-      <div class="container-x flex flex-col items-center gap-12 sm:gap-16">
+    <section id="servicios" class="section" aria-labelledby="servicios-titulo">
+      <div class="container-x">
         <SectionHeader
+          id="servicios-titulo"
           eyebrow="Portafolio"
           title="Servicios Profesionales"
           subtitle="Soluciones contables y fiscales adaptadas a las necesidades de su empresa."
         />
-        <div class="grid w-full gap-5 md:grid-cols-3 lg:gap-6">
+        <div class="section-body grid w-full gap-5 md:grid-cols-3 lg:gap-6">
           {serviceGroups.map((group, i) => (
             <ServiceCard
               icon={group.icon}
               title={group.title}
               items={group.items}
               whatsappMessage={group.whatsappMessage}
-              href="/servicios/"
               delay={i * 100}
             />
           ))}
+        </div>
+        <div class="reveal mt-10 flex justify-center">
+          <a href="/servicios/" class="btn btn-secondary">
+            Ver los {services.length} servicios en detalle <Icon name="lucide:arrow-right" class="arrow h-4 w-4" aria-hidden="true" />
+          </a>
         </div>
       </div>
     </section>
 
     <AuthorCard />
-    <AboutMe />
+    <AboutMe tone="dark" />
     <Testimonials />
     <Tarifa />
 
-    <section id="faq" class="section section-tint">
-      <div class="container-x flex flex-col items-center gap-12 sm:gap-16">
+    <section id="faq" class="section">
+      <div class="container-x">
         <SectionHeader
           eyebrow="Preguntas Frecuentes"
           title="¿Tiene dudas?"
           subtitle="Resolvemos sus inquietudes sobre contabilidad y finanzas."
         />
 
-        <div class="grid w-full items-start gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+        <div class="section-body grid w-full items-start gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
           <div class="reveal">
             <MenuAcordeon />
+            <a href="/preguntas-frecuentes/" class="link mt-6 inline-flex min-h-[44px] items-center gap-1.5">
+              Ver todas las preguntas frecuentes <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+            </a>
             <script type="application/ld+json" is:inline set:html={JSON.stringify({
               '@context': 'https://schema.org',
               ...faqSchema(faqs.map((f) => ({ q: f.question, a: f.answer }))),

@@ -3,6 +3,7 @@
  * Encabezado de sección: eyebrow + titular serif + subtítulo.
  * - as: 'h1' en cabeceras de página, 'h2' (por defecto) en secciones.
  * - align: left | center
+ * - tone: 'dark' para secciones sobre fondo oscuro (.section-dark).
  * - El título acepta HTML (para <span class="mark">).
  */
 import Badge from './Badge.astro';
@@ -14,16 +15,18 @@ interface Props {
 	align?: 'left' | 'center';
 	as?: 'h1' | 'h2';
 	id?: string;
+	tone?: 'light' | 'dark';
 	class?: string;
 }
 
-const { eyebrow, title, subtitle, align = 'center', as = 'h2', id, class: cls = '' } = Astro.props;
+const { eyebrow, title, subtitle, align = 'center', as = 'h2', id, tone = 'light', class: cls = '' } = Astro.props;
+const dark = tone === 'dark';
 const Heading = as;
 const alignCls = align === 'center' ? 'items-center text-center mx-auto' : 'items-start text-left';
 ---
 
 <div class={`reveal flex max-w-2xl flex-col gap-4 ${alignCls} ${cls}`}>
-	{eyebrow && <Badge variant="eyebrow">{eyebrow}</Badge>}
-	<Heading id={id} class={as === 'h1' ? 'text-h1' : ''} set:html={title} />
-	{subtitle && <p class="lead max-w-[60ch]">{subtitle}</p>}
+	{eyebrow && <Badge variant="eyebrow" class={dark ? '!text-brand-200' : ''}>{eyebrow}</Badge>}
+	<Heading id={id} class={`${as === 'h1' ? 'text-h1' : ''} ${dark ? 'text-white' : ''}`} set:html={title} />
+	{subtitle && <p class={`lead max-w-[60ch] ${dark ? '!text-white/75' : ''}`}>{subtitle}</p>}
 </div>

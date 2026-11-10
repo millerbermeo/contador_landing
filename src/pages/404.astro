@@ -5,6 +5,7 @@ import Whatsapp from '../components/Whatsapp.astro';
 import Footer from '../components/Footer.astro';
 import { Icon } from 'astro-icon/components';
 import { HEADER_LINKS } from '../data/site';
+import { services } from '../data/services';
 ---
 
 <Layout
@@ -38,7 +39,23 @@ import { HEADER_LINKS } from '../data/site';
             <a href="/servicios/" class="btn btn-secondary">Ver servicios</a>
           </div>
 
-          <nav aria-label="Enlaces principales" class="w-full border-t border-border pt-6">
+        </div>
+
+        <div class="mx-auto mt-16 max-w-4xl">
+          <h2 class="text-center font-sans text-sm font-semibold text-ink">¿Buscaba alguno de estos servicios?</h2>
+          <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" role="list">
+            {services.map((s) => (
+              <li>
+                <a href={`/servicios/${s.slug}/`} class="card card-interactive group flex min-h-[56px] items-center gap-3 p-3 pr-4 text-sm font-medium text-ink">
+                  <span class="icon-tile h-9 w-9 shrink-0 rounded-xl"><Icon name={s.icon} class="h-4 w-4" aria-hidden="true" /></span>
+                  <span class="flex-1">{s.shortTitle}</span>
+                  <Icon name="lucide:arrow-right" class="arrow h-4 w-4 text-muted" aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <nav aria-label="Enlaces principales" class="mt-10 border-t border-border pt-6">
             <ul class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-sm" role="list">
               {HEADER_LINKS.map((link) => (
                 <li><a href={link.href} class="btn btn-ghost btn-sm">{link.label}</a></li>

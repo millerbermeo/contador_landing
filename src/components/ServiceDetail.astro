@@ -5,11 +5,21 @@ import PageHero from './ui/PageHero.astro';
 import Accordion from './ui/Accordion.astro';
 import { waLink } from '../data/site';
 import { faqSchema } from '../data/schema';
-import type { Service } from '../data/services';
+import { services, type Service } from '../data/services';
 
 interface Props { service: Service }
 
 const { service: s } = Astro.props;
+
+const others = services.filter((o) => o.slug !== s.slug);
+
+// Índice de la página: se deriva del contenido real del servicio.
+const toc = [
+  { id: 'incluye', label: '¿Qué incluye?', meta: `${s.features.length} puntos`, icon: 'lucide:check-circle' },
+  { id: 'beneficios', label: 'Beneficios', meta: `${s.benefits.length} ventajas`, icon: 'lucide:zap' },
+  { id: 'para-quien', label: '¿Para quién es?', meta: `${s.who.length} perfiles`, icon: 'lucide:users' },
+  ...(s.faq.length > 0 ? [{ id: 'preguntas', label: 'Preguntas frecuentes', meta: `${s.faq.length} respuestas`, icon: 'lucide:help-circle' }] : []),
+];
 ---
 
 <PageHero
@@ -29,81 +39,120 @@ const { service: s } = Astro.props;
   <a href="/contacto/" class="btn btn-secondary btn-lg">
     <Icon name="lucide:mail" class="h-4 w-4 text-brand-700" aria-hidden="true" /> Otros medios de contacto
   </a>
+
+  <nav slot="aside" aria-label="En esta página" class="rounded-panel border border-border bg-surface/80 p-2 shadow-card backdrop-blur-sm">
+    <p class="px-4 pb-1 pt-3 text-2xs font-semibold uppercase tracking-[0.14em] text-muted">En esta página</p>
+    <ul role="list">
+      {toc.map((t) => (
+        <li>
+          <a href={`#${t.id}`} class="group flex min-h-[44px] items-center gap-3 rounded-2xl px-4 py-2.5 transition-colors duration-150 hover:bg-sunken">
+            <Icon name={t.icon} class="h-4 w-4 shrink-0 text-brand-700" aria-hidden="true" />
+            <span class="flex-1 text-sm font-medium text-ink">{t.label}</span>
+            <span class="text-xs tabular-nums text-muted">{t.meta}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
 </PageHero>
 
 <section class="section-tight">
   <div class="container-x grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_22rem]">
     <div class="flex min-w-0 flex-col gap-6">
 
-      <div class="grid gap-5 md:grid-cols-2">
-        <article class="card reveal p-6 sm:p-7">
-          <h2 class="flex items-center gap-3 text-h3">
-            <span class="icon-tile h-10 w-10 rounded-lg"><Icon name="lucide:check-circle" class="h-5 w-5" aria-hidden="true" /></span>
-            ¿Qué incluye?
-          </h2>
-          <ul class="mt-6 space-y-3" role="list">
-            {s.features.map((f) => (
-              <li class="flex items-start gap-2.5 text-[0.9375rem] leading-relaxed text-ink-soft">
-                <Icon name="lucide:check" class="mt-1 h-4 w-4 text-brand-600" aria-hidden="true" />
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
-        </article>
+      <article id="incluye" class="card reveal scroll-mt-28 p-6 sm:p-8" aria-labelledby="incluye-titulo">
+        <h2 id="incluye-titulo" class="flex items-center gap-3 text-h3">
+          <span class="icon-tile h-10 w-10 rounded-lg"><Icon name="lucide:check-circle" class="h-5 w-5" aria-hidden="true" /></span>
+          ¿Qué incluye?
+        </h2>
+        <ul class="mt-6 grid gap-x-8 gap-y-4 md:grid-cols-2" role="list">
+          {s.features.map((f) => (
+            <li class="flex items-start gap-3 text-[0.9375rem] leading-relaxed text-ink-soft">
+              <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent-soft text-brand-700">
+                <Icon name="lucide:check" class="h-3.5 w-3.5" aria-hidden="true" />
+              </span>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
 
-        <article class="card reveal p-6 sm:p-7" data-reveal-delay="80">
-          <h2 class="flex items-center gap-3 text-h3">
-            <span class="icon-tile h-10 w-10 rounded-lg"><Icon name="lucide:zap" class="h-5 w-5" aria-hidden="true" /></span>
-            Beneficios
-          </h2>
-          <ul class="mt-6 space-y-3" role="list">
-            {s.benefits.map((b) => (
-              <li class="flex items-start gap-2.5 text-[0.9375rem] leading-relaxed text-ink-soft">
-                <Icon name="lucide:trending-up" class="mt-1 h-4 w-4 text-brand-600" aria-hidden="true" />
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-        </article>
-      </div>
+      <section id="beneficios" class="reveal scroll-mt-28 pt-4" aria-labelledby="beneficios-titulo">
+        <h2 id="beneficios-titulo" class="flex items-center gap-3 text-h3">
+          <span class="icon-tile h-10 w-10 rounded-lg"><Icon name="lucide:zap" class="h-5 w-5" aria-hidden="true" /></span>
+          Beneficios
+        </h2>
+        <ul class="mt-6 grid gap-4 sm:grid-cols-2" role="list" data-stagger>
+          {s.benefits.map((b) => (
+            <li class="reveal card flex items-start gap-3 p-5 sm:p-6">
+              <Icon name="lucide:trending-up" class="mt-0.5 h-5 w-5 shrink-0 text-brand-700" aria-hidden="true" />
+              <span class="text-[0.9375rem] leading-relaxed text-ink-soft">{b}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      <article class="card reveal bg-sunken p-6 shadow-none sm:p-7">
-        <h2 class="flex items-center gap-3 text-h3">
+      <article id="para-quien" class="card reveal mt-4 scroll-mt-28 bg-sunken p-6 shadow-none sm:p-8" aria-labelledby="para-quien-titulo">
+        <h2 id="para-quien-titulo" class="flex items-center gap-3 text-h3">
           <span class="icon-tile h-10 w-10 rounded-lg bg-surface"><Icon name="lucide:users" class="h-5 w-5" aria-hidden="true" /></span>
           ¿Para quién es este servicio?
         </h2>
         <ul class="mt-6 grid gap-3 sm:grid-cols-2" role="list">
           {s.who.map((w) => (
-            <li class="flex items-center gap-3 rounded-xl border border-border bg-surface p-3.5">
-              <Icon name="lucide:user-check" class="h-5 w-5 text-brand-700" aria-hidden="true" />
-              <span class="text-sm font-medium text-ink">{w}</span>
+            <li class="flex items-center gap-3 rounded-xl border border-border bg-surface p-4">
+              <Icon name="lucide:user-check" class="h-5 w-5 shrink-0 text-brand-700" aria-hidden="true" />
+              <span class="text-sm font-medium leading-snug text-ink">{w}</span>
             </li>
           ))}
         </ul>
       </article>
 
       {s.faq.length > 0 && (
-        <div class="reveal mt-6">
+        <section id="preguntas" class="reveal mt-4 scroll-mt-28 pt-4" aria-labelledby="preguntas-titulo">
           <script type="application/ld+json" is:inline set:html={JSON.stringify({
             '@context': 'https://schema.org',
             ...faqSchema(s.faq),
           })} />
-          <h2 class="text-h3">Preguntas frecuentes sobre {s.title.toLowerCase()}</h2>
+          <h2 id="preguntas-titulo" class="flex items-center gap-3 text-h3">
+            <span class="icon-tile h-10 w-10 rounded-lg"><Icon name="lucide:help-circle" class="h-5 w-5" aria-hidden="true" /></span>
+            Preguntas frecuentes sobre {s.title.toLowerCase()}
+          </h2>
           <Accordion class="mt-6" name={`faq-${s.slug}`} items={s.faq} />
-        </div>
+        </section>
       )}
     </div>
 
-    <aside class="lg:sticky lg:top-24 lg:self-start" aria-labelledby="cta-servicio">
+    <aside class="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start" aria-label="Contratar y otros servicios">
       <div class="reveal relative isolate overflow-hidden rounded-panel bg-brand-dark p-7 text-white shadow-float sm:p-8">
         <div class="pointer-events-none absolute -right-20 -top-20 -z-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true"></div>
-        <h2 id="cta-servicio" class="text-h3 text-white">¿Listo para empezar?</h2>
+        <span class="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 ring-1 ring-inset ring-white/15">
+          <Icon name={s.icon} class="h-6 w-6 text-accent" aria-hidden="true" />
+        </span>
+        <h2 id="cta-servicio" class="mt-5 text-h3 text-white">¿Listo para empezar?</h2>
         <p class="mt-3 text-white/80">Contáctenos hoy y reciba una asesoría personalizada sin compromiso.</p>
         <a href={waLink(`Hola, quiero contratar el servicio de ${s.title}.`)} target="_blank" rel="noopener noreferrer"
           class="btn btn-inverse btn-lg btn-block mt-6 !whitespace-normal text-center">
           <WaIcon class="h-5 w-5" /> Contratar {s.shortTitle}
         </a>
+        <a href="/contacto/" class="mt-3 inline-flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-full text-sm font-medium text-white/80 transition-colors duration-150 hover:text-white">
+          Ver otros canales <Icon name="lucide:arrow-right" class="arrow h-4 w-4" aria-hidden="true" />
+        </a>
       </div>
+
+      <nav class="reveal card p-2" aria-labelledby="otros-servicios" data-reveal-delay="80">
+        <h2 id="otros-servicios" class="px-4 pb-1 pt-4 font-sans text-2xs font-semibold uppercase tracking-[0.14em] text-muted">Otros servicios</h2>
+        <ul role="list">
+          {others.map((o) => (
+            <li>
+              <a href={`/servicios/${o.slug}/`} class="group flex min-h-[44px] items-center gap-3 rounded-2xl px-4 py-2 text-sm font-medium text-ink-soft transition-colors duration-150 hover:bg-sunken hover:text-ink">
+                <Icon name={o.icon} class="h-4 w-4 shrink-0 text-brand-700" aria-hidden="true" />
+                <span class="flex-1">{o.shortTitle}</span>
+                <Icon name="lucide:chevron-right" class="arrow h-4 w-4 text-muted" aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </aside>
   </div>
 </section>

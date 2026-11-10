@@ -1,0 +1,43 @@
+---
+/**
+ * Rejilla de servicios para las páginas de cobertura local (Florencia, Huila).
+ * Banda tint con tarjetas enlazadas (stretched-link) a cada servicio.
+ */
+import { Icon } from 'astro-icon/components';
+import SectionHeader from '../ui/SectionHeader.astro';
+
+interface Props {
+	title: string;
+	subtitle: string;
+	items: { slug: string; title: string; icon: string; heroDescription: string }[];
+}
+
+const { title, subtitle, items } = Astro.props;
+---
+
+<section class="section section-tint" aria-labelledby="servicios-locales">
+	<div class="container-x">
+		<SectionHeader id="servicios-locales" eyebrow="Servicios" title={title} subtitle={subtitle} />
+		<ul class="section-body grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6" role="list" data-stagger="70">
+			{items.map((s) => (
+				<li class="reveal">
+					<article class="card card-interactive group relative flex h-full flex-col p-6 sm:p-7">
+						<span class="icon-tile mb-5">
+							<Icon name={s.icon} class="h-6 w-6" aria-hidden="true" />
+						</span>
+						<h3 class="mb-2 font-sans text-base font-semibold text-ink">
+							<a href={`/servicios/${s.slug}/`} class="stretched-link">{s.title}</a>
+						</h3>
+						<p class="flex-1 text-sm leading-relaxed text-muted">{s.heroDescription}</p>
+						<span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700" aria-hidden="true">
+							Ver servicio <Icon name="lucide:arrow-right" class="arrow h-4 w-4" />
+						</span>
+					</article>
+				</li>
+			))}
+		</ul>
+		<p class="mt-10 text-center text-sm text-muted">
+			<a href="/servicios/" class="link font-semibold">Ver todos los servicios</a>
+		</p>
+	</div>
+</section>

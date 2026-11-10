@@ -2,7 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import WaIcon from './ui/WaIcon.astro';
 import Breadcrumbs from './Breadcrumbs.astro';
-import type { BlogPost } from '../data/blog';
+import { blogPosts, type BlogPost } from '../data/blog';
 import { SITE, waLink } from '../data/site';
 
 interface Props { post: BlogPost }
@@ -13,6 +13,18 @@ const words = post.content.split(/\s+/).length;
 const readTime = Math.max(1, Math.round(words / 200));
 const dateLabel = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(post.date));
 const initials = post.author.split(' ').map((w) => w[0]).join('').slice(0, 2);
+const fmt = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const postReadTime = (p: BlogPost) => Math.max(1, Math.round(p.content.split(/\s+/).length / 200));
+
+// Relacionados: misma categoría primero, luego los más recientes.
+const byDate = [...blogPosts].filter((p) => p.slug !== post.slug).sort((a, b) => b.date.localeCompare(a.date));
+const related = [
+  ...byDate.filter((p) => p.category === post.category),
+  ...byDate.filter((p) => p.category !== post.category),
+].slice(0, 3);
+
+const plain = (t: string) => t.replace(/\*\*(.+?)\*\*/g, '$1').replace(/\*(.+?)\*/g, '$1');
+const slugify = (t: string) => plain(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 // Parser de markdown ligero: negritas/cursivas inline, encabezados, listas (agrupadas en ul/ol), tablas y notas.
 const inline = (text: string) => {
@@ -30,17 +42,27 @@ const inline = (text: string) => {
 };
 
 type Block =
-  | { t: 'h2' | 'h3' | 'p' | 'note'; v: string }
+  | { t: 'h2'; v: string; id: string }
+  | { t: 'h3' | 'p' | 'note'; v: string }
   | { t: 'ul' | 'ol'; items: string[] }
   | { t: 'table'; head: string[]; body: string[][] };
 
 const lines = post.content.split('\n');
 const blocks: Block[] = [];
+const usedIds = new Set<string>();
 let i = 0;
 while (i < lines.length) {
   const line = lines[i];
   const trimmed = line.trim();
-  if (line.startsWith('## ')) { blocks.push({ t: 'h2', v: line.slice(3) }); i++; continue; }
+  if (line.startsWith('## ')) {
+    const v = line.slice(3);
+    let id = slugify(v) || `seccion-${blocks.length}`;
+    while (usedIds.has(id)) id += '-2';
+    usedIds.add(id);
+    blocks.push({ t: 'h2', v, id });
+    i++;
+    continue;
+  }
   if (line.startsWith('### ')) { blocks.push({ t: 'h3', v: line.slice(4) }); i++; continue; }
   if (line.startsWith('|')) {
     const tableLines: string[] = [];
@@ -72,7 +94,12 @@ while (i < lines.length) {
   i++;
 }
 
+const toc = blocks.filter((b): b is Extract<Block, { t: 'h2' }> => b.t === 'h2').map((b) => ({ id: b.id, label: plain(b.v) }));
+const showToc = toc.length >= 2;
+
 ---
+
+<div class="read-progress" aria-hidden="true" data-read-progress></div>
 
 <header class="relative isolate overflow-hidden border-b border-border">
   <div class="bg-aurora pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
@@ -83,64 +110,196 @@ while (i < lines.length) {
       { label: post.title },
     ]} />
 
-    <div class="mx-auto mt-10 max-w-3xl sm:mt-14">
-      <div class="reveal flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted">
-        <span class="chip-brand">{post.category}</span>
-        <time datetime={post.date}>{dateLabel}</time>
-        <span class="inline-flex items-center gap-1.5">
-          <Icon name="lucide:clock" class="h-3.5 w-3.5" aria-hidden="true" /> {readTime} min de lectura
-        </span>
-      </div>
+    <div class="post-grid mt-10 sm:mt-14">
+      <div class="min-w-0">
+        <div class="reveal flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted">
+          <span class="chip-brand">{post.category}</span>
+          <time datetime={post.date}>{dateLabel}</time>
+          <span class="inline-flex items-center gap-1.5">
+            <Icon name="lucide:clock" class="h-3.5 w-3.5" aria-hidden="true" /> {readTime} min de lectura
+          </span>
+        </div>
 
-      <h1 class="reveal mt-5" data-reveal-delay="60">{post.title}</h1>
+        <h1 class="reveal mt-5" data-reveal-delay="60">{post.title}</h1>
 
-      <div class="reveal mt-8 flex items-center gap-3" data-reveal-delay="120">
-        <span class="grid h-11 w-11 place-items-center rounded-full bg-brand-700 text-sm font-semibold text-white" aria-hidden="true">{initials}</span>
-        <span>
-          <span class="block text-sm font-semibold text-ink">{post.author}</span>
-          <span class="block text-xs text-muted">{SITE.role}</span>
-        </span>
+        <div class="reveal mt-8 flex items-center gap-3" data-reveal-delay="120">
+          <span class="grid h-11 w-11 place-items-center rounded-full bg-brand-700 text-sm font-semibold text-white" aria-hidden="true">{initials}</span>
+          <span>
+            <span class="block text-sm font-semibold text-ink">{post.author}</span>
+            <span class="block text-xs text-muted">{SITE.role}</span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
 </header>
 
-<article class="container-x section-tight">
-  <div class="article mx-auto">
-    {blocks.map((b) => {
-      const render = (text: string) =>
-        inline(text).map((n) => (typeof n === 'string' ? n : n.t === 'strong' ? <strong>{n.v}</strong> : <em>{n.v}</em>));
-      switch (b.t) {
-        case 'h2': return <h2>{render(b.v)}</h2>;
-        case 'h3': return <h3>{render(b.v)}</h3>;
-        case 'note': return <p class="note">{b.v}</p>;
-        case 'ul': return <ul role="list">{b.items.map((it) => <li>{render(it)}</li>)}</ul>;
-        case 'ol': return <ol role="list">{b.items.map((it) => <li>{render(it)}</li>)}</ol>;
-        case 'table': return (
-          <div class="table-wrap">
-            <table>
-              <thead><tr>{b.head.map((h) => <th scope="col">{render(h)}</th>)}</tr></thead>
-              <tbody>{b.body.map((row) => <tr>{row.map((c) => <td>{render(c)}</td>)}</tr>)}</tbody>
-            </table>
-          </div>
-        );
-        default: return <p>{render(b.v)}</p>;
-      }
-    })}
-  </div>
+<div class="container-x section-tight">
+  <div class="post-grid">
+    <div class="min-w-0">
+      {showToc && (
+        <details class="toc-mobile mb-10 rounded-2xl border border-border bg-surface lg:hidden">
+          <summary class="flex min-h-[48px] cursor-pointer list-none items-center gap-3 px-5 text-sm font-semibold text-ink">
+            <Icon name="lucide:list-tree" class="h-4 w-4 text-brand-700" aria-hidden="true" />
+            <span class="flex-1">En este artículo</span>
+            <span class="text-xs font-normal text-muted">{toc.length} secciones</span>
+            <Icon name="lucide:chevron-down" class="toc-chevron h-4 w-4 text-muted" aria-hidden="true" />
+          </summary>
+          <nav aria-label="Índice del artículo" class="border-t border-border px-3 py-2">
+            <ol role="list">
+              {toc.map((t) => <li><a href={`#${t.id}`} class="toc-link">{t.label}</a></li>)}
+            </ol>
+          </nav>
+        </details>
+      )}
 
-  <aside class="reveal mx-auto mt-14 max-w-prose" aria-labelledby="ayuda-articulo">
-    <div class="card flex flex-col items-start gap-5 bg-sunken p-6 shadow-none sm:flex-row sm:items-center sm:justify-between sm:p-7">
-      <div>
-        <h2 id="ayuda-articulo" class="text-h4 font-sans font-semibold">¿Necesita ayuda con este tema?</h2>
-        <p class="mt-1 text-sm text-muted">Consulte a nuestro equipo de expertos sin compromiso.</p>
-      </div>
-      <a href={waLink(`Hola, vi el artículo "${post.title}" y me gustaría recibir asesoría.`)} target="_blank" rel="noopener noreferrer" class="btn btn-primary shrink-0">
-        <WaIcon class="h-4 w-4" /> Consultar ahora
-      </a>
+      <article class="article" data-article>
+        {blocks.map((b) => {
+          const render = (text: string) =>
+            inline(text).map((n) => (typeof n === 'string' ? n : n.t === 'strong' ? <strong>{n.v}</strong> : <em>{n.v}</em>));
+          switch (b.t) {
+            case 'h2': return <h2 id={b.id}>{render(b.v)}</h2>;
+            case 'h3': return <h3>{render(b.v)}</h3>;
+            case 'note': return <p class="note">{b.v}</p>;
+            case 'ul': return <ul role="list">{b.items.map((it) => <li>{render(it)}</li>)}</ul>;
+            case 'ol': return <ol role="list">{b.items.map((it) => <li>{render(it)}</li>)}</ol>;
+            case 'table': return (
+              <div class="table-wrap">
+                <table>
+                  <thead><tr>{b.head.map((h) => <th scope="col">{render(h)}</th>)}</tr></thead>
+                  <tbody>{b.body.map((row) => <tr>{row.map((c) => <td>{render(c)}</td>)}</tr>)}</tbody>
+                </table>
+              </div>
+            );
+            default: return <p>{render(b.v)}</p>;
+          }
+        })}
+      </article>
+
+      <aside class="reveal mt-14" aria-labelledby="ayuda-articulo">
+        <div class="card flex flex-col items-start gap-5 bg-sunken p-6 shadow-none sm:flex-row sm:items-center sm:justify-between sm:p-7">
+          <div>
+            <h2 id="ayuda-articulo" class="text-h4 font-sans font-semibold">¿Necesita ayuda con este tema?</h2>
+            <p class="mt-1 text-sm text-muted">Consulte a nuestro equipo de expertos sin compromiso.</p>
+          </div>
+          <a href={waLink(`Hola, vi el artículo "${post.title}" y me gustaría recibir asesoría.`)} target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full shrink-0 sm:w-auto">
+            <WaIcon class="h-4 w-4" /> Consultar ahora
+          </a>
+        </div>
+      </aside>
     </div>
-    <a href="/blog/" class="btn btn-ghost mt-6 -ml-3">
-      <Icon name="lucide:arrow-left" class="h-4 w-4" aria-hidden="true" /> Volver al blog
-    </a>
-  </aside>
-</article>
+
+    {showToc && (
+      <nav class="hidden lg:block" aria-label="Índice del artículo">
+        <div class="sticky top-24">
+          <p class="flex items-center gap-2 text-2xs font-semibold uppercase tracking-[0.14em] text-muted">
+            <Icon name="lucide:list-tree" class="h-3.5 w-3.5" aria-hidden="true" /> En este artículo
+          </p>
+          <ol class="mt-4" role="list" data-toc>
+            {toc.map((t) => <li><a href={`#${t.id}`} class="toc-link" data-toc-link={t.id}>{t.label}</a></li>)}
+          </ol>
+          <a href="/blog/" class="mt-6 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-medium text-brand-700 hover:text-brand-800">
+            <Icon name="lucide:arrow-left" class="h-4 w-4" aria-hidden="true" /> Volver al blog
+          </a>
+        </div>
+      </nav>
+    )}
+  </div>
+</div>
+
+{related.length > 0 && (
+  <section class="section-tight section-tint" aria-labelledby="relacionados">
+    <div class="container-x">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span class="eyebrow">Siga leyendo</span>
+          <h2 id="relacionados" class="mt-3 text-h3">Artículos relacionados</h2>
+        </div>
+        <a href="/blog/" class="btn btn-ghost -mr-3">
+          Ver todos los artículos <Icon name="lucide:arrow-right" class="arrow h-4 w-4" aria-hidden="true" />
+        </a>
+      </div>
+      <ul class="mt-8 grid gap-5 md:grid-cols-3 lg:gap-6" role="list" data-stagger>
+        {related.map((r) => (
+          <li class="reveal">
+            <article class="card card-interactive group relative flex h-full flex-col p-6">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted">
+                <span class="chip-brand">{r.category}</span>
+                <span class="inline-flex items-center gap-1">
+                  <Icon name="lucide:clock" class="h-3 w-3" aria-hidden="true" /> {postReadTime(r)} min
+                </span>
+              </div>
+              <h3 class="mt-4 font-sans text-base font-semibold leading-snug text-ink">
+                <a href={`/blog/${r.slug}/`} class="stretched-link">{r.title}</a>
+              </h3>
+              <p class="mt-auto pt-5 text-xs text-muted"><time datetime={r.date}>{fmt.format(new Date(r.date))}</time></p>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<style>
+  /* Columna de lectura (~42rem) + índice; el título del header comparte la misma x que la prosa. */
+  .post-grid {
+    margin-inline: auto;
+    max-width: 42rem;
+  }
+  @media (min-width: 1024px) {
+    .post-grid {
+      display: grid;
+      max-width: none;
+      grid-template-columns: minmax(0, 42rem) 15rem;
+      justify-content: center;
+      column-gap: 4rem;
+    }
+  }
+  .toc-mobile summary::-webkit-details-marker { display: none; }
+  .toc-chevron { transition: transform 250ms var(--ease-spring); }
+  .toc-mobile[open] .toc-chevron { transform: rotate(180deg); }
+  .toc-mobile summary:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 1rem; }
+  @media (prefers-reduced-motion: reduce) {
+    .toc-chevron { transition: none; }
+  }
+</style>
+
+<script>
+  // Progreso de lectura: solo transform (scaleX) vía variable CSS, sincronizado con rAF.
+  const bar = document.querySelector<HTMLElement>('[data-read-progress]');
+  const article = document.querySelector<HTMLElement>('[data-article]');
+  if (bar && article) {
+    let ticking = false;
+    const update = () => {
+      const r = article.getBoundingClientRect();
+      const total = r.height - window.innerHeight * 0.6;
+      const p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 1;
+      bar.style.setProperty('--progress', p.toFixed(4));
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
+  // Sección activa en el índice.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]')];
+  if (links.length && 'IntersectionObserver' in window) {
+    const byId = new Map(links.map((l) => [l.dataset.tocLink, l]));
+    const heads = links.map((l) => document.getElementById(l.dataset.tocLink!)).filter(Boolean) as HTMLElement[];
+    const setActive = (id: string) => links.forEach((l) => l.setAttribute('aria-current', String(l.dataset.tocLink === id)));
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: '-15% 0px -70% 0px' },
+    );
+    heads.forEach((h) => io.observe(h));
+    if (heads[0]) byId.get(heads[0].id)?.setAttribute('aria-current', 'true');
+  }
+</script>
